@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on 石塔白又大</title>
+    <link>https://uphgs.com/tags/typescript/</link>
+    <description>Recent content in TypeScript on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 21 Aug 2021 08:04:10 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Class 类（TS）</title>
+      <link>https://uphgs.com/posts/typescript/ts-class/</link>
+      <pubDate>Sat, 21 Aug 2021 08:04:10 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-class/</guid>
+      <description>Class 的基础语法 创建一个最基本的空类
+class Point {}声明两个公共可写的属性
+class Point {x: number;y: number;}const pt = new Point();pt.</description>
+    </item>
+    
+    <item>
+      <title>TypeScript 基本语法</title>
+      <link>https://uphgs.com/posts/typescript/ts-grammar/</link>
+      <pubDate>Sat, 14 Aug 2021 22:38:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-grammar/</guid>
+      <description>| 联合类型（Union Types） 只能满足其中一种条件（A 类型或 B 类型）
+type A = {name: &#39;a&#39;,age: number}type B = {name: &#39;b&#39;,gender: string}type C = A | Bconst obj1: C = { name: &#39;a&#39;, age: 18 } // 正确const obj2: C = { name: &#39;b&#39;, gender: &#39;boy&#39; } // 正确const obj3: C = { name: &#39;a&#39;, gender: &#39;girl&#39; } // 错误，只能选 A、B 对象中的一种，不能混合创建&amp;amp; 交叉类型（Intersection Types） 已有的条件必须都满足（A 类型和 B 类型）</description>
+    </item>
+    
+    <item>
+      <title>泛型</title>
+      <link>https://uphgs.com/posts/typescript/ts-generics/</link>
+      <pubDate>Sat, 17 Jul 2021 16:46:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-generics/</guid>
+      <description>用一个东西来表示广泛的类型，俗称泛型。
+基础用法 如下定义的 T，该函数表示你传入什么类型的值，我就会返回什么类型的值。
+function identity&amp;lt;T&amp;gt;(arg: T): T {return arg}const a = identity(&#39;hi&#39;)console.</description>
+    </item>
+    
+  </channel>
+</rss>

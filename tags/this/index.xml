@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>this on 石塔白又大</title>
+    <link>https://uphgs.com/tags/this/</link>
+    <description>Recent content in this on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 17 Sep 2020 20:58:21 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/this/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>函数</title>
+      <link>https://uphgs.com/posts/javascript/function/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/function/</guid>
+      <description>函数是什么 JavaScript 中只有函数和方法
+闭包 闭包的特点
+能让一个函数维持一个变量 但并不能维持这个变量的值 尤其是变量的值会变化时 例1
+let x = &#39;x&#39;let a = &#39;1&#39;function f1(x) {return x + a}a = &#39;3&#39;{let a = &#39;2&#39;f1(&#39;x&#39;) // &#39;x3&#39;}a = &#39;4&#39;例2</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>watch on 石塔白又大</title>
+    <link>https://uphgs.com/tags/watch/</link>
+    <description>Recent content in watch on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Wed, 25 Nov 2020 22:07:22 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/watch/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue 计算属性和监听器</title>
+      <link>https://uphgs.com/posts/vue/computed-and-watch/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/computed-and-watch/</guid>
+      <description>计算属性（computed） 基础用法 computed: {fullName() {return this.firstName + &#39; &#39; + this.lastName}}添加 getter &amp;amp; setter computed: {fullName: {// getterget() {return this.</description>
+    </item>
+    
+  </channel>
+</rss>

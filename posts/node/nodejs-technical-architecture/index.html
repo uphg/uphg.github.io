@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node.js 技术架构</title>
+<meta name="description" content="API 文档 官方地址：中文文档/英文文档 devdocs.io 搜索功能便捷，支持夜间模式，并且可以离线观看 Node.js 是什么 是一个平台
+让多种技术组合起来 让 JavaScript 也能调用系统接口、开发后端应用 Node.js 用到了哪些技术
+V8引擎 libuv C/C&#43;&#43; 实现的 c-ares、http-parser、OpenSSL、zlib 等库 Node.">
+<link rel="canonical" href="https://uphgs.com/posts/node/nodejs-technical-architecture/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Node.js 技术架构</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-07-17 16:46:12 &#43;0800 CST" title="2021-07-17 16:46:12 &#43;0800 CST">
+    2021-07-17
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="api-文档">API 文档</h2>
+<ul>
+<li>官方地址：<a href="http://nodejs.cn/api/">中文文档</a>/<a href="https://nodejs.org/api/">英文文档</a></li>
+<li><a href="https://devdocs.io/">devdocs.io</a> 搜索功能便捷，支持夜间模式，并且可以离线观看</li>
+</ul>
+<h2 id="nodejs-是什么">Node.js 是什么</h2>
+<ul>
+<li>
+<p><strong>是一个平台</strong></p>
+<ul>
+<li>让多种技术组合起来</li>
+<li>让 JavaScript 也能调用系统接口、开发后端应用</li>
+</ul>
+</li>
+<li>
+<p><strong>Node.js 用到了哪些技术</strong></p>
+<ul>
+<li>V8引擎</li>
+<li>libuv</li>
+<li>C/C++ 实现的 c-ares、http-parser、OpenSSL、zlib 等库</li>
+</ul>
+</li>
+</ul>
+<h2 id="nodejs-不是什么">Node.js 不是什么</h2>
+<ul>
+<li>
+<p><strong>不是 web 框架</strong></p>
+<ul>
+<li>Node.js 并不是 web 后端框架</li>
+<li>所以你不能把 Node.js 与 Flask 或 Spring 对比</li>
+</ul>
+</li>
+<li>
+<p><strong>不是编程语言</strong></p>
+<ul>
+<li>Node.js 并不是后端的 JS</li>
+<li>所以你不能把 Node.js 与 Python 或 PHP 对比</li>
+</ul>
+</li>
+</ul>
+<h2 id="nodejs-技术架构">Node.js 技术架构</h2>
+<!-- raw HTML omitted -->
+<p>随着 Node.js 的版本已经从 0.8 升级到 12.11.1，其架构也在一直变化中。如果你想看源码，推荐看 <a href="https://github.com/nodejs/node/tree/v0.10.0">Node.js v0.10.0</a> 版本，因为这个版本使用了很久，而且源码相对最新版较少。</p>
+<p>如果想要了解更多，可以看 <a href="https://github.com/yjhjstz/deep-into-node">深入理解Node.js：核心思想与源码分析</a></p>
+<h2 id="什么是-bindings">什么是 bindings</h2>
+<h3 id="背景">背景</h3>
+<ul>
+<li>C/C++ 实现了一个 http_parser 库， 很高效</li>
+<li>你只会写 JS，但想使用这个库</li>
+<li>直接调用肯定不会成功，于是就需要一个中间的桥梁</li>
+</ul>
+<h3 id="bindings">bindings</h3>
+<ul>
+<li>Node.js 用 C++ 对 <code>http_parser</code> 进行封装，使它符合某些要求，封装的文件名就叫做 <code>http_parser_bindings.cpp</code></li>
+<li>用 Node.js 提供的编译工具将其编译为 <code>.node</code> 文件，JS 代码就可以直接 require 这个 <code>.node</code> 文件</li>
+<li>这样 JS 就能调用 C++ 库，中间的桥梁就是 binding</li>
+<li>由于 Node.js 提供了很多 binding，所以要加个 s，这就是 <strong><code>bindings</code></strong> 的由来</li>
+</ul>
+<h2 id="js-与-c-交互案例">JS 与 C++ 交互案例</h2>
+<ul>
+<li>JS 调用 C++ 代码：<a href="http://nodejs.cn/api/addons.html#addons_function_arguments">官方示例</a></li>
+<li>C++ 调用 JS 代码：<a href="http://nodejs.cn/api/addons.html#addons_callbacks">官方示例</a></li>
+</ul>
+<h2 id="什么是-eventloop">什么是 EventLoop</h2>
+<p><strong>Event 表示事件</strong>，如：</p>
+<ul>
+<li>计时器到期，要执行一个事件</li>
+<li>文件读取完毕或出错，要执行一个事件</li>
+<li>socket 有内容了，关闭了，要执行一个事件</li>
+</ul>
+<p><strong>Loop 就是循环</strong>，如：</p>
+<ul>
+<li>while(true) 循环（死循环）</li>
+<li>Node.js 需要按照顺序轮询每种事件，这种事件往往都是循环，所以叫 loop</li>
+</ul>
+<p><strong>EventLoop</strong></p>
+<ul>
+<li>操作系统触发事件，JS 处理事件，EventLoop 就是对事件处理顺序的管理</li>
+<li>通常 EventLoop 会停留在 poll 阶段，不停的问操作系统，接下来有没有事情做</li>
+</ul>
+<p>EventLoop 执行顺序图示</p>
+<pre><code>   ┌───────────────────────────┐
+┌─&gt;│           timers          │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │&lt;─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │
+   └───────────────────────────┘
+</code></pre>
+<p>::: details 图示</p>
+<p><img src="/images/nodejs-eventloop-process.jpg" alt="EventLoop 执行顺序图示"></p>
+<p>:::</p>
+<h2 id="nodejs-工作流程">Node.js 工作流程</h2>
+<p><img src="/images/nodejs-process.jpg" alt="Node.js 工作流程"></p>
+<h2 id="面试题">面试题</h2>
+<h3 id="1-下面的代码中那个函数先执行">1. 下面的代码中，那个函数先执行</h3>
+<pre><code class="language-js">setTimeout(f1, 0)
+setImmediate(f2)
+</code></pre>
+<p>一般情况下都是 <code>setImmediate(f2)</code> 先执行，因为它处在 check 阶段，只有在 Node.js 第一次运行时，会先进入 timers 阶段</p>
+<p>end 。。。</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

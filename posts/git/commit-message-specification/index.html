@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commit message 规范</title>
+<meta name="description" content="Git 每次提交代码，都要写 Commit message（提交说明），否则就不允许提交。
+git commit -m &quot;hello world&quot;上面代码的 -m 参数，就是用来指定 commit mesage 的。">
+<link rel="canonical" href="https://uphgs.com/posts/git/commit-message-specification/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Commit message 规范</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-11-08 17:04:32 &#43;0800 CST" title="2021-11-08 17:04:32 &#43;0800 CST">
+    2021-11-08
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>Git 每次提交代码，都要写 Commit message（提交说明），否则就不允许提交。</p>
+<pre><code class="language-sh">git commit -m &quot;hello world&quot;
+</code></pre>
+<p>上面代码的 <code>-m</code> 参数，就是用来指定 commit mesage 的。</p>
+<p>如果一行不够，可以只执行 <code>git commit</code>，就会跳出文本编辑器，让你写多行。</p>
+<pre><code class="language-sh">git commit
+</code></pre>
+<p>基本上，你写什么都行</p>
+<p>但是，一般来说，commit message 应该清晰明了，说明本次提交的目的。</p>
+<p>目前，社区有多种 Commit message 的<a href="https://github.com/ajoslin/conventional-changelog/blob/master/conventions">写法规范</a>。本文介绍<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.greljkmo14y0">Angular 规范</a>，这是目前使用最广的写法，比较合理和系统化，并且有配套的工具。</p>
+<h2 id="commit-message-的作用">Commit message 的作用</h2>
+<p>格式化的Commit message，有几个好处。</p>
+<p><strong>（1）提供更多的历史信息，方便快速浏览。</strong></p>
+<p>比如，下面的命令显示上次发布后的变动，每个commit占据一行。你只看行首，就知道某次 commit 的目的。</p>
+<pre><code class="language-sh">git log &lt;last tag&gt; HEAD --pretty=format:%s
+</code></pre>
+<p><strong>（2）可以过滤某些 commit（比如文档改动），便于快速查找信息。</strong></p>
+<p>比如，下面的命令仅仅显示本次发布新增加的功能。</p>
+<pre><code class="language-sh">git log &lt;last release&gt; HEAD --grep feature
+</code></pre>
+<p><strong>（3）可以直接从 commit 生成 Change log。</strong></p>
+<p>Change Log 是发布新版本时，用来说明与上一个版本差异的文档，详见后文。</p>
+<p><img src="/images/git-commit-specification-demo1.png" alt="Change log 示例"></p>
+<h2 id="commit-message-的格式">Commit message 的格式</h2>
+<p>每次提交，Commit message 都包括三个部分：Header，Body 和 Footer。</p>
+<pre><code class="language-sh">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;
+# 空一行
+&lt;body&gt;
+# 空一行
+&lt;footer&gt;
+</code></pre>
+<p>其中，Header 是必需的，Body 和 Footer 可以省略。</p>
+<p>不管是哪一个部分，任何一行都不得超过72个字符（或100个字符）。这是为了避免自动换行影响美观。</p>
+<h3 id="header">Header</h3>
+<p>Header 部分只有一行，包括三个字段：<code>type</code>（必需）、<code>scope</code>（可选）和 <code>subject</code>（必需）。</p>
+<p><strong>（1）type</strong></p>
+<p><code>type</code>用于说明 commit 的类别，允许使用下面的标识。</p>
+<ul>
+<li><code>feat</code>：添加新功能（feature）</li>
+<li><code>fix</code>：bug 修复</li>
+<li><code>perf</code>：提高性能的代码修改</li>
+<li><code>refactor</code>：重构（即不是新增功能，也不是修改 bug 的代码变动）</li>
+<li><code>style</code>：代码格式（不影响代码运行的变动）</li>
+<li><code>test</code>：测试修改</li>
+<li><code>docs</code>：文档修改（documentation）</li>
+<li><code>build</code>：影响系统构建，或项目依赖的更改（如：webpack，npm 包等）</li>
+<li><code>ci</code>：命令行配置文件和脚本的更改</li>
+<li><code>chore</code>：其他的修改，例如修改 <code>.gitignore</code></li>
+</ul>
+<p>如果 <code>type</code> 为 <code>feat</code> 和 <code>fix</code>，则该 commit 将肯定出现在 Change log 之中。其他情况（<code>docs</code>、<code>chore</code>、<code>style</code>、<code>refactor</code>、<code>test</code>）由你决定，要不要放入 Change log，建议是不要。</p>
+<p><strong>（2）scope</strong></p>
+<p><code>scope</code> 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。</p>
+<p><strong>（3）subject</strong></p>
+<p><code>subject</code> 是 commit 目的的简短描述，尽量不超过 50 个字符。</p>
+<ul>
+<li>以动词开头，使用第一人称现在时，比如 <code>change</code>，而不是 <code>changed</code> 或 <code>changes</code></li>
+<li>第一个字母小写</li>
+<li>结尾不加句号（<code>.</code>）</li>
+</ul>
+<h3 id="body">Body</h3>
+<p>Body 部分是对本次 commit 的详细描述，可以分成多行。下面是一个范例。</p>
+<pre><code class="language-sh">More detailed explanatory text, if necessary.  Wrap it to 
+about 72 characters or so. 
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+- Use a hanging indent
+</code></pre>
+<p>有两个注意点。</p>
+<ol>
+<li>
+<p>使用第一人称现在时，比如使用<code>change</code>而不是<code>changed</code>或<code>changes</code>。</p>
+</li>
+<li>
+<p>应该说明代码变动的动机，以及与以前行为的对比。</p>
+</li>
+</ol>
+<h3 id="footer">Footer</h3>
+<p>Footer 部分只用于两种情况。</p>
+<p><strong>（1）不兼容变动</strong></p>
+<p>如果当前代码与上一个版本不兼容，则 Footer 部分以 <code>BREAKING CHANGE</code> 开头，后面是对变动的描述、以及变动理由和迁移方法。</p>
+<pre><code class="language-bash">BREAKING CHANGE: isolate scope bindings definition has changed.
+
+    To migrate the code follow the example below:
+
+    Before:
+
+    scope: {
+      myAttr: 'attribute',
+    }
+
+    After:
+
+    scope: {
+      myAttr: '@',
+    }
+
+    The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+</code></pre>
+<p><strong>（2）关闭 Issue</strong></p>
+<p>如果当前 commit 针对某个 issue，那么可以在 Footer 部分关闭这个 issue 。</p>
+<pre><code class="language-bash">Closes #234
+</code></pre>
+<p>也可以一次关闭多个 issue 。</p>
+<pre><code class="language-bash">Closes #123, #245, #992
+</code></pre>
+<h3 id="revert">Revert</h3>
+<p>还有一种特殊情况，如果当前 commit 用于撤销以前的 commit，则必须以 <code>revert:</code> 开头，后面跟着被撤销 Commit 的 Header。</p>
+<pre><code class="language-bash">revert: feat(pencil): add 'graphiteWidth' option
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
+</code></pre>
+<p>Body 部分的格式是固定的，必须写成 <code>This reverts commit &lt;hash&gt;.</code>，其中的 <code>hash</code> 是被撤销 commit 的 SHA 标识符。</p>
+<p>如果当前 commit 与被撤销的 commit，在同一个发布（release）里面，那么它们都不会出现在 Change log 里面。如果两者在不同的发布，那么当前 commit，会出现在 Change log 的<code>Reverts</code>小标题下面。</p>
+<h2 id="commitizen">Commitizen</h2>
+<p><a href="https://github.com/commitizen/cz-cli">Commitizen</a>是一个撰写合格 Commit message 的工具。</p>
+<h3 id="全局安装">全局安装</h3>
+<p>安装</p>
+<pre><code class="language-sh">yarn global add commitizen
+# 或者：npm install -g commitizen
+</code></pre>
+<p>在项目目录运行以下的命令，使其支持 Angular 的 Commit message 格式</p>
+<pre><code class="language-sh">commitizen init cz-conventional-changelog --save-dev --save-exact
+# Yarn
+commitizen init cz-conventional-changelog --yarn --dev --exact
+</code></pre>
+<p>如果上面的命令报错，可以<strong>手动安装配置该模块</strong></p>
+<p>首先安装 <code>cz-conventional-changelog</code></p>
+<pre><code class="language-sh">yarn add -D cz-conventional-changelog
+
+# 或者
+npm i -D cz-conventional-changelog
+pnpm add -D cz-conventional-changelog
+</code></pre>
+<p>然后配置 <code>package.json</code></p>
+<pre><code class="language-json">{
+  &quot;config&quot;: {
+    &quot;commitizen&quot;: {
+      &quot;path&quot;: &quot;./node_modules/cz-conventional-changelog&quot;
+    }
+  }
+}
+</code></pre>
+<p>以后，凡是用到 <code>git commit</code> 命令，一律改为使用 <code>git cz</code>。这时，就会出现选项，用来生成符合格式的 Commit message。</p>
+<p><img src="/images/git-commit-specification-demo2.png" alt="Commitizen 运行示例"></p>
+<h3 id="当前项目">当前项目</h3>
+<p>也可以只在当前项目中安装使用，这样做的好处就是能保证当前项目的 Commitizen 版本一致。</p>
+<p>安装</p>
+<pre><code class="language-sh">yarn add -D commitizen
+# 或者：npm install -D commitizen
+</code></pre>
+<p>在 <code>package.json</code> 中添加运行脚本</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;cz-init&quot;: &quot;commitizen init cz-conventional-changelog --yarn --dev --exact&quot;,
+    &quot;cz&quot;: &quot;cz&quot;
+  }
+}
+</code></pre>
+<p>运行 <code>yarn cz-init</code> 初始化 Commitizen，会发现 <code>package.json</code> 中多了以下配置</p>
+<pre><code class="language-json">{
+  &quot;config&quot;: {
+    &quot;commitizen&quot;: {
+      &quot;path&quot;: &quot;./node_modules/cz-conventional-changelog&quot;
+    }
+  }
+}
+</code></pre>
+<p>然后每次提交的时候运行 <code>yarn cz</code> 编写 commit 信息即可</p>
+<h2 id="使用-commitlint-校验-message">使用 Commitlint 校验 message</h2>
+<p><a href="https://github.com/conventional-changelog/commitlint">commitlint</a> 可以检测你的 commit 信息是否符合 Angular 团队的提交规范</p>
+<p>安装</p>
+<pre><code class="language-sh"># 安装
+yarn add -D @commitlint/config-conventional @commitlint/cli
+# 或者：npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+# 使用常用配置配置 commitlint
+echo &quot;module.exports = {extends: ['@commitlint/config-conventional']}&quot; &gt; commitlint.config.js
+</code></pre>
+<p>如果需要在提交之前进行验证，可以添加 <code>commit-msg</code> hook（推荐）</p>
+<pre><code class="language-sh"># 安装 Husky v6
+npm install husky --save-dev
+# 或者
+yarn add husky --dev
+
+# 启用 hooks
+npx husky install
+# 或者
+yarn husky install
+
+# 添加 hook
+npx husky add .husky/commit-msg 'npx --no -- commitlint --edit &quot;$1&quot;'
+</code></pre>
+<p>如何卸载</p>
+<pre><code class="language-sh">npm uninstall husky &amp;&amp; git config --unset core.hooksPath
+</code></pre>
+<h2 id="快捷生成-change-log-与版本号">快捷生成 Change log 与版本号</h2>
+<p>安装插件 <a href="https://github.com/conventional-changelog/standard-version">standard-version</a></p>
+<pre><code class="language-sh"># 安装
+yarn add -D standard-version
+# 或者
+npm i --save-dev standard-version
+</code></pre>
+<p>添加运行脚本到 <code>package.json</code></p>
+<pre><code class="language-json">// package.json
+{
+  &quot;scripts&quot;: {
+    &quot;release&quot;: &quot;standard-version&quot;
+  }
+}
+</code></pre>
+<p>然后运行 <code>yarn release</code> 即可。</p>
+<p>它做了以下事情</p>
+<ul>
+<li>自动根据 commit message 更新 <code>package.json</code> 中的版本号</li>
+<li>生成 Change log 日志（基于<a href="https://github.com/conventional-changelog/conventional-changelog">conventional-changelog</a>）</li>
+<li>提交上面的改动。</li>
+<li>发布版本标签（添加当前版本的 git tag）</li>
+</ul>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html">Commit message 和 Change log 编写指南</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/182553920">如何规范你的Git commit？</a></li>
+<li><a href="https://juejin.cn/post/6844903606815064077#heading-10">优雅的提交你的 Git Commit Message</a></li>
+<li><a href="https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13">Conventional Commit Messages</a></li>
+<li><a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md">Angular 开发规范</a></li>
+<li><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a></li>
+<li><a href="https://semver.org/lang/zh-CN/">语义化版本号（Semantic Versioning）</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/git/" alt="git" >
+                        git
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

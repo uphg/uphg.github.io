@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Process on 石塔白又大</title>
+    <link>https://uphgs.com/tags/process/</link>
+    <description>Recent content in Process on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 27 Nov 2021 20:53:45 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/process/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>子进程</title>
+      <link>https://uphgs.com/posts/node/child-process/</link>
+      <pubDate>Sat, 27 Nov 2021 20:53:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/child-process/</guid>
+      <description>进程的概念，以及在 Node.js 中使用进程
+进程 Process 举例
+NotePad.exe 是一个程序，不是进程 双击 NotePad.exe 时，操作系统会开启一个进程 定义
+进程是程序的执行实例 程序在 CPU 上执行时的活动叫进程 实际上进程并没有明确定义，只要符合一些的规则即可 特点</description>
+    </item>
+    
+  </channel>
+</rss>

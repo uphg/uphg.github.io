@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on 石塔白又大</title>
+    <link>https://uphgs.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 05 Nov 2021 15:11:32 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据库基础知识</title>
+      <link>https://uphgs.com/posts/node/database-basics/</link>
+      <pubDate>Fri, 05 Nov 2021 15:11:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/database-basics/</guid>
+      <description>总结数据库基础知识的笔记。
+范式（NF） 范式（NF）。表示一张数据表的表结构所符合的某种设计标准的级别，数据库范式分为 1NF，2NF，3NF，BCNF，4NF，5NF。一般在我们设计关系型数据库的时候，最多考虑到 BCNF 就够了。
+第一范式（1NF） 首先是第一范式（1NF）。1NF 的定义为：符合 1NF 的关系中的每个属性都不可再分。表1所示的情况，就不符合 1NF 的要求。
+实际上，1NF 是所有关系型数据库的最基本要求，你在关系型数据库管理系统（RDBMS），例如 SQL Server，Oracle，MySQL 中创建数据表的时候，如果数据表的设计不符合这个最基本的要求，那么操作一定是不能成功的。也就是说，只要在 RDBMS 中已经存在的数据表，一定是符合 1NF 的。如果我们要在 RDBMS 中表现表中的数据，就得设计为表2的形式：</description>
+    </item>
+    
+  </channel>
+</rss>

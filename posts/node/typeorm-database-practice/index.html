@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeORM 数据库实践</title>
+<meta name="description" content="代码地址：github.com/uphg/nextjs-blog-demo
+运行 Type ORM 首先在项目根目录创建 post-data 并把它添加到 .gitignore
+然后运行
+docker run -v &quot;$PWD/blog-data&quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.">
+<link rel="canonical" href="https://uphgs.com/posts/node/typeorm-database-practice/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">TypeORM 数据库实践</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-04-30 22:37:48 &#43;0800 CST" title="2022-04-30 22:37:48 &#43;0800 CST">
+    2022-04-30
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>代码地址：<a href="https://github.com/uphg/nextjs-blog-demo">github.com/uphg/nextjs-blog-demo</a></p>
+<h2 id="运行-type-orm">运行 Type ORM</h2>
+<p>首先在项目根目录创建 <code>post-data</code> 并把它添加到 .gitignore</p>
+<p>然后运行</p>
+<pre><code class="language-js">docker run -v &quot;$PWD/blog-data&quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+</code></pre>
+<p>查看容器状态</p>
+<pre><code class="language-sh"># 查看容器的运行状态
+docker ps -a
+
+# 查看启动日志
+docker logs 容器id
+</code></pre>
+<h2 id="验证-pg">验证 pg</h2>
+<p>进入 docker 容器</p>
+<pre><code class="language-sh">docker exec -it 容器id bash
+</code></pre>
+<p>进入 pg 命令行</p>
+<pre><code class="language-sh">psql -U blog -W
+# 默认设置了不需要密码
+# 如果需要添加密码，可在 docker run 选项里的 -e POSTGRES_HOST_AUTH_METHOD=trust 替换成 -e POSTGRES_PASSWORD=123456
+</code></pre>
+<p>执行 pg 命令</p>
+<pre><code class="language-sh">\l 用于 list databases，目前有一个 blog 数据库
+\c 用于 connect to a database（连接数据库，如：\c blog）
+\dt 用于 display tables，目前我们没有 tables
+</code></pre>
+<h2 id="创建数据库">创建数据库</h2>
+<p>用 SQL 来创建数据库</p>
+<ul>
+<li>因为 TypeORM 没有提供单纯的创建数据库的API（差评）</li>
+<li>创建命令 <code>CREATE DATABASE xxx ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';</code></li>
+<li>我们需要创建三个数据库：开发、测试、生产</li>
+<li>对应英文：development、test、production</li>
+<li>最终创建三个数据库：blog_development、blog_test、blog_production</li>
+</ul>
+<h2 id="安装-typeorm">安装 TypeORM</h2>
+<p>步骤参考自<a href="https://typeorm.io/#installation">Getting Started</a></p>
+<p>安装相关依赖 <code>yarn add typeorm reflect-metadata @types/node pg</code></p>
+<p>修改 tsconfig 添加如下内容</p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    ...
+    &quot;emitDecoratorMetadata&quot;: true,
+    &quot;experimentalDecorators&quot;: true,
+    ...
+  }
+}
+</code></pre>
+<p>git commit 当前修改（因为之后的步骤会覆盖当前内容）</p>
+<p>运行 <code>npx typeorm init --database postgres</code></p>
+<p>恢复修改的文件</p>
+<pre><code class="language-sh">git checkout HEAD -- .gitignore
+git checkout HEAD -- tsconfig.json
+</code></pre>
+<p>修改 <code>src/data-source.ts</code></p>
+<pre><code class="language-ts">import &quot;reflect-metadata&quot;
+import { DataSource } from &quot;typeorm&quot;
+
+export const AppDataSource = new DataSource({
+  type: &quot;postgres&quot;,
+  host: &quot;localhost&quot;,
+  port: 5432,
+  username: &quot;blog&quot;,
+  password: &quot;&quot;,
+  database: &quot;blog_development&quot;,
+  synchronize: true,
+  logging: false,
+  entities: [/* User */],
+  migrations: [],
+  subscribers: [],
+})
+</code></pre>
+<p>修改 src/index.ts 内容</p>
+<pre><code class="language-ts">import { AppDataSource } from &quot;./data-source&quot;
+
+AppDataSource.initialize().then(async () =&gt; {
+  console.log(AppDataSource)
+  AppDataSource.close()
+}).catch(error =&gt; console.log(error))
+
+</code></pre>
+<p>TypeORM 的 tsconfig 配置</p>
+<pre><code class="language-json">{
+  &quot;compilerOptions&quot;: {
+    &quot;lib&quot;: [
+      &quot;es5&quot;,
+      &quot;es6&quot;
+    ],
+    &quot;target&quot;: &quot;es5&quot;,
+    &quot;module&quot;: &quot;commonjs&quot;,
+    &quot;moduleResolution&quot;: &quot;node&quot;,
+    &quot;outDir&quot;: &quot;./build&quot;,
+    &quot;emitDecoratorMetadata&quot;: true,
+    &quot;experimentalDecorators&quot;: true,
+    &quot;sourceMap&quot;: true
+  }
+}
+</code></pre>
+<h2 id="运行-typescript">运行 TypeScript</h2>
+<ul>
+<li>Next.js 默认使用 babel 来将 TypeScript 编译为 JavScript（内置功能）</li>
+<li>TypeORM 推荐使用 ts-node 来编译（非内置）</li>
+<li>babel 和 ts-node 对 TypeScript 的支持并非完全一致</li>
+<li>所以我们必须进行统一，全部用 babel</li>
+</ul>
+<h2 id="连接数据库">连接数据库</h2>
+<p>安装 babel 相关依赖</p>
+<pre><code class="language-sh">yarn add @babel/cli @babel/core
+</code></pre>
+<p>尝试运行 ts 文件</p>
+<pre><code class="language-sh">npx babel ./src --out-dir dist --extensions &quot;.ts,.tsx&quot;
+</code></pre>
+<h3 id="解决-support-for-the-experimental-syntax-decorators-legacy-isnt-currently-enabled-报错">解决 <code>Support for the experimental syntax 'decorators-legacy' isn't currently enabled</code> 报错</h3>
+<p>安装插件 <code>yarn add -D @babel/plugin-proposal-decorators</code></p>
+<p>在 Next.js 中添加 <code>.babelrc</code> 配置，参考<a href="https://nextjs.org/docs/advanced-features/customizing-babel-config">官方文档</a></p>
+<pre><code class="language-js">{
+  &quot;presets&quot;: [&quot;next/babel&quot;],
+  &quot;plugins&quot;: [
+    [&quot;@babel/plugin-proposal-decorators&quot;, { &quot;legacy&quot;: true }]
+  ]
+}
+</code></pre>
+<p>删除 <code>src/entity/User.ts</code> 文件和相关引用，再次运行 <code>npx babel ./src --out-dir dist --extensions &quot;.ts,.tsx&quot;</code> 打包</p>
+<p>打包后运行 dist 下的 js 文件 <code>node dist/index.js</code></p>
+<h3 id="解决-column-type-for-userfirstname-is-not-defined-and-cannot-be-guessed-报错">解决 <code>Column type for User#firstName is not defined and cannot be guessed</code> 报错</h3>
+<p>在 User.ts 中声明类型</p>
+<pre><code class="language-ts">import { Entity, PrimaryGeneratedColumn, Column } from &quot;typeorm&quot;
+
+@Entity()
+export class User {
+
+  @PrimaryGeneratedColumn()
+  id: number
+
+  @Column('text')
+  firstName: string
+
+  @Column('text')
+  lastName: string
+
+  @Column('int')
+  age: number
+
+}
+</code></pre>
+<h2 id="禁用-sync">禁用 sync</h2>
+<ul>
+<li>将 <code>synchronize: true</code> 改为 <code>false</code></li>
+<li>如果为 true，那么在连接数据库时，typeorm 会自动根据 entity 目录来修改数据表</li>
+<li>假设 entity 里有 User，就会自动创建 User 表</li>
+</ul>
+<p>看起来很方便，为什么要禁用</p>
+<ul>
+<li>因为 sync 功能可能会在我们修改 User 时直接删除数据</li>
+<li>这种行为绝对不能发生在生产环境</li>
+<li>所以我们要一开始就杜绝 sync 功能</li>
+</ul>
+<h2 id="创建表通过-migration">创建表（通过 migration）</h2>
+<p>确保当前数据库没有表，如果有就 <code>drop table xxx;</code> 删除指定表</p>
+<p>步骤</p>
+<pre><code class="language-sh"># 查看已运行容器
+docker ps
+
+# 进入指定容器
+docker exec -it xxx bash
+
+# 进入 blog 账号
+psql -U blog
+
+# 查看数据库
+\l
+
+# 连接 blog_development 表
+\c blog_development
+
+# 查看当前数据库中的表
+\dt
+
+# 删除指定表
+drop table typeorm_metadata;
+</code></pre>
+<h2 id="创建-post-表">创建 Post 表</h2>
+<p>运行</p>
+<pre><code class="language-sh">npx typeorm migration:create src/migration/CreatePost
+</code></pre>
+<p>得到 <code>src/migration/{timestamp}CreatePost.ts</code>，并添加如下内容（参考<a href="https://typeorm.io/migrations#using-migration-api-to-write-migrations">文档</a>）</p>
+<pre><code class="language-ts">import { MigrationInterface, QueryRunner, Table } from &quot;typeorm&quot;
+
+export class CreatePost1651393775049 implements MigrationInterface {
+
+  public async up(queryRunner: QueryRunner): Promise&lt;void&gt; {
+    return await queryRunner.createTable(
+      new Table({
+        name: &quot;posts&quot;,
+        columns: [
+          {
+            name: &quot;id&quot;,
+            type: &quot;int&quot;,
+            isPrimary: true, // 主键
+            isGenerated: true, // 自动创建
+            generationStrategy: 'increment' // 创建策略：自增长
+          },
+          {
+            name: &quot;title&quot;,
+            type: &quot;varchar&quot;,
+          },
+          {
+            name: 'content',
+            type: 'text'
+          }
+        ],
+      }),
+      true,
+    )
+  }
+
+  public async down(queryRunner: QueryRunner): Promise&lt;void&gt; {
+    return await queryRunner.dropTable('posts')
+  }
+
+}
+</code></pre>
+<p>在 data-source.ts 中添加如下配置</p>
+<pre><code class="language-ts">export const AppDataSource = new DataSource({
+  ...,
+  entities: [
+    'dist/entities/**/*.js'
+  ],
+  migrations: [
+    'dist/migration/**/*.js'
+  ],
+  subscribers: [
+    'dist/subscribers/**/*.js'
+  ]
+})
+</code></pre>
+<p>运行 migration（数据迁移）</p>
+<pre><code class="language-sh"># 编译为 JS 文件
+npx babel ./src --out-dir dist --extensions &quot;.ts,.tsx&quot;
+
+# 升级（创建 posts 表）
+yarn typeorm migration:run -d src/data-source.ts
+# 降级（删除 posts 表）
+yarn typeorm migration:revert -d src/data-source.ts
+</code></pre>
+<p><strong>解决 <code>Cannot use import statement outside a module</code> 报错</strong></p>
+<p>使用 <code>typeorm-ts-node-commonjs migration:run -d src/data-source.ts</code> 代替 <code>typeorm migration:run -d src/data-source.ts</code></p>
+<p>或者将 typeorm-ts-node-commonjs 添加到 package.json 中 <code>&quot;typeorm&quot;: &quot;typeorm-ts-node-commonjs&quot;</code>，然后运行 <code>yarn typeorm migration:run -d src/data-source.ts</code></p>
+<h2 id="快捷运行命令">快捷运行命令</h2>
+<ul>
+<li>npx 在 Windows 上运行很慢</li>
+<li>默认会从 <code>node_modules/.bin</code> 里找命令</li>
+<li>推荐将命令直接写在 package.json 的 scripts 中</li>
+</ul>
+<p>让 babel 自动 build</p>
+<ul>
+<li>npx babel &ndash;help 可以看到有 <code>-w</code> 选项（监听文件更改自动 build）</li>
+<li>我们还可以让 yarn dev 同时运行 next dev 和 babel -w</li>
+<li>但 Windows 不支持 &amp; 操作，只有 Linux / Mac 支持</li>
+<li>于是搜索 <code>npm run tasks in parallel</code></li>
+<li>安装 <code>concurrently</code> 代替 &amp; 操作</li>
+</ul>
+<h2 id="使用-concurrently">使用 concurrently</h2>
+<p>安装</p>
+<pre><code class="language-sh">yarn add -D concurrently
+</code></pre>
+<p>在 package.json 中添加配置如下</p>
+<pre><code class="language-json">{
+  ...
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;concurrently \&quot;next dev\&quot; \&quot;babel -w ./src --out-dir dist --extensions .ts,.tsx\&quot;&quot;
+  }
+}
+</code></pre>
+<h2 id="数据源映射到实体">数据源映射到实体</h2>
+<p><strong>背景</strong></p>
+<ul>
+<li>刚刚只是在数据库里创建了 Post，代码如何读写 Post 呢</li>
+<li>答案：将数据映射到 Entity（实体）</li>
+<li>运行命令：<code>yarn typeorm entity:create src/entity/Post</code></li>
+</ul>
+<p><strong>声明 Post 中的类型</strong></p>
+<pre><code class="language-ts">import { Column, Entity, PrimaryGeneratedColumn } from &quot;typeorm&quot;
+
+@Entity('posts')
+export class Post {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column('varchar')
+  title: string;
+
+  @Column('text')
+  content: string;
+}
+</code></pre>
+<p><strong>如何使用实体</strong></p>
+<ul>
+<li><a href="https://typeorm.io/#/working-with-entity-manager">EntityManager</a> 或 <a href="https://typeorm.io/working-with-repository">Repository</a></li>
+</ul>
+<h2 id="entitymanager-api">EntityManager API</h2>
+<ul>
+<li><code>manager.find(User, { name: 'jack' })</code></li>
+<li><code>manager.create(User, { name: 'jack' })</code></li>
+<li><code>manager.save(user1)</code></li>
+<li><code>manager.save([user1, user2, user3])</code></li>
+<li><code>manager.remove(user1)</code>（用到了事务）</li>
+<li><code>manager.update(User, 1, { name: 'jack' })</code></li>
+<li><code>manager.delete(user1, 1)</code>（没有用到事务）</li>
+<li><code>manager.findOne(user1, 1)</code>（只查找符合条件的第一项）</li>
+</ul>
+<p><strong>封装思路</strong></p>
+<ul>
+<li>把所有操作都放在 manager 上</li>
+<li>把 User 类、user1 对象和其他参数传给 manager</li>
+</ul>
+<p><strong>创建一篇文章</strong></p>
+<p>在 <code>src/index.ts</code> 中添加以下内容</p>
+<pre><code class="language-ts">const posts = await AppDataSource.manager.find(Post)
+const p = new Post()
+p.title = 'Post 1'
+p.content = '我的第一篇文章'
+await AppDataSource.manager.save(p)
+const posts2 = await AppDataSource.manager.find(Post)
+</code></pre>
+<p>打开 blog_development 数据库，运行 <code>select * from posts</code> 查看表中是否有该数据</p>
+<h2 id="repository-api">Repository API</h2>
+<p><strong>举例</strong></p>
+<pre><code class="language-js">const userRepository = getRepository(User)
+await userRepository.findOne(1)
+await userRepository.save(user)
+</code></pre>
+<p><strong>封装思路</strong></p>
+<ul>
+<li>通过 User 构造一个 repo 对象</li>
+<li>这个 repo 对象就只操作 User 表</li>
+</ul>
+<p><strong>特色</strong></p>
+<ul>
+<li><a href="https://typeorm.io/#/tree-entities">TreeRepository</a> 和 MongoRepository</li>
+<li>目前暂时用不到</li>
+</ul>
+<h2 id="总结">总结</h2>
+<p><strong>migration 数据迁移</strong></p>
+<ul>
+<li>数据库迁移（升级和降级）</li>
+</ul>
+<p><strong>entity 实体</strong></p>
+<ul>
+<li>用类和对象来操作数据表和数据行</li>
+</ul>
+<p><strong>connection 连接</strong></p>
+<ul>
+<li>一个数据库连接，默认最多 10 个连接</li>
+<li>这种模式叫做连接池，可以参考<a href="https://juejin.cn/post/6844903602939494414">这篇文章</a></li>
+</ul>
+<p><strong>manager/repo</strong></p>
+<ul>
+<li>两种 API 封装风格，用于操作 entity</li>
+</ul>
+<h2 id="seed">Seed</h2>
+<p>也叫数据填充</p>
+<ul>
+<li>现在数据库有了，数据表 posts 也有了</li>
+<li>我们可以通过 seed 脚本来构造数据</li>
+<li>这比我们写一个网页加一个表单造数据简单的多</li>
+<li>一般不在生产环境中运行 seed 脚本</li>
+</ul>
+<p>好处</p>
+<ul>
+<li>方便你的同事快速运行项目</li>
+<li>不然你就会被吐槽：请问你创建的这个表怎么填充数据</li>
+<li>为了防止被新同事烦，你应该写 seed 脚本</li>
+</ul>
+<h2 id="关于-cannot-access-xxx-before-initialization-报错解决方案">关于 Cannot access &lsquo;xxx&rsquo; before initialization 报错解决方案</h2>
+<p>表关联关系相互引用问题，参考 TypeORM 官方 issues：https://github.com/typeorm/typeorm/issues/4190</p>
+<p>将类对象改为字符串形式即可，如下</p>
+<pre><code class="language-js">// 之前的写法
+// Photo.ts
+@ManyToOne(type =&gt; User, user =&gt; user.photos)
+  user: User;
+
+// User.ts
+@OneToMany(type =&gt; Photo, photo =&gt; photo.user)
+  photos: Photo[];
+
+// 修改后的写法
+// Photo.ts
+@ManyToOne('User', 'photos')
+  user: User;
+
+// User.ts
+@OneToMany('Photo', 'user')
+  photos: Photo[];
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/typeorm/" alt="TypeORM" >
+                        TypeORM
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

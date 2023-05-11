@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AJAX on 石塔白又大</title>
+    <link>https://uphgs.com/tags/ajax/</link>
+    <description>Recent content in AJAX on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Tue, 09 Jun 2020 15:44:57 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AJAX</title>
+      <link>https://uphgs.com/posts/javascript/ajax-use/</link>
+      <pubDate>Tue, 09 Jun 2020 15:44:57 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/ajax-use/</guid>
+      <description>什么是 AJAX 全称：Async JavaScript And XML（异步的 JavaScript 和 XML）。 功能：用 JavaScript 发请求和收响应。 概念：AJAX 是浏览器的功能，浏览器可以发请求收响应，浏览器在 window 上加了一个 XMLHttpRequest 函数，用这个函数可以构造一个对象，用于发送请求接收响应。 一个完整的 AJAX 请求 buttons.</description>
+    </item>
+    
+  </channel>
+</rss>

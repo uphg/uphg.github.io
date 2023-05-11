@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS 不正交</title>
+<meta name="description" content="margin 属性合并 兄弟元素之间 在默认情况下两个 div 之间的 margin 属性会重合，例如：
+CSS
+main {border: 1px solid blue;}div {border: 1px solid red;height: 100px;margin: 10px;}HTML">
+<link rel="canonical" href="https://uphgs.com/posts/css/css-not-orthogonal/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">CSS 不正交</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2019-09-01 09:06:34 &#43;0800 CST" title="2019-09-01 09:06:34 &#43;0800 CST">
+    2019-09-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="margin-属性合并"><code>margin</code> 属性合并</h2>
+<h3 id="兄弟元素之间">兄弟元素之间</h3>
+<p>在默认情况下两个 div 之间的 margin 属性会重合，例如：</p>
+<p>CSS</p>
+<pre><code class="language-css">main {
+  border: 1px solid blue;
+}
+div {
+  border: 1px solid red;
+  height: 100px;
+  margin: 10px;
+}
+</code></pre>
+<p>HTML</p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt; 
+&lt;/main&gt;
+</code></pre>
+<p>图示：</p>
+<p><img src="/images/CSS-Layout_01.jpg" alt="图片"></p>
+<p>但假如在其中插入一个带有 <code>border: 1px solid black;</code> 的 div 时，margin 又会被撑开，如图：</p>
+<p><img src="/images/CSS-Layout_02.jpg" alt="图片"></p>
+<blockquote>
+<p>即使插入的 div 边框为 0.1px 其他div的margin也会受到影响，其他会影响margin的属性还有: <code>display: table;</code>，<code>display: flex</code> 等</p>
+</blockquote>
+<p>代码链接：http://js.jirengu.com/giqanalumi/10/edit?html,output</p>
+<h3 id="父子元素之间">父子元素之间</h3>
+<p>当子元素带有 margin-top 父元素没有 margin-top 时，父元素也会被顶下去，如下：</p>
+<p>HTML</p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;div class=&quot;parent&quot;&gt;
+    &lt;div class=&quot;child&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/main&gt;
+</code></pre>
+<p>CSS</p>
+<pre><code class="language-css">main {
+  border: 1px solid blue;
+  padding: 5px;
+}
+.child {
+  height: 100px;
+  width: 100px;
+  background-color: #ff0000;
+  margin-top: 100px; 
+}
+.parent {
+  background-color: #000;
+}
+</code></pre>
+<p>图示：</p>
+<p><img src="/images/CSS-Layout_03.jpg" alt="图片"></p>
+<p><strong>给上面的父元素添加一个 <code>border-top: 5px solid green;</code>，子元素就会撑开父元素了，如图：</strong></p>
+<p><img src="/images/CSS-Layout_04.jpg" alt="图片"></p>
+<p>除了加 border 属性，还可以添加: <code>padding</code>  <code>display: inline-block;</code>  <code>display: flex;</code>  <code>display: table;</code>  <code>overflow: hidden;</code> 等</p>
+<blockquote>
+<p>如果在有 margin 属性的子元素上添加一个内联元素，那么 margin 也不会影响父元素布局</p>
+</blockquote>
+<p>代码链接：http://js.jirengu.com/cimunikafi/2/edit</p>
+<h2 id="2-li-小圆点受-display-影响">2. <code>li</code> 小圆点受 <code>display</code> 影响</h2>
+<p>当修改 li 的 display 属性时 li 的小圆点就会消失，如下：</p>
+<p>HTML</p>
+<pre><code class="language-html">&lt;ul&gt;
+  &lt;li&gt;选项1&lt;/li&gt;
+  &lt;li&gt;选项2&lt;/li&gt;
+  &lt;li&gt;选项3&lt;/li&gt;
+&lt;/ul&gt; 
+</code></pre>
+<p>CSS</p>
+<pre><code class="language-css">ul {
+  border: 1px solid #000;
+}
+li {
+  display: block;
+}
+</code></pre>
+<p>图：</p>
+<p><img src="/images/CSS-Layout_05.jpg" alt="图片"></p>
+<blockquote>
+<p>原因：由于默认的 li 的默认 display 属性为： <code>list-item</code>  小圆点只会显示在有这个属性的元素上</p>
+</blockquote>
+<p>代码链接：http://js.jirengu.com/kiciminufa/1/edit</p>
+<h2 id="3-position-会影响-dispaly-属性">3. <code>position</code> 会影响 <code>dispaly</code> 属性</h2>
+<p>HTML</p>
+<pre><code class="language-html">&lt;div class=&quot;parent&quot;&gt;
+  &lt;div class=&quot;child&quot;&gt;内联样式&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>CSS</p>
+<pre><code class="language-css">.parent {
+  background: yellow;
+  height: 100px;
+  position: relative;
+}
+.child {
+  display: inline;
+  border: 1px solid red;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+</code></pre>
+<p>此时打开控制台选中 child 元素 在控制台右侧选择 Computed 一栏 搜索 display ，就可以看到实际上child 的 display 属性变成了 block ，如图：</p>
+<p><img src="/images/CSS-Layout_06.jpg" alt="图片"></p>
+<blockquote>
+<p>注意：只有当 display 的属性为 inline 或者 inline-block 时添加 position 属性才会被变为 block</p>
+</blockquote>
+<p>代码链接：http://js.jirengu.com/yucujokate/1/edit</p>
+<h2 id="4-position-fixed-受-transform-影响">4. <code>position: fixed</code> 受 <code>transform</code> 影响</h2>
+<p>当给有 <code>position: fixed</code> 属性的父元素或祖先元素一个 transform 属性时 <code>position: fixed</code> 就不会相对屏幕定位，而是相对那个父元素或祖先元素定位，如下：</p>
+<p>HTML</p>
+<pre><code class="language-html">&lt;main&gt;
+  &lt;div class=&quot;demo&quot;&gt;&lt;/div&gt;
+&lt;/main&gt;
+</code></pre>
+<p>CSS</p>
+<pre><code class="language-css">main {
+  width: 200px;
+  height: 200px;
+  border: 1px solid blue;
+  transform: translate(10px, 50px);
+}
+.demo {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: fixed;
+  right: 5px;
+  top:50px;
+}
+</code></pre>
+<p>图示：</p>
+<p><img src="/images/CSS-Layout_07.jpg" alt="图片"></p>
+<p>代码链接：http://js.jirengu.com/zesiyopemi/2/edit</p>
+<h2 id="5-float-元素会影响周围的-inline-元素">5. <code>float</code> 元素会影响周围的 <code>inline</code> 元素</h2>
+<p>HTML</p>
+<pre><code class="language-html">&lt;div class=&quot;parent&quot;&gt;
+  &lt;div class=&quot;float&quot;&gt;浮动元素&lt;/div&gt;
+  &lt;div class=&quot;child&quot;&gt;文字元素&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>CSS</p>
+<pre><code class="language-css">.parent {
+  background: blue;
+  height: 100px;
+}
+.float {
+  background: rgba(255, 0, 0, 0.5);
+  width: 100px;
+  height: 60px;
+  float: left;
+}
+.child {
+  width: 300px;
+  height: 50px;
+  background: white;
+}
+</code></pre>
+<p>这时 float 元素就会影响兄弟元素里的 inline 元素，如图：</p>
+<p><img src="/images/CSS-Layout_08.jpg" alt="图片"></p>
+<p>代码链接：http://js.jirengu.com/bojacipogu/10/edit</p>
+<p><strong>拓展：浮动最初的作用</strong></p>
+<p>浮动开始只是为了让图文混排出现的，当在一段文字中插入一个图片，文字默认是与图片底线对齐的。很不美观，于是就出现了 <code>float: left</code> 等属性，可以显示图片又使文字排版美观</p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/css/" alt="CSS" >
+                        CSS
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

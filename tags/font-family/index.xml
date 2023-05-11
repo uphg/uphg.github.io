@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>font-family on 石塔白又大</title>
+    <link>https://uphgs.com/tags/font-family/</link>
+    <description>Recent content in font-family on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sun, 20 Sep 2020 20:01:35 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/font-family/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSS 引入字体</title>
+      <link>https://uphgs.com/posts/css/add-font-family/</link>
+      <pubDate>Sun, 20 Sep 2020 20:01:35 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/add-font-family/</guid>
+      <description>首先需要字体文件，类似如下类型
+HankRnd-Black.otfHankRnd-Black.ttf然后需要一个工具生成本地字体文件，这里我使用 https://www.fontsquirrel.com/
+打开后点击 Generator，按照如下步骤操作
+会得到一个压缩包，复制其中如下后缀的文件
+hankrnd-webfont.woffhankrnd-webfont.woff2创建一个 font-family.css 文件，添加以下内容
+@font-face {font-family: &#39;hankrndregular&#39;;src: url(&#39;hankrnd-webfont.</description>
+    </item>
+    
+  </channel>
+</rss>

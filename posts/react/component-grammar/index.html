@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React 语法 &amp; 组件化</title>
+<meta name="description" content="GitHub 案例链接 使用 props 单向数据流实现简单的组件通信 使用 eventHub 实现组件间通信 使用 Redux 代替 EventHub React 语法 首先使用原生 JS 实现一个简单的数组加减功能">
+<link rel="canonical" href="https://uphgs.com/posts/react/component-grammar/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">React 语法 &amp; 组件化</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-01-16 18:10:11 &#43;0800 CST" title="2021-01-16 18:10:11 &#43;0800 CST">
+    2021-01-16
+</time>
+      
+        —
+        
+            <a class="hover:text-gray-500" href="/categories/%E5%89%8D%E7%AB%AF/" alt="前端" >
+                前端
+                </a>
+        
+
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="github-案例链接">GitHub 案例链接</h2>
+<ul>
+<li><a href="https://github.com/uphg/react-component-demo/blob/master/src/main-props.js">使用 props 单向数据流实现简单的组件通信</a></li>
+<li><a href="https://github.com/uphg/react-component-demo/blob/master/src/main-eventhub-discrete.js">使用 eventHub 实现组件间通信</a></li>
+<li><a href="https://github.com/uphg/react-component-demo/blob/master/src/main-redux.js">使用 Redux 代替 EventHub</a></li>
+</ul>
+<h2 id="react-语法">React 语法</h2>
+<p>首先使用原生 JS 实现一个简单的数组加减功能</p>
+<pre><code class="language-html">&lt;div&gt;
+  &lt;span id=&quot;result&quot;&gt;0&lt;/span&gt;
+  &lt;button id=&quot;add&quot;&gt;+1&lt;/button&gt;
+  &lt;button id=&quot;cut&quot;&gt;-1&lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">const result = document.querySelector(&quot;#result&quot;);
+const add = document.querySelector(&quot;#add&quot;);
+const cut = document.querySelector(&quot;#cut&quot;);
+
+add.addEventListener(&quot;click&quot;, function() {
+  let number = parseInt(result.innerText, 10);
+  number += 1;
+  result.innerText = number;
+});
+
+cut.addEventListener(&quot;click&quot;, function() {
+  let number = parseInt(result.innerText, 10);
+  number -= 1;
+  result.innerText = number;
+});
+</code></pre>
+<p>然后使用 React 函数实现，对比一下它们的区别</p>
+<pre><code class="language-html">&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">let number = 0;
+
+const clickAdd = () =&gt; {
+  number += 1;
+  render();
+};
+const clickCut = () =&gt; {
+  number -= 1;
+  render();
+};
+
+render();
+
+function render() {
+  const span = React.createElement(&quot;span&quot;, { className: &quot;text&quot; }, number);
+  const addButton = React.createElement(&quot;button&quot;, { onClick: clickAdd }, &quot;+1&quot;);
+  const cutButton = React.createElement(&quot;button&quot;, { onClick: clickCut }, &quot;-1&quot;);
+  const div = React.createElement(
+    &quot;div&quot;,
+    { className: &quot;parent&quot; },
+    span,
+    addButton,
+    cutButton
+  );
+  ReactDOM.render(div, document.querySelector(&quot;#root&quot;));
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://jsbin.com/zodapipoqu/4/edit?html,js,output">https://jsbin.com/zodapipoqu/4/edit?html,js,output</a></p>
+</blockquote>
+<p>React 的写法虽然逻辑上更简洁，但是总要 <code>React.createElement()</code> 方法创建 DOM，很麻烦，于是 React 使用了 JSX 优化此部分</p>
+<pre><code class="language-jsx">function render() {
+  ReactDOM.render(
+    &lt;div class=&quot;parent&quot;&gt;
+      &lt;span class=&quot;text&quot;&gt;{number}&lt;/span&gt;
+      &lt;button onClick={clickAdd}&gt;+1&lt;/button&gt;
+      &lt;button onClick={clickCut}&gt;-1&lt;/button&gt;
+    &lt;/div&gt;,
+    document.querySelector(&quot;#root&quot;)
+  );
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://jsbin.com/kevosoluma/edit?html,js,output">https://jsbin.com/kevosoluma/edit?html,js,output</a></p>
+</blockquote>
+<p>JSX 语法支持 JS 与标签（XML）混着写</p>
+<pre><code class="language-jsx">function App() {
+  const names = ['Alice', 'Emily', 'Kate'];
+  return (
+    &lt;div&gt;
+      {
+        names.map(function (name) {
+          return &lt;div&gt;Hello, {name}!&lt;/div&gt;
+        })
+      }
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<!-- raw HTML omitted -->
+<p>并且如果插入数组会自动展开</p>
+<pre><code class="language-js">function App() {
+  const arr = [
+    &lt;h1 style=&quot;margin: 0.67em 0;&quot;&gt;Hello world!&lt;/h1&gt;,
+    &lt;h2&gt;React is awesome&lt;/h2&gt;,
+  ];
+  return (
+    &lt;div&gt;{arr}&lt;/div&gt;
+  )
+}
+</code></pre>
+<!-- raw HTML omitted -->
+<h2 id="react-组件">React 组件</h2>
+<p>一个简单的 React 组件案例</p>
+<pre><code class="language-jsx">function Box() {
+  return (
+    &lt;div class=&quot;parent&quot;&gt;
+      &lt;span class=&quot;text&quot;&gt;{number}&lt;/span&gt;
+      &lt;button onClick={clickAdd}&gt;+1&lt;/button&gt;
+      &lt;button onClick={clickCut}&gt;-1&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Box /&gt;
+    &lt;/div&gt;
+  )
+}
+
+function render() {
+  ReactDOM.render(&lt;App /&gt;, document.querySelector(&quot;#root&quot;))
+}
+</code></pre>
+<p>函数组件支持传入属性，属性会以对象的形式传入函数的参数中</p>
+<pre><code class="language-jsx">function Box(props) {
+  return (
+    &lt;div class=&quot;parent&quot;&gt;
+      &lt;p&gt;名称：{props.name}，年龄：{props.age}&lt;/p&gt;
+      &lt;span class=&quot;text&quot;&gt;{number}&lt;/span&gt;
+      &lt;button onClick={clickAdd}&gt;+1&lt;/button&gt;
+      &lt;button onClick={clickCut}&gt;-1&lt;/button&gt;
+    &lt;/div&gt;
+  )
+}
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Box name=&quot;张三&quot; age=&quot;18&quot; /&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://jsbin.com/rupiwoqoku/1/edit?html,js,output">https://jsbin.com/rupiwoqoku/1/edit?html,js,output</a></p>
+</blockquote>
+<h2 id="propschildren">props.children</h2>
+<p>如果父组件内只有一个组件 <code>props.children</code> 就会返回该组件，可以通过这种方式渲染子组件</p>
+<pre><code class="language-jsx">const HiMessage = (props) =&gt; (
+  &lt;h1&gt;嗨，{props.name}&lt;/h1&gt;
+)
+
+const Box = (props) =&gt; (
+  &lt;div className=&quot;box&quot;&gt;{props.children}&lt;/div&gt;
+)
+
+function App() {
+  return (
+    &lt;Box&gt;
+      &lt;HiMessage name=&quot;小恒恒&quot; /&gt;
+    &lt;/Box&gt;
+  )
+}
+</code></pre>
+<pre><code class="language-css">.box {
+  border: 1px solid blue;
+}
+</code></pre>
+<!-- raw HTML omitted -->
+<p>而如果有多个子节点，它会返回一个子节点组成的数组</p>
+<pre><code class="language-jsx">const Box = (props) =&gt; (
+  &lt;ol className=&quot;box&quot;&gt;
+  {
+    props.children.map( item =&gt; &lt;li&gt;{item}&lt;/li&gt;)
+  }
+  &lt;/ol&gt;
+)
+
+function App() {
+  return (
+    &lt;Box&gt;
+      &lt;span&gt;小恒恒&lt;/span&gt;
+      &lt;span&gt;小果果&lt;/span&gt;
+    &lt;/Box&gt;
+  )
+}
+</code></pre>
+<h2 id="使用-class-组件">使用 class 组件</h2>
+<p>为了能够让每个组件有独立的变量，React 还支持以 class 构造函数的方式构建组件</p>
+<pre><code class="language-js">class Box extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      number: 0
+    }
+  }
+  clickAdd() {
+    this.setState({
+      number: this.state.number + 1
+    })
+  }
+  clickCut() {
+    this.setState({
+      number: this.state.number - 1
+    })
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;span class=&quot;text&quot;&gt;{this.state.number}&lt;/span&gt;
+        &lt;button onClick={this.clickAdd.bind(this)}&gt;+1&lt;/button&gt;
+        &lt;button onClick={this.clickCut.bind(this)}&gt;-1&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+render();
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;Box /&gt;
+    &lt;/div&gt;
+  )
+}
+
+function render() {
+  ReactDOM.render(
+    &lt;App /&gt;,
+    document.querySelector(&quot;#root&quot;)
+  );
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://jsbin.com/mijipefegi/1/edit?html,js,output">https://jsbin.com/mijipefegi/1/edit?html,js,output</a></p>
+</blockquote>
+<h3 id="关于-setstate">关于 <code>setState()</code></h3>
+<p><code>setState()</code> 在每次调用它修改数据时，它都会自动的调用当前组件的 <code>render()</code> 更新当前 DOM，并且每次更新会使用 DOM diff 对比每次 DOM 更新的位置，来局部更新 DOM 。</p>
+<p>但由于 React 中 <code>this.setState()</code> 是异步更新的，它会等所有代码都执行完毕后才调用，所以在一个函数中多次调用 <code>this.setState()</code> 它会根据优化合并为一次。</p>
+<p>如果想要修改 <code>this.state</code> 的数据，最好使用函数回调的方式，函数会接收两个参数，分别是最新的 state 和 最新的 props，如下：</p>
+<pre><code class="language-js">this.setState((state, props) =&gt; {
+  return {
+    number: state.number + 1
+  }
+})
+</code></pre>
+<h3 id="class-组件的特点">class 组件的特点</h3>
+<ol>
+<li>每个组件的 <code>class</code> 必须继承 <code>React.Component</code> 。</li>
+<li>组件会传入一个 props 对象，用于存储外部传入的属性，使用时调用 <code>this.props.xxx</code>。</li>
+<li>组件中的变量必须在 <code>this.state</code> 中事先声明.</li>
+<li>如果需要修改变量的值，必须调用 <code>this.setState()</code> 修改。</li>
+<li><code>this.setState()</code> 是异步的，它会等待代码执行完毕后才执行。</li>
+<li>组件的 html(xml) 部分必须以 <code>class</code> 内的 <code>render()</code> 函数的返回值中书写。</li>
+<li>如果在 html 中需要绑定事件函数，必须自己使用 <code>xxx.bind(this)</code> 来绑定 <code>this</code>，否则绑定的函数中无法调用 <code>this</code></li>
+</ol>
+<h2 id="解决-class-组件-render-函数的-this-问题">解决 class 组件 render 函数的 this 问题</h2>
+<p>有以下三种方式</p>
+<pre><code class="language-jsx">class Box extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      number: 0
+    }
+  }
+  add1 = () =&gt; {
+    this.setState((state) =&gt; ({
+      number: state.number + 1
+    }))
+  }
+  add2() {
+    this.setState((state) =&gt; ({
+      number: state.number + 1
+    }))
+  }
+  add3() {
+    this.setState((state) =&gt; ({
+      number: state.number + 1
+    }))
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;p&gt;{this.state.number}&lt;/p&gt;
+        &lt;div&gt;
+          &lt;button onClick={this.add1}&gt;（一）点击加一&lt;/button&gt;
+          &lt;button onClick={this.add2.bind(this)}&gt;（二）点击加一&lt;/button&gt;
+          &lt;button onClick={() =&gt; { this.add3() }}&gt;（三）点击加一&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+<h2 id="react-组件通信">React 组件通信</h2>
+<p>可以利用 props 将函数传入子组件，实现简单的组件通信，以一个点击按钮发送消息的组件为例</p>
+<pre><code class="language-jsx">// 创建一个子组件，接收父组件传入的值，并在 click 的函数中调用
+class Box extends React.Component {
+  constructor() {
+    super()
+  }
+  clickButton() {
+    this.props.send('hi')
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;p&gt;收到的消息：{this.props.message}&lt;/p&gt;
+        &lt;button onClick={this.clickButton.bind(this)}&gt;发送消息&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+// 创建一个父组件，把子组件需要的值传入
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      message: ''
+    }
+  }
+  changeMessage(message) {
+    this.setState({
+      message: message
+    })
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;Box message={this.state.message} send={this.changeMessage.bind(this)} /&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+// 初始化 React DOM
+ReactDOM.render(&lt;App /&gt;, document.querySelector(&quot;#root&quot;))
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://jsbin.com/nowaliyiba/2/edit?html,js,output">https://jsbin.com/nowaliyiba/2/edit?html,js,output</a></p>
+</blockquote>
+<h2 id="使用-eventbus-实现更灵活的组件通信">使用 eventBus 实现更灵活的组件通信</h2>
+<p>首先实现一个简单的 eventBus，该 eventBus 只包括事件监听(on)，事件触发(trigger)两个功能</p>
+<pre><code class="language-js">const cache = {}
+const eventHub = {
+  trigger(eventName, data) {
+    const event = cache[eventName]
+    if (!event) { return false }
+    for (let i = 0; i &lt; event.length; i++) {
+      event[i](data)
+    }
+  },
+  on(eventName, fn) {
+    if(!cache[eventName]) {
+      cache[eventName] = []
+    }
+    cache[eventName].push(fn)
+  }
+}
+</code></pre>
+<p>实现一个花钱功能的组件，先创建一个子组件，点击按钮会触发 eventBus 的花钱事件</p>
+<pre><code class="language-jsx">class Box extends React.Component {
+  constructor() {
+    super()
+  }
+  clickWallet() {
+    eventBus.trigger('花钱', 100)
+  }
+  render() {
+    return (
+      &lt;div className=&quot;box&quot;&gt;
+        &lt;p&gt;姓名：{this.props.name}，钱包总金额：{this.props.amount}&lt;/p&gt;
+        &lt;button onClick={this.clickWallet.bind(this)}&gt;花钱&lt;/button&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+</code></pre>
+<p>创建一个父组件，将总金额传入子组件，并且在生命周期钩子函数 <code>componentDidMount</code> 监听子组件的花钱事件。</p>
+<pre><code class="language-jsx">class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      amount: 10000
+    }
+  }
+  componentDidMount() {
+    eventBus.on('花钱', (data) =&gt; {
+      this.setState((state) =&gt; {
+        return {
+          amount: state.amount - data
+        }
+      })
+    })
+  }
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;Box name=&quot;小花&quot; amount={this.state.amount}/&gt;
+        &lt;Box name=&quot;小张&quot; amount={this.state.amount}/&gt;
+        &lt;Box name=&quot;小华&quot; amount={this.state.amount}/&gt;
+        &lt;Box name=&quot;小郭&quot; amount={this.state.amount}/&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+ReactDOM.render(
+  &lt;App /&gt;,
+  document.querySelector('#root')
+)
+</code></pre>
+<blockquote>
+<p>生命周期钩子函数 <code>componentDidMount</code> 类似 Vue 的 <code>mounted</code> ，表示组件已经挂载到实例中。</p>
+</blockquote>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/react/" alt="React" >
+                        React
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

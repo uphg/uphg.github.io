@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>inject on 石塔白又大</title>
+    <link>https://uphgs.com/tags/inject/</link>
+    <description>Recent content in inject on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sun, 06 Dec 2020 13:30:22 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/inject/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue 进阶属性</title>
+      <link>https://uphgs.com/posts/vue/advanced-options/</link>
+      <pubDate>Sun, 06 Dec 2020 13:30:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/advanced-options/</guid>
+      <description>directives 指令 除了 Vue 官方内置的指令 (v-model 和 v-if 等) ，Vue 还允许我们自定义指令。
+添加一个 focus 指令，使元素自动聚焦：
+// 注册一个全局自定义指令 `v-focus`Vue.</description>
+    </item>
+    
+  </channel>
+</rss>

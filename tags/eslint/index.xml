@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ESLint on 石塔白又大</title>
+    <link>https://uphgs.com/tags/eslint/</link>
+    <description>Recent content in ESLint on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Tue, 16 Nov 2021 18:01:05 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/eslint/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue3 配置 ESLint</title>
+      <link>https://uphgs.com/posts/vue3-config-eslint/</link>
+      <pubDate>Tue, 16 Nov 2021 18:01:05 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue3-config-eslint/</guid>
+      <description>记录 Vue3 项目配置 ESLint 的过程，主要配置流程：
+Vue ESLint 插件 TS 类型检测 Prettierrc 自动格式化 eslint-plugin-vue 插件 安装 eslint-plugin-vue</description>
+    </item>
+    
+  </channel>
+</rss>

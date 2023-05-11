@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Context</title>
+<meta name="description" content="使用 React Context 传值 使用案例
+const NumberContext = React.createContext(100);function F1() {return (&lt;div className=&quot;bordered&quot;&gt;&lt;p&gt;F1&lt;/p&gt;&lt;F2 /&gt;&lt;/div&gt;);}function F2() {return (&lt;div className=&quot;bordered&quot;&gt;&lt;p&gt;F2&lt;/p&gt;&lt;NumberContext.">
+<link rel="canonical" href="https://uphgs.com/posts/react/context/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">React Context</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-02-01 17:02:03 &#43;0800 CST" title="2021-02-01 17:02:03 &#43;0800 CST">
+    2021-02-01
+</time>
+      
+        —
+        
+            <a class="hover:text-gray-500" href="/categories/%E5%89%8D%E7%AB%AF/" alt="前端" >
+                前端
+                </a>
+        
+
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="使用-react-context-传值">使用 React Context 传值</h2>
+<p>使用案例</p>
+<pre><code class="language-jsx">const NumberContext = React.createContext(100);
+
+function F1() {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F1&lt;/p&gt;
+      &lt;F2 /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function F2() {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F2&lt;/p&gt;
+      &lt;NumberContext.Consumer&gt;
+        {(number) =&gt; &lt;F3 message={number} /&gt;}
+      &lt;/NumberContext.Consumer&gt;
+    &lt;/div&gt;
+  );
+}
+
+function F3(props) {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F3，message：{props.message}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default function App() {
+  return (
+    &lt;NumberContext.Provider value=&quot;99&quot;&gt;
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;F1 /&gt;
+      &lt;/div&gt;
+    &lt;/NumberContext.Provider&gt;
+  );
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://codesandbox.io/s/optimistic-ramanujan-o53gs?file=/src/App.js">https://codesandbox.io/s/optimistic-ramanujan-o53gs?file=/src/App.js</a></p>
+</blockquote>
+<h2 id="实现一个-context-组件">实现一个 Context 组件</h2>
+<p>React 的父组件可以通过 <code>props.children</code> 函数得到它当前包裹的子组件的信息，所以可以通过这个接收到所有子组件的信息，并做处理。</p>
+<pre><code class="language-jsx">function Consumer(props) {
+  let number = 100;
+  props.children(number);
+  return &lt;div&gt;Consumer&lt;/div&gt;;
+}
+
+function App() {
+  return (
+    &lt;Consumer&gt;
+      {(n) =&gt; console.log(&quot;n 的值为：&quot; + n)}
+    &lt;/Consumer&gt;
+  );
+}
+// n 的值为：100 
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js">https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js</a></p>
+</blockquote>
+<p>如果组件包裹了多个内容，props.children 会返回一个数组</p>
+<pre><code class="language-jsx">function Consumer(props) {
+  let number = 100;
+  console.log(props.children);
+  props.children[1](number);
+  return &lt;div&gt;Consumer&lt;/div&gt;;
+}
+
+function App() {
+  return (
+    &lt;Consumer&gt;
+      &lt;p&gt;&lt;/p&gt;
+      {(n) =&gt; console.log(&quot;n 的值为：&quot; + n)}
+    &lt;/Consumer&gt;
+  );
+}
+// (2) [Object, ƒ ()]
+// n 的值为：100 
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js">https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js</a></p>
+</blockquote>
+<p>执行 <code>props.children()</code> 会返回子组件 Consumer return 的内容，可以通过这个方式渲染子组件</p>
+<pre><code class="language-jsx">function Consumer(props) {
+  let number = 100;
+  let result = props.children(number);
+  return &lt;div&gt;{result}&lt;/div&gt;;
+}
+
+function Box(props) {
+  return &lt;p&gt;message：{props.message}&lt;/p&gt;;
+}
+
+function App() {
+  return &lt;Consumer&gt;{(n) =&gt; &lt;Box message={n} /&gt;}&lt;/Consumer&gt;;
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js">https://codesandbox.io/s/objective-engelbart-lg31s?file=/src/App.js</a></p>
+</blockquote>
+<h2 id="修改-context-的值">修改 Context 的值</h2>
+<p>由于改值时只允许在 App 中修改（因为值是从 App 传入，假设各组件都是一个单文件），所以 App 的子孙组件想要修改 App 的值，同样也要通过 Context 传入一个 set 方法</p>
+<pre><code class="language-jsx">const NumberContext = React.createContext(100);
+
+function F1() {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F1&lt;/p&gt;
+      &lt;F2 /&gt;
+    &lt;/div&gt;
+  );
+}
+
+function F2() {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F2&lt;/p&gt;
+      &lt;NumberContext.Consumer&gt;
+        {(e) =&gt; &lt;F3 message={e.number} setValue={e.setNumber} /&gt;}
+      &lt;/NumberContext.Consumer&gt;
+    &lt;/div&gt;
+  );
+}
+
+function F3(props) {
+  return (
+    &lt;div className=&quot;bordered&quot;&gt;
+      &lt;p&gt;F3&lt;/p&gt;
+      &lt;p&gt;{props.message}&lt;/p&gt;
+      &lt;button onClick={props.setValue}&gt;点击+1&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      number: 99
+    };
+  }
+  setNumber() {
+    this.setState((state) =&gt; {
+      return {
+        number: (state.number += 1)
+      };
+    });
+  }
+  render() {
+    const value = {
+      number: this.state.number,
+      setNumber: this.setNumber.bind(this)
+    };
+    return (
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;p&gt;{&quot;APP&quot;}&lt;/p&gt;
+        &lt;NumberContext.Provider value={value}&gt;
+          &lt;F1 /&gt;
+        &lt;/NumberContext.Provider&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+<blockquote>
+<p>案例链接：<a href="https://codesandbox.io/s/confident-cloud-qs2ox?file=/src/App.js">https://codesandbox.io/s/confident-cloud-qs2ox?file=/src/App.js</a></p>
+</blockquote>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/react/" alt="React" >
+                        React
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

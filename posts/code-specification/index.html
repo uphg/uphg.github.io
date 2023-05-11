@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>代码规范</title>
+<meta name="description" content="文章参考 谷歌 JavaScript 风格指南 Airbnb JavaScript 风格指南 JavaScript Standard Style 如何写出无法维护的代码 The Joel Test: 20 Years Later StackOverflow 创始人总结的 20 条衡量技术团队好坏的标准 视频：The better parts Douglas Crockford 阐述他认为 JS 中的好的特性有哪些，坏的特性有哪些 JavaScript 代码规范 文件命名小写 文件名必须全部小写，并且可以包含下划线（_）或破折号（-），但不能包含额外的标点符号。遵循项目使用的约定。文件名的扩展名必须是 .">
+<link rel="canonical" href="https://uphgs.com/posts/code-specification/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">代码规范</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-12-11 16:51:46 &#43;0800 CST" title="2021-12-11 16:51:46 &#43;0800 CST">
+    2021-12-11
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="文章参考">文章参考</h2>
+<ul>
+<li><a href="https://google.github.io/styleguide/jsguide.html">谷歌 JavaScript 风格指南</a></li>
+<li><a href="https://lin-123.github.io/javascript/">Airbnb JavaScript 风格指南</a></li>
+<li><a href="https://standardjs.com/rules-zhcn.html">JavaScript Standard Style</a></li>
+<li><a href="https://coolshell.cn/articles/4758.html">如何写出无法维护的代码</a></li>
+<li><a href="https://dev.to/checkgit/the-joel-test-20-years-later-1kjk">The Joel Test: 20 Years Later</a> StackOverflow 创始人总结的 20 条衡量技术团队好坏的标准</li>
+<li><a href="https://www.youtube.com/watch?v=DxnYQRuLX7Q">视频：The better parts</a> Douglas Crockford 阐述他认为 JS 中的好的特性有哪些，坏的特性有哪些</li>
+</ul>
+<h2 id="javascript-代码规范">JavaScript 代码规范</h2>
+<h3 id="文件命名小写">文件命名小写</h3>
+<p>文件名必须全部小写，并且可以包含下划线（<code>_</code>）或破折号（<code>-</code>），但不能包含额外的标点符号。遵循项目使用的约定。文件名的扩展名必须是 <code>.js</code>。</p>
+<h3 id="es-modules">ES modules</h3>
+<p>导入路径中的文件必须添加扩展名</p>
+<pre><code class="language-js">// Bad
+import '../directory/file';
+
+// Good
+import '../directory/file.js';
+</code></pre>
+<p>导入命名必须以文件名驼峰式命名</p>
+<pre><code class="language-js">// Naming module imports
+import * as fileOne from '../file-one.js';
+import * as fileTwo from '../file_two.js';
+
+// Naming default imports
+import MyClass from '../my-class.js';
+import myFunction from '../my_function.js';
+</code></pre>
+<h3 id="禁止使用-var">禁止使用 var</h3>
+<pre><code class="language-js">// Bad
+var state = true
+
+// Good
+let state = false
+</code></pre>
+<h3 id="使用-const-声明常量">使用 const 声明常量</h3>
+<pre><code class="language-js">// Bad
+let a = 2
+
+// Good
+const a = 1
+</code></pre>
+<h3 id="使用两个空格缩进">使用两个空格缩进</h3>
+<pre><code class="language-js">// Bad
+switch(a){
+    case &quot;a&quot;:
+        break
+    case &quot;b&quot;:
+        break
+}
+
+// Good
+switch(a){
+  case &quot;a&quot;:
+    break
+  case &quot;b&quot;:
+    break
+}
+</code></pre>
+<h3 id="字符串">字符串</h3>
+<p>默认字符串尽量使用单引号</p>
+<pre><code class="language-js">// Bad
+const double = &quot;double&quot;
+
+// Good
+const single = 'single'
+</code></pre>
+<p>使用模板字面量拼接字符串</p>
+<pre><code class="language-js">// Bad
+const string1 = 'Hello, ' + name + '!'
+
+// Good
+const string2 = `Hello, ${name}!`
+</code></pre>
+<h3 id="条件语句">条件语句</h3>
+<p>禁止在条件语句中使用常量</p>
+<pre><code class="language-js">// Bad
+if (true) {
+  // ...
+}
+
+// Good
+if (a === 2) {
+  // ...
+}
+</code></pre>
+<p>禁止在条件语句中赋值</p>
+<pre><code class="language-js">// Bad
+let a = 2
+if (a = 1) {
+  // ...
+  console.log(123)
+}
+
+// Good
+let a = 2
+a = 1
+if (a) {
+  // ...
+  console.log(123)
+}
+</code></pre>
+<h3 id="使用驼峰式命名">使用驼峰式命名</h3>
+<pre><code class="language-js">// Bar
+const { category_id } = query
+
+// Good
+const { categoryId } = query
+</code></pre>
+<h3 id="禁止使用特定语法">禁止使用特定语法</h3>
+<p>禁止使用 <code>with</code> 语句，因为 <code>with</code> 语句的语法不明确</p>
+<pre><code class="language-js">var obj = {
+  p1: 1,
+  p2: 2
+}
+with (obj) {
+  p1 = 4
+  p2 = 5
+}
+
+// 相当于
+obj.p1 = 4
+obj.p2 = 5
+</code></pre>
+<p>禁止使用 <code>in</code> 运算符，因为 <code>in</code> 运算符是判断对象或其原型链的属性，判断的不明确</p>
+<pre><code class="language-js">const obj = {
+  foo: null
+}
+// 判断 obj 中是否存在 foo 属性
+if (foo in obj) {
+  // ...
+}
+</code></pre>
+<p>禁止使用二进制运算符，因为二进制运算符不常用，会使代码难以理解和查错。</p>
+<pre><code class="language-js">0 | 3 // 3
+0 &amp; 3 // 0
+~ 3 // -4
+~~3 // 3
+// ...
+</code></pre>
+<h3 id="不使用分号">不使用分号</h3>
+<pre><code class="language-js">// Bad
+const a = 1;
+const b = { a: 1 };
+
+// Good
+const a = 1
+const b = { a: 2 }
+</code></pre>
+<h3 id="禁止对象末尾逗号">禁止对象末尾逗号</h3>
+<pre><code class="language-js">// Bad
+const o = {
+  a: 1,
+  b: 2,
+}
+const a = [
+  1,
+  2,
+]
+
+// Good
+const o = {
+  a: 1,
+  b: 2
+}
+const a = [
+  1,
+  2
+]
+</code></pre>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>extends on 石塔白又大</title>
+    <link>https://uphgs.com/tags/extends/</link>
+    <description>Recent content in extends on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 04 Feb 2022 13:30:03 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/extends/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>继承与组合</title>
+      <link>https://uphgs.com/posts/extends-and-composition/</link>
+      <pubDate>Fri, 04 Feb 2022 13:30:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/extends-and-composition/</guid>
+      <description>类的使用 用原生 JavaScript 声明一个类
+class Person {name;age;sayHi() {} // 共有函数playing = function () {} // 自有函数constructor(name, age) {this.</description>
+    </item>
+    
+    <item>
+      <title>Vue 进阶属性</title>
+      <link>https://uphgs.com/posts/vue/advanced-options/</link>
+      <pubDate>Sun, 06 Dec 2020 13:30:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/advanced-options/</guid>
+      <description>directives 指令 除了 Vue 官方内置的指令 (v-model 和 v-if 等) ，Vue 还允许我们自定义指令。
+添加一个 focus 指令，使元素自动聚焦：
+// 注册一个全局自定义指令 `v-focus`Vue.</description>
+    </item>
+    
+    <item>
+      <title>构造函数</title>
+      <link>https://uphgs.com/posts/javascript/constructor/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/constructor/</guid>
+      <description>构造函数（类） 创建一个简单的构造函数
+function Fn(name) {this.name = name}Fn.prototype.run = function() {console.log(this.name + &#39;在跑&#39;)}let obj = new Fn(&#39;小张&#39;)new 做了什么 当 let obj = new Fn(&#39;小张&#39;) 执行时，做了以下事情</description>
+    </item>
+    
+  </channel>
+</rss>

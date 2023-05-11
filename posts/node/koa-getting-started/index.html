@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Koa 入门</title>
+<meta name="description" content="Koa 历史：2013 年 8 月，TJ 开始编写 Koa，2015 年 8 月，Koa 发布 v1.0.0 版本。
+Koa 中间件模型">
+<link rel="canonical" href="https://uphgs.com/posts/node/koa-getting-started/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Koa 入门</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-03-19 09:38:31 &#43;0800 CST" title="2022-03-19 09:38:31 &#43;0800 CST">
+    2022-03-19
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="koa">Koa</h2>
+<p>历史：2013 年 8 月，TJ 开始编写 Koa，2015 年 8 月，Koa 发布 v1.0.0 版本。</p>
+<p>Koa 中间件模型</p>
+<p><img src="/images/koa-middleware.jpg" alt="Koa 中间件模型"></p>
+<h2 id="创建一个-koa-服务">创建一个 Koa 服务</h2>
+<p>安装依赖</p>
+<pre><code class="language-sh">yarn add koa
+yarn add -D @types/koa
+tsc --init
+</code></pre>
+<p>创建 <code>server.ts</code></p>
+<pre><code class="language-ts">import Koa from 'koa'
+
+const app = new Koa()
+
+app.use(async (context, next) =&gt; {
+  context.body = 'hello'
+  await next()
+  context.body += ' Jack'
+})
+
+app.use(async (context, next) =&gt; {
+  context.body += ' world'
+  await next()
+})
+
+app.use(async (context, next) =&gt; {
+  context.set('Content-Type', 'text/html; charset=utf-8')
+})
+
+app.listen(3000)
+</code></pre>
+<p>运行</p>
+<pre><code class="language-js">ts-node-dev server.ts
+</code></pre>
+<h2 id="创建一个-koa-中间件">创建一个 Koa 中间件</h2>
+<p>创建一个记录 Hello World 打印总用时的中间件</p>
+<pre><code class="language-js">import Koa from 'koa'
+
+const app = new Koa()
+
+app.use(async (context, next) =&gt; {
+  context.body = 'hello'
+  await next()
+  const time = context.response.get('X-Response-Time')
+  console.log(`${context.url} - ${time}`)
+})
+
+app.use(async (context, next) =&gt; {
+  const start = Date.now()
+  await next()
+  const time = Date.now() - start
+  context.set('X-Response-Time', `${time}ms`)
+})
+
+app.use(async (context, next) =&gt; {
+  context.body = 'Hello World'
+  for (let i = 0; i &lt; 10000; i++) {
+    context.body += ' Hello World'
+  }
+})
+
+app.listen(3000)
+</code></pre>
+<p><strong>改写为 Promise 写法</strong></p>
+<pre><code class="language-js">app.use(async (context, next) =&gt; {
+  const start = Date.now()
+  return next().then(() =&gt; {
+    const time = Date.now() - start
+    context.set('X-Response-Time', `${time}ms`)
+  })
+})
+</code></pre>
+<p>注意</p>
+<ul>
+<li>一定要写 return，因为中间件必须返回一个 Promise 对象</li>
+<li>错误处理在这里写有点反模式，用 <code>app.on('error')</code> 更好</li>
+</ul>
+<p><strong>Express 的实现</strong></p>
+<p>参考 <a href="https://github.com/expressjs/response-time"><code>response-time</code></a> 库，该库依赖 <code>on-headers</code> 库实现了计算请求的响应时间方式，基本思路就是重写 <code>res.writeHead</code> API，在调用该方法前监听 header，当开始写 header 时就是结束时间。</p>
+<h2 id="appxxx">app.xxx</h2>
+<p><a href="https://koajs.com/#application">文档</a></p>
+<ul>
+<li><code>app.env</code></li>
+<li><code>app.proxy</code></li>
+<li><code>app.subdomainOffset</code></li>
+<li><code>app.listen()</code></li>
+<li><code>app.callback()</code></li>
+<li><strong><code>app.use(fn)</code></strong> &mdash; 插入中间件 fn</li>
+<li><code>app.keys</code></li>
+<li><code>app.context</code></li>
+<li><strong><code>app.on('error', fn)</code></strong> &mdash; 错误处理</li>
+<li><strong><code>app.emit()</code></strong> &mdash; 触发事件</li>
+</ul>
+<h2 id="ctxxxx">ctx.xxx</h2>
+<p><a href="https://koajs.com/#context">文档</a></p>
+<ul>
+<li><code>ctx.req</code> Node.js 封装的 request（请求）</li>
+<li><code>ctx.res</code> Node.js 封装的 response（响应）</li>
+<li><code>ctx.request</code> Koa 封装的 request（请求）</li>
+<li><code>ctx.response</code> Koa 封装的 response（响应）</li>
+<li><code>ctx.state</code> 跨中间件分享数据</li>
+<li><code>ctx.app</code></li>
+<li><code>ctx.cookies.get/set</code></li>
+<li><code>ctx.throw</code> 附带信息的抛出错误</li>
+<li><code>ctx.assert</code></li>
+<li><code>ctx.respond</code> 不推荐使用</li>
+</ul>
+<p>Request 委托 &amp; Response 委托</p>
+<p>ctx 还实现了 Request 和 Response 的委托方法，例如，你调用 <code>ctx.body</code> 就相当于调用 <code>ctx.response.body</code>，但由于很难区分是 request 还是 response 的方法，建议还是使用 <code>ctx.response.xxx</code> 的方式</p>
+<h2 id="其他-api">其他 API</h2>
+<p>大部分 API 与 express 很相似</p>
+<h3 id="ctxrequestxxx">ctx.request.xxx</h3>
+<p><a href="https://koajs.com/#request">文档</a></p>
+<ul>
+<li><code>request.header</code></li>
+<li><code>request.headers</code>（<code>request.header</code> 的别名）</li>
+<li><strong><code>request.method</code></strong></li>
+<li><code>request.length</code></li>
+<li><code>request.url</code></li>
+<li><code>request.origin</code></li>
+<li><code>request.href</code></li>
+<li><strong><code>request.path</code></strong></li>
+<li><code>request.querystring</code></li>
+<li><code>request.search</code></li>
+<li><code>request.host</code></li>
+<li><code>request.hostname</code></li>
+<li><code>request.URL</code></li>
+<li><code>request.type</code></li>
+<li><code>request.charset</code></li>
+<li><strong><code>request.query</code></strong></li>
+<li><code>request.fresh</code></li>
+<li><code>request.stale</code></li>
+<li><code>request.protocol</code></li>
+<li>&hellip;</li>
+<li><strong><code>request.idempotent</code></strong> 检查请求是否是幂等的（幂等：多次操作是否会产生一样的影响，如 get 操作）</li>
+<li><strong><code>request.get(field)</code></strong></li>
+</ul>
+<h3 id="ctxresponsexxx">ctx.response.xxx</h3>
+<p><a href="https://koajs.com/#response">文档</a></p>
+<ul>
+<li><code>response.header</code></li>
+<li><code>response.headers</code></li>
+<li><code>response.socket</code></li>
+<li><strong><code>response.status</code></strong> 设置响应状态码</li>
+<li><code>response.message</code></li>
+<li><code>response.length</code></li>
+<li><strong><code>response.body</code></strong> 支持五种类型（<code>string</code>、<code>Buffer</code>、<code>Stream</code>、<code>Object || Array</code>、<code>null || undefined</code></li>
+<li><code>response.get()</code></li>
+<li><strong><code>response.set()</code></strong></li>
+<li><strong><code>response.append()</code></strong></li>
+<li><code>response.type</code></li>
+<li><code>response.is()</code></li>
+<li><code>response.redirect(url, [alt])</code></li>
+<li><code>response.attachment()</code></li>
+<li><code>response.headerSent</code></li>
+<li><code>response.flushHeaders()</code></li>
+<li>&hellip;</li>
+</ul>
+<h2 id="koa-与-express-的区别">Koa 与 Express 的区别</h2>
+<p>相同点</p>
+<ul>
+<li>都是由 TJ 开发，Express 是由 TJ 在 2010 年 6 月 开始编写，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。Koa 是 TJ 在 2013 年 8 月 开始编写，2015 年 8 月，发布 v1.0.0 版本。</li>
+</ul>
+<p>区别</p>
+<ul>
+<li>最主要的区别是中间件的处理方式，Koa 使用的是 U 形 + Generator/await 的方式，让中间件的操作更便捷，并且写法上去除了回调的方式。</li>
+</ul>
+<p>优缺点总结</p>
+<ul>
+<li>Express 的优点：文档完善，生态更完善。缺点就是需要每次调用 callback。</li>
+<li>Koa 的优点：没有 callback。缺点是与 Express 的中间件无法复用，基本都需要重新实现。</li>
+</ul>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>对象</title>
+<meta name="description" content="Object.create() Object.create() 方法创建一个新对象，可以传入一个对象作为创建对象的原型。
+// 创建带有对象原型链的空对象const obj1 = Object.create(Object.prototype)const obj2 = new Object()const obj3 = {}// 创建一个没有任何原型链的对象（纯对象）const obj4 = Object.">
+<link rel="canonical" href="https://uphgs.com/posts/javascript/object/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">对象</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-08-01 09:45:13 &#43;0800 CST" title="2021-08-01 09:45:13 &#43;0800 CST">
+    2021-08-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="objectcreate"><code>Object.create()</code></h2>
+<p><code>Object.create()</code> 方法创建一个新对象，可以传入一个对象作为创建对象的原型。</p>
+<pre><code class="language-javascript">// 创建带有对象原型链的空对象
+const obj1 = Object.create(Object.prototype)
+const obj2 = new Object()
+const obj3 = {}
+
+// 创建一个没有任何原型链的对象（纯对象）
+const obj4 = Object.create(null)
+</code></pre>
+<p>使用 <code>Object.create()</code> 追加对象的原型</p>
+<pre><code class="language-js">// 原型对象
+const object1 = {
+  type: 'people',
+  move() {
+    console.log('我会动')
+  }
+}
+const object2 = Object.create(object1)
+object2.move() // &quot;我会动&quot;
+object2.type === object1.type // true
+</code></pre>
+<h2 id="objectkeys"><code>Object.keys()</code></h2>
+<p><code>Object.keys()</code> 方法会返回一个由一个给定对象的自身可枚举属性组成的数组。</p>
+<pre><code class="language-javascript">const obj = { name: '小明', age: 18 }
+console.log(Object.keys(obj)) // [&quot;name&quot;, &quot;age&quot;]
+</code></pre>
+<h2 id="objectvalues"><code>Object.values()</code></h2>
+<p><code>Object.values()</code> 方法返回一个给定对象自身的所有可枚举属性值的数组（与 for-in 循环枚举原型链中的属性有所不同）。</p>
+<pre><code class="language-javascript">const obj = { foo: 'bar', baz: 42 }
+console.log(Object.values(obj)) // ['bar', 42]
+</code></pre>
+<h2 id="设置对象属性名">设置对象属性名</h2>
+<p>使用变量作为对象属性名</p>
+<pre><code class="language-javascript">let name = 'a'
+let object = {
+  [name]: 1
+}
+console.log(object) // 输出 {a: 1}
+</code></pre>
+<p>对象属性名还可以做简单的运算</p>
+<pre><code class="language-javascript">let n = 2
+let a = {
+  [n*n + n/n + n/3]: 1
+}
+console.log(a) // 输出 {5.666666666666667: 1}
+</code></pre>
+<h2 id="objectassign">Object.assign()</h2>
+<p><code>Object.assign()</code> 方法用于将所有可枚举属性的值从一个或多个源对象分配到目标对象，并且它将返回目标对象。</p>
+<pre><code class="language-js">const target = { a: 1, b: 2 };
+const source = { b: 4, c: 5 };
+
+const returnedTarget = Object.assign(target, source);
+
+console.log(target);
+// 输出：Object { a: 1, b: 4, c: 5 }
+
+console.log(returnedTarget);
+// 输出：Object { a: 1, b: 4, c: 5 }
+</code></pre>
+<p>使用 <code>Object.assign()</code> 批量赋值</p>
+<pre><code class="language-js">const obj = {
+  a: 1,
+  b: 2
+}
+Object.assign(obj, { b: 3, p1: 4, p2: 5})
+// 输出：{a: 1, b: 3, p1: 4, p2: 5}
+</code></pre>
+<h2 id="objectgetprototypeof"><code>Object.getPrototypeOf()</code></h2>
+<p>使用 <code>Object.getPrototypeOf()</code> 可以获取对象原型</p>
+<pre><code class="language-js">let obj1 = {}
+let obj2 = {}
+Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2) // true
+</code></pre>
+<p>几种特殊对象的原型</p>
+<pre><code class="language-js">// 空对象的原型是 Object.prototype
+Object.getPrototypeOf({}) === Object.prototype // true
+
+// Object.prototype 的原型是 null
+Object.getPrototypeOf(Object.prototype) === null // true
+
+// 函数的原型是 Function.prototype
+function f() {}
+Object.getPrototypeOf(f) === Function.prototype // true
+</code></pre>
+<p>可以用以下方式获取对象原型的名称</p>
+<pre><code class="language-js">Object.getPrototypeOf([]).constructor.name  // &quot;Array&quot;
+// 或
+[].constructor.name // &quot;Array&quot;，前提是如果对象没有定义新的 contructor 属性
+</code></pre>
+<h2 id="objectsetprototypeof"><code>Object.setPrototypeOf()</code></h2>
+<p>使用 <code>Object.setPrototypeOf()</code> 方法为对象设置原型，返回该对象。它接受两个参数，第一个是现有对象，第二个是原型对象。</p>
+<pre><code class="language-js">const a = {}
+const b = { x: 1 }
+Object.setPrototypeOf(a, b);
+
+Object.getPrototypeOf(a) === b // true
+a.x // 1
+</code></pre>
+<p>上面的代码中，<code>Object.setPrototypeOf</code> 方法将对象 <code>a</code> 的原型，设置为对象 <code>b</code>，因此 <code>a</code> 可以共享 <code>b</code> 的属性。</p>
+<blockquote>
+<p>除了上面两种方式，使用 <code>b.__proto__ = a</code> 也可以设置对象的原型链，但是不推荐，此方式浏览器会默认为非法操作。</p>
+</blockquote>
+<h2 id="objectprototypehasownproperty"><code>Object.prototype.hasOwnProperty()</code></h2>
+<p>对象实例的 <code>hasOwnProperty</code> 方法返回一个布尔值，用于判断某个属性定义在对象自身，还是定义在原型链上。</p>
+<pre><code class="language-javascript">Date.hasOwnProperty('length') // true
+Date.hasOwnProperty('toString') // false
+</code></pre>
+<p>上面代码表明，<code>Date.length</code>（构造函数 <code>Date</code> 可以接受多少个参数）是 <code>Date</code> 自身的属性，<code>Date.toString</code> 是继承的属性。</p>
+<p>另外，<code>hasOwnProperty</code> 方法是 JavaScript 之中唯一一个处理对象属性时，不会遍历原型链的方法。</p>
+<h2 id="get--set"><code>get</code> &amp; <code>set</code></h2>
+<p>通过给对象的属性设置 <code>get</code>、<code>set</code> 语法，来修改对象被读取/写入时的状态权限。</p>
+<pre><code class="language-javascript">let _age = 18
+let obj = {
+  get age () {
+    return _age
+  },
+  set age (value) {
+    if (value &lt; 100) {
+      _age = value
+    }else{
+      _age = 100
+    }
+  }
+}
+console.log(_age)   // 输出 18
+console.log(obj.age) // 输出 18
+obj.age = 1000
+console.log(obj.age) // 输出 100
+</code></pre>
+<h2 id="objectdefineproperty"><code>Object.defineProperty()</code></h2>
+<p>该方法允许通过属性描述对象，定义或修改一个属性，然后返回修改后的对象，它的用法如下：</p>
+<pre><code class="language-javascript">Object.defineProperty(object, propertyName, attributesObject)
+</code></pre>
+<p><code>Object.defineProperty()</code> 方法接受三个参数，依次如下。</p>
+<ul>
+<li>object：属性所在的对象。</li>
+<li>propertyName：字符串，表示属性名。</li>
+<li>attributesObject：属性描述对象。</li>
+</ul>
+<p>假如一个对象之前并没有添加 <code>get</code> <code>set</code> 语法，就可以使用以下方式追加</p>
+<pre><code class="language-javascript">let i = 2
+let object = {
+  a: 1,
+  b: 2
+}
+Object.defineProperty(object, 'x', {
+  get() { return i },
+  set(value) {
+    i += value
+    return i
+  }
+})
+object.x = 100
+object.x // 102
+</code></pre>
+<h2 id="实现-a--1--a--2--a--3-结果为-true">实现 <code>a === 1 &amp;&amp; a === 2 &amp;&amp; a === 3</code> 结果为 <code>true</code></h2>
+<pre><code class="language-javascript">let i = 0
+/* 给 window 添加一个属性，属性名是 a，a 有一个 get 函数 */
+Object.defineProperty(window, 'a', {
+  get(){
+    i+=1
+    return i
+  },
+})
+a === 1 &amp;&amp; a === 2 &amp;&amp; a === 3 // 输出 true
+</code></pre>
+<blockquote>
+<p>该方法就是通过 <code>Object.defineProperty</code> 添加 <code>get</code> 语法来设置全局变量 a 的读取过程，每次访问 a 的值都会改变。</p>
+</blockquote>
+<h2 id="实现一个简单的-undefined">实现一个简单的 undefined</h2>
+<p>在 JavaScript 中，<code>undefined</code> 不是关键字 而是一个只读的变量，证明如下</p>
+<pre><code class="language-javascript">var function // 报错
+var null // 报错
+var this // 报错
+var undefined // undefined
+undefined = 1
+undefined // undefined
+</code></pre>
+<p>所以，如果给变量添加 get 语法，它就可以基本的实现 <code>undefined</code> 的只读原理</p>
+<pre><code class="language-javascript">let object = {
+  get undefined() { return undefined }
+}
+object.undefined // undefined
+object.undefined = 'jack'
+object.undefined // undefined
+</code></pre>
+<p>上面的代码中 <code>o.undefined</code> 每次访问的值都是 <code>undefined</code>，不可修改，这就像 <code>undefined</code> 的只读性。</p>
+<p>通过给变量设置 <code>writable</code> 属性为 <code>false</code>，也可以实现只读。</p>
+<pre><code class="language-javascript">let object = { name: undefined }
+Object.defineProperty(object, 'name', { writable: false })
+object.name // undefined
+object.name = 'jack'
+object.name // undefined
+</code></pre>
+<p>上面的代码通过设置，<code>o.name</code> 属性的 <code>writable: false</code> 使得该属性为不可修改的，从而实现类似 <code>undefined</code> 的只读性。</p>
+<p>需要注意的是，将 <code>writable</code> 属性设置为 <code>true</code> 只读属性就会变回可写的。</p>
+<pre><code class="language-javascript">let object = { name: undefined }
+Object.defineProperty(object, 'name', { writable: true })
+object.name = 'xxx'
+object.name // &quot;xxx&quot;
+</code></pre>
+<h2 id="configurable-禁止修改属性"><code>configurable</code> 禁止修改属性</h2>
+<p>禁止修改属性，如：value，writable，get，set等</p>
+<p>当且仅当该属性的 configurable 键值为 true 时，该属性的描述符才能够被改变，同时该属性也能从对应的对象上被删除。
+默认值为 false。（设置 configurable 为 true 时，无法修改属性）</p>
+<p>将上面的对象 o 的 configurable 设置为 true</p>
+<pre><code class="language-js">let o = {name: undefined}
+Object.defineProperty(o, 'name', {writable: false, configurable: false})
+// 此时再修改writable的属性会报错：
+Object.defineProperty(o, 'name', {writable: true}) // 报错
+</code></pre>
+<h2 id="enumerable-可枚举属性"><code>enumerable</code> 可枚举属性</h2>
+<p>默认情况下 遍历某个对象或数组，并不能完全遍历该对象/数组的所有属性</p>
+<pre><code class="language-js">// 对象的toString属性并不能被遍历
+let obj = {a: 1, b: 2, c: 3}
+for(let key in obj){
+  console.log(key)
+}
+// a b c
+
+// 数组的length属性并不能被遍历
+let num = [1, 2, 3]
+for(let key in num){
+  console.log(key)
+}
+// 0 1 2
+</code></pre>
+<p>我们可以通过给对象添加一个 enumerable 修饰符来修改，该对象的属性是否可遍历</p>
+<pre><code class="language-js">let obj = {a: 1, b: 2, c: 3}
+Object.defineProperty(obj, 'b', {value: 2, enumerable: false})
+for(let key in obj){
+  console.log(key)
+}
+// a c
+</code></pre>
+<p>查看对象的属性描述</p>
+<pre><code class="language-js">Object.getOwnPropertyDescriptor(obj, 'b')
+// {value: 2, writable: true, enumerable: false, configurable: true}
+Object.getOwnPropertyDescriptor(obj, 'a')
+// {value: 1, writable: true, enumerable: true, configurable: true}
+</code></pre>
+<p>可以批量的给属性添加修饰符</p>
+<pre><code class="language-js">Object.defineProperties(o, {
+  a: {value: 1, writable: false},
+  b: {value: 2, writable: true}
+})
+o.a = 2
+o.a // 1
+o.b = 4
+o.b // 4
+</code></pre>
+<h2 id="使用-symbol-设置对象的-key">使用 Symbol 设置对象的 key</h2>
+<pre><code class="language-js">let s = Symbol()
+let o = {[s]: 1}
+o[s] // 1
+</code></pre>
+<p>Symbol 设置的key只能通过 <code>getOwnPropertySymbols</code> 的方式获取</p>
+<pre><code class="language-js">// 获取对象的key 方法1
+Object.keys(o) // []
+// 获取对象中的 Symbol key
+Object.getOwnPropertySymbols(o) // [Symbol()]
+// 获取对象的key 方法2
+Object.getOwnPropertyNames(o) // []
+</code></pre>
+<h2 id="参考文档">参考文档</h2>
+<p>MDN 文档：https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty</p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/javascript/" alt="JavaScript" >
+                        JavaScript
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

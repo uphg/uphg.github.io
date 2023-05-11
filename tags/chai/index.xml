@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chai on 石塔白又大</title>
+    <link>https://uphgs.com/tags/chai/</link>
+    <description>Recent content in Chai on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 20 Jan 2022 13:52:58 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/chai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建 JavaScript 库</title>
+      <link>https://uphgs.com/posts/javascript/build-js-library/</link>
+      <pubDate>Thu, 20 Jan 2022 13:52:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/build-js-library/</guid>
+      <description>记录搭建一个 JavaScript 库的过程
+示例项目：github.com/uphg/vanilla-ts-lib-starter
+使用 Vite 搭建脚手架 运行 create 命令快速创建
+pnpm create vite my-vanilla-app# 或指定模板pnpm create vite my-vanilla-app --template vanilla-ts添加 library（库）配置</description>
+    </item>
+    
+  </channel>
+</rss>

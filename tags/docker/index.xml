@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on 石塔白又大</title>
+    <link>https://uphgs.com/tags/docker/</link>
+    <description>Recent content in Docker on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 06 Nov 2021 12:10:12 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/docker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作数据库</title>
+      <link>https://uphgs.com/posts/node/operational-database/</link>
+      <pubDate>Sat, 06 Nov 2021 12:10:12 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/operational-database/</guid>
+      <description>安装 Docker（Windows） 注册：https://hub.docker.com/ 下载：Docker for Windows Installer 确认输入 docker --version 后返回版本号 设置国内镜像，镜像的地址为：https://docker.mirrors.ustc.edu.cn/ 给 Docker 配置自己的阿里云镜像 确保命令行输入 docker run hello-world 时输出 Hello from Docker!</description>
+    </item>
+    
+  </channel>
+</rss>

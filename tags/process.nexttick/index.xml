@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>process.nextTick() on 石塔白又大</title>
+    <link>https://uphgs.com/tags/process.nexttick/</link>
+    <description>Recent content in process.nextTick() on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 03 Feb 2022 19:48:27 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/process.nexttick/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event Loop</title>
+      <link>https://uphgs.com/posts/event-loop/</link>
+      <pubDate>Thu, 03 Feb 2022 19:48:27 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/event-loop/</guid>
+      <description>当 JavaScript 执行一个异步任务的时候（如：AJAX），JavaScript 什么都不会做，它只会通知 C++（单线程），C++ 通过轮询来查看延时任务什么时候完成，完成了再通知 JavaScript 继续执行该任务。EventLoop 就是 C++ 如何通过轮询执行 JavaScript 异步任务（也可以说 C++ 轮询执行 JavaScript 异步任务的规则）</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>?? 运算符</title>
+<meta name="description" content="基础语法 ?? 与 || 运算符非常相似，不同的地方在于，?? 语法评估运算符时不使用 &ldquo;truthy&rdquo; （真实的）而是 &ldquo;nullish&rdquo;（无效的）判断，意思是“值严格等于 null 或 undefined”才会执行后面的内容。
+使用 ??
+// false ?">
+<link rel="canonical" href="https://uphgs.com/posts/nullish-coalescing/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">?? 运算符</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-10-22 11:01:16 &#43;0800 CST" title="2021-10-22 11:01:16 &#43;0800 CST">
+    2021-10-22
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="基础语法">基础语法</h2>
+<p><code>??</code> 与 <code>||</code> 运算符非常相似，不同的地方在于，<code>??</code> 语法评估运算符时不使用 &ldquo;truthy&rdquo; （真实的）而是 &ldquo;nullish&rdquo;（无效的）判断，意思是“值严格等于 <code>null</code> 或 <code>undefined</code>”才会执行后面的内容。</p>
+<p><strong>使用 <code>??</code></strong></p>
+<pre><code class="language-js">// 
+false ?? true;   // =&gt; false
+0 ?? 1;          // =&gt; 0
+'' ?? 'default'; // =&gt; ''
+
+null ?? [];      // =&gt; []
+undefined ?? []; // =&gt; []
+</code></pre>
+<p><strong>使用 <code>||</code></strong></p>
+<pre><code class="language-js">false || true;   // =&gt; true
+0 || 1;          // =&gt; 1
+'' || 'default'; // =&gt; 'default'
+
+null || [];      // =&gt; []
+undefined || []; // =&gt; []
+</code></pre>
+<blockquote>
+<p>上面的例子表明：<code>||</code> 只要前面的值转为布尔类型是 <code>false</code> 就会执行后面的内容，但 <code>??</code> 只有前面的值完全等于 <code>null</code> 或 <code>undefined</code> 才会执行后面的内容。</p>
+</blockquote>
+<h2 id="与其他运算符混用">与其他运算符混用</h2>
+<p>默认情况下，如果 <code>&amp;&amp;</code> 和 <code>||</code> 混用，默认 <code>&amp;&amp;</code> 的优先级更高，如下：</p>
+<pre><code class="language-js">1hs &amp;&amp; middle || rhs  // =&gt; (1hs &amp;&amp; middle) || rhs
+1hs || middle &amp;&amp; rhs  // =&gt; 1hs || (middle &amp;&amp; rhs)
+</code></pre>
+<p>如果它们和 <code>??</code> 混用，则必须把其中一种运算符添加在括号中使用</p>
+<pre><code class="language-js">(lhs &amp;&amp; middle) ?? rhs;
+lhs &amp;&amp; (middle ?? rhs);
+
+(lhs ?? middle) &amp;&amp; rhs;
+lhs ?? (middle &amp;&amp; rhs);
+
+(lhs || middle) ?? rhs;
+lhs || (middle ?? rhs);
+
+(lhs ?? middle) || rhs;
+lhs ?? (middle || rhs);
+</code></pre>
+<h2 id="判断-documentall">判断 <code>document.all</code></h2>
+<p>使用 <code>??</code> 判断 <code>document.all</code> 会根据它真实的值去判断</p>
+<pre><code class="language-js">document.all || true; // =&gt; true
+document.all ?? true; // =&gt; HTMLAllCollection[]
+</code></pre>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

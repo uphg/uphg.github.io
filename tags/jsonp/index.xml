@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JSONP on 石塔白又大</title>
+    <link>https://uphgs.com/tags/jsonp/</link>
+    <description>Recent content in JSONP on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Wed, 10 Jun 2020 09:28:17 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/jsonp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>跨域 &amp; CORS &amp; JSONP</title>
+      <link>https://uphgs.com/posts/javascript/cross-domain/</link>
+      <pubDate>Wed, 10 Jun 2020 09:28:17 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/cross-domain/</guid>
+      <description>关键词 同源策略
+浏览器故意设计的一个功能限制
+CORS
+突破浏览器限制的一个方法
+JSONP
+IE时代妥协的产物
+同源策略 什么是源 使用 window.origin 或 location.origin 可以得到当前页面的源
+源 = 协议 + 域名 + 端口号</description>
+    </item>
+    
+  </channel>
+</rss>

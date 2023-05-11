@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WebStorm 配置</title>
+<meta name="description" content="设置自动格式化代码快捷键 按两下 shift 在弹出框中搜索：Reformat 其中第一项 Reformat Code 就是你自动格式化代码的快捷键 配置 JS 代码自动加分号 打开 Setting &gt; Editor &gt; Code Style &gt; JavaScript &gt; Puntuation 选择 semicolon to terminate statements 后的 always 选项 自动引入与自动添加变量 搜索 Show Context Actions，查看你的快捷键">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/webstorm/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">WebStorm 配置</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="0001-01-01 00:00:00 &#43;0000 UTC" title="0001-01-01 00:00:00 &#43;0000 UTC">
+    0001-01-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="设置自动格式化代码快捷键">设置自动格式化代码快捷键</h2>
+<ol>
+<li>按两下 shift</li>
+<li>在弹出框中搜索：<code>Reformat</code></li>
+<li>其中第一项 <code>Reformat Code</code> 就是你自动格式化代码的快捷键</li>
+</ol>
+<h2 id="配置-js-代码自动加分号">配置 JS 代码自动加分号</h2>
+<ol>
+<li>打开 Setting &gt; Editor &gt; Code Style &gt; JavaScript &gt; Puntuation</li>
+<li>选择 semicolon to terminate statements 后的 always 选项</li>
+</ol>
+<h2 id="自动引入与自动添加变量">自动引入与自动添加变量</h2>
+<p>搜索 <code>Show Context Actions</code>，查看你的快捷键</p>
+<p>新建一个 <code>*.ts</code> 文件，添加以下内容</p>
+<pre><code class="language-js">http.createServer()
+</code></pre>
+<p>鼠标选中 http 点击 <code>Alt + Enter</code>，选择 <code>Introduce local variable</code></p>
+<h2 id="智能补全代码">智能补全代码</h2>
+<p>搜索：<code>Complete Current Statement</code>，查看你的快捷键</p>
+<p>当你输入 <code>if(true)</code>，按下 <code>Ctrl + Shift + Enter</code> 即可补全为 <code>if(true){ }</code>，它还会自动格式化代码。</p>
+<h2 id="配置-git">配置 git</h2>
+<p>打开 Setting &gt; Version Control &gt; Git，在 Path to Git executable 中添加如下示例配置</p>
+<pre><code>C:\xxx\cmder\vendor\git-for-windows\bin\git.exe
+</code></pre>
+<h2 id="配置-bash-命令行">配置 bash 命令行</h2>
+<p>打开 Setting &gt; Tools &gt; Terminal，在 Shell path 中添加如下示例配置</p>
+<pre><code>C:\xxx\cmder\vendor\git-for-windows\bin\bash.exe
+</code></pre>
+<h2 id="设置指定文件夹为项目根目录">设置指定文件夹为项目根目录</h2>
+<p><img src="/images/webstorm-resource-root.png" alt="webstorm-resource-root"></p>
+<p>可以使引用项目中的图片或其他路径标签时 WebStorm 不提示错误，示例：</p>
+<pre><code class="language-html">&lt;img src=&quot;/images/404.png&quot;  alt=&quot;404&quot;/&gt;
+</code></pre>
+<h2 id="配置代码格式化">配置代码格式化</h2>
+<p>设置 <code>import { demo } from 'demo'</code> 中 <code>{}</code> 左右的空格</p>
+<p><img src="/images/setting-import-curly-braces-about-space.png" alt="import space"></p>
+<h2 id="配置文件未保存标识">配置文件未保存标识</h2>
+<p>如图</p>
+<p><img src="/images/webstorm-file-save-state.png" alt="file save state"></p>
+<h2 id="设置标签换行后内容没有tab">设置标签换行后内容没有tab</h2>
+<p>设置前</p>
+<pre><code class="language-vue">&lt;script&gt;
+  export default {
+    name: 'Demo'
+  }
+&lt;/script&gt;
+</code></pre>
+<p>设置后</p>
+<pre><code class="language-vue">&lt;script&gt;
+export default {
+  name: 'Demo'
+}
+&lt;/script&gt;
+</code></pre>
+<p>配置示例</p>
+<p><img src="/images/webstorm-label-tab.jpg" alt="WebStorm Setting"></p>
+<h2 id="自动引入当前项目的-eslint">自动引入当前项目的 ESLint</h2>
+<p>配置示例</p>
+<p><img src="/images/webstorm-import-eslint.jpg" alt="WebStorm Setting"></p>
+<h2 id="添加-vue-项目中-webpack-配置路径识别--符">添加 Vue 项目中 Webpack 配置路径，识别 @ 符</h2>
+<p><img src="/images/webstorm-vue-webpack.jpg" alt="WebStorm Setting"></p>
+<h2 id="设置当前项目根据-eslint-保存时自动格式化">设置当前项目根据 ESLint 保存时自动格式化</h2>
+<p>图示</p>
+<p><img src="/images/webstorm-setting-eslint.jpg" alt="WebStorm Setting"></p>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

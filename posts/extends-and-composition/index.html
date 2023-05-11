@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>继承与组合</title>
+<meta name="description" content="类的使用 用原生 JavaScript 声明一个类
+class Person {name;age;sayHi() {} // 共有函数playing = function () {} // 自有函数constructor(name, age) {this.">
+<link rel="canonical" href="https://uphgs.com/posts/extends-and-composition/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">继承与组合</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-02-04 13:30:03 &#43;0800 CST" title="2022-02-04 13:30:03 &#43;0800 CST">
+    2022-02-04
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="类的使用">类的使用</h2>
+<p>用原生 JavaScript 声明一个类</p>
+<pre><code class="language-js">class Person {
+  name;
+  age;
+  sayHi() {} // 共有函数
+  playing = function () {} // 自有函数
+  constructor(name, age) {
+    this.name = name
+    this.age = age
+  }
+}
+
+new Person('Jack', 18)
+// { name: 'Jack', age: 18, playing: ƒ () } [[Prototype]].sayHi()
+</code></pre>
+<p>使用 TypeScript 声明相同的类</p>
+<pre><code class="language-typescript">class Person {
+  sayHi() {}
+  playing = function () {}
+  constructor(public name: string, public age: number) {}
+}
+
+new Person('Jack', 18)
+// { name: 'Jack', age: 18, playing: ƒ () } [[Prototype]].sayHi()
+</code></pre>
+<h2 id="继承extends">继承（extends）</h2>
+<p>假设两个类 人类，报社，都继承了 事件发布/订阅的功能，但它们都有各自的功能（打招呼、打印）</p>
+<pre><code class="language-js">class EventEmitter {
+  constructor() {}
+  cache = []
+  on() {}
+  off() {}
+  emit() {}
+}
+
+class Person extends EventEmitter {
+  constructor() { super() }
+  sayHi() {}
+}
+
+class 报社 extends EventEmitter {
+  constructor() { super() }
+  print() {}
+}
+
+const person = new Person()
+const baoshe = new 报社()
+</code></pre>
+<h2 id="多态polymorphism">多态（Polymorphism）</h2>
+<p>子类重写父类的属性，以实现多态</p>
+<p>多态的意思是不同的子类对同一个消息有不同的反应，如 人类的 on 方法会比 报社 的 on 方法多一个 log 功能</p>
+<pre><code class="language-js">class Person extends EventEmitter {
+  constructor() { super() }
+  sayHi() {}
+  on(eventName, fn) {
+    console.log('我要监听了')
+    super.on(eventName, fn)
+  }
+}
+
+const person = new Person()
+</code></pre>
+<h2 id="组合composition">组合（composition）</h2>
+<p>使用组合实现继承的功能</p>
+<pre><code class="language-js">class Person {
+  name;
+  sayHi() {}
+}
+
+function mixin(value, other) {
+  return Object.assign(value, other)
+}
+
+function createEmitter() {
+  return {
+    on() {},
+    emit() {},
+    off() {}
+  }
+}
+
+let person1 = new Person('Jack')
+mixin(person1, createEmitter())
+// {name: undefined, on: ƒ, emit: ƒ, off: ƒ} [[Prototype]] sayHi: ƒ sayHi()
+</code></pre>
+<h2 id="组合解决的问题">组合解决的问题</h2>
+<p>假如有猫、狗两个类，它们都有动物的特征</p>
+<pre><code class="language-js">dog
+  .wangwang()
+  .poop() // 拉屎
+cat
+  .miaomiao()
+  .poop()
+</code></pre>
+<p>那么就可以写一个动物类，让猫、狗继承</p>
+<pre><code class="language-js">animal
+  .poop()
+    dog
+      .wangwang()
+    cat
+      .miaomiao()
+</code></pre>
+<p>假如还有两种机器人，一个是打扫卫生机器人，一个是杀人机器人，它们都具有 ai 智能，并且一个可以清理垃圾，一个可以杀人</p>
+<pre><code class="language-js">cleaningRobot
+  .ai()
+  .clean()
+MurderRobot
+  .ai()
+  .kill()
+
+// 继承
+Robot
+  .ai()
+    cleaningRobot
+      .clean()
+    MurderRobot
+      .kill()
+</code></pre>
+<p>现在，要实现一个狗型杀人机器人（变态的需求总是不期而遇）</p>
+<p>你会发现，用继承总是无法完美的实现该需求，因为继承不够灵活，如果它是狗，它就必须继承拉屎的功能，但是狗型杀人机器人是不需要拉屎的，它只需要汪汪、杀人、ai 智能。so，该需求需要用组合来实现</p>
+<pre><code class="language-js">// 不用 继承 实现 dog
+const createWang = (state) =&gt; ({
+  wangwang() {
+    console.log(`汪汪，我是${state.name}`)
+  }
+})
+
+const createPoop = (state) =&gt; ({
+  poop() {
+    console.log(`${state.name}拉屎了`)
+  }
+})
+
+const createDog = (name) =&gt; {
+  const state = { name }
+  return Object.assign(
+    {},
+    createWang(state),
+    createPoop(state)
+  )
+}
+
+// 不用 继承 实现杀人机器人
+const createAi = (state) =&gt; ({
+  ai() { console.log(`${state.name}智能机器人`) }
+})
+
+const createKill = (state) =&gt; ({
+  kill() { console.log(`${state.name}会杀人`) }
+})
+
+const createMurderRobot = (name) =&gt; {
+  const state = { name }
+  return Object.assign(
+    {},
+    createAi(state),
+    createKill(state)
+  )
+}
+
+// 不用 继承 实现狗型杀人机器人
+const createMurderRobotDog = (name) =&gt; {
+  const state = { name }
+  return Object.assign(
+    {},
+    createWang(state),
+    createAi(state),
+    createKill(state)
+  )
+}
+
+const dog = createDog('小白')
+const murderRobot = createMurderRobot('小姜')
+const murderRobotDog = createMurderRobotDog('Jack')
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/javascript/" alt="JavaScript" >
+                        JavaScript
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/extends/" alt="extends" >
+                        extends
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/composition/" alt="composition" >
+                        composition
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

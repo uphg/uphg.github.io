@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Git 使用规范</title>
+<meta name="description" content="Git 仓库操作规范总结
+分支管理策略 主分支 首先代码应该有且仅有一个主分支，项目的正式版本，都在这个主分支上发布。
+Git 主分支的默认名为 master，但是由于 master 一词打擦边球，所以建议使用 main 作为默认分支名称，从 Git 2.28 开始，可以通过设置 init.">
+<link rel="canonical" href="https://uphgs.com/posts/git/git-usage-specification/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Git 使用规范</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-11-10 16:52:23 &#43;0800 CST" title="2021-11-10 16:52:23 &#43;0800 CST">
+    2021-11-10
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>Git 仓库操作规范总结</p>
+<h2 id="分支管理策略">分支管理策略</h2>
+<h3 id="主分支">主分支</h3>
+<p>首先代码应该有且仅有一个主分支，项目的正式版本，都在这个主分支上发布。</p>
+<p>Git 主分支的默认名为 <code>master</code>，但是由于 <code>master</code> 一词打擦边球，所以建议使用 <code>main</code> 作为默认分支名称，从 Git 2.28 开始，可以通过设置 <code>init.defaultBranch</code> 修改默认分支的名称</p>
+<pre><code class="language-sh">git config --global init.defaultBranch main
+</code></pre>
+<h3 id="开发分支">开发分支</h3>
+<p>日常开发的分支，每次发布新版本时，合并到 <code>main</code> 分支，推荐命名 <code>dev</code>。</p>
+<p>创建 <code>dev</code> 分支</p>
+<pre><code class="language-sh">git checkout -b dev main
+</code></pre>
+<p>合并到 <code>main</code> 分支</p>
+<pre><code class="language-sh"># 切换到 main 分支
+git checkout main
+# 对 dev 分支进行合并
+git merge --no-ff dev
+</code></pre>
+<p>关于 <code>--no-ff</code> 参数：默认情况下，Git 执行“快进式合并”（fast-farward merge），会直接将 <code>main</code> 分支指向 <code>dev</code> 分支。使用 <code>--no-ff</code> 参数后，会执行正常合并，在 <code>main</code> 分支上生成一个新节点。为了能够清晰的看到合并前的结构，尽量采用这种方式。</p>
+<p><img src="/images/git-use-standard-process-merge-demo.png" alt="git merge 两种合并流程示例"></p>
+<p>如上图，在后一种情况下，无法从 Git 提交历史中看到合并之前新功能分支的所做的改动历史。</p>
+<h3 id="功能分支">功能分支</h3>
+<p>开发某个新功能时创建该分支，命名方式可以自定义，推荐以 <code>feat-*</code> 开头的方式命名。默认情况下，功能分支通常只存放在开发者仓库中，不应该存放在 origin（远程仓库）</p>
+<p>创建功能分支</p>
+<pre><code class="language-sh"># 从 dev 分支创建 myfeature 分支并切换至该分支
+git checkout -b myfeature dev
+</code></pre>
+<p>完成新功能后合并回 <code>dev</code> 分支</p>
+<pre><code class="language-sh"># 切换到 dev 分支
+$ git checkout dev
+# 将 myfeature 分支合并到 dev 分支
+$ git merge --no-ff myfeature
+
+# 删除 myfeature 分支
+$ git branch -d myfeature
+# 同步到远程仓库
+$ git push origin dev
+</code></pre>
+<h3 id="预发布分支">预发布分支</h3>
+<p>用于发布新版本的测试的分支，发布后需要合并回 <code>dev</code>、<code>main</code> 分支，名称以 <code>release-*</code> 开头，通常在新版本发布后会删除该分支</p>
+<pre><code class="language-sh"># 创建预发布分支
+git checkout -b release-1.2 dev
+
+# 完成预发布分支后合并回 main 分支
+$ git checkout main
+$ git merge --no-ff release-1.2
+
+# 更新版本
+$ git tag -a 1.2
+
+# 合并回 dev 分支
+git checkout dev
+git merge --no-ff release-1.2
+
+# 删除预发布分支
+git branch -d release-1.2
+</code></pre>
+<h3 id="修补分支">修补分支</h3>
+<p>用于修复某些 bug ，命名以 <code>hotfix-*</code> 开头，最终要合并回 <code>dev</code>、<code>main</code> 分支</p>
+<pre><code class="language-sh"># 创建一个修补分支
+git checkout -b hotfix-1.2.1 main
+
+# 修复完成后合并到 main 分支
+git checkout main
+git merge --no-ff hotfix-1.2.1
+
+# 更新版本
+git tag -a 1.2.1
+
+# 再合并到 dev 分支
+git checkout dev
+git merge --no-ff hotfix-1.2.1
+
+# 最后删除修补分支
+git branch -d hotfix-1.2.1
+</code></pre>
+<h2 id="提交-commit">提交 commit</h2>
+<p>修改完成后，就可以提交当前 commit 了</p>
+<pre><code class="language-sh">git add .      # --all 的缩写，表示保存所有变化（包括新建、修改和删除）
+git status -sb # -s 表示显示简略的文件状态信息，-b 表示显示改动分支
+git commit -v  # --verbose 缩写，表示列出 diff 结果（diff：用来比较两个文本文件的差异）
+
+# 一行内容展示每次的 commit 信息
+git log --oneline
+</code></pre>
+<p>::: details <!-- raw HTML omitted -->git status<!-- raw HTML omitted --> 示例</p>
+<pre><code class="language-sh">$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        deleted:    docs/posts/git-commit-specification.md
+        deleted:    docs/posts/git-use-standard-process.md
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+        docs/posts/commit-message-specification.md
+        docs/posts/git-usage-specification.md
+
+$ git status -s
+ D docs/posts/git-commit-specification.md
+ D docs/posts/git-use-standard-process.md
+?? docs/posts/commit-message-specification.md
+?? docs/posts/git-usage-specification.md
+
+$ git status -b
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use &quot;git add/rm &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+        deleted:    docs/posts/git-commit-specification.md
+        deleted:    docs/posts/git-use-standard-process.md
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+
+        docs/posts/commit-message-specification.md
+        docs/posts/git-usage-specification.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+
+$ git status -sb
+## master...origin/master
+ D docs/posts/git-commit-specification.md
+ D docs/posts/git-use-standard-process.md
+?? docs/posts/commit-message-specification.md
+?? docs/posts/git-usage-specification.md
+</code></pre>
+<p>:::</p>
+<h2 id="撰写提交信息">撰写提交信息</h2>
+<p>这一步可以参考：<a href="./commit-message-specification.md">Commit message 规范</a>，尽量提交规范化的信息。</p>
+<h2 id="与主干同步">与主干同步</h2>
+<p>分支开发过程中，经常需要与主干仓库保持同步</p>
+<pre><code class="language-sh">git fetch origin
+git rebase origin/master
+</code></pre>
+<h2 id="合并-commit">合并 commit</h2>
+<p>分支开发完成后，很可能有一堆 commit，但是合并到主干的时候，往往希望只有一个（或最多两三个）commit，这样不仅清晰，也容易管理。</p>
+<p>怎样将多个 commit 合并呢？这就要用到 git rebase 命令（变基）。</p>
+<pre><code class="language-sh">git rebase -i origin/master
+</code></pre>
+<p><code>git rebase</code> 命令的 i 参数表示互动（interactive），这时 git 会打开一个互动界面，进行下一步操作。</p>
+<p>下面采用<a href="https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history">Tute Costa</a>的例子，来解释怎么合并commit。</p>
+<pre><code class="language-bash">pick 07c5abd Introduce OpenPGP and teach basic usage
+pick de9b1eb Fix PostChecker::Post#urls
+pick 3e7ee36 Hey kids, stop all the highlighting
+pick fa20af3 git interactive rebase, squash, amend
+
+# Rebase 8db7e8b..fa20af3 onto 8db7e8b
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like &quot;squash&quot;, but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+</code></pre>
+<p>上面的互动界面，先列出当前分支最新的4个 commit（越下面越新）。每个 commit 前面有一个操作命令，默认是 pick，表示该行 commit 被选中，要进行 rebase 操作。</p>
+<p>4个 commit 的下面是一大堆注释，列出可以使用的命令。</p>
+<ul>
+<li>pick：正常选中</li>
+<li>reword：选中，并且修改提交信息；</li>
+<li>edit：选中，rebase 时会暂停，允许你修改这个commit（参考<a href="https://schacon.github.io/gitbook/4_interactive_rebasing.html">这里</a>）</li>
+<li>squash：选中，会将当前 commit 与上一个 commit 合并</li>
+<li>fixup：与squash相同，但不会保存当前commit的提交信息</li>
+<li>exec：执行其他shell命令</li>
+</ul>
+<p>上面这6个命令当中，squash 和 fixup 可以用来合并 commit。先把需要合并的 commit 前面的动词，改成squash（或者s）。</p>
+<pre><code class="language-bash">pick 07c5abd Introduce OpenPGP and teach basic usage
+s de9b1eb Fix PostChecker::Post#urls
+s 3e7ee36 Hey kids, stop all the highlighting
+pick fa20af3 git interactive rebase, squash, amend
+</code></pre>
+<p>这样一改，执行后，当前分支只会剩下两个 commit。第二行和第三行的 commit，都会合并到第一行的 commit。提交信息会同时包含，这三个 commit 的提交信息。</p>
+<pre><code class="language-bash"># This is a combination of 3 commits.
+# The first commit's message is:
+Introduce OpenPGP and teach basic usage
+
+# This is the 2nd commit message:
+Fix PostChecker::Post#urls
+
+# This is the 3rd commit message:
+Hey kids, stop all the highlighting
+</code></pre>
+<p>如果将第三行的 squash 命令改成 fixup 命令。</p>
+<pre><code class="language-bash">pick 07c5abd Introduce OpenPGP and teach basic usage
+s de9b1eb Fix PostChecker::Post#urls
+f 3e7ee36 Hey kids, stop all the highlighting
+pick fa20af3 git interactive rebase, squash, amend
+</code></pre>
+<p>运行结果相同，还是会生成两个 commit，第二行和第三行的 commit，都合并到第一行的 commit。但是，新的提交信息里面，第三行 commit 的提交信息，会被注释掉。</p>
+<pre><code class="language-bash"># This is a combination of 3 commits.
+# The first commit's message is:
+Introduce OpenPGP and teach basic usage
+
+# This is the 2nd commit message:
+Fix PostChecker::Post#urls
+
+# This is the 3rd commit message:
+# Hey kids, stop all the highlighting
+</code></pre>
+<p><a href="https://ponyfoo.com/articles/git-github-hacks">Pony Foo</a>提出另外一种合并 commit 的简便方法，就是先撤销过去5个 commit，然后再建一个新的。</p>
+<pre><code class="language-bash">git reset HEAD~5
+git add .
+git commit -am &quot;Here's the bug fix that closes #28&quot;
+git push --force
+</code></pre>
+<h2 id="推送到远程仓库">推送到远程仓库</h2>
+<p>合并 commit 后，就可以推送当前分支到远程仓库了</p>
+<pre><code class="language-sh">git push --force origin myfeature
+</code></pre>
+<p>force 参数，因为 rebase 以后，分支历史改变了，跟远程分支不一定兼容，有可能要强行推送</p>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></li>
+<li><a href="https://www.ruanyifeng.com/blog/2012/07/git.html">Git分支管理策略</a></li>
+<li><a href="https://thoughtbot.com/blog/git-interactive-rebase-squash-amend-rewriting-history">Git Interactive Rebase, Squash, Amend and Other Ways of Rewriting History</a></li>
+<li><a href="https://docs.github.com/cn/get-started/using-git/using-git-rebase-on-the-command-line">Using Git rebase on the command line</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/git/" alt="git" >
+                        git
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue 造轮子 - 测试用例</title>
+<meta name="description" content="大部分语法来自 Jest
+其中 Wrapper 是一个包括了一个挂载组件或 vnode，以及测试该组件或 vnode 的方法。
+基本示例 判断一个 Button 组件是否存在
+// 期待 Button 组件存在describe(&#39;Button&#39;, () =&gt; {it(&#39;create&#39;, () =&gt; {const wrapper = mount(Button)expect(wrapper.">
+<link rel="canonical" href="https://uphgs.com/posts/vue/test-grammar/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Vue 造轮子 - 测试用例</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="0001-01-01 00:00:00 &#43;0000 UTC" title="0001-01-01 00:00:00 &#43;0000 UTC">
+    0001-01-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>大部分语法来自 Jest</p>
+<p>其中 <code>Wrapper</code> 是一个包括了一个挂载组件或 vnode，以及测试该组件或 vnode 的方法。</p>
+<h2 id="基本示例">基本示例</h2>
+<p>判断一个 Button 组件是否存在</p>
+<pre><code class="language-js">// 期待 Button 组件存在
+describe('Button', () =&gt; {
+  it('create', () =&gt; {
+    const wrapper = mount(Button)
+    expect(wrapper.exists()).toBe(true)
+  })
+})
+</code></pre>
+<ul>
+<li><code>expect()</code>：期待。</li>
+<li><code>.exists()</code>：断言是否存在。</li>
+<li><code>.toBe()</code>：表示判断什么是什么（使用 <code>Object.is</code> 比较）。</li>
+</ul>
+<h2 id="验证点击事件">验证点击事件</h2>
+<p>判断一个 Button 组件是否被点击</p>
+<pre><code class="language-js">describe('Button', () =&gt; {
+  it('clickable', async () =&gt; {
+    const onClick = jest.fn()
+    const wrapper = mount(Button, {
+      props: { onClick }
+    })
+    await wrapper.trigger('click')
+    expect(onClick).toHaveBeenCalled()
+  })
+})
+</code></pre>
+<ul>
+<li><code>.toHaveBeenCalled()</code>：判断一个函数是否被调用。</li>
+<li><code>.trigger(eventType)</code>：触发 DOM 上的事件，trigger 仅适用于原生的 DOM 事件。</li>
+</ul>
+<h2 id="验证样式改变">验证样式改变</h2>
+<p>判断特定状态下组件 class 的变化</p>
+<pre><code class="language-js">describe('Button', () =&gt; {
+  it('type', () =&gt; {
+    const wrapper = mount(Button, {
+      props: { type: 'primary' },
+    })
+    expect(wrapper.classes()).toContain('tu-button--primary')
+    // 或者这样写：
+    // expect(wrapper.classes('tu-button--primary')).toBe(true)
+  })
+})
+</code></pre>
+<ul>
+<li><code>.classes()</code>：返回包含 class 名称的数组。或在提供 class 名的时候返回一个布尔值。</li>
+<li><code>.toContain(item)</code>：判断数组中是否存在某项。</li>
+</ul>
+<h2 id="验证是否存在指定子元素">验证是否存在指定子元素</h2>
+<p>判断是否存在某个子元素</p>
+<pre><code class="language-js">describe('Button', () =&gt; {
+  it('icon', () =&gt; {
+    const wrapper = mount(Button, {
+      props: { icon: 'close' }
+    })
+    expect(wrapper.find('.tu-icon-close').exists()).toBeTruthy()
+  })
+})
+</code></pre>
+<ul>
+<li><code>.find()</code>：返回匹配选择器的第一个 DOM 节点或 Vue 组件的 <code>Wrapper</code>，可以使用任何有效的 DOM 选择器 (使用 <code>querySelector</code> 语法)。</li>
+<li><code>.toBeTruthy()</code>：判断某个值转为布尔值时是否为真（除了 <code>false</code>，<code>0</code>，<code>''</code>，<code>null</code>，<code>undefined</code>，<code>NaN</code>）其他值都为真。</li>
+</ul>
+<h2 id="验证是否存在属性">验证是否存在属性</h2>
+<p>判断 Button 组件是否可以设置原生的 type 属性</p>
+<pre><code class="language-js">describe('Button', () =&gt; {
+  it('nativeType', () =&gt; {
+    const wrapper = mount(Button, {
+      props: { nativeType: 'submit' },
+    })
+    expect(wrapper.attributes('type')).toBe('submit')
+  })
+})
+</code></pre>
+<ul>
+<li><code>.attributes()</code>：返回 DOM 节点上的指定属性。</li>
+</ul>
+<h2 id="验证点击事件是否可用">验证点击事件是否可用</h2>
+<p>判断 Button 的点击事件是否为 <code>undefined</code></p>
+<pre><code class="language-js">describe('Button', () =&gt; {
+  it('disabled', async () =&gt; {
+    const wrapper = mount(Button, {
+      props: { disabled: true }
+    })
+    /* 测试 disabled 样式，暂时省略 */
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('click')).toBeUndefined()
+    // 或者你可以这样写：
+    // expect(wrapper.emitted()).not.toHaveProperty('click')
+  })
+})
+</code></pre>
+<ul>
+<li><code>.toBeUndefined()</code>：只匹配 <code>undefined</code>。</li>
+<li><code>.emitted()</code>：获取被触发的事件。</li>
+</ul>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

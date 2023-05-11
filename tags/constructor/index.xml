@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Constructor on 石塔白又大</title>
+    <link>https://uphgs.com/tags/constructor/</link>
+    <description>Recent content in Constructor on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 17 Sep 2020 20:58:21 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/constructor/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>构造函数</title>
+      <link>https://uphgs.com/posts/javascript/constructor/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/constructor/</guid>
+      <description>构造函数（类） 创建一个简单的构造函数
+function Fn(name) {this.name = name}Fn.prototype.run = function() {console.log(this.name + &#39;在跑&#39;)}let obj = new Fn(&#39;小张&#39;)new 做了什么 当 let obj = new Fn(&#39;小张&#39;) 执行时，做了以下事情</description>
+    </item>
+    
+  </channel>
+</rss>

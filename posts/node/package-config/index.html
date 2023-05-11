@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>package.json 配置项</title>
+<meta name="description" content="配置示例 ::: details 基础配置示例
+{&quot;name&quot;: &quot;vue&quot;,&quot;version&quot;: &quot;3.2.23&quot;,&quot;description&quot;: &quot;The progressive...&quot;,&quot;main&quot;: &quot;index.js&quot;,&quot;module&quot;: &quot;dist/vue.">
+<link rel="canonical" href="https://uphgs.com/posts/node/package-config/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">package.json 配置项</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-12-04 22:11:20 &#43;0800 CST" title="2021-12-04 22:11:20 &#43;0800 CST">
+    2021-12-04
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="配置示例">配置示例</h2>
+<p>::: details 基础配置示例</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;vue&quot;,
+  &quot;version&quot;: &quot;3.2.23&quot;,
+  &quot;description&quot;: &quot;The progressive...&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;module&quot;: &quot;dist/vue.runtime.esm-bundler.js&quot;,
+  &quot;types&quot;: &quot;dist/vue.d.ts&quot;,
+  &quot;unpkg&quot;: &quot;dist/vue.global.js&quot;,
+  &quot;files&quot;: [
+    &quot;index.js&quot;,
+    &quot;index.mjs&quot;,
+    &quot;dist&quot;
+  ],
+  &quot;exports&quot;: {
+    &quot;.&quot;: {
+      &quot;import&quot;: {
+        &quot;node&quot;: &quot;./index.mjs&quot;,
+        &quot;default&quot;: &quot;./dist/demo.runtime.esm-bundler.js&quot;
+      },
+      &quot;require&quot;: &quot;./index.js&quot;,
+      &quot;types&quot;: &quot;./dist/demo.d.ts&quot;
+    },
+    &quot;./dist/*&quot;: &quot;./dist/*&quot;,
+    &quot;./package.json&quot;: &quot;./package.json&quot;,
+  },
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;git+https://github.com/npm/cli.git&quot;
+  },
+  &quot;keywords&quot;: [
+    &quot;npm&quot;
+  ],
+  &quot;author&quot;: &quot;Jack&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/owner/project/issues&quot;
+  },
+  &quot;homepage&quot;: &quot;https://github.com/owner/project#readme&quot;,
+  &quot;dependencies&quot;: {
+    &quot;vue&quot;: &quot;3.2.23&quot;
+  }
+}
+</code></pre>
+<p>:::</p>
+<p>::: details Node.js 脚本包配置示例</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;vue&quot;,
+  &quot;version&quot;: &quot;3.2.23&quot;,
+  &quot;description&quot;: &quot;The progressive...&quot;,
+  &quot;bin&quot;: {
+    &quot;t&quot;: &quot;cli.js&quot;
+  },
+  &quot;files&quot;: [
+    &quot;*.js&quot;
+  ],
+  &quot;version&quot;: &quot;0.0.3&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;git+https://github.com/npm/cli.git&quot;
+  },
+  &quot;keywords&quot;: [
+    &quot;vue&quot;
+  ],
+  &quot;author&quot;: &quot;Jack&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/owner/project/issues&quot;
+  },
+  &quot;homepage&quot;: &quot;https://github.com/owner/project#readme&quot;,
+  &quot;dependencies&quot;: {
+    &quot;commander&quot;: &quot;^3.0.2&quot;,
+    &quot;inquirer&quot;: &quot;^8.0.0&quot;
+  }
+}
+</code></pre>
+<p>:::</p>
+<h2 id="name">name</h2>
+<p>包名称，如果要在 npm 上发布该包，不能与已发布的包名称冲突，同时它要满足以下规则</p>
+<ul>
+<li>名称必须小于或等于 214 个字符</li>
+<li>不能以点或下划线开头</li>
+<li>包的名称中不得包含大写字母</li>
+<li>该名称最终成为 URL 的一部分、命令行上的参数和文件夹名称。因此，名称不能包含任何非 URL 安全字符。</li>
+</ul>
+<p>一些常用的命名技巧</p>
+<ul>
+<li>不要使用与核心节点模块相同的名称。</li>
+<li>不要在名称中加入“js”或“node”。假设它是 js，因为您正在编写 package.json 文件，并且您可以使用“engines”字段指定引擎。（见下文。）</li>
+<li>名称可能会被库的使用者经常引用，因此它应该很短，但也应该具有合理的描述性。</li>
+<li>命名前，在 npm 上查看是否已经存在该包名：<a href="https://www.npmjs.com/">www.npmjs.com</a></li>
+</ul>
+<h2 id="version">version</h2>
+<p><strong>相关文档</strong></p>
+<ul>
+<li>语义化版本控制规范：<a href="https://semver.org/">semver.org</a></li>
+<li>版本控制语法文档：<a href="https://github.com/npm/node-semver">npm/node-semver</a></li>
+</ul>
+<p>如果要在 npm 上发布该包，name 和 version 字段都是必须的。名称和版本构成一个包的唯一标识符，让它每次改动都是唯一的，所以每次发布包，都要更新版本。</p>
+<p>版本号会附带标签，包括：latest（默认）、alpha（内测）、beta（公测）、next（下一个）等</p>
+<p>默认排序大小为：<code>1.0.0</code> &gt; <code>1.0.0-beta.0</code> &gt; <code>1.0.0-alpha.0</code></p>
+<p>版本号可以使用判断符，如：<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code>、<code>=</code> 语法可以是单个条件，或者多个条件</p>
+<pre><code class="language-js">// 匹配小于 1.2.7的所有版本
+&lt;1.2.7
+
+//匹配大于等于 1.2.7 并且小于 1.3.0 的版本
+&gt;=1.2.7 &lt;1.3.0
+
+// 还可以使用 || 语法
+// 表示匹配 1.2.7 或大于等于 1.2.9 小于 2.0.0 的版本
+1.2.7 || &gt;=1.2.9 &lt;2.0.0
+
+// 与 1.2.7 等价，都表示等于 1.2.7
+=1.2.7
+v1.2.7
+</code></pre>
+<h2 id="description">description</h2>
+<p>包的描述，有助于别人在搜索时更容易搜到</p>
+<h2 id="bin">bin</h2>
+<p>包的可执行文件配置，通常用来配置包的可执行脚本，npm 会将它配置到 PATH 环境变量中</p>
+<pre><code class="language-json">// 默认用法
+{
+  &quot;name&quot;: &quot;my-program&quot;,
+  &quot;version&quot;: &quot;1.2.5&quot;,
+  &quot;bin&quot;: &quot;./path/to/program&quot;
+}
+
+// 与上面的配置效果相同
+{
+  &quot;name&quot;: &quot;my-program&quot;,
+  &quot;version&quot;: &quot;1.2.5&quot;,
+  &quot;bin&quot;: {
+    &quot;my-program&quot;: &quot;./path/to/program&quot;
+  }
+}
+</code></pre>
+<blockquote>
+<p>注意脚本文件开头必须添加 <code>#!/usr/bin/env node</code></p>
+</blockquote>
+<h2 id="main">main</h2>
+<p>包的入口文件路径（引用包的主文件），如果未设置，默认为根目录下的 index.js</p>
+<h2 id="module">module</h2>
+<p>设置该包的 ESM 规范的入口文件（在包被引用时 <code>module</code> &gt; <code>main</code>），主要用于配置兼容 ES6+ 语法的包，需要与 import 或 require 结合使用</p>
+<p>配置示例</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;my-lib&quot;,
+  &quot;files&quot;: [&quot;dist&quot;],
+  &quot;main&quot;: &quot;./dist/my-lib.umd.js&quot;,
+  &quot;module&quot;: &quot;./dist/my-lib.es.js&quot;,
+  &quot;exports&quot;: {
+    &quot;.&quot;: {
+      &quot;import&quot;: &quot;./dist/my-lib.es.js&quot;,
+      &quot;require&quot;: &quot;./dist/my-lib.umd.js&quot;
+    }
+  }
+}
+</code></pre>
+<p>所有允许引用 javascript 的模块语法都支持 ESM。
+（仅与 import 或 require 结合使用）</p>
+<h2 id="types">types</h2>
+<p>配置包的 TypeScript 类型声明文件路径，如下</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;awesome&quot;,
+  &quot;author&quot;: &quot;Vandelay Industries&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;main&quot;: &quot;./lib/main.js&quot;,
+  &quot;types&quot;: &quot;./lib/main.d.ts&quot;
+}
+</code></pre>
+<h2 id="unpkg">unpkg</h2>
+<p>unpkg 引用文件路径（通常为 umd 格式），详情参考：<a href="https://unpkg.com/">unpkg.com</a></p>
+<h2 id="files">files</h2>
+<p>发布包时所包含的文件列表，通常为 dist 目录，默认为选择根目录下所有文件</p>
+<p>可以设置 <code>.npmignore</code> 文件排除要包含在 npm 包内的文件，规则类似 <code>.gitignore</code></p>
+<p>无论设置如何，始终会包含某些文件：</p>
+<ul>
+<li><code>package.json</code></li>
+<li><code>README</code></li>
+<li><code>LICENSE</code> / <code>LICENCE</code></li>
+<li><code>main</code> 字段中的文件</li>
+</ul>
+<p>相反，以下文件总是被忽略：</p>
+<ul>
+<li><code>.git</code></li>
+<li><code>CVS</code></li>
+<li><code>.svn</code></li>
+<li><code>.hg</code></li>
+<li><code>.lock-wscript</code></li>
+<li><code>.wafpickle-N</code></li>
+<li><code>.*.swp</code></li>
+<li><code>.DS_Store</code></li>
+<li><code>._*</code></li>
+<li><code>npm-debug.log</code></li>
+<li><code>.npmrc</code></li>
+<li><code>node_modules</code></li>
+<li><code>config.gypi</code></li>
+<li><code>*.orig</code></li>
+<li><code>package-lock.json</code></li>
+</ul>
+<h2 id="exports">exports</h2>
+<p>指定包在被引用时使用哪个模块，该字段总是优先于其他字段，如：<code>main</code>、<code>module</code>、<code>browser</code> 或者自定义字段。</p>
+<p><strong>基础用法</strong></p>
+<p>配置示例</p>
+<pre><code class="language-js">{
+  &quot;name&quot;: &quot;demo&quot;,
+  &quot;exports&quot;: {
+    &quot;.&quot;: &quot;./main.js&quot;,
+    &quot;./sub/path&quot;: &quot;./secondary.js&quot;,
+    &quot;./prefix/&quot;: &quot;./directory/&quot;,
+    &quot;./other-prefix/*&quot;: &quot;./yet-another/*/*.js&quot;
+  }
+}
+</code></pre>
+<p>引用示例</p>
+<pre><code class="language-js">import demo from 'demo'	// .../package/main.js
+import path from 'demo/sub/path'	// .../package/secondary.js
+import foo from 'demo/other-prefix/foo'	// .../package/yet-another/foo.js
+import deepBar from 'demo/other-prefix/deep/bar'	// .../package/yet-another/deep/bar.js
+</code></pre>
+<p>可以指定 <code>import</code> 或 <code>require</code> 引入方式的文件</p>
+<p><strong>环境判断</strong></p>
+<p><code>exports</code> 可以根据环境配置要引用的文件</p>
+<p>例如配置 import 引入包的入口文件时使用 <code>.es.js</code>，require 引用包的入口文件时使用 <code>.umd.js</code></p>
+<pre><code class="language-js">{
+  &quot;name&quot;: &quot;my-lib&quot;,
+  &quot;files&quot;: [&quot;dist&quot;],
+  &quot;main&quot;: &quot;./dist/my-lib.umd.js&quot;,
+  &quot;module&quot;: &quot;./dist/my-lib.es.js&quot;,
+  &quot;exports&quot;: {
+    &quot;.&quot;: {
+      &quot;import&quot;: &quot;./dist/my-lib.es.js&quot;,
+      &quot;require&quot;: &quot;./dist/my-lib.umd.js&quot;
+    },
+    &quot;./package.json&quot;: &quot;./package.json&quot;
+  }
+}
+</code></pre>
+<h2 id="dependencies">dependencies</h2>
+<p>项目所用的依赖，包括依赖的版本控制，它可以是包的 version，URL 链接，GitHub 地址或本地路径</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;foo&quot;,
+  &quot;version&quot;: &quot;0.0.0&quot;,
+  &quot;dependencies&quot;: {
+    &quot;foo&quot; : &quot;2.0.1&quot;,
+    &quot;bar&quot; : &quot;http://asdf.com/asdf.tar.gz&quot;,
+    &quot;express&quot;: &quot;expressjs/express&quot;, // git@github.com:expressjs/express.git
+    &quot;two&quot; : &quot;file:../two&quot;
+  }
+}
+</code></pre>
+<p>本地路径支持以下格式</p>
+<pre><code class="language-json">.. /foo/bar
+~/foo/bar
+./foo/bar
+/foo/bar
+</code></pre>
+<h2 id="devdependencies">devDependencies</h2>
+<p>配置开发环境的依赖包，主要在开发模式下使用，通常用来存放编译工具等</p>
+<h2 id="peerdependencies">peerDependencies</h2>
+<p>对等依赖，配置当前包所需的依赖包及版本信息，配置后包的使用者引入包时会自动根据 peerDependencies 检测相关依赖是否存在并且满足版本要求，也用来防止包的使用者多次安装相同的库。</p>
+<p>假如 A、B 库同时使用了 依赖 pluginA 和 pluginB，默认配置情况下，<code>node_modules</code> 如下图所示</p>
+<pre><code>.
+└─ node_modules
+│  ├─ A
+│  │  ├─ pluginA
+│  │  └─ pluginB
+│  └─ B
+│     ├─ pluginA
+│     └─ pluginB
+...
+</code></pre>
+<p>但是如果 A、B 库配置了 peerDependencies</p>
+<pre><code class="language-json">// A package.json
+{
+  &quot;peerDependencies&quot;: {
+    &quot;pluginA&quot;: &quot;1.0.0&quot;,
+    &quot;pluginB&quot;: &quot;1.0.0&quot;
+  }
+}
+
+// B package.json
+{
+  &quot;peerDependencies&quot;: {
+    &quot;pluginA&quot;: &quot;1.0.0&quot;,
+    &quot;pluginB&quot;: &quot;1.0.0&quot;
+  }
+}
+</code></pre>
+<p>那么安装时，它们的 <code>node_modules</code> 结构就会像这样</p>
+<pre><code>.
+└─ node_modules
+│  ├─ A
+│  ├─ B
+│  ├─ pluginA # v1.0.0
+│  └─ pluginB # v1.0.0
+...
+</code></pre>
+<blockquote>
+<p>如果你没有安装 peerDependencies 中指定版本的依赖，npm 不会自动安装同等依赖，只会产生警告，需要你去手动安装。</p>
+</blockquote>
+<h2 id="bundleddependencies">bundledDependencies</h2>
+<p>捆绑依赖，当前包被打包时捆绑依赖中指定的项会被一同打包，捆绑依赖中声明的包必须要在 devDependencies 或 dependencies 中存在，因为捆绑依赖的版本信息要根据 devDependencies 或 dependencies 获取，它本身以数组形式声明</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;awesome-web-framework&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;bundledDependencies&quot;: [
+    &quot;renderized&quot;,
+    &quot;super-streams&quot;
+  ]
+}
+</code></pre>
+<blockquote>
+<p>该选项允许两种命名方式：<code>bundledDependencies</code>、<code>bundleDependencies</code></p>
+</blockquote>
+<h2 id="optionaldependencies">optionalDependencies</h2>
+<p>可选依赖项，一些依赖包即使安装失败，仍然可以运行的依赖项（可以理解为当前包对该依赖非必要）</p>
+<h2 id="repository">repository</h2>
+<p>指定代码存放的地址，通常用来配置代码 GitHub 仓库地址</p>
+<pre><code class="language-json">{
+  &quot;repository&quot;: {
+    &quot;type&quot;: &quot;git&quot;,
+    &quot;url&quot;: &quot;git+https://github.com/demo/lib-demo.git&quot;
+  }
+}
+</code></pre>
+<h2 id="keywords">keywords</h2>
+<p>配置包的搜索关键字，有助于 npm 搜索包时根据关键字查找包</p>
+<h2 id="author">author</h2>
+<p>包作者的名字</p>
+<h2 id="license">license</h2>
+<p>包使用的开源协议，如 MIT 协议</p>
+<pre><code class="language-json">{
+  &quot;license&quot;: &quot;MIT&quot;,
+}
+</code></pre>
+<h2 id="bugs">bugs</h2>
+<p>bug 反馈地址，通常为仓库的 issues 地址</p>
+<pre><code class="language-json">{
+  &quot;bugs&quot;: {
+    &quot;url&quot;: &quot;https://github.com/owner/project/issues&quot;
+  }
+}
+</code></pre>
+<h2 id="homepage">homepage</h2>
+<p>项目的主页，通常是该库的文档地址或者仓库首页</p>
+<pre><code class="language-json">{
+  &quot;homepage&quot;: &quot;https://github.com/owner/project#readme&quot;,
+}
+</code></pre>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json">npm | package.json</a></li>
+<li><a href="https://github.com/SunshowerC/blog/issues/8">package.json 中 你还不清楚的 browser，module，main 字段优先级</a></li>
+<li><a href="https://www.typescriptlang.org/docs/handbook/declaration-files/publishing.html">Documentation - Publishing - TypeScript</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/npm/" alt="npm" >
+                        npm
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/package.json/" alt="package.json" >
+                        package.json
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

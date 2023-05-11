@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JS的缺点 on 石塔白又大</title>
+    <link>https://uphgs.com/tags/js%E7%9A%84%E7%BC%BA%E7%82%B9/</link>
+    <description>Recent content in JS的缺点 on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sun, 03 Jan 2021 13:12:31 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/js%E7%9A%84%E7%BC%BA%E7%82%B9/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JS 的缺陷</title>
+      <link>https://uphgs.com/posts/javascript/js-garbage/</link>
+      <pubDate>Sun, 03 Jan 2021 13:12:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/js-garbage/</guid>
+      <description>JS 的BUG 字符串相加运算方式歧义，将 + &amp;quot;a&amp;quot; 转为 NaN &amp;quot;b&amp;quot; + &amp;quot;a&amp;quot; + + &amp;quot;a&amp;quot; + &amp;quot;a&amp;quot;答案：&amp;quot;baNaNa&amp;quot;</description>
+    </item>
+    
+  </channel>
+</rss>

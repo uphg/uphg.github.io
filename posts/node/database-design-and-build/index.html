@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库设计与搭建</title>
+<meta name="description" content="增删改查的难点 开发效率
+很多人做了五年的 CRUD，开发效率却始终没有变 如何做到快速开发？ 代码质量
+为何互联网公司的代码大部分都是屎山，难以维护 2000 年左右就兴起的单元测试技术，为何还不会用 宣称敏捷开发，是否懂得敏捷开发包含单元测试 前后端联调
+为何后端给出的接口前端总是无法流畅使用，需要联调 前后端代码交给两个人做，增加的沟通成本是否值得 伸缩性
+数据量变大之后，应用是否还能正常运行 业务量增加之后，机器性能是否还扛得住 高并发 C10k problem">
+<link rel="canonical" href="https://uphgs.com/posts/node/database-design-and-build/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">数据库设计与搭建</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-05-02 13:51:26 &#43;0800 CST" title="2022-05-02 13:51:26 &#43;0800 CST">
+    2022-05-02
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="增删改查的难点">增删改查的难点</h2>
+<p><strong>开发效率</strong></p>
+<ul>
+<li>很多人做了五年的 CRUD，开发效率却始终没有变</li>
+<li>如何做到快速开发？</li>
+</ul>
+<p><strong>代码质量</strong></p>
+<ul>
+<li>为何互联网公司的代码大部分都是屎山，难以维护</li>
+<li>2000 年左右就兴起的单元测试技术，为何还不会用</li>
+<li>宣称敏捷开发，是否懂得敏捷开发包含单元测试</li>
+</ul>
+<p><strong>前后端联调</strong></p>
+<ul>
+<li>为何后端给出的接口前端总是无法流畅使用，需要联调</li>
+<li>前后端代码交给两个人做，增加的沟通成本是否值得</li>
+</ul>
+<p><strong>伸缩性</strong></p>
+<ul>
+<li>数据量变大之后，应用是否还能正常运行</li>
+<li>业务量增加之后，机器性能是否还扛得住</li>
+</ul>
+<p><strong>高并发 C10k problem</strong></p>
+<ul>
+<li>如果 10000 个连接同时进入，怎么保证服务质量</li>
+<li>课外读物：<a href="https://www.zhihu.com/question/54895548">如何设计秒杀系统</a></li>
+</ul>
+<p><strong>安全性和稳定性</strong></p>
+<ul>
+<li>怎么防脱裤、MD5 碰撞？怎么防 XSS、CSRF、Replay？</li>
+<li>怎么备份数据？怎么双活？</li>
+</ul>
+<p><strong>怎么预防脱发、颈椎病、肾结石</strong></p>
+<h2 id="一些重要的原则">一些重要的原则</h2>
+<p><strong>过早优化乃万恶之源</strong></p>
+<ul>
+<li>Premature optimization is the root of all evil</li>
+<li>如果你没有办法量化性能，就不要尝试优化性能</li>
+</ul>
+<p><strong>开发效率 &gt; 可读性 &gt; 运行效率</strong></p>
+<ul>
+<li>对于初创公司，最重要的事情是活下去</li>
+<li>80% 以上的中国创业公司活不过三年</li>
+</ul>
+<p><strong>可用性 &gt; 易用性 &gt; 美观</strong></p>
+<ul>
+<li>不要一开始就在易用性和美观性上浪费太多时间</li>
+</ul>
+<p><strong>永远不要删除数据（敏感数据除外）</strong></p>
+<ul>
+<li>尽量软删除，删除前确认</li>
+</ul>
+<h2 id="自学的最好方式">自学的最好方式</h2>
+<p>定一个目标，然后去做，不管结果怎么样，你都会学到东西。</p>
+<h2 id="需求分析">需求分析</h2>
+<p><strong>博客系统</strong></p>
+<ul>
+<li>用户可以登录、注销，但不可以修改密码（功能从简）</li>
+<li>需要重置密码可以自行联系管理员</li>
+<li>用户可以对博客进行增删改查</li>
+<li>用户可以对博客进行评论，但不能修改评论（功能从简）</li>
+<li>用户不可以编辑用户名、密码、姓名、头像（功能从简）</li>
+</ul>
+<p><strong>可用性要求</strong></p>
+<ul>
+<li>手机也能完成上面的操作</li>
+</ul>
+<p><strong>其他要求</strong></p>
+<ul>
+<li>对搜索引擎优化</li>
+</ul>
+<h2 id="思路">思路</h2>
+<p><strong>需求</strong></p>
+<ul>
+<li>简单的增删改查</li>
+<li>主要的表有 users/posts/comments</li>
+</ul>
+<p><strong>主要的数据</strong></p>
+<ul>
+<li>user (id/username/password_digest)</li>
+<li>posts (id/user_id/title/content)</li>
+<li>comments (id/user_id/post_id/content)</li>
+</ul>
+<p><strong>其他</strong></p>
+<ul>
+<li>手机适配：设计两套界面 PC + mobile</li>
+<li>SEO：多用 SSG 或 SSR，少用 BSR</li>
+</ul>
+<h2 id="开始写代码">开始写代码</h2>
+<p><strong>创建表</strong></p>
+<ul>
+<li>使用 migration</li>
+</ul>
+<p><strong>创建关联</strong></p>
+<ul>
+<li>使用 TypeORM 提供的 API</li>
+</ul>
+<p><strong>填充数据</strong></p>
+<ul>
+<li>使用 seed 脚本</li>
+</ul>
+<p><strong>创建页面</strong></p>
+<ul>
+<li>首页、登录页、注册页</li>
+</ul>
+<p><strong>创建 API</strong></p>
+<ul>
+<li><code>/api/v1/sign_up</code> 注册</li>
+<li><code>/api/v1/sign_in</code> 登录</li>
+</ul>
+<p><strong>约定前后端接口</strong></p>
+<ul>
+<li>RESTful</li>
+<li>约定错误码</li>
+<li>约定资源格式</li>
+</ul>
+<p><strong>单元测试</strong></p>
+<ul>
+<li>成功要测、失败也要测</li>
+<li>外部依赖不要测</li>
+</ul>
+<h2 id="操作数据库">操作数据库</h2>
+<p><strong>删除之前的容器</strong></p>
+<pre><code class="language-sh"># 查看所有容器运行状态
+docker ps -a
+
+# 关闭指定容器
+docker kill 容器id
+
+# 删除指定容器
+docker rm 容器id
+</code></pre>
+<p><strong>删除当前数据库</strong></p>
+<pre><code class="language-sh"># 在 psql 中运行
+drop database blog_development;
+</code></pre>
+<p><strong>创建数据库</strong></p>
+<pre><code class="language-sh">CREATE DATABASE xxx ENCODING 'UTF8' LC_COLLATE 'en_US.utf8' LC_CTYPE 'en_US.utf8';
+</code></pre>
+<h2 id="创建数据库关联">创建数据库关联</h2>
+<p>三个表之间的关联关系</p>
+<pre><code>users
+a user has many post
+a user has many comments
+
+posts
+a post belongs to a user
+a post has many comments
+
+comments
+a comment belongs to a user
+a comment belongs to a post
+</code></pre>
+<p>对应</p>
+<pre><code>用户
+一个用户有很多文章
+一个用户有很多评论
+
+文章
+一篇文章属于一个用户
+一篇文章有很多评论
+
+评论
+一个评论属于一个用户
+一个评论属于一篇文章
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

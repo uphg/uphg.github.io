@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>教程 on 石塔白又大</title>
+    <link>https://uphgs.com/categories/%E6%95%99%E7%A8%8B/</link>
+    <description>Recent content in 教程 on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 08 Aug 2019 22:31:32 +0000</lastBuildDate><atom:link href="https://uphgs.com/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>环境搭建 - Cmder 配置</title>
+      <link>https://uphgs.com/posts/envconfig/cmder-install/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cmder-install/</guid>
+      <description>尽量使用完整版 Cmder，这样配置起来更方便。
+注意 如果安装了浏览器FQ插件（如 Proxy SwitchyOmega）尽量使用FQ下载。 如果安装电脑中前已经有 Git Bash 直接下载安装简化版即可，此教程不包括简化版安装教程。 下载 官网链接：https://cmder.net/ 下载后尽量解压到一个非中文无空格路径下的目录 选择完整版下载 配置 首先解压文件 (最好放在一个没有空格的目录)，解压后打开</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - Git 配置</title>
+      <link>https://uphgs.com/posts/envconfig/git-config/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/git-config/</guid>
+      <description>配置 Git 在 Git Bash 命令行运行这五句话
+git config --global user.name xxxxxx # 把 xxxxxx 替换成你的英文名字随便什么都行git config --global user.</description>
+    </item>
+    
+  </channel>
+</rss>

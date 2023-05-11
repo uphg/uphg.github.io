@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hexo 搭建博客教程</title>
+<meta name="description" content="需要会使用命令行工具，并且有GitHub账号。 这篇文章的主要目的是记录自己搭建博客时踩的坑，所以可能没那么全面 部分内容来自： Hexo官方文档
+在 Github 新建一个仓库 名称格式：
+username.github.io注：username 必须是你的 GitHub 用户名
+在新仓库中点击 Settings 下拉，在 GitHub Pages 中点击 Choose a theme ，随便选择一个主题应用">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/hexo-build-blog/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Hexo 搭建博客教程</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2019-08-28 19:15:48 &#43;0000 UTC" title="2019-08-28 19:15:48 &#43;0000 UTC">
+    2019-08-28
+</time>
+      
+        —
+        
+            <a class="hover:text-gray-500" href="/categories/%E5%8D%9A%E5%AE%A2/" alt="博客" >
+                博客
+                </a>
+        
+
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>需要会使用命令行工具，并且有GitHub账号。
+这篇文章的主要目的是记录自己搭建博客时踩的坑，所以可能没那么全面
+部分内容来自： <a href="https://hexo.io/zh-cn/docs/">Hexo官方文档</a></p>
+<!-- raw HTML omitted -->
+<h2 id="在-github-新建一个仓库">在 Github 新建一个仓库</h2>
+<p>名称格式：</p>
+<pre><code>username.github.io
+</code></pre>
+<blockquote>
+<p>注：username 必须是你的 GitHub 用户名</p>
+</blockquote>
+<p>在新仓库中点击 Settings 下拉，在 GitHub Pages 中点击 Choose a theme ，随便选择一个主题应用</p>
+<p>刷新页面会发现 GitHub Pages 中多了一行网址 ，复制这个网址，这个网址就是后面要配置的 URL 的网址</p>
+<h2 id="环境搭建">环境搭建</h2>
+<p>安装 Hexo</p>
+<pre><code>npm install -g hexo-cli
+</code></pre>
+<p>查看当前版本</p>
+<pre><code class="language-bash">hexo version
+</code></pre>
+<p>博客目录名称</p>
+<pre><code class="language-bash">username.github.io-creator
+</code></pre>
+<p>在要创建博客的目录下初始化环境</p>
+<pre><code>hexo init
+</code></pre>
+<p>安装必备的组件</p>
+<pre><code>npm install
+</code></pre>
+<h2 id="配置_config设置">配置<code>_config</code>设置</h2>
+<p>打开博客根目录下的 <code>_config.yml</code> 文件</p>
+<p>修改其中的一些配置：
+<strong>首先修改URL</strong></p>
+<p>url：你的仓库主页预览网址</p>
+<p>root：你的仓库名称 (如果是用户名格式填 / 即可，即 username.github.io)</p>
+<pre><code class="language-yml"># URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://username.github.io/
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+</code></pre>
+<p><strong>然后修改 Deployment</strong></p>
+<p>主要修改 repository 改为你的仓库的下载地址</p>
+<pre><code class="language-yml"># Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: git@github.com:username/username.github.io.git
+  branch: master
+</code></pre>
+<p><strong>可选设置</strong></p>
+<p>命令行新建文章时的名称格式为日期</p>
+<pre><code class="language-yml">new_post_name: :year-:month-:day-:title.md # File name of new posts
+</code></pre>
+<h2 id="发布更新文章">发布更新文章</h2>
+<p>在根目录下打开命令行</p>
+<h3 id="安装一个拓展工具用于向-github-推送文章">安装一个拓展工具(用于向 GitHub 推送文章)</h3>
+<pre><code>npm i hexo-deployer-git
+</code></pre>
+<p>详情参考：<a href="https://hexo.io/zh-cn/docs/github-pages#Private-repository">将 Hexo 部署到 GitHub Pages</a></p>
+<h3 id="新建一篇文章">新建一篇文章</h3>
+<pre><code>hexo new post &quot;article title&quot;
+</code></pre>
+<p>文章的目录在 <code>source\_posts</code>下</p>
+<h3 id="生成静态网页">生成静态网页</h3>
+<pre><code class="language-sh">hexo g
+# 全称：hexo generate
+</code></pre>
+<h3 id="开启本地服务器预览">开启本地服务器预览</h3>
+<pre><code class="language-sh">hexo s
+# 全称：hexo server
+</code></pre>
+<h3 id="部署到-github">部署到 GitHub</h3>
+<pre><code class="language-sh">hexo d
+# 全称：hexo deploy
+</code></pre>
+<h2 id="更多相关命令">更多相关命令</h2>
+<p><strong>清除文件缓存</strong></p>
+<pre><code>hexo clean
+</code></pre>
+<p><strong>删除 hexo</strong></p>
+<p>3.0.0版本执行</p>
+<pre><code class="language-text">npm uninstall hexo-cli -g
+</code></pre>
+<p>之前版本执行</p>
+<pre><code class="language-text">npm uninstall hexo -g
+</code></pre>
+<h2 id="拓展内容">拓展内容</h2>
+<p>以下是拓展内容，可不看</p>
+<h3 id="文章">文章</h3>
+<p><strong>文件名称</strong></p>
+<p>Hexo 默认以标题做为文件名称，但您可编辑 <code>new_post_name</code> 参数来改变默认的文件名称，</p>
+<p>举例来说，它的默认值是 <code>:title.md</code>，你可以更改为 <code>:year-:month-:day-:title.md</code> 可让您更方便的通过日期来管理文章。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:title</code></td>
+<td style="text-align:left">标题（小写，空格将会被替换为短杠）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:year</code></td>
+<td style="text-align:left">建立的年份，比如， <code>2015</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:month</code></td>
+<td style="text-align:left">建立的月份（有前导零），比如， <code>04</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:i_month</code></td>
+<td style="text-align:left">建立的月份（无前导零），比如， <code>4</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:day</code></td>
+<td style="text-align:left">建立的日期（有前导零），比如， <code>07</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:i_day</code></td>
+<td style="text-align:left">建立的日期（无前导零），比如， <code>7</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Front-matter</strong></p>
+<p>Front-matter 是文件最上方以 <code>---</code> 分隔的区域，用于指定个别文件的变量，举例来说：</p>
+<pre><code>---
+title: Hello World
+date: 2013/7/13 20:46:25
+---
+</code></pre>
+<p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>layout</code></td>
+<td style="text-align:left">布局</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>title</code></td>
+<td style="text-align:left">标题</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>date</code></td>
+<td style="text-align:left">建立日期</td>
+<td style="text-align:left">文件建立日期</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>updated</code></td>
+<td style="text-align:left">更新日期</td>
+<td style="text-align:left">文件更新日期</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>comments</code></td>
+<td style="text-align:left">开启文章的评论功能</td>
+<td style="text-align:left">true</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>tags</code></td>
+<td style="text-align:left">标签（不适用于分页）</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>categories</code></td>
+<td style="text-align:left">分类（不适用于分页）</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>permalink</code></td>
+<td style="text-align:left">覆盖文章网址</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>keywords</code></td>
+<td style="text-align:left">仅用于 meta 标签和 Open Graph 的关键词（不推荐使用）</td>
+<td style="text-align:left"></td>
+</tr>
+</tbody>
+</table>
+<p><strong>添加文章描述</strong></p>
+<p>在文章头部的 Front-matter 中添加 <code>description</code> 属性来添加描述，如果没有这个属性，默认会自动截取文章内容作为文章的描述。</p>
+<p><strong>给文章添加标签分类</strong></p>
+<p>只有文章支持分类和标签，您可以在 Front-matter 中设置。在其他系统中，分类和标签听起来很接近，但是在 Hexo 中两者有着明显的差别：分类具有顺序性和层次性，也就是说 <code>Foo, Bar</code> 不等于 <code>Bar, Foo</code>；而标签没有顺序和层次。</p>
+<pre><code>categories:
+- Diary
+tags:
+- PS3
+- Games
+</code></pre>
+<p><strong>删除标签</strong></p>
+<p>首先把每篇文章中那个标签的属性去除，然后执行以下命令，清除之前的缓存</p>
+<pre><code>hexo clean
+</code></pre>
+<p>然后再次 <code>hexo g</code> 生页面成即可</p>
+<h2 id="永久链接插件">永久链接插件</h2>
+<p>插件地址：https://github.com/rozbo/hexo-abbrlink</p>
+<blockquote>
+<p>使用方法见文档</p>
+</blockquote>
+<p><strong>给文章添加 favicon.ico 图标</strong></p>
+<p>首先修改主题文件夹的配置信息：</p>
+<p>在根目录 <code>根目录/themes/xxx/_config.yml</code></p>
+<p>找到 favicon 并修改为以下路径：</p>
+<pre><code>favicon: favicon.ico
+</code></pre>
+<p>然后将准备好的 <code>favicon.ico</code> 图标放到 <code>hexo/themes/xxx/source</code> 路径下即可</p>
+<blockquote>
+<p>注：xxx 表示你的主题文件的路径，博客主题文件都存放在 <code>根目录/themes</code>下</p>
+<p>ico 图标转换网站转换：http://www.bitbug.net/</p>
+</blockquote>
+<p><strong>VSC 安装 stylus 语法高亮</strong></p>
+<p>搜索插件：<code>language-stylus</code></p>
+<blockquote>
+<p>使用VSC修改主题样式可以安装</p>
+</blockquote>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/hexo/" alt="Hexo" >
+                        Hexo
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

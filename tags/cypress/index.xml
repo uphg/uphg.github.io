@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cypress on 石塔白又大</title>
+    <link>https://uphgs.com/tags/cypress/</link>
+    <description>Recent content in Cypress on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Mon, 21 Mar 2022 20:33:07 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/cypress/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cypress 自动化测试</title>
+      <link>https://uphgs.com/posts/cypress-test/</link>
+      <pubDate>Mon, 21 Mar 2022 20:33:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/cypress-test/</guid>
+      <description>自动化测试的好处 用代码来模拟键盘、鼠标操作，方便多个页面，多次重复测试。
+为什么以前自动化测试不流行 以前浏览器对自动化的支持不友好，如 IE 自动化测试框架 API 不友好，有很大的学习成本，如 selenium 为什么现在可以做自动化测试 支持 Headless（无界面）的浏览器变多，方便测试 一些自动化测试框架的 API（Cypress）非常友好 Cypress 自带丰富的测试样例 Cypress 简介 版本 v1.</description>
+    </item>
+    
+  </channel>
+</rss>

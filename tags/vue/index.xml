@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vue on 石塔白又大</title>
+    <link>https://uphgs.com/tags/vue/</link>
+    <description>Recent content in Vue on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 07 Aug 2021 12:02:45 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/vue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vue 造轮子 - JSX 语法</title>
+      <link>https://uphgs.com/posts/vue/jsx/</link>
+      <pubDate>Sat, 07 Aug 2021 12:02:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/jsx/</guid>
+      <description>记录在 Vue 3 中如何使用 JSX 语法。
+Vite JSX 插件 安装
+yarn add -D @vitejs/plugin-vue-jsx# or npm install -D @vitejs/plugin-vue-jsx添加配置</description>
+    </item>
+    
+    <item>
+      <title>Vue 造轮子 - 创建 Vue 3 项目</title>
+      <link>https://uphgs.com/posts/vue/create-vue3/</link>
+      <pubDate>Sat, 07 Aug 2021 12:02:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/create-vue3/</guid>
+      <description>总结创建 Vue 3 项目的踩坑。
+搭建项目 运行以下命令创建一个包含 ts 的 Vue 3 项目，参考自：cn.vitejs.dev/guide/
+yarn create vite vue3-vite-example --template vue-ts进入文件夹运行项目</description>
+    </item>
+    
+    <item>
+      <title>Vue Router 的原理</title>
+      <link>https://uphgs.com/posts/vue/router/</link>
+      <pubDate>Tue, 12 Jan 2021 15:05:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/router/</guid>
+      <description>hash 路由 hash 路由可以在任何情况下使用，但是 hash 路由 # 后的内容无法被服务器接收到，所以你不论访问那个页面，服务器都只会认为你访问了根路径（SEO不友好）。
+实现 hash 路由 实现一个简单的跳转功能，路由显示 #1 时跳转 div1 ，路由显示 #2 时跳转 div2&amp;hellip; 依次类推。</description>
+    </item>
+    
+    <item>
+      <title>Vue 进阶属性</title>
+      <link>https://uphgs.com/posts/vue/advanced-options/</link>
+      <pubDate>Sun, 06 Dec 2020 13:30:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/advanced-options/</guid>
+      <description>directives 指令 除了 Vue 官方内置的指令 (v-model 和 v-if 等) ，Vue 还允许我们自定义指令。
+添加一个 focus 指令，使元素自动聚焦：
+// 注册一个全局自定义指令 `v-focus`Vue.</description>
+    </item>
+    
+    <item>
+      <title>Vue 动画原理</title>
+      <link>https://uphgs.com/posts/vue/transition/</link>
+      <pubDate>Fri, 04 Dec 2020 17:10:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/transition/</guid>
+      <description>使用类名过渡 类名规则
+v-enter ：进入过渡时最开始的状态 v-enter-active ：进入过渡的过渡效果，如 transition: all 0.3s; v-enter-to ：进入过渡结束时的状态，如果不设置，则显示元素默认状态。 v-leave ：离开过渡时最开始的状态，如果不设置，则显示元素默认状态。 v-leave-active ：离开过渡的过渡效果，如 transition: all 0.</description>
+    </item>
+    
+    <item>
+      <title>Vue 模板、指令与修饰符</title>
+      <link>https://uphgs.com/posts/vue/template-instruction-modifier/</link>
+      <pubDate>Fri, 04 Dec 2020 17:10:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/template-instruction-modifier/</guid>
+      <description>模板的三种写法 直接放在HTML中（完整版） 如果引入的是Vue完整版，可以直接在带有指定 id 的 div 中书写模板，随后将这个 id 传入 new Vue 中即可。
+&amp;lt;div id=&amp;quot;xxx&amp;quot;&amp;gt;{{n}}&amp;lt;button @click=&amp;quot;add&amp;quot;&amp;gt;+1&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;new Vue({el: &#39;#xxx&#39;,data: {n: 0},methods: {add() { }}})通过 template 属性传入（完整版） 可以事先指定一个带有 id 的 div，在 new Vue 的时候传入的 template 属性中书写模板。</description>
+    </item>
+    
+    <item>
+      <title>Vue 数据响应式原理（2.x）</title>
+      <link>https://uphgs.com/posts/vue/responsive/</link>
+      <pubDate>Sat, 28 Nov 2020 14:05:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/responsive/</guid>
+      <description>在理解 Vue 数据响应式之前，首先要理解一些 ES6 之后的新语法，如 getter、setter、Object.defineProperty()。
+getter 可以给对象的属性设置获取时的值，通过函数 return 的方式返回。
+let object = {姓: &#39;张&#39;,名: &#39;三&#39;,get 姓名() {return this.</description>
+    </item>
+    
+    <item>
+      <title>Vue 表单与输入绑定</title>
+      <link>https://uphgs.com/posts/vue/form-and-model/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/form-and-model/</guid>
+      <description>::: info 双向绑定
+双向绑定就是在变量被改变时，视图UI会跟着变化。在用户改变视图内容时，变量也会跟着改变。
+:::
+表单输入绑定 使用方式
+&amp;lt;input v-model=&amp;quot;message&amp;quot; type=&amp;quot;text&amp;quot;&amp;gt;v-model 实际上是 v-on:input 与 v-bind:value 的语法糖，它的实现原理大致如下：</description>
+    </item>
+    
+    <item>
+      <title>Vue 计算属性和监听器</title>
+      <link>https://uphgs.com/posts/vue/computed-and-watch/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/computed-and-watch/</guid>
+      <description>计算属性（computed） 基础用法 computed: {fullName() {return this.firstName + &#39; &#39; + this.lastName}}添加 getter &amp;amp; setter computed: {fullName: {// getterget() {return this.</description>
+    </item>
+    
+    <item>
+      <title>使用 Vue CLI 创建项目</title>
+      <link>https://uphgs.com/posts/vue/use-vue-cli/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/use-vue-cli/</guid>
+      <description>创建脚手架 安装 Vue CLI
+yarn global add @vue/cli-service-global# or npm install -g @vue/cli-service-global创建一个项目</description>
+    </item>
+    
+    <item>
+      <title>Vue Prop 自定义属性</title>
+      <link>https://uphgs.com/posts/vue/prop/</link>
+      <pubDate>Tue, 24 Nov 2020 17:35:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/prop/</guid>
+      <description>官方文档：https://cn.vuejs.org/v2/guide/components-props.html
+Prop 的大小写 语法示例
+Vue.component(&#39;blog-post&#39;, {// 下面的 postTitle 在JS中是驼峰式命名法props: [&#39;postTitle&#39;],template: &#39;&amp;lt;h3&amp;gt;{{ postTitle }}&amp;lt;/h3&amp;gt;&#39;})但由于 HTML 中的属性对大小写不敏感，所以在模板中要按照以下方式书写</description>
+    </item>
+    
+    <item>
+      <title>Vue 简介 &amp; 构造选项</title>
+      <link>https://uphgs.com/posts/vue/options/</link>
+      <pubDate>Tue, 24 Nov 2020 17:35:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/options/</guid>
+      <description>Vue 作者 尤雨溪，英文名 Evan You 。 本科就读于美国科尔盖特大学，艺术与艺术史专业。 帕森设计学院艺术硕士。 毕业后在 Google Creative Lab 担任 UI 相关工作。 后来转为全职 JavaScript 开发工程师。 现为独立开发者，靠每个月几十万以上的 捐款生活，还有 其他赞助。 Linkedin 主页、GitHub 主页、个人域名。 Vue 完整版与运行时（runtime）版本的区别 完整版 Vue 自带一个 compiler 函数，可以将类似 &amp;lt;div&amp;gt;{{n}}&amp;lt;/div&amp;gt; 的代码转换为类似 h(&#39;div&#39;, this.</description>
+    </item>
+    
+    <item>
+      <title>使用递归组件</title>
+      <link>https://uphgs.com/posts/vue/tree-component/</link>
+      <pubDate>Fri, 16 Oct 2020 10:37:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/tree-component/</guid>
+      <description>::: tip 注意
+由于需要调用自身，所以必须含有 name 这个属性，因为没有 name 这个属性会造成控件自身不能调用自身。且调用自身组件最好绑定一个 key 值，方便 Vue 重新渲染。
+:::
+假设有如下数据结构的data.js
+export default [{title: &amp;quot;标题 1&amp;quot;,content: &amp;quot;内容 1&amp;quot;,child: [{title: &amp;quot;标题 1-1&amp;quot;,content: &amp;quot;内容 1-1&amp;quot;,child: [{title: &amp;quot;标题 1-1-1&amp;quot;,content: &amp;quot;内容 1-1-1&amp;quot;}]}]},{title: &amp;quot;标题 2&amp;quot;,content: &amp;quot;内容 2&amp;quot;,}]那么组件（tree.</description>
+    </item>
+    
+    <item>
+      <title>Vue 常用插件</title>
+      <link>https://uphgs.com/posts/vue/plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/plugin/</guid>
+      <description>Element UI 使用 el-scrollbar &amp;lt;el-scrollbar wrap-class=&amp;quot;scrollbar-wrapper&amp;quot;&amp;gt;&amp;lt;/el-scrollbar&amp;gt;.el-scrollbar {height: 100%;}/* 由于 横向滚动条的 bug 可以设置此样式消除 */.</description>
+    </item>
+    
+  </channel>
+</rss>

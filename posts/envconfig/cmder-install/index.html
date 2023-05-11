@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环境搭建 - Cmder 配置</title>
+<meta name="description" content="尽量使用完整版 Cmder，这样配置起来更方便。
+注意 如果安装了浏览器FQ插件（如 Proxy SwitchyOmega）尽量使用FQ下载。 如果安装电脑中前已经有 Git Bash 直接下载安装简化版即可，此教程不包括简化版安装教程。 下载 官网链接：https://cmder.net/ 下载后尽量解压到一个非中文无空格路径下的目录 选择完整版下载 配置 首先解压文件 (最好放在一个没有空格的目录)，解压后打开">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/cmder-install/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">环境搭建 - Cmder 配置</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2019-08-08 22:31:32 &#43;0000 UTC" title="2019-08-08 22:31:32 &#43;0000 UTC">
+    2019-08-08
+</time>
+      
+        —
+        
+            <a class="hover:text-gray-500" href="/categories/%E6%95%99%E7%A8%8B/" alt="教程" >
+                教程
+                </a>
+        
+
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>尽量使用完整版 Cmder，这样配置起来更方便。</p>
+<!-- raw HTML omitted -->
+<h2 id="注意">注意</h2>
+<ul>
+<li>如果安装了浏览器FQ插件（如 Proxy SwitchyOmega）尽量使用FQ下载。</li>
+<li>如果安装电脑中前已经有 Git Bash 直接下载安装简化版即可，此教程不包括简化版安装教程。</li>
+</ul>
+<h2 id="下载">下载</h2>
+<ul>
+<li>官网链接：https://cmder.net/</li>
+<li>下载后尽量解压到一个非中文无空格路径下的目录</li>
+<li>选择完整版下载
+<img src="/images/cmder_29.png" alt="cmder"></li>
+</ul>
+<h2 id="配置">配置</h2>
+<ol>
+<li>
+<p>首先解压文件 (最好放在一个没有空格的目录)，解压后打开</p>
+</li>
+<li>
+<p>在命令行底部右键菜单栏，选择第三个选项，如图：</p>
+</li>
+</ol>
+<p><img src="/images/cmder_24.png" alt="cmder"></p>
+<ol start="3">
+<li>配置语言等选项 (此处语言选项可能重启后失效，如果失效需要修改配置文件)，如图：</li>
+</ol>
+<p><img src="/images/cmder_19.png" alt="cmder"></p>
+<ol start="4">
+<li>然后配置窗口比例，这里如果高度配置百分比保存后重新打开无效可以设置为像素，如图：</li>
+</ol>
+<p><img src="/images/cmder_20.png" alt="cmder"></p>
+<ol start="5">
+<li>配置失去焦点自动隐藏，如图：</li>
+</ol>
+<p><img src="/images/cmder_22.png" alt="cmder"></p>
+<ol start="6">
+<li>配置启动程序的默认命令行，即为 Git Bash 如图：</li>
+</ol>
+<p><img src="/images/cmder_23.png" alt="cmder"></p>
+<p>::: details 假如 Cmder 配置语言后再次打开发现语言还是英文，就需要修改配置文件</p>
+<p>打开设置，选择导出，如图：</p>
+<p><img src="/images/cmder_25.png" alt="cmder"></p>
+<p>选择那个 ConEmu.xml 文件，如图：</p>
+<p><img src="/images/cmder_26.png" alt="cmder"></p>
+<p>然后在文件中查找 language 将其中 data 的属性改为 zh 如图：</p>
+<p><img src="/images/cmder_27.png" alt="cmder"></p>
+<p>:::</p>
+<h2 id="配置-vscode">配置 VSCode</h2>
+<ol>
+<li>在 VSCode 中 <code>Ctrl + Shift + P</code> 打开命令 搜索 settings</li>
+<li>选择 打开设置 (json)</li>
+<li>在 VSCode 中添加如下配置（path 需要替换为你的 Git Bash 的路径）</li>
+</ol>
+<pre><code class="language-sh">&quot;terminal.integrated.profiles.windows&quot;: {
+  &quot;Git-Bash&quot;: {
+    &quot;path&quot;: [&quot;C:\\xxx\\cmder\\vendor\\git-for-windows\\bin\\bash.exe&quot;],
+  },
+},
+&quot;terminal.integrated.defaultProfile.windows&quot;: &quot;Git-Bash&quot;,
+</code></pre>
+<h2 id="快捷键">快捷键</h2>
+<h3 id="设置分屏">设置分屏</h3>
+<p>在设置中选择 <code>按键 &amp; 宏</code> 一栏在其中的搜索框中搜索 分屏 然后设置 复制分屏至底部和复制分屏至右侧的快捷键，如图：</p>
+<p><img src="/images/cmder_28.png" alt="cmder"></p>
+<p>设置之后就可以使用快捷键分屏了</p>
+<p>强制关闭当前窗口：<code>Ctrl + W</code></p>
+<h2 id="配置右键菜单">配置右键菜单</h2>
+<h4 id="第一步配置环境变量">第一步，配置环境变量</h4>
+<ol>
+<li>找到 Cmder 的存放目录，记住该目录（如：<code>C:\Software\cmder</code>）。</li>
+<li>右键点击我的电脑 &ndash;&gt; 属性 &ndash;&gt; 高级系统设置 &ndash;&gt; 环境变量 &ndash;&gt; 系统变量。</li>
+<li>点击新建，变量名设置为 <code>CMDER_HOME</code>，变量值粘贴 Cmder 的存放目录。</li>
+<li>点击系统变量中的 Path，然后在新窗口中点击新建，输入 <code>%CMDER_HOME%</code>。</li>
+<li>至此，环境变量配置完成，一路点击确定关闭即可。</li>
+</ol>
+<h4 id="第二步添加-cmder-到右键菜单">第二步，添加 Cmder 到右键菜单</h4>
+<ol>
+<li>Windows 10 系统下右键点击开始（屏幕左下角的图标“田”），选择 Windows PowerShell（管理员），在管理员权限的终端输入以下语句：
+<pre><code class="language-sh">Cmder.exe /REGISTER ALL
+</code></pre>
+</li>
+<li>到此，即可使用右键菜单打开 Cmder</li>
+</ol>
+<h2 id="添加主题">添加主题</h2>
+<p>在设置的 特征 &ndash;&gt; 颜色 中，随便修改一个主题的名字并保存，它就会生成一个新的自定义主题，在 <code>ConEmu.xml</code> 中搜索并替换该主题的配置为你想要的配置即可。</p>
+<p>我自己的主题配色：</p>
+<pre><code class="language-xml">&lt;key name=&quot;Palette1&quot; modified=&quot;2021-03-09 13:42:06&quot; build=&quot;180626&quot;&gt;
+  &lt;value name=&quot;Name&quot; type=&quot;string&quot; data=&quot;Chester&quot;/&gt;
+  &lt;value name=&quot;TextColorIdx&quot; type=&quot;hex&quot; data=&quot;10&quot;/&gt;
+  &lt;value name=&quot;BackColorIdx&quot; type=&quot;hex&quot; data=&quot;10&quot;/&gt;
+  &lt;value name=&quot;PopTextColorIdx&quot; type=&quot;hex&quot; data=&quot;10&quot;/&gt;
+  &lt;value name=&quot;PopBackColorIdx&quot; type=&quot;hex&quot; data=&quot;10&quot;/&gt;
+  &lt;value name=&quot;ColorTable00&quot; type=&quot;dword&quot; data=&quot;00453830&quot;/&gt;
+  &lt;value name=&quot;ColorTable01&quot; type=&quot;dword&quot; data=&quot;00b17f66&quot;/&gt;
+  &lt;value name=&quot;ColorTable02&quot; type=&quot;dword&quot; data=&quot;008dc916&quot;/&gt;
+  &lt;value name=&quot;ColorTable03&quot; type=&quot;dword&quot; data=&quot;00d68a28&quot;/&gt;
+  &lt;value name=&quot;ColorTable04&quot; type=&quot;dword&quot; data=&quot;006a61bf&quot;/&gt;
+  &lt;value name=&quot;ColorTable05&quot; type=&quot;dword&quot; data=&quot;00eca6ca&quot;/&gt;
+  &lt;value name=&quot;ColorTable06&quot; type=&quot;dword&quot; data=&quot;003fc8ff&quot;/&gt;
+  &lt;value name=&quot;ColorTable07&quot; type=&quot;dword&quot; data=&quot;00e6d4d0&quot;/&gt;
+  &lt;value name=&quot;ColorTable08&quot; type=&quot;dword&quot; data=&quot;00b09788&quot;/&gt;
+  &lt;value name=&quot;ColorTable09&quot; type=&quot;dword&quot; data=&quot;00e7ab77&quot;/&gt;
+  &lt;value name=&quot;ColorTable10&quot; type=&quot;dword&quot; data=&quot;009aca8f&quot;/&gt;
+  &lt;value name=&quot;ColorTable11&quot; type=&quot;dword&quot; data=&quot;00c0c67b&quot;/&gt;
+  &lt;value name=&quot;ColorTable12&quot; type=&quot;dword&quot; data=&quot;009491e3&quot;/&gt;
+  &lt;value name=&quot;ColorTable13&quot; type=&quot;dword&quot; data=&quot;007c79db&quot;/&gt;
+  &lt;value name=&quot;ColorTable14&quot; type=&quot;dword&quot; data=&quot;00a3d7dd&quot;/&gt;
+  &lt;value name=&quot;ColorTable15&quot; type=&quot;dword&quot; data=&quot;00e6d4d0&quot;/&gt;
+&lt;/key&gt;
+</code></pre>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="https://github.com/joonro/ConEmu-Color-Themes">ConEmu-Color-Themes</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/51061493">将 Cmder 添加到右键菜单</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" alt="命令行" >
+                        命令行
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

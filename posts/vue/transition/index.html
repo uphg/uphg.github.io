@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue 动画原理</title>
+<meta name="description" content="使用类名过渡 类名规则
+v-enter ：进入过渡时最开始的状态 v-enter-active ：进入过渡的过渡效果，如 transition: all 0.3s; v-enter-to ：进入过渡结束时的状态，如果不设置，则显示元素默认状态。 v-leave ：离开过渡时最开始的状态，如果不设置，则显示元素默认状态。 v-leave-active ：离开过渡的过渡效果，如 transition: all 0.">
+<link rel="canonical" href="https://uphgs.com/posts/vue/transition/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Vue 动画原理</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2020-12-04 17:10:22 &#43;0800 CST" title="2020-12-04 17:10:22 &#43;0800 CST">
+    2020-12-04
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="使用类名过渡">使用类名过渡</h2>
+<p>类名规则</p>
+<ol>
+<li><strong><code>v-enter</code></strong> ：进入过渡时最开始的状态</li>
+<li><strong><code>v-enter-active</code></strong> ：进入过渡的过渡效果，如 <code>transition: all 0.3s;</code></li>
+<li><code>v-enter-to</code> ：进入过渡结束时的状态，如果不设置，则显示元素默认状态。</li>
+<li><code>v-leave</code> ：离开过渡时最开始的状态，如果不设置，则显示元素默认状态。</li>
+<li><strong><code>v-leave-active</code></strong> ：离开过渡的过渡效果，如 <code>transition: all 0.3s;</code></li>
+<li><strong><code>v-leave-to</code></strong> ：离开过渡结束时的状态。</li>
+</ol>
+<p>使用案例</p>
+<pre><code class="language-html">&lt;div id=&quot;example-1&quot;&gt;
+  &lt;button @click=&quot;show = !show&quot;&gt;
+    Toggle render
+  &lt;/button&gt;
+  &lt;transition name=&quot;slide-fade&quot;&gt;
+    &lt;p v-if=&quot;show&quot;&gt;hello&lt;/p&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">new Vue({
+  el: &quot;#example-1&quot;,
+  data: {
+    show: true,
+  },
+});
+</code></pre>
+<pre><code class="language-css">/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</code></pre>
+<p>::: tip 注意</p>
+<p>类名过渡中的 <code>v-leave</code> 存在 bug，想要精确的控制，最好使用下面的 JS 钩子函数过渡。</p>
+<p>:::</p>
+<h2 id="css--animation-动画">CSS + animation 动画</h2>
+<p>还可以通过在 <code>v-enter-active</code> 和 <code>v-leave-active</code> 之间设置 animation 动画实现过渡。</p>
+<pre><code class="language-html">&lt;div id=&quot;example-2&quot;&gt;
+  &lt;button @click=&quot;show = !show&quot;&gt;Toggle show&lt;/button&gt;
+  &lt;transition name=&quot;bounce&quot;&gt;
+    &lt;p v-if=&quot;show&quot;&gt;
+      真、假、浑浊、无瑕；起、落、精准、偏差；模糊年岁，似已蒸发，天地倒挂；若人间是场大梦啊，梦里啷当巨铁锁人家，夜归的人叩响了门环，我要不要叫醒他；
+    &lt;/p&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">new Vue({
+  el: &quot;#example-2&quot;,
+  data: {
+    show: true,
+  },
+});
+</code></pre>
+<pre><code class="language-css">.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+</code></pre>
+<h2 id="指定-css-类名">指定 CSS 类名</h2>
+<p>还可以指定类名，结合其他第三方 CSS 动画库如 <a href="https://animate.style/">animate.css</a> 使用</p>
+<pre><code class="language-html">&lt;link
+  href=&quot;https://cdn.jsdelivr.net/npm/animate.css@3.5.1&quot;
+  rel=&quot;stylesheet&quot;
+  type=&quot;text/css&quot;
+/&gt;
+&lt;div id=&quot;example-3&quot;&gt;
+  &lt;button @click=&quot;show = !show&quot;&gt;
+    Toggle render
+  &lt;/button&gt;
+  &lt;transition
+    name=&quot;custom-classes-transition&quot;
+    enter-active-class=&quot;animated bounceInLeft&quot;
+    leave-active-class=&quot;animated bounceOutRight&quot;
+  &gt;
+    &lt;p v-if=&quot;show&quot;&gt;hello&lt;/p&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">new Vue({
+  el: &quot;#example-3&quot;,
+  data: {
+    show: true,
+  },
+});
+</code></pre>
+<h3 id="animatecss-模块化引入">Animate.css 模块化引入</h3>
+<p>安装</p>
+<pre><code class="language-js">yarn add animate.css
+</code></pre>
+<p>引入 4.x</p>
+<pre><code class="language-js">// 1. 组件化引入
+import animate from &quot;animate.css&quot;;
+Vue.use(animate);
+</code></pre>
+<pre><code class="language-js">// 2. 或直接引入 css
+import &quot;animate.min.css&quot;;
+</code></pre>
+<p>引入 3.x</p>
+<pre><code class="language-js">import &quot;animate.css/animate.compat.css&quot;;
+</code></pre>
+<h3 id="使用-animatecss-40">使用 Animate.css 4.0</h3>
+<p>由于 Animate.css 4.0 更新后改变了类名，使用的时候需要添加 <code>animate__</code> 前缀使用</p>
+<pre><code class="language-vue">&lt;div id=&quot;app&quot;&gt;
+  &lt;button @click=&quot;show = !show&quot;&gt;
+    Toggle render
+  &lt;/button&gt;
+  &lt;transition
+    name=&quot;custom-classes-transition&quot;
+    enter-active-class=&quot;animate__animated animate__bounceInLeft&quot;
+    leave-active-class=&quot;animate__animated animate__bounceOutRight&quot;
+  &gt;
+    &lt;p v-if=&quot;show&quot;&gt;hello&lt;/p&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="钩子函数">钩子函数</h2>
+<p>可以在 attribute 中声明 JavaScript 钩子</p>
+<pre><code class="language-vue">&lt;transition
+  @before-enter=&quot;beforeEnter&quot;
+  @enter=&quot;enter&quot;
+  @after-enter=&quot;afterEnter&quot;
+  @enter-cancelled=&quot;enterCancelled&quot;
+
+  @before-leave=&quot;beforeLeave&quot;
+  @leave=&quot;leave&quot;
+  @after-leave=&quot;afterLeave&quot;
+  @leave-cancelled=&quot;leaveCancelled&quot;
+&gt;
+  &lt;!-- ... --&gt;
+&lt;/transition&gt;
+</code></pre>
+<pre><code class="language-js">methods: {
+  // === 进入时 ===
+  beforeEnter(el) { },
+  // 当与 CSS 结合使用时
+  // 回调函数 done 是可选的
+  enter(el, done) { done() },
+  afterEnter(el) { },
+  enterCancelled(el) { },
+
+  // === 离开时 ===
+  beforeLeave(el) { },
+  // 当与 CSS 结合使用时
+  // 回调函数 done 是可选的
+  leave(el, done) { done() },
+  afterLeave(el) { },
+  // leaveCancelled 只用于 v-show 中
+  leaveCancelled(el) { }
+}
+</code></pre>
+<p>还可以结合第三方库 Velocity.js 使用</p>
+<pre><code class="language-vue">&lt;div id=&quot;example-4&quot;&gt;
+  &lt;button @click=&quot;show = !show&quot;&gt;Toggle&lt;/button&gt;
+  &lt;transition
+    appear
+    @enter=&quot;enter&quot;
+    @leave=&quot;leave&quot;
+    :css=&quot;false&quot;
+  &gt;
+    &lt;div v-if=&quot;show&quot; class=&quot;demo-4&quot;&gt;&lt;/div&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">data() {
+  return {
+    show: true
+  }
+},
+methods: {
+  // 进入过渡回调
+  enter(el, done) {
+    Velocity(el, { width: '300px' }, { duration: 300 })
+    Velocity(el, { height: '300px;' }, { duration: 300 }, { complete: done })
+  },
+  // 离开过渡回调
+  leave(el, done) {
+    Velocity(el, { height: '150px' }, { duration: 300 })
+    Velocity(el, { width: '0px' }, { duration: 300 }, { complete: done })
+  }
+}
+</code></pre>
+<pre><code class="language-css">.demo-4 {
+  width: 0;
+  height: 150px;
+  overflow: hidden;
+  background-color: #eee;
+}
+</code></pre>
+<h2 id="初始渲染的过渡">初始渲染的过渡</h2>
+<p>transition 还支持第一次加载过渡，只要添加一个 <code>appear</code> 属性</p>
+<pre><code class="language-vue">&lt;transition appear&gt;
+  &lt;!-- ... --&gt;
+&lt;/transition&gt;
+</code></pre>
+<p>和进入 / 离开过渡一样 <code>appear</code> 属性也支持自定义类名</p>
+<pre><code class="language-vue">&lt;transition
+  appear
+  appear-class=&quot;custom-appear-class&quot;
+  appear-to-class=&quot;custom-appear-to-class&quot; (2.1.8+)
+  appear-active-class=&quot;custom-appear-active-class&quot;
+&gt;
+  &lt;!-- ... --&gt;
+&lt;/transition&gt;
+</code></pre>
+<p>且支持自定义 JavaScript 钩子：</p>
+<pre><code class="language-vue">&lt;transition
+  appear
+  v-on:before-appear=&quot;customBeforeAppearHook&quot;
+  v-on:appear=&quot;customAppearHook&quot;
+  v-on:after-appear=&quot;customAfterAppearHook&quot;
+  v-on:appear-cancelled=&quot;customAppearCancelledHook&quot;
+&gt;
+  &lt;!-- ... --&gt;
+&lt;/transition&gt;
+</code></pre>
+<h2 id="多个元素的过渡">多个元素的过渡</h2>
+<p>默认情况下 transition 中如果有多组件，过渡会一起执行，结合绝对定位，就可以实现无缝的过渡</p>
+<p>::: tip 注意</p>
+<p>多组件过渡需要给每个组件添加唯一的 <code>key</code> 属性</p>
+<p>:::</p>
+<pre><code class="language-vue">&lt;div id=&quot;example-5&quot;&gt;
+  &lt;transition name=&quot;fade&quot;&gt;
+    &lt;button
+      v-if=&quot;status === 'off'&quot;
+      key=&quot;off&quot;
+      @click=&quot;status = 'on'&quot;
+    &gt;off&lt;/button&gt;
+    &lt;button
+      v-else-if=&quot;status === 'on'&quot;
+      key=&quot;on&quot;
+      @click=&quot;status = 'off'&quot;
+    &gt;on&lt;/button&gt;
+  &lt;/transition&gt;
+&lt;/div&gt;
+</code></pre>
+<pre><code class="language-js">data() {
+  return {
+    status: 'off'
+  }
+}
+</code></pre>
+<pre><code class="language-css">#example-5 {
+  position: relative;
+}
+button {
+  position: absolute;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all 1s;
+}
+.fade-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.fade-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+</code></pre>
+<p>Vue 还提供了 <strong>过渡模式</strong></p>
+<ul>
+<li><code>in-out</code>：新元素先进行过渡，完成之后当前元素过渡离开。</li>
+<li><code>out-in</code>：当前元素先进行过渡，完成之后新元素过渡进入。</li>
+</ul>
+<p>用 in-out 添加一个开关按钮过渡：</p>
+<pre><code class="language-vue">&lt;transition name=&quot;fade&quot; mode=&quot;in-out&quot;&gt;
+  &lt;!-- ... the buttons ... --&gt;
+&lt;/transition&gt;
+</code></pre>
+<p>就会实现类似发牌的效果</p>
+<h2 id="拓展">拓展</h2>
+<ul>
+<li><a href="https://cn.vuejs.org/v2/guide/transitions.html#%E5%88%97%E8%A1%A8%E8%BF%87%E6%B8%A1">列表过渡</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/vue/" alt="Vue" >
+                        Vue
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

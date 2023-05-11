@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>搭建 JavaScript 库</title>
+<meta name="description" content="记录搭建一个 JavaScript 库的过程
+示例项目：github.com/uphg/vanilla-ts-lib-starter
+使用 Vite 搭建脚手架 运行 create 命令快速创建
+pnpm create vite my-vanilla-app# 或指定模板pnpm create vite my-vanilla-app --template vanilla-ts添加 library（库）配置">
+<link rel="canonical" href="https://uphgs.com/posts/javascript/build-js-library/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">搭建 JavaScript 库</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-01-20 13:52:58 &#43;0800 CST" title="2022-01-20 13:52:58 &#43;0800 CST">
+    2022-01-20
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>记录搭建一个 JavaScript 库的过程</p>
+<p>示例项目：<a href="https://github.com/uphg/vanilla-ts-lib-starter">github.com/uphg/vanilla-ts-lib-starter</a></p>
+<h2 id="使用-vite-搭建脚手架">使用 Vite 搭建脚手架</h2>
+<p>运行 create 命令快速创建</p>
+<pre><code class="language-sh">pnpm create vite my-vanilla-app
+# 或指定模板
+pnpm create vite my-vanilla-app --template vanilla-ts
+</code></pre>
+<p>添加 library（库）配置</p>
+<pre><code class="language-ts">// vite.config.ts
+import path from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, 'src/index.ts'),
+      name: 'demo-lib',
+      formats: ['es', 'umd'], // default：['es', 'umd']
+      fileName: (format) =&gt; `index.${format}.js`
+    }
+  }
+})
+</code></pre>
+<p>在 src 中创建一个 index.ts 测试</p>
+<pre><code class="language-js">function add(a: number, b: number) {
+  return a + b
+}
+
+function reduce(a: number, b: number) {
+  return a - b
+}
+
+export { add, reduce };
+</code></pre>
+<p>运行 <code>pnpm build</code> 打包该文件</p>
+<h2 id="添加-ts-类型编译插件">添加 TS 类型编译插件</h2>
+<p>安装插件</p>
+<pre><code class="language-sh"># 用于编译 TS 类型声明文件
+pnpm add -D rollup rollup-plugin-typescript2
+</code></pre>
+<p>添加 rollup 配置</p>
+<pre><code class="language-js">// rollup.config.js
+import path from 'path'
+import typescript from 'rollup-plugin-typescript2';
+
+export default {
+  input: 'src/index.ts',
+  output: [
+    {
+      // preserveModules: false,
+      dir: 'types',
+      format: 'es'
+    }
+  ],
+  plugins: [
+    typescript({
+      tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+      tsconfigOverride: {
+        compilerOptions: {
+          sourceMap: false,
+          declaration: true,
+          declarationMap: false,
+          rootDir: './src',
+          outDir: 'types',
+          declarationDir: 'types'
+        }
+      }
+    })
+  ]
+}
+</code></pre>
+<p>添加运行脚本</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;build:types&quot;: &quot;rollup -c&quot;
+  }
+}
+</code></pre>
+<h2 id="chai--mocha--sinon-单元测试">chai + mocha + sinon 单元测试</h2>
+<h3 id="chai--mocha">chai + mocha</h3>
+<ul>
+<li>chai：一个封装的测试用例库</li>
+<li>mocha：用来提供 describe、it 函数，以及更漂亮的测试输出的一个库</li>
+</ul>
+<p><strong>安装</strong></p>
+<pre><code class="language-sh"># 全局安装 TS Node 环境
+pnpm global add ts-node mocha
+
+# 安装单元测试相关插件
+pnpm add -D chai mocha
+pnpm add -D @types/node @types/chai @types/mocha
+
+# 运行以下命令让 mocha 支持测试 TS 文件（测试 test/index.ts 文件）
+mocha -r ts-node/register test/index.ts
+
+# 在当前项目中安装 TS Node 环境
+pnpm add -D ts-node typescript
+</code></pre>
+<p>配置当前项目中运行 TS 测试的脚本</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;mocha -r ts-node/register test/**/*.ts&quot;
+  }
+}
+</code></pre>
+<p><strong>使用</strong></p>
+<pre><code class="language-js">import * as chai from 'chai'
+
+const assert = chai.assert
+
+describe('a', () =&gt; {
+  it('a 是 true', () =&gt; {
+    const a = true
+    assert.isTrue(a)
+  })
+})
+</code></pre>
+<h3 id="sinon">sinon</h3>
+<p>sinon 是一个专门用来测试函数的库，它可以与 chai 结合使用</p>
+<p><strong>安装</strong></p>
+<pre><code class="language-sh">pnpm add -D sinon sinon-chai
+pnpm add -D @types/sinon @types/sinon-chai
+</code></pre>
+<p><strong>与 chai 结合使用</strong></p>
+<pre><code class="language-ts">import * as chai from 'chai'
+import * as sinon from 'sinon'
+import * as sinonChai from 'sinon-chai'
+
+chai.use(sinonChai)
+const assert = chai.assert
+
+describe('fn', () =&gt; {
+  it('fn 被调用', () =&gt; {
+    const fn = sinon.fake()
+    fn()
+    assert.isTrue(fn.called)
+  })
+})
+</code></pre>
+<h2 id="jest-单元测试">Jest 单元测试</h2>
+<p>Jest 最大的优点就是方便，它整合了很多测试工具，是一个集成的测试框架</p>
+<h3 id="配置运行环境">配置运行环境</h3>
+<p>安装依赖</p>
+<pre><code class="language-sh"># 安装 Jest
+pnpm add -D jest @types/jest
+
+# 安装 Babel 支持
+pnpm add -D babel-jest @babel/core @babel/preset-env
+
+# 安装 TypeScript 支持（需要配置 babel）
+pnpm add -D ts-node @babel/preset-typescript
+</code></pre>
+<p>添加 babel 配置，参考自：<a href="https://jestjs.io/zh-Hans/docs/getting-started#%E4%BD%BF%E7%94%A8-babel">使用-babel</a></p>
+<pre><code class="language-js">// babel.config.js
+module.exports = {
+  presets: [
+    ['@babel/preset-env', {targets: {node: 'current'}}],
+    '@babel/preset-typescript',
+  ],
+}
+</code></pre>
+<p>添加 Jest 配置（运行 <code>jest --init</code> 初始化配置文件）</p>
+<pre><code class="language-ts">// jest.config.ts
+import type {Config} from '@jest/types';
+
+const config: Config.InitialOptions = {
+  coverageProvider: &quot;v8&quot;,
+  testEnvironment: &quot;jsdom&quot;,
+  // 匹配测试文件
+  testMatch: [
+    &quot;**/test/**/*.[jt]s?(x)&quot;,
+    &quot;**/?(*.)+(spec|test).[tj]s?(x)&quot;
+  ],
+  // 配置测试跳过路径
+  testPathIgnorePatterns: [
+    &quot;\\\\node_modules\\\\&quot;
+  ],
+  verbose: true,
+};
+
+export default config
+</code></pre>
+<p>在 <code>package.json</code> 中添加运行脚本</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    ...
+    &quot;test&quot;: &quot;jest&quot;
+  }
+}
+</code></pre>
+<h3 id="创建测试用例">创建测试用例</h3>
+<p>添加示例方法</p>
+<pre><code class="language-js">// ./src/add.ts
+function add(a: number, b: number) {
+  return a + b
+}
+
+export default add
+</code></pre>
+<p>给该方法添加测试文件</p>
+<pre><code class="language-js">// ./test/add.test.ts
+import add from '../src/add'
+
+test('add', () =&gt; {
+  expect(add(1, 2)).toBe(3)
+})
+
+</code></pre>
+<p>运行 <code>pnpm test</code> 测试该方法</p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/javascript/" alt="JavaScript" >
+                        JavaScript
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/chai/" alt="Chai" >
+                        Chai
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/mocha/" alt="Mocha" >
+                        Mocha
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/jest/" alt="Jest" >
+                        Jest
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

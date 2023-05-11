@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>npm on 石塔白又大</title>
+    <link>https://uphgs.com/tags/npm/</link>
+    <description>Recent content in npm on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 04 Dec 2021 22:11:20 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>package.json 配置项</title>
+      <link>https://uphgs.com/posts/node/package-config/</link>
+      <pubDate>Sat, 04 Dec 2021 22:11:20 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/package-config/</guid>
+      <description>配置示例 ::: details 基础配置示例
+{&amp;quot;name&amp;quot;: &amp;quot;vue&amp;quot;,&amp;quot;version&amp;quot;: &amp;quot;3.2.23&amp;quot;,&amp;quot;description&amp;quot;: &amp;quot;The progressive...&amp;quot;,&amp;quot;main&amp;quot;: &amp;quot;index.js&amp;quot;,&amp;quot;module&amp;quot;: &amp;quot;dist/vue.</description>
+    </item>
+    
+    <item>
+      <title>Node.js 环境搭建</title>
+      <link>https://uphgs.com/posts/node/node-env-setup/</link>
+      <pubDate>Sat, 04 Dec 2021 21:56:55 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/node-env-setup/</guid>
+      <description>安装 Node.js 进入官网，下载稳定版安装，安装过程中如果有需要勾选的选项，尽量选择勾选。
+安装 Node.js 后重启命令行（不要打开 Node.js），Node.js 默认自带了 npm、npx 工具，如下
+node --versionnpm --versionnpx --versionnpm CLI Node 包管理工具</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TypeScript 基本语法</title>
+<meta name="description" content="| 联合类型（Union Types） 只能满足其中一种条件（A 类型或 B 类型）
+type A = {name: &#39;a&#39;,age: number}type B = {name: &#39;b&#39;,gender: string}type C = A | Bconst obj1: C = { name: &#39;a&#39;, age: 18 } // 正确const obj2: C = { name: &#39;b&#39;, gender: &#39;boy&#39; } // 正确const obj3: C = { name: &#39;a&#39;, gender: &#39;girl&#39; } // 错误，只能选 A、B 对象中的一种，不能混合创建&amp; 交叉类型（Intersection Types） 已有的条件必须都满足（A 类型和 B 类型）">
+<link rel="canonical" href="https://uphgs.com/posts/typescript/ts-grammar/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">TypeScript 基本语法</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-08-14 22:38:22 &#43;0800 CST" title="2021-08-14 22:38:22 &#43;0800 CST">
+    2021-08-14
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="-联合类型union-types"><code>|</code> 联合类型（Union Types）</h2>
+<p>只能满足其中一种条件（A 类型或 B 类型）</p>
+<pre><code class="language-typescript">type A = {
+  name: 'a',
+  age: number
+}
+type B = {
+  name: 'b',
+  gender: string
+}
+
+type C = A | B
+
+const obj1: C = { name: 'a', age: 18 } // 正确
+const obj2: C = { name: 'b', gender: 'boy' } // 正确
+const obj3: C = { name: 'a', gender: 'girl' } // 错误，只能选 A、B 对象中的一种，不能混合创建
+</code></pre>
+<h2 id="-交叉类型intersection-types"><code>&amp;</code> 交叉类型（Intersection Types）</h2>
+<p>已有的条件必须都满足（A 类型和 B 类型）</p>
+<pre><code class="language-typescript">interface Colorful {
+  color: string;
+}
+interface Circle {
+  radius: number;
+}
+ 
+type ColorfulCircle = Colorful &amp; Circle;
+
+function draw(circle: Colorful &amp; Circle) {
+  console.log(`Color was ${circle.color}`);
+  console.log(`Radius was ${circle.radius}`);
+}
+
+draw({ color: &quot;blue&quot;, radius: 42 }); // 正确
+
+draw({ color: &quot;red&quot; }); // 错误：缺少 radius 属性
+</code></pre>
+<p>如果 A B 两种类型中的 name 类型不同，使用 <code>&amp;</code> 后所有类型都为 <code>never</code></p>
+<pre><code class="language-ts">interface A {
+  name: boolean,
+  age: number
+}
+
+interface B {
+  name: string,
+  state: boolean
+}
+
+const c: A &amp; B = {
+  name: '1',    // Type 'string' is not assignable to type 'never'.
+  age: 15,      // Type 'number' is not assignable to type 'never'.
+  state: false  // Type 'boolean' is not assignable to type 'never'.
+}
+</code></pre>
+<h2 id="-非空断言non-null-assertion"><code>!</code> 非空断言（Non-null assertion）</h2>
+<p>非空断言，用来告诉 TypeScript 该值的类型不可能是 <code>null</code> 或 <code>undefined</code></p>
+<pre><code class="language-typescript">const object = {
+  name: 'jack'
+}
+
+const fn = (a: number) =&gt; a + 1
+const b = (document!.getElementById('myInput')! as HTMLInputElement).value
+
+fn(Number(b))
+</code></pre>
+<h2 id="类型推断">类型推断</h2>
+<p>TS 可以根据已有代码自动推断类型</p>
+<pre><code class="language-typescript">const n = 3 // const a: 3
+const a = [0, 1, null] // const a: (number | null)[]
+</code></pre>
+<p>包括使用构造函数时</p>
+<pre><code class="language-typescript">class A {
+  a1: number;
+}
+class B {
+  b1: string;
+}
+class C {
+  c1: boolean;
+}
+
+const array = [new A(), new B(), new C()]
+// const array: (A | B | C)[]
+</code></pre>
+<p>如果想要纠正自动类型推断，也可手动声明类型</p>
+<pre><code class="language-typescript">const zoo: Animal[] = [new A(), new B(), new C()] // const zoo: Animal[]
+</code></pre>
+<p>另外，TypeScript 还会自动根据上下文推断类型，以 window 下的默认事件对象为例</p>
+<pre><code class="language-typescript">window.onmousedown = function (mouseEvent) {
+  console.log(mouseEvent.button); //&lt;- 对的
+  console.log(mouseEvent.kangaroo); //&lt;- 错的！因为该参数不存在 kangaroo 属性
+};
+</code></pre>
+<p>还可以使用 <code>typeof</code> 修饰符反推类型</p>
+<pre><code class="language-typescript">const object = {
+  name: 'Jack'
+}
+
+type O = typeof object
+const obj: O = { name: 'Jack' }
+</code></pre>
+<h2 id="returntypetype"><code>ReturnType&lt;Type&gt;</code></h2>
+<p>定义函数的返回类型的 Type</p>
+<pre><code class="language-ts">declare function f1(): { a: number; b: string };
+ 
+type T0 = ReturnType&lt;() =&gt; string&gt;;
+// type T0 = string
+
+type T1 = ReturnType&lt;(s: string) =&gt; void&gt;;
+// type T1 = void
+
+type T2 = ReturnType&lt;&lt;T&gt;() =&gt; T&gt;;
+// type T2 = unknown
+
+type T3 = ReturnType&lt;&lt;T extends U, U extends number[]&gt;() =&gt; T&gt;;
+// type T3 = number[]
+
+type T4 = ReturnType&lt;typeof f1&gt;;
+// type T4 = { a: number; b: string; }
+
+type T5 = ReturnType&lt;any&gt;;
+// type T5 = any
+
+type T6 = ReturnType&lt;never&gt;;
+// type T6 = never
+
+type T7 = ReturnType&lt;string&gt;;
+// 错误：必须传入 '(...args: any) =&gt; any' 格式类型，
+
+type T8 = ReturnType&lt;Function&gt;;
+// 错误：类型 Function 不满足 '(...args: any) =&gt; any' 约束
+// 'Function' 类型不匹配签名 '(...args: any): any'
+</code></pre>
+<h2 id="typeof-类型操作符">typeof 类型操作符</h2>
+<p>TypeScript 中可以使用 <code>typeof</code> 操作符直接声明类型</p>
+<pre><code class="language-typescript">let s = &quot;hello&quot;;
+let n: typeof s //let n: string
+</code></pre>
+<p>这种方式常常用在复杂类型中</p>
+<pre><code class="language-typescript">type Predicate = (x: unknown) =&gt; boolean;
+type K = ReturnType&lt;Predicate&gt; // type K = boolean
+</code></pre>
+<p>假如你需要定义一个一个函数返回值的类型，但是直接使用函数名会报错</p>
+<pre><code class="language-typescript">function f() {
+  return { x: 10, y: 3 }
+}
+type P = ReturnType&lt;f&gt; // 错误，不能直接传入函数名
+</code></pre>
+<p>这时就可以使用 <code>typeof</code> 操作符</p>
+<pre><code class="language-typescript">function f() {
+  return { x: 10, y: 3 }
+}
+type P = ReturnType&lt;typeof f&gt;
+// type P = { x: number; y: number; }
+</code></pre>
+<p>要在变量声明时使用，应该使用 <code>&lt;&gt;</code> 符</p>
+<pre><code class="language-typescript">const messageBox = (message: string): string =&gt; message;
+// 报错
+let notGood: typeof messageBox(&quot;你还好吗?&quot;);
+
+// 应使用以下语法
+let good: ReturnType&lt;typeof messageBox&gt;
+</code></pre>
+<h2 id="空值类型">空值类型</h2>
+<p>void 表示空，没有任何返回</p>
+<pre><code class="language-ts">function fn(): void {
+  console.log('这是一个没有 return 的函数')
+}
+</code></pre>
+<p>Null 和 Undefined</p>
+<p>TS 和 JS 一样，也将 Null 和 Undefined 区分位两种类型，分别为 <code>null</code> 和 <code>undefined</code></p>
+<pre><code class="language-ts">const a: undefined = undefined 
+const b: null = null
+</code></pre>
+<h2 id="重载">重载</h2>
+<p>TypeScript 可以通过重载来支持多种指定类型的参数验证</p>
+<p>使用函数重载，可以让函数支持多种情况的类型判断</p>
+<pre><code class="language-ts">function add(a: number, b: number): number;
+function add(a: string, b: string): string;
+function add(a: any, b: any): any {
+  return a + b
+}
+
+console.log(add(1, 2))
+console.log(add('白', '纸'))
+</code></pre>
+<h2 id="接口">接口</h2>
+<p>接口主要用来声明一个对象的类型，如下</p>
+<pre><code class="language-typescript">// 声明对象的类型
+interface Human {
+  name: string;
+  age: number;
+}
+const a: Human = { name: '小恒', age: 18 }
+console.log(a)
+
+// 声明时可以指定 key 的类型
+interface StringArray {
+  [index: number]: string;
+}
+ 
+const myArray: StringArray = ['hi', 'How', 'are', 'you']
+</code></pre>
+<h3 id="可选属性">可选属性</h3>
+<p>接口的可选属性会在你键入拼写错误的属性时提示你，如下</p>
+<pre><code class="language-typescript">interface SquareConfig {
+  color?: string;
+  width?: number;
+}
+
+function createSquare(config: SquareConfig): { color: string; area: number } {
+  let newSquare = {}
+  if (config.clor) {
+    // 错误：'StyleConfig' 中不存在 ’clor‘ 属性
+    newSquare.color = config.clor;
+  }
+  return newSquare;
+}
+
+let mySquare = createSquare({color: &quot;black&quot;});
+</code></pre>
+<h3 id="只读属性">只读属性</h3>
+<p>可以在属性名前用 <code>readonly</code> 来指定只读属性，只读属性在创建后不允许修改</p>
+<pre><code class="language-typescript">interface Point {
+  readonly a: number;
+  readonly b: number;
+}
+let n: Point = { a: 10, b: 20 }
+n.x = 1 // 错误！
+</code></pre>
+<h3 id="只读数组类型">只读数组类型</h3>
+<p>TypeScript 内置了 <code>ReadonlyArray&lt;T&gt;</code> 类型，它与 <code>Array&lt;T&gt;</code> 相似，只是把所有可变方法去掉了，因此可以确保数组创建后再也不能被修改：</p>
+<pre><code class="language-typescript">let a: number[] = [1, 2, 3]
+let b: ReadonlyArray&lt;number&gt; = a
+b[0] = 10 // error!
+b.push(4) // error!
+b.length = 20 // error!
+a = b // error!
+</code></pre>
+<p>上面代码的最后一行中，可以看到就算把整个 <code>ReadonlyArray</code> 赋值到一个普通数组也不可以。但是你可以用类型断言重写</p>
+<pre><code class="language-typescript">let a: number[] = [1, 2, 3]
+let b: ReadonlyArray&lt;number&gt; = a
+a = b as number[];
+</code></pre>
+<h3 id="额外的属性检查">额外的属性检查</h3>
+<p>默认情况下，接口声明的对象类型只能包括列举的属性，传入不存在的属性会报错</p>
+<pre><code class="language-typescript">interface Style {
+  color?: string;
+  width?: number;
+}
+
+function createStyle(config: Style): void {
+  console.log(config)
+}
+
+// 错误：'Style' 中不存在 'height'
+const myStyle = createStyle({ height: 100, width: 100 });
+</code></pre>
+<p>可以通过类型断言解决这个问题</p>
+<pre><code class="language-typescript">const myStyle = createStyle({ height: 100, width: 100 } as Style)
+</code></pre>
+<p><strong>但是，更好的方法是声明一个包括字符串 key 的所有类型</strong></p>
+<pre><code class="language-typescript">interface Style {
+  color?: string;
+  width?: number;
+  [key: string]: any;
+}
+
+function createStyle(config: Style): void {
+  console.log(config)
+}
+
+const myStyle = createStyle({ height: 100, width: 100 } as Style)
+</code></pre>
+<h3 id="函数类型">函数类型</h3>
+<p>可以通过以下方式使用函数类型声明</p>
+<pre><code class="language-typescript">interface styleFunc {
+  (first: number, last: number): boolean;
+}
+const fn: styleFunc = function (a, b) {
+  return a &gt; b
+}
+
+console.log(fn(1, 2))
+</code></pre>
+<p>嵌套的函数类型</p>
+<pre><code class="language-typescript">interface numberFunc {
+  (param1: number, param2: number): number
+}
+
+const fn = function (a:number): numberFunc {
+  return function(b, c) {
+    return a + b + c
+  }
+}
+
+console.log(fn(1)(2, 3))
+</code></pre>
+<p>声明函数中 <code>this</code> 的类型（如果设置了 <code>this</code> 的类型，就必须传入符合类型的 <code>this</code>）</p>
+<pre><code class="language-typescript">interface Human {
+  name: string;
+  age: number;
+}
+
+function fn(this: Human) {
+  console.log(this)
+}
+
+fn.call({ name: 'Jack', age: 18 }) // { name: 'Jack', age: 18 }
+fn() // 错误：void 类型的 this 不能分配给 Human 类型的 this
+</code></pre>
+<h3 id="接口可以继承">接口可以继承</h3>
+<p>基础语法</p>
+<pre><code class="language-typescript">interface A1 {
+  color: string;
+}
+
+interface A2 extends A1 {
+  length: number;
+}
+
+let a = {} as A2;
+a.color = &quot;blue&quot;;
+a.length = 10;
+console.log(a)
+</code></pre>
+<p>接口也可以同时继承两个接口，如下</p>
+<pre><code class="language-typescript">interface Color {
+  color: string;
+}
+interface Height {
+  height: number;
+}
+interface Style extends Color, Height {
+  background: string;
+}
+
+const a: Style = {
+  color: 'red',
+  height: 20,
+  background: '#ffffff'
+}
+
+console.log(a)
+</code></pre>
+<p>接口还可以继承继承过其他接口的接口，如下</p>
+<pre><code class="language-typescript">interface Color {
+  color: string;
+}
+interface Height extends Color {
+  height: number;
+}
+interface Style extends Height {
+  background: string;
+}
+
+const a: Style = {
+  color: 'red',
+  height: 20,
+  background: '#ffffff'
+}
+
+console.log(a)
+</code></pre>
+<h3 id="特殊情况">特殊情况</h3>
+<p>虽然大部分情况下 TS 是严格的，但是如果你赋值时是一个变量，它可能不那么严格，如下</p>
+<pre><code class="language-typescript">interface Human {
+  name: string;
+  age: number;
+}
+
+let a = { name: 'Jack', age: 18, gender: 'male' }
+let b: Human = a // {name: 'Jack', age: 18, gender: 'male'}
+
+console.log(b)
+</code></pre>
+<p>上面的代码就没有检测出对象中不存在的 gender 属性</p>
+<blockquote>
+<p>这表明 TS 实际上是 unsound（不健全的）的，也就是它的类型检查并不是那么的严格，也是有修改的空间的。</p>
+</blockquote>
+<h2 id="枚举">枚举</h2>
+<p>可以使用枚举定义常量，如果只声明第一个的值为 1，后面的值会自动按顺序声明</p>
+<pre><code class="language-ts">enum type { Up = 1, Down, Left, Right }
+
+console.log(type.Up, type.Down, type.Left, type.Right) // 1 2 3 4
+</code></pre>
+<p>如果不赋值，会默认从 0 开始</p>
+<pre><code class="language-ts">enum type { Up, Down, Left, Right }
+
+console.log(type.Up, type.Down, type.Left, type.Right) // 0,  1,  2,  3 
+</code></pre>
+<p>如果使用字符串枚举，必须给每个成员赋值</p>
+<pre><code class="language-ts">enum type { Up = '张三', Down = '李四', Left = '王五', Right = '陈六' }
+
+console.log(type.Up, type.Down, type.Left, type.Right) // &quot;张三&quot;,  &quot;李四&quot;,  &quot;王五&quot;,  &quot;陈六&quot;
+</code></pre>
+<p>枚举还可以根据值获取 key</p>
+<pre><code class="language-ts">enum Color {
+  Red = 1,
+  Blue = 2,
+  Green = 3
+}
+
+let colorName: string = Color[2]
+console.log(colorName) // &quot;Blue&quot;
+</code></pre>
+<p>枚举声明时支持简单的运算符（支持的运算符有：<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&gt;&gt;&gt;</code>, <code>&amp;</code>, <code>|</code>, <code>^</code>）</p>
+<pre><code class="language-typescript">enum FileAccess {
+  A,
+  B = 1 + 2,
+  C = 2 * 2,
+  D = 0 | 1
+}
+
+console.log(FileAccess.C)
+</code></pre>
+<p>注意，枚举是真实存在的对象，可以用对象的方式使用它</p>
+<pre><code class="language-typescript">enum E {
+  X,
+  Y,
+  Z,
+}
+ 
+function fn(obj: { X: number }) {
+  return obj.X;
+}
+
+console.log(E)
+console.log(fn(E))
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/typescript/" alt="TypeScript" >
+                        TypeScript
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

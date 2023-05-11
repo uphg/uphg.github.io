@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on 石塔白又大</title>
+    <link>https://uphgs.com/tags/git/</link>
+    <description>Recent content in git on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Wed, 10 Nov 2021 16:52:23 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git 使用规范</title>
+      <link>https://uphgs.com/posts/git/git-usage-specification/</link>
+      <pubDate>Wed, 10 Nov 2021 16:52:23 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/git/git-usage-specification/</guid>
+      <description>Git 仓库操作规范总结
+分支管理策略 主分支 首先代码应该有且仅有一个主分支，项目的正式版本，都在这个主分支上发布。
+Git 主分支的默认名为 master，但是由于 master 一词打擦边球，所以建议使用 main 作为默认分支名称，从 Git 2.28 开始，可以通过设置 init.</description>
+    </item>
+    
+    <item>
+      <title>Commit message 规范</title>
+      <link>https://uphgs.com/posts/git/commit-message-specification/</link>
+      <pubDate>Mon, 08 Nov 2021 17:04:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/git/commit-message-specification/</guid>
+      <description>Git 每次提交代码，都要写 Commit message（提交说明），否则就不允许提交。
+git commit -m &amp;quot;hello world&amp;quot;上面代码的 -m 参数，就是用来指定 commit mesage 的。</description>
+    </item>
+    
+  </channel>
+</rss>

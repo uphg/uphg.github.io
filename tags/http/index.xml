@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HTTP on 石塔白又大</title>
+    <link>https://uphgs.com/tags/http/</link>
+    <description>Recent content in HTTP on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 22 May 2020 19:43:52 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>浏览器模型</title>
+      <link>https://uphgs.com/posts/javascript/browser-storage/</link>
+      <pubDate>Fri, 22 May 2020 19:43:52 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/browser-storage/</guid>
+      <description>window.JSON ::: tip 注意
+由于 JSON 只支持对象、数组、数值、字符串、布尔值和 null ，所以 window.JSON 只适用于。如果强行转换其他类型，如：日期、正则、函数、循环、引用类型的对象，或者带有 undefined 的对象，则会抛出一个错误。
+:::
+JSON.parse 作用：</description>
+    </item>
+    
+  </channel>
+</rss>

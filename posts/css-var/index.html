@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使用 CSS 变量</title>
+<meta name="description" content="CSS 变量笔记总结。
+变量的声明 变量声明时，前面要加 --
+body {--foo: #000000;--bar: #F7EFD2;}它们与 color、font-size 等正式属性没有什么不同，只是没有默认含义。所以 CSS 变量（CSS variable）又叫做 “CSS 自定义属性”（CSS custom properties）。因为变量与自定义的 CSS 属性其实是一回事。">
+<link rel="canonical" href="https://uphgs.com/posts/css-var/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">使用 CSS 变量</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-11-12 14:29:58 &#43;0800 CST" title="2021-11-12 14:29:58 &#43;0800 CST">
+    2021-11-12
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>CSS 变量笔记总结。</p>
+<h2 id="变量的声明">变量的声明</h2>
+<p>变量声明时，前面要加 <code>--</code></p>
+<pre><code class="language-css">body {
+  --foo: #000000;
+  --bar: #F7EFD2;
+}
+</code></pre>
+<p>它们与 <code>color</code>、<code>font-size</code> 等正式属性没有什么不同，只是没有默认含义。所以 CSS 变量（CSS variable）又叫做 <strong>“CSS 自定义属性”</strong>（CSS custom properties）。因为变量与自定义的 CSS 属性其实是一回事。</p>
+<p>你可能会问，为什么选择两根连词线（<code>--</code>）表示变量？因为 <code>$foo</code> 被 Sass 用掉了，<code>@foo</code> 被 Less 用掉了。为了不产生冲突，官方的 CSS 变量就改用两根连词线了。</p>
+<p>各种值都可以放入 CSS 变量。</p>
+<pre><code class="language-css">:root{
+  --main-color: #4d4e53;
+  --main-bg: rgb(255, 255, 255);
+  --logo-border-color: rebeccapurple;
+
+  --header-height: 68px;
+  --content-padding: 10px 20px;
+
+  --base-line-height: 1.428571429;
+  --transition-duration: .35s;
+  --external-link: &quot;external link&quot;;
+  --margin-top: calc(2vh + 20px);
+}
+</code></pre>
+<p>::: tip</p>
+<p>变量名大小写敏感，<code>--header-color</code> 和 <code>--Header-Color</code> 是两个不同变量。</p>
+<p>:::</p>
+<h2 id="var-函数"><code>var()</code> 函数</h2>
+<p><code>var()</code> 函数用于读取变量。</p>
+<pre><code class="language-css">a {
+  color: var(--foo);
+  text-decoration-color: var(--bar);
+}
+</code></pre>
+<p><code>var()</code> 函数还可以使用第二个参数，表示变量的默认值。如果该变量不存在，就会使用这个默认值（仅限于变量未定义时使用）。</p>
+<pre><code class="language-css">:root {
+  color: var(--foo, #7F583F);
+}
+</code></pre>
+<p>第二个参数不处理内部的逗号或空格，都视作参数的一部分。</p>
+<pre><code class="language-css">:root {
+  font-family: var(--font-stack, &quot;Roboto&quot;, &quot;Helvetica&quot;);
+  padding: var(--pad, 10px 15px 20px);
+}
+</code></pre>
+<p><code>var()</code> 函数还可以用在变量的声明。</p>
+<pre><code class="language-css">:root {
+  --primary-color: red;
+  --text-color: var(--primary-color);
+}
+</code></pre>
+<p>注意，变量值只能用作属性值，不能用作属性名。</p>
+<pre><code class="language-css">.foo {
+  --side: margin-top;
+  /* 无效 */
+  var(--side): 20px;
+}
+</code></pre>
+<p>上面代码中，变量 <code>--side</code> 用作属性名，这是无效的。</p>
+<h2 id="变量值的类型">变量值的类型</h2>
+<p>如果变量值是一个字符串，可以与其他字符串拼接。</p>
+<pre><code class="language-css">:root {
+  --bar: 'hello';
+  --foo: var(--bar)' world';
+}
+</code></pre>
+<p>利用这一点，可以 debug，如下</p>
+<pre><code class="language-css">body:after {
+  content: '--screen-category : 'var(--screen-category);
+}
+</code></pre>
+<p>如果变量值是数值，不能与数值单位直接连用。</p>
+<pre><code class="language-css">.foo {
+  --gap: 20;
+  /* 无效 */
+  margin-top: var(--gap)px;
+}
+</code></pre>
+<p>必须使用 <code>calc()</code> 函数，将它们连接。</p>
+<pre><code class="language-css">.foo {
+  --gap: 20;
+  margin-top: calc(var(--gap) * 1px);
+}
+</code></pre>
+<p>或者更复杂的使用 CSS3 <code>calc()</code> 计算，例如：</p>
+<pre><code class="language-css">body {
+  --columns: 4;
+  --margins: calc(24px / var(--columns));
+}
+</code></pre>
+<p>如果变量值带有单位，就不能写成字符串。</p>
+<pre><code class="language-css">/* 无效 */
+.foo {
+  --foo: '20px';
+  font-size: var(--foo);
+}
+
+/* 有效 */
+.foo {
+  --foo: 20px;
+  font-size: var(--foo);
+}
+</code></pre>
+<p>如果变量值不合法，会使用继承值或初始值代替，而不是 <code>var()</code> 中的默认值，如下</p>
+<pre><code class="language-css">body {
+  --color: 20px;
+  background-color: #369;
+  background-color: var(--color, #cd0000);
+}
+</code></pre>
+<p>上面的代码会变成</p>
+<pre><code class="language-css">body {
+  --color: 20px;
+  background-color: #369;
+  background-color: transparent;
+}
+</code></pre>
+<p>所以最后 body 的背景为：<code>background-color: transparent</code></p>
+<h2 id="作用域">作用域</h2>
+<p>同一个 CSS 变量，可以在多个选择器内声明。读取的时候，优先级最高的声明生效。这与 CSS 的&quot;层叠&quot;（cascade）规则是一致的。</p>
+<p>下面是一个<a href="http://jsbin.com/buwahixoqo/edit?html,css,output">例子</a>。</p>
+<pre><code class="language-html">&lt;style&gt;
+  :root { --color: blue; }
+  div { --color: green; }
+  #alert { --color: red; }
+  * { color: var(--color); }
+&lt;/style&gt;
+
+&lt;p&gt;蓝色&lt;/p&gt;
+&lt;div&gt;绿色&lt;/div&gt;
+&lt;div id=&quot;alert&quot;&gt;红色&lt;/div&gt;
+</code></pre>
+<p>上面代码中，三个选择器都声明了 <code>--color</code> 变量。不同元素读取这个变量的时候，会采用优先级最高的规则，因此三段文字的颜色是不一样的。</p>
+<p>这就是说，变量的作用域就是它所在的选择器的有效范围。</p>
+<pre><code class="language-css">body {
+  --foo: #7F583F;
+}
+
+.content {
+  --bar: #F7EFD2;
+}
+</code></pre>
+<p>上面代码中，变量 <code>--foo</code> 的作用域是 <code>body</code> 选择器的生效范围，<code>--bar</code> 的作用域是 <code>.content</code> 选择器的生效范围。</p>
+<p>由于这个原因，全局的变量通常放在根元素<code>:root</code>里面，确保任何选择器都可以读取它们。</p>
+<pre><code class="language-css">:root {
+  --main-color: #06c;
+}
+</code></pre>
+<h2 id="响应式布局">响应式布局</h2>
+<p>CSS 是动态的，页面的任何变化，都会导致采用的规则变化。</p>
+<p>利用这个特点，可以在响应式布局的 <code>media</code> 命令里面声明变量，使得不同的屏幕宽度有不同的变量值。</p>
+<pre><code class="language-css">body {
+  --primary: #7F583F;
+  --secondary: #F7EFD2;
+}
+
+a {
+  color: var(--primary);
+  text-decoration-color: var(--secondary);
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    --primary:  #F7EFD2;
+    --secondary: #7F583F;
+  }
+}
+</code></pre>
+<h2 id="兼容性处理">兼容性处理</h2>
+<pre><code class="language-css">a {
+  color: #7F583F;
+  color: var(--primary);
+}
+</code></pre>
+<p>也可以使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@supports"><code>@support</code></a> 命令进行检测。</p>
+<pre><code class="language-css">@supports ( (--a: 0)) {
+  /* supported */
+}
+
+@supports ( not (--a: 0)) {
+  /* not supported */
+}
+</code></pre>
+<h2 id="javascript-操作">JavaScript 操作</h2>
+<p>JavaScript 也可以检测浏览器是否支持 CSS 变量。</p>
+<pre><code class="language-javascript">const isSupported =
+  window.CSS &amp;&amp;
+  window.CSS.supports &amp;&amp;
+  window.CSS.supports('--a', 0);
+
+if (isSupported) {
+  /* supported */
+} else {
+  /* not supported */
+}
+</code></pre>
+<p>JavaScript 操作 CSS 变量的写法如下。</p>
+<pre><code class="language-javascript">// 设置变量
+document.body.style.setProperty('--primary', '#7F583F');
+
+// 读取变量
+document.body.style.getPropertyValue('--primary').trim();
+// '#7F583F'
+
+// 删除变量
+document.body.style.removeProperty('--primary');
+</code></pre>
+<p>这意味着，JavaScript 可以将任意值存入样式表。下面是一个监听事件的例子，事件信息被存入 CSS 变量。</p>
+<pre><code class="language-javascript">const docStyle = document.documentElement.style;
+
+document.addEventListener('mousemove', (e) =&gt; {
+  docStyle.setProperty('--mouse-x', e.clientX);
+  docStyle.setProperty('--mouse-y', e.clientY);
+});
+</code></pre>
+<p>那些对 CSS 无用的信息，也可以放入 CSS 变量。</p>
+<pre><code class="language-css">--foo: if(x &gt; 5) this.width = 10;
+</code></pre>
+<p>上面代码中，<code>--foo</code> 的值在 CSS 里面是无效语句，但是可以被 JavaScript 读取。这意味着，可以把样式设置写在 CSS 变量中，让 JavaScript 读取。</p>
+<p>所以，CSS 变量提供了 JavaScript 与 CSS 通信的一种途径。</p>
+<h2 id="html-标签中设置-css-变量">HTML 标签中设置 CSS 变量</h2>
+<p>这个应该不难理解</p>
+<pre><code class="language-html">&lt;div style=&quot;--color: #1a73e8;&quot;&gt;
+  &lt;img src=&quot;mm.jpg&quot; style=&quot;border: 10px solid var(--color);&quot;&gt;
+&lt;/div&gt;
+</code></pre>
+<h2 id="命名规范">命名规范</h2>
+<p>默认情况下，使用：名称 + 属性</p>
+<pre><code class="language-css">body {
+  --button-padding: 16px;
+  --button-border-color: #C0C4CC;
+  --navbar-text-color: #000000;
+  --search-bg-color: #ffffff;
+}
+</code></pre>
+<p>如果附带类型，比如大小，可以使用：名称 + 类型 + 属性</p>
+<pre><code class="language-css">body {
+  --button-height: 36px;
+  --button-small-height: 32px;
+  --button-big-height: 40px;
+}
+</code></pre>
+<h2 id="参考文章">参考文章</h2>
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2017/05/css-variables.html">CSS 变量教程</a></li>
+<li><a href="https://www.zhangxinxu.com/wordpress/2016/11/css-css3-variables-var/">小 tips：了解 CSS 变量 var</a></li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/css/" alt="CSS" >
+                        CSS
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

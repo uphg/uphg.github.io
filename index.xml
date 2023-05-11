@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>嘿! on 石塔白又大</title>
+    <link>https://uphgs.com/</link>
+    <description>Recent content in 嘿! on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 16 Jun 2022 14:53:49 +0800</lastBuildDate><atom:link href="https://uphgs.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webpack 源码阅读</title>
+      <link>https://uphgs.com/posts/node/webpack-source/</link>
+      <pubDate>Thu, 16 Jun 2022 14:53:49 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-source/</guid>
+      <description>准备代码 创建一个 demo 项目 webpack-cli 将 src/index.js 打包为 dist/main.js 从 GitHub 下载 webpack，切换至 v5.10.1（git reset --hard v5.</description>
+    </item>
+    
+    <item>
+      <title>Loader 原理</title>
+      <link>https://uphgs.com/posts/node/webpack-loader-principle/</link>
+      <pubDate>Tue, 14 Jun 2022 21:27:44 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-loader-principle/</guid>
+      <description>代码地址：github.com/uphg/webpack-loader-principle-demo
+实现一个可加载 CSS 的 Loader 如何把 CSS 变为 JS
+style.css
+body {color: red;}css-loader.</description>
+    </item>
+    
+    <item>
+      <title>Webpack 核心原理</title>
+      <link>https://uphgs.com/posts/node/webpack-core-principle/</link>
+      <pubDate>Mon, 13 Jun 2022 17:56:09 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-core-principle/</guid>
+      <description>代码地址：webpack-core-principle-demo
+打包 英文 bundle bundle 是打包，bundler 就叫打包器 现有代码 index.js
+import a from &#39;./a.js&#39;import b from &#39;.</description>
+    </item>
+    
+    <item>
+      <title>babel、AST、依赖</title>
+      <link>https://uphgs.com/posts/node/webpack-babel-ast-and-rely/</link>
+      <pubDate>Sun, 12 Jun 2022 21:48:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-babel-ast-and-rely/</guid>
+      <description>代码地址：github.com/uphg/webpack-babel-compile-demo
+babel 的原理 parse: 把代码 code1 变成 AST traverse: 遍历 AST 进行修改 generate: 把 AST 变成代码 code2 运行流程</description>
+    </item>
+    
+    <item>
+      <title>博客系统搭建</title>
+      <link>https://uphgs.com/posts/node/blog-system-building/</link>
+      <pubDate>Sun, 08 May 2022 19:35:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/blog-system-building/</guid>
+      <description>使用 Next.js + TypeORM 搭建博客系统
+创建三个表 博客系统应该最少包含三个表 User、Post、Comment 分别表示用户、博客、评论
+User 表
+@Entity(&#39;users&#39;)export class User {@PrimaryGeneratedColumn(&#39;increment&#39;)id: string;@Column(&#39;varchar&#39;)username: string;@Column(&#39;varchar&#39;)passwordDigest: string;@CreateDateColumn()createdAt: Date;@UpdateDateColumn()updatedAt: Date;}Post 表</description>
+    </item>
+    
+    <item>
+      <title>数据库设计与搭建</title>
+      <link>https://uphgs.com/posts/node/database-design-and-build/</link>
+      <pubDate>Mon, 02 May 2022 13:51:26 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/database-design-and-build/</guid>
+      <description>增删改查的难点 开发效率
+很多人做了五年的 CRUD，开发效率却始终没有变 如何做到快速开发？ 代码质量
+为何互联网公司的代码大部分都是屎山，难以维护 2000 年左右就兴起的单元测试技术，为何还不会用 宣称敏捷开发，是否懂得敏捷开发包含单元测试 前后端联调
+为何后端给出的接口前端总是无法流畅使用，需要联调 前后端代码交给两个人做，增加的沟通成本是否值得 伸缩性
+数据量变大之后，应用是否还能正常运行 业务量增加之后，机器性能是否还扛得住 高并发 C10k problem</description>
+    </item>
+    
+    <item>
+      <title>TypeORM 数据库实践</title>
+      <link>https://uphgs.com/posts/node/typeorm-database-practice/</link>
+      <pubDate>Sat, 30 Apr 2022 22:37:48 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/typeorm-database-practice/</guid>
+      <description>代码地址：github.com/uphg/nextjs-blog-demo
+运行 Type ORM 首先在项目根目录创建 post-data 并把它添加到 .gitignore
+然后运行
+docker run -v &amp;quot;$PWD/blog-data&amp;quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.</description>
+    </item>
+    
+    <item>
+      <title>Next.js 入门</title>
+      <link>https://uphgs.com/posts/node/next-getting-started/</link>
+      <pubDate>Sat, 26 Mar 2022 16:32:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/next-getting-started/</guid>
+      <description>Next.js 的背景 开发团队是 zeit，后改名为 Vercel zeit 团队的水平：ZEIT.co 是什么样一个组织? Next.js 核心团队平均年龄在 20 岁，几乎每个同事都有非常强大的背景。 Next.js 的定位 优点（全栈框架）</description>
+    </item>
+    
+    <item>
+      <title>Cypress 自动化测试</title>
+      <link>https://uphgs.com/posts/cypress-test/</link>
+      <pubDate>Mon, 21 Mar 2022 20:33:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/cypress-test/</guid>
+      <description>自动化测试的好处 用代码来模拟键盘、鼠标操作，方便多个页面，多次重复测试。
+为什么以前自动化测试不流行 以前浏览器对自动化的支持不友好，如 IE 自动化测试框架 API 不友好，有很大的学习成本，如 selenium 为什么现在可以做自动化测试 支持 Headless（无界面）的浏览器变多，方便测试 一些自动化测试框架的 API（Cypress）非常友好 Cypress 自带丰富的测试样例 Cypress 简介 版本 v1.</description>
+    </item>
+    
+    <item>
+      <title>Koa 入门</title>
+      <link>https://uphgs.com/posts/node/koa-getting-started/</link>
+      <pubDate>Sat, 19 Mar 2022 09:38:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/koa-getting-started/</guid>
+      <description>Koa 历史：2013 年 8 月，TJ 开始编写 Koa，2015 年 8 月，Koa 发布 v1.0.0 版本。
+Koa 中间件模型</description>
+    </item>
+    
+    <item>
+      <title>如何活的更久一点</title>
+      <link>https://uphgs.com/posts/live-longer/</link>
+      <pubDate>Sun, 06 Mar 2022 17:27:37 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/live-longer/</guid>
+      <description>最近看 b 站的 一个视频 什么样的人死的更快？【围炉夜话】 讲了什么样的人更长寿，什么样的人更短寿。
+总结一下视频中的结论
+如何活得更久（物理上） 做有氧运动，少吃甜点、饮料、果汁（糖类，精加工碳水），多吃新鲜水果，豆类，坚果，五谷杂粮，优质的低脂蛋白，远离污染，少抽烟。远离装修空气污染
+如何活的更久（精神上） 少焦虑，尽量不让自己处于压力状态，尽量让自己处于挑战反应（遇到问题感到有些压力的同时更具有挑战性），少让自己处于威胁反应（遇到问题感到更大的压力）。最后，乐观且自信。</description>
+    </item>
+    
+    <item>
+      <title>继承与组合</title>
+      <link>https://uphgs.com/posts/extends-and-composition/</link>
+      <pubDate>Fri, 04 Feb 2022 13:30:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/extends-and-composition/</guid>
+      <description>类的使用 用原生 JavaScript 声明一个类
+class Person {name;age;sayHi() {} // 共有函数playing = function () {} // 自有函数constructor(name, age) {this.</description>
+    </item>
+    
+    <item>
+      <title>Event Loop</title>
+      <link>https://uphgs.com/posts/event-loop/</link>
+      <pubDate>Thu, 03 Feb 2022 19:48:27 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/event-loop/</guid>
+      <description>当 JavaScript 执行一个异步任务的时候（如：AJAX），JavaScript 什么都不会做，它只会通知 C++（单线程），C++ 通过轮询来查看延时任务什么时候完成，完成了再通知 JavaScript 继续执行该任务。EventLoop 就是 C++ 如何通过轮询执行 JavaScript 异步任务（也可以说 C++ 轮询执行 JavaScript 异步任务的规则）</description>
+    </item>
+    
+    <item>
+      <title>在 Nuxt2 中使用 script setup &#43; TS</title>
+      <link>https://uphgs.com/posts/build-nuxt2-setup/</link>
+      <pubDate>Mon, 31 Jan 2022 23:06:40 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/build-nuxt2-setup/</guid>
+      <description>使用 Nuxt.js 搭建 Vue2 + script setup + TypeScript 的项目
+示例项目：nuxt2-setup-demo
+使用 script setup 创建 Nuxt.</description>
+    </item>
+    
+    <item>
+      <title>事件委托</title>
+      <link>https://uphgs.com/posts/javascript/event-deleg/</link>
+      <pubDate>Sat, 29 Jan 2022 21:29:28 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/event-deleg/</guid>
+      <description>事件捕获/冒泡，示例项目：https://github.com/uphg/dom-event-demo
+事件冒泡 微软公司提出使用事件冒泡来处理事件流，事件冒泡表示事件会从最内层元素开始触发，一直向外传播，具体顺序为：div -&amp;gt; body -&amp;gt; html -&amp;gt; document
+事件捕获 网景公司提出另一种名为事件捕获的概念，与事件冒泡相反，事件会从最外层开始触发，直到最内侧的元素，顺序为：document -&amp;gt; html -&amp;gt; body -&amp;gt; div</description>
+    </item>
+    
+    <item>
+      <title>搭建 JavaScript 库</title>
+      <link>https://uphgs.com/posts/javascript/build-js-library/</link>
+      <pubDate>Thu, 20 Jan 2022 13:52:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/build-js-library/</guid>
+      <description>记录搭建一个 JavaScript 库的过程
+示例项目：github.com/uphg/vanilla-ts-lib-starter
+使用 Vite 搭建脚手架 运行 create 命令快速创建
+pnpm create vite my-vanilla-app# 或指定模板pnpm create vite my-vanilla-app --template vanilla-ts添加 library（库）配置</description>
+    </item>
+    
+    <item>
+      <title>Funt - 函数封装</title>
+      <link>https://uphgs.com/posts/wheel/funt-function/</link>
+      <pubDate>Wed, 05 Jan 2022 10:09:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-function/</guid>
+      <description>函数防抖 首先用 setTimeout 实现一个最简单的防抖函数
+function debounce(func, wait) {let timerIdreturn function (...args) {if (timerId) clearTimeout(timerId)timerId = setTimeout(() =&amp;gt; {func.</description>
+    </item>
+    
+    <item>
+      <title>Funt - 类型转换</title>
+      <link>https://uphgs.com/posts/wheel/funt-typecast/</link>
+      <pubDate>Thu, 30 Dec 2021 19:31:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-typecast/</guid>
+      <description>过滤负值
+Math.max(-123, 0)</description>
+    </item>
+    
+    <item>
+      <title>正则速查表</title>
+      <link>https://uphgs.com/posts/regexp-memo/</link>
+      <pubDate>Wed, 29 Dec 2021 22:49:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/regexp-memo/</guid>
+      <description>loadsh 中的正则 n进制字符串 // 不规范的16进制字符串值const reIsBadHex = /^[-+]0x[0-9a-f]+$/i// 二进制字符串const reIsBinary = /^0b[01]+$/i// 八进制字符串值const reIsOctal = /^0o[0-7]+$/i数字 // 无符号的整数值 const reIsUint = /^(?</description>
+    </item>
+    
+    <item>
+      <title>Funt - 类型</title>
+      <link>https://uphgs.com/posts/wheel/funt-parsing/</link>
+      <pubDate>Tue, 28 Dec 2021 20:55:39 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-parsing/</guid>
+      <description>string &amp;amp; boolean &amp;amp; number &amp;amp; symbol &amp;amp; bigInt 基本都使用 typeof value === &#39;type&#39; 的方式判断，只有布尔使用严格相等的 true 或 false，以 isString 为例：</description>
+    </item>
+    
+    <item>
+      <title>代码规范</title>
+      <link>https://uphgs.com/posts/code-specification/</link>
+      <pubDate>Sat, 11 Dec 2021 16:51:46 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/code-specification/</guid>
+      <description>文章参考 谷歌 JavaScript 风格指南 Airbnb JavaScript 风格指南 JavaScript Standard Style 如何写出无法维护的代码 The Joel Test: 20 Years Later StackOverflow 创始人总结的 20 条衡量技术团队好坏的标准 视频：The better parts Douglas Crockford 阐述他认为 JS 中的好的特性有哪些，坏的特性有哪些 JavaScript 代码规范 文件命名小写 文件名必须全部小写，并且可以包含下划线（_）或破折号（-），但不能包含额外的标点符号。遵循项目使用的约定。文件名的扩展名必须是 .</description>
+    </item>
+    
+    <item>
+      <title>内存管理</title>
+      <link>https://uphgs.com/posts/memory-management/</link>
+      <pubDate>Wed, 08 Dec 2021 16:27:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/memory-management/</guid>
+      <description>本文转自内存管理 - JavaScript | MDN
+简介 像C语言这样的底层语言一般都有底层的内存管理接口，比如 malloc()和free()。相反，JavaScript 是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放。 释放的过程称为垃圾回收。这个“自动”是混乱的根源，并让 JavaScript（和其他高级语言）开发者错误的感觉他们可以不关心内存管理。
+内存生命周期 不管什么程序语言，内存生命周期基本是一致的：
+分配你所需要的内存 使用分配到的内存（读、写） 不需要时将其释放\归还 所有语言第二部分都是明确的。第一和第三部分在底层语言中是明确的，但在像JavaScript这些高级语言中，大部分都是隐含的。</description>
+    </item>
+    
+    <item>
+      <title>package.json 配置项</title>
+      <link>https://uphgs.com/posts/node/package-config/</link>
+      <pubDate>Sat, 04 Dec 2021 22:11:20 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/package-config/</guid>
+      <description>配置示例 ::: details 基础配置示例
+{&amp;quot;name&amp;quot;: &amp;quot;vue&amp;quot;,&amp;quot;version&amp;quot;: &amp;quot;3.2.23&amp;quot;,&amp;quot;description&amp;quot;: &amp;quot;The progressive...&amp;quot;,&amp;quot;main&amp;quot;: &amp;quot;index.js&amp;quot;,&amp;quot;module&amp;quot;: &amp;quot;dist/vue.</description>
+    </item>
+    
+    <item>
+      <title>Node.js 环境搭建</title>
+      <link>https://uphgs.com/posts/node/node-env-setup/</link>
+      <pubDate>Sat, 04 Dec 2021 21:56:55 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/node-env-setup/</guid>
+      <description>安装 Node.js 进入官网，下载稳定版安装，安装过程中如果有需要勾选的选项，尽量选择勾选。
+安装 Node.js 后重启命令行（不要打开 Node.js），Node.js 默认自带了 npm、npx 工具，如下
+node --versionnpm --versionnpx --versionnpm CLI Node 包管理工具</description>
+    </item>
+    
+    <item>
+      <title>Express 核心</title>
+      <link>https://uphgs.com/posts/node/express-core/</link>
+      <pubDate>Thu, 02 Dec 2021 21:39:43 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/express-core/</guid>
+      <description>Express 历史：2010 年 6 月，TJ 开始编写 Express，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。
+Express 中间件模型
+创建一个 Express 项目 mkdir express-democd express-demoyarn init -yyarn install express创建 app.</description>
+    </item>
+    
+    <item>
+      <title>子进程</title>
+      <link>https://uphgs.com/posts/node/child-process/</link>
+      <pubDate>Sat, 27 Nov 2021 20:53:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/child-process/</guid>
+      <description>进程的概念，以及在 Node.js 中使用进程
+进程 Process 举例
+NotePad.exe 是一个程序，不是进程 双击 NotePad.exe 时，操作系统会开启一个进程 定义
+进程是程序的执行实例 程序在 CPU 上执行时的活动叫进程 实际上进程并没有明确定义，只要符合一些的规则即可 特点</description>
+    </item>
+    
+    <item>
+      <title>Vue3 配置 ESLint</title>
+      <link>https://uphgs.com/posts/vue3-config-eslint/</link>
+      <pubDate>Tue, 16 Nov 2021 18:01:05 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue3-config-eslint/</guid>
+      <description>记录 Vue3 项目配置 ESLint 的过程，主要配置流程：
+Vue ESLint 插件 TS 类型检测 Prettierrc 自动格式化 eslint-plugin-vue 插件 安装 eslint-plugin-vue</description>
+    </item>
+    
+    <item>
+      <title>Stream 入门</title>
+      <link>https://uphgs.com/posts/node/stream-getting-started/</link>
+      <pubDate>Sun, 14 Nov 2021 12:49:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/stream-getting-started/</guid>
+      <description>本文案例使用 Node.js 应用 Stream
+本文案例代码：https://github.com/uphg/stream-demo
+概念图 stream 是水流，默认没有水 stream.write 可以让水流中有水（数据） 每次写入的小数据叫做 chunk（块） 产生数据的一段叫做 source（源头） 得到数据的一段叫做 sink（水池） 基本用法 使用 Stream 写入内容</description>
+    </item>
+    
+    <item>
+      <title>使用 CSS 变量</title>
+      <link>https://uphgs.com/posts/css-var/</link>
+      <pubDate>Fri, 12 Nov 2021 14:29:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css-var/</guid>
+      <description>CSS 变量笔记总结。
+变量的声明 变量声明时，前面要加 --
+body {--foo: #000000;--bar: #F7EFD2;}它们与 color、font-size 等正式属性没有什么不同，只是没有默认含义。所以 CSS 变量（CSS variable）又叫做 “CSS 自定义属性”（CSS custom properties）。因为变量与自定义的 CSS 属性其实是一回事。</description>
+    </item>
+    
+    <item>
+      <title>域名申请教程</title>
+      <link>https://uphgs.com/posts/domain-name-application/</link>
+      <pubDate>Fri, 12 Nov 2021 11:01:57 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/domain-name-application/</guid>
+      <description>服务商配置 在 www.namesilo.com 上注册一个账号（注册信息需为英文） 选择一个域名，并使用支付宝购买。 配置 DNS 关联 github 的 ip 地址（A），并关联 www 子域（CNAME） 选择 Manage My Domains （管理我的域名）可配置域名相关设置</description>
+    </item>
+    
+    <item>
+      <title>Git 使用规范</title>
+      <link>https://uphgs.com/posts/git/git-usage-specification/</link>
+      <pubDate>Wed, 10 Nov 2021 16:52:23 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/git/git-usage-specification/</guid>
+      <description>Git 仓库操作规范总结
+分支管理策略 主分支 首先代码应该有且仅有一个主分支，项目的正式版本，都在这个主分支上发布。
+Git 主分支的默认名为 master，但是由于 master 一词打擦边球，所以建议使用 main 作为默认分支名称，从 Git 2.28 开始，可以通过设置 init.</description>
+    </item>
+    
+    <item>
+      <title>Commit message 规范</title>
+      <link>https://uphgs.com/posts/git/commit-message-specification/</link>
+      <pubDate>Mon, 08 Nov 2021 17:04:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/git/commit-message-specification/</guid>
+      <description>Git 每次提交代码，都要写 Commit message（提交说明），否则就不允许提交。
+git commit -m &amp;quot;hello world&amp;quot;上面代码的 -m 参数，就是用来指定 commit mesage 的。</description>
+    </item>
+    
+    <item>
+      <title>操作数据库</title>
+      <link>https://uphgs.com/posts/node/operational-database/</link>
+      <pubDate>Sat, 06 Nov 2021 12:10:12 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/operational-database/</guid>
+      <description>安装 Docker（Windows） 注册：https://hub.docker.com/ 下载：Docker for Windows Installer 确认输入 docker --version 后返回版本号 设置国内镜像，镜像的地址为：https://docker.mirrors.ustc.edu.cn/ 给 Docker 配置自己的阿里云镜像 确保命令行输入 docker run hello-world 时输出 Hello from Docker!</description>
+    </item>
+    
+    <item>
+      <title>数据库基础知识</title>
+      <link>https://uphgs.com/posts/node/database-basics/</link>
+      <pubDate>Fri, 05 Nov 2021 15:11:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/database-basics/</guid>
+      <description>总结数据库基础知识的笔记。
+范式（NF） 范式（NF）。表示一张数据表的表结构所符合的某种设计标准的级别，数据库范式分为 1NF，2NF，3NF，BCNF，4NF，5NF。一般在我们设计关系型数据库的时候，最多考虑到 BCNF 就够了。
+第一范式（1NF） 首先是第一范式（1NF）。1NF 的定义为：符合 1NF 的关系中的每个属性都不可再分。表1所示的情况，就不符合 1NF 的要求。
+实际上，1NF 是所有关系型数据库的最基本要求，你在关系型数据库管理系统（RDBMS），例如 SQL Server，Oracle，MySQL 中创建数据表的时候，如果数据表的设计不符合这个最基本的要求，那么操作一定是不能成功的。也就是说，只要在 RDBMS 中已经存在的数据表，一定是符合 1NF 的。如果我们要在 RDBMS 中表现表中的数据，就得设计为表2的形式：</description>
+    </item>
+    
+    <item>
+      <title>?? 运算符</title>
+      <link>https://uphgs.com/posts/nullish-coalescing/</link>
+      <pubDate>Fri, 22 Oct 2021 11:01:16 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/nullish-coalescing/</guid>
+      <description>基础语法 ?? 与 || 运算符非常相似，不同的地方在于，?? 语法评估运算符时不使用 &amp;ldquo;truthy&amp;rdquo; （真实的）而是 &amp;ldquo;nullish&amp;rdquo;（无效的）判断，意思是“值严格等于 null 或 undefined”才会执行后面的内容。
+使用 ??
+// false ?</description>
+    </item>
+    
+    <item>
+      <title>Class 类（TS）</title>
+      <link>https://uphgs.com/posts/typescript/ts-class/</link>
+      <pubDate>Sat, 21 Aug 2021 08:04:10 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-class/</guid>
+      <description>Class 的基础语法 创建一个最基本的空类
+class Point {}声明两个公共可写的属性
+class Point {x: number;y: number;}const pt = new Point();pt.</description>
+    </item>
+    
+    <item>
+      <title>TypeScript 基本语法</title>
+      <link>https://uphgs.com/posts/typescript/ts-grammar/</link>
+      <pubDate>Sat, 14 Aug 2021 22:38:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-grammar/</guid>
+      <description>| 联合类型（Union Types） 只能满足其中一种条件（A 类型或 B 类型）
+type A = {name: &#39;a&#39;,age: number}type B = {name: &#39;b&#39;,gender: string}type C = A | Bconst obj1: C = { name: &#39;a&#39;, age: 18 } // 正确const obj2: C = { name: &#39;b&#39;, gender: &#39;boy&#39; } // 正确const obj3: C = { name: &#39;a&#39;, gender: &#39;girl&#39; } // 错误，只能选 A、B 对象中的一种，不能混合创建&amp;amp; 交叉类型（Intersection Types） 已有的条件必须都满足（A 类型和 B 类型）</description>
+    </item>
+    
+    <item>
+      <title>Vue 造轮子 - JSX 语法</title>
+      <link>https://uphgs.com/posts/vue/jsx/</link>
+      <pubDate>Sat, 07 Aug 2021 12:02:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/jsx/</guid>
+      <description>记录在 Vue 3 中如何使用 JSX 语法。
+Vite JSX 插件 安装
+yarn add -D @vitejs/plugin-vue-jsx# or npm install -D @vitejs/plugin-vue-jsx添加配置</description>
+    </item>
+    
+    <item>
+      <title>Vue 造轮子 - 创建 Vue 3 项目</title>
+      <link>https://uphgs.com/posts/vue/create-vue3/</link>
+      <pubDate>Sat, 07 Aug 2021 12:02:45 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/create-vue3/</guid>
+      <description>总结创建 Vue 3 项目的踩坑。
+搭建项目 运行以下命令创建一个包含 ts 的 Vue 3 项目，参考自：cn.vitejs.dev/guide/
+yarn create vite vue3-vite-example --template vue-ts进入文件夹运行项目</description>
+    </item>
+    
+    <item>
+      <title>对象</title>
+      <link>https://uphgs.com/posts/javascript/object/</link>
+      <pubDate>Sun, 01 Aug 2021 09:45:13 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/object/</guid>
+      <description>Object.create() Object.create() 方法创建一个新对象，可以传入一个对象作为创建对象的原型。
+// 创建带有对象原型链的空对象const obj1 = Object.create(Object.prototype)const obj2 = new Object()const obj3 = {}// 创建一个没有任何原型链的对象（纯对象）const obj4 = Object.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript 数据类型</title>
+      <link>https://uphgs.com/posts/javascript/type-of-data/</link>
+      <pubDate>Sat, 31 Jul 2021 22:14:02 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/type-of-data/</guid>
+      <description>数据类型概述 最新的 ECMAScript 标准定义了 8 种数据类型：
+Boolean Number String BigInt Symbol null undefined Object 任何 constructed 对象实例的特殊非数据结构类型，也用做数据结构：new Object，new Array，new Map，new Set，new WeakMap，new WeakSet，new Date，和几乎所有通过 new keyword 创建的东西，都属于 Object 类型（复杂类型）。</description>
+    </item>
+    
+    <item>
+      <title>泛型</title>
+      <link>https://uphgs.com/posts/typescript/ts-generics/</link>
+      <pubDate>Sat, 17 Jul 2021 16:46:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/typescript/ts-generics/</guid>
+      <description>用一个东西来表示广泛的类型，俗称泛型。
+基础用法 如下定义的 T，该函数表示你传入什么类型的值，我就会返回什么类型的值。
+function identity&amp;lt;T&amp;gt;(arg: T): T {return arg}const a = identity(&#39;hi&#39;)console.</description>
+    </item>
+    
+    <item>
+      <title>Node.js 技术架构</title>
+      <link>https://uphgs.com/posts/node/nodejs-technical-architecture/</link>
+      <pubDate>Sat, 17 Jul 2021 16:46:12 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/nodejs-technical-architecture/</guid>
+      <description>API 文档 官方地址：中文文档/英文文档 devdocs.io 搜索功能便捷，支持夜间模式，并且可以离线观看 Node.js 是什么 是一个平台
+让多种技术组合起来 让 JavaScript 也能调用系统接口、开发后端应用 Node.js 用到了哪些技术
+V8引擎 libuv C/C++ 实现的 c-ares、http-parser、OpenSSL、zlib 等库 Node.</description>
+    </item>
+    
+    <item>
+      <title>一个人需要多少土地</title>
+      <link>https://uphgs.com/posts/need-happy/</link>
+      <pubDate>Fri, 11 Jun 2021 18:15:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/need-happy/</guid>
+      <description>文豪托尔斯泰经常一出手就是《战争与和平》这样的大著作，其实他一向很羡慕像莫泊桑这样的短篇小说家，他也曾尝试写短篇，其中不乏精品。
+比如这篇《一个人需要多少土地》，讲的是一个叫做帕霍姆的地主向巴什基尔人的头领购买土地，当他问及土地的价格，头领告诉他：“我们的价格一直不变：一天1000卢布……我们以天为单位卖地。你一天走多远，走过的土地都是你的。而价格是一天1000卢布……但有一个条件：如果你不能在当天返回出发地点，你就将白白失去那1000卢布。”
+帕霍姆从第二天早上开始圈地，他努力地往外走，一直到不得不往回走，才发现自己走得太远了。于是他用尽全力狂奔回来，在最后一瞬间回到了原点，但是却吐血而死。他的仆人捡起那把铁锨，在地上挖了一个坑，把帕霍姆埋在了里面。帕霍姆最后需要的土地只有从头到脚那么一小块。
+“帕霍姆情节”是不是就是指那种有手无胃的人？这些人有强壮的手脚，却没有胃。他们感觉不到幸福，只有饥饿。他死的时候都不知道，其实人只需要从头到脚六英尺那么一小块土地。
+总有人会比你更成功！你总能得到更多！被社会系统接管幸福系统的人，像在食物中饿死的无胃的人一样，永远吃不饱。正如我前面谈到的成功正态分布，成功从来只是少数人的游戏。社会先给我们定义“成功”（一个到达才允许幸福的资格），然后狞笑着让我们参与一场永远只有少数人笑、多数人哭的游戏。社会规定的“幸福”永远是稀缺品。
+你可以按照社会设置好的方式去工作、设置好的方式去竞争、设置好的方式去交换，但是一定不能按照社会设置好的方式去幸福。否则，你就彻底废了。</description>
+    </item>
+    
+    <item>
+      <title>堆叠上下文</title>
+      <link>https://uphgs.com/posts/css/stacking-context/</link>
+      <pubDate>Tue, 23 Feb 2021 11:02:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/stacking-context/</guid>
+      <description>一图胜千言
+深入理解 CSS 中的层叠上下文和层叠顺序 </description>
+    </item>
+    
+    <item>
+      <title>正则表达式入门</title>
+      <link>https://uphgs.com/posts/envconfig/regexp-started/</link>
+      <pubDate>Fri, 12 Feb 2021 18:15:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/regexp-started/</guid>
+      <description>相关链接 内容参考：正则表达式30分钟入门教程 正则验证：在线正则验证器(JavaScript) 入门 \b 是正则表达式规定的一个特殊代码（元字符），代表着单词的开头或结尾，也就是单词的分界处。
+如果需要更精确的说法，\b 匹配这样的位置：它的前一个字符和后一个字符不全是（一个是,一个不是或不存在）\w。
+假如要精确地查找 hi 这个单词，如下
+假如要找 hi 后面不远处跟着的一个 Lucy 的内容，如下</description>
+    </item>
+    
+    <item>
+      <title>React 相关插件</title>
+      <link>https://uphgs.com/posts/react/plugin/</link>
+      <pubDate>Thu, 11 Feb 2021 18:10:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/plugin/</guid>
+      <description>immer.js 便捷修改 React 的 setState
+使用案例
+const newState = produce(state, (draft) =&amp;gt; {draft.user.name = &#39;Jack&#39;})React Swiper 安装</description>
+    </item>
+    
+    <item>
+      <title>创建 React 项目</title>
+      <link>https://uphgs.com/posts/react/create/</link>
+      <pubDate>Sat, 06 Feb 2021 20:01:02 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/create/</guid>
+      <description>CDN 引入 首先在 BootCDN 搜索 react ，选择 .../umd/react.production.min.js 后缀的版本。
+再搜索 react-dom ，选择 .../umd/react-dom.production.min.js 后缀的版本。
+把他们都引入项目中，示例</description>
+    </item>
+    
+    <item>
+      <title>React Hooks</title>
+      <link>https://uphgs.com/posts/react/hooks/</link>
+      <pubDate>Mon, 01 Feb 2021 17:10:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/hooks/</guid>
+      <description>GitHub 案例链接 使用 useState 案例 使用 useContext 案例 使用 useReducer 案例 使用 useEffect 案例 模块化 Hooks useEffect 案例 React Hooks 使用案例</description>
+    </item>
+    
+    <item>
+      <title>React 生命周期</title>
+      <link>https://uphgs.com/posts/react/life-cycle/</link>
+      <pubDate>Mon, 01 Feb 2021 17:10:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/life-cycle/</guid>
+      <description>Vanilla JS 生命周期案例 const app = document.querySelector(&#39;#app&#39;)// createlet div = document.createElement(&#39;div&#39;)div.style.border = &#39;1px solid #cccccc&#39;div.</description>
+    </item>
+    
+    <item>
+      <title>React Context</title>
+      <link>https://uphgs.com/posts/react/context/</link>
+      <pubDate>Mon, 01 Feb 2021 17:02:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/context/</guid>
+      <description>使用 React Context 传值 使用案例
+const NumberContext = React.createContext(100);function F1() {return (&amp;lt;div className=&amp;quot;bordered&amp;quot;&amp;gt;&amp;lt;p&amp;gt;F1&amp;lt;/p&amp;gt;&amp;lt;F2 /&amp;gt;&amp;lt;/div&amp;gt;);}function F2() {return (&amp;lt;div className=&amp;quot;bordered&amp;quot;&amp;gt;&amp;lt;p&amp;gt;F2&amp;lt;/p&amp;gt;&amp;lt;NumberContext.</description>
+    </item>
+    
+    <item>
+      <title>React Redux</title>
+      <link>https://uphgs.com/posts/react/redux/</link>
+      <pubDate>Thu, 28 Jan 2021 11:20:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/redux/</guid>
+      <description>GitHub 案例链接 使用 Vanilla JS + Redux 实现简单加减 使用 React + Redux 实现加减 使用 React-Redux 实现加减 Vanilla JS Vanilla JS 是一个快速，轻量级，跨平台的框架，用于构建功能强大的 JavaScript 应用程序。</description>
+    </item>
+    
+    <item>
+      <title>React Router</title>
+      <link>https://uphgs.com/posts/react/router/</link>
+      <pubDate>Thu, 28 Jan 2021 11:20:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/router/</guid>
+      <description>GitHub 案例链接 实现一个 React Hash 路由 实现一个 React History 路由 使用 React Router 路由的原理 首先使用 React 一个简单的 hash 路由</description>
+    </item>
+    
+    <item>
+      <title>React 语法 &amp; 组件化</title>
+      <link>https://uphgs.com/posts/react/component-grammar/</link>
+      <pubDate>Sat, 16 Jan 2021 18:10:11 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/react/component-grammar/</guid>
+      <description>GitHub 案例链接 使用 props 单向数据流实现简单的组件通信 使用 eventHub 实现组件间通信 使用 Redux 代替 EventHub React 语法 首先使用原生 JS 实现一个简单的数组加减功能</description>
+    </item>
+    
+    <item>
+      <title>Vue Router 的原理</title>
+      <link>https://uphgs.com/posts/vue/router/</link>
+      <pubDate>Tue, 12 Jan 2021 15:05:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/router/</guid>
+      <description>hash 路由 hash 路由可以在任何情况下使用，但是 hash 路由 # 后的内容无法被服务器接收到，所以你不论访问那个页面，服务器都只会认为你访问了根路径（SEO不友好）。
+实现 hash 路由 实现一个简单的跳转功能，路由显示 #1 时跳转 div1 ，路由显示 #2 时跳转 div2&amp;hellip; 依次类推。</description>
+    </item>
+    
+    <item>
+      <title>JS 的缺陷</title>
+      <link>https://uphgs.com/posts/javascript/js-garbage/</link>
+      <pubDate>Sun, 03 Jan 2021 13:12:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/js-garbage/</guid>
+      <description>JS 的BUG 字符串相加运算方式歧义，将 + &amp;quot;a&amp;quot; 转为 NaN &amp;quot;b&amp;quot; + &amp;quot;a&amp;quot; + + &amp;quot;a&amp;quot; + &amp;quot;a&amp;quot;答案：&amp;quot;baNaNa&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>Hexo 主题推荐</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-theme/</link>
+      <pubDate>Tue, 22 Dec 2020 13:15:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-theme/</guid>
+      <description>主题均来自Hexo官网
+Oranges GitHub：https://github.com/zchengsite/hexo-theme-oranges 网站示例：https://hexo.theme.oranges.zcheng.site/ Inside GitHub：https://github.com/ikeq/hexo-theme-inside 网站示例：https://blog.oniuo.com/ Lx GitHub：https://github.com/blleng/hexo-theme-lx 网站示例：https://lx.js.org/ Fluid GitHub：https://github.com/fluid-dev/hexo-theme-fluid 网站示例：https://hexo.fluid-dev.com/ Aomori GitHub：https://github.com/lh1me/hexo-theme-aomori 网站示例：https://linhong.</description>
+    </item>
+    
+    <item>
+      <title>Vue 进阶属性</title>
+      <link>https://uphgs.com/posts/vue/advanced-options/</link>
+      <pubDate>Sun, 06 Dec 2020 13:30:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/advanced-options/</guid>
+      <description>directives 指令 除了 Vue 官方内置的指令 (v-model 和 v-if 等) ，Vue 还允许我们自定义指令。
+添加一个 focus 指令，使元素自动聚焦：
+// 注册一个全局自定义指令 `v-focus`Vue.</description>
+    </item>
+    
+    <item>
+      <title>Vue 动画原理</title>
+      <link>https://uphgs.com/posts/vue/transition/</link>
+      <pubDate>Fri, 04 Dec 2020 17:10:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/transition/</guid>
+      <description>使用类名过渡 类名规则
+v-enter ：进入过渡时最开始的状态 v-enter-active ：进入过渡的过渡效果，如 transition: all 0.3s; v-enter-to ：进入过渡结束时的状态，如果不设置，则显示元素默认状态。 v-leave ：离开过渡时最开始的状态，如果不设置，则显示元素默认状态。 v-leave-active ：离开过渡的过渡效果，如 transition: all 0.</description>
+    </item>
+    
+    <item>
+      <title>Vue 模板、指令与修饰符</title>
+      <link>https://uphgs.com/posts/vue/template-instruction-modifier/</link>
+      <pubDate>Fri, 04 Dec 2020 17:10:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/template-instruction-modifier/</guid>
+      <description>模板的三种写法 直接放在HTML中（完整版） 如果引入的是Vue完整版，可以直接在带有指定 id 的 div 中书写模板，随后将这个 id 传入 new Vue 中即可。
+&amp;lt;div id=&amp;quot;xxx&amp;quot;&amp;gt;{{n}}&amp;lt;button @click=&amp;quot;add&amp;quot;&amp;gt;+1&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt;new Vue({el: &#39;#xxx&#39;,data: {n: 0},methods: {add() { }}})通过 template 属性传入（完整版） 可以事先指定一个带有 id 的 div，在 new Vue 的时候传入的 template 属性中书写模板。</description>
+    </item>
+    
+    <item>
+      <title>Vue 数据响应式原理（2.x）</title>
+      <link>https://uphgs.com/posts/vue/responsive/</link>
+      <pubDate>Sat, 28 Nov 2020 14:05:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/responsive/</guid>
+      <description>在理解 Vue 数据响应式之前，首先要理解一些 ES6 之后的新语法，如 getter、setter、Object.defineProperty()。
+getter 可以给对象的属性设置获取时的值，通过函数 return 的方式返回。
+let object = {姓: &#39;张&#39;,名: &#39;三&#39;,get 姓名() {return this.</description>
+    </item>
+    
+    <item>
+      <title>Vue 表单与输入绑定</title>
+      <link>https://uphgs.com/posts/vue/form-and-model/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/form-and-model/</guid>
+      <description>::: info 双向绑定
+双向绑定就是在变量被改变时，视图UI会跟着变化。在用户改变视图内容时，变量也会跟着改变。
+:::
+表单输入绑定 使用方式
+&amp;lt;input v-model=&amp;quot;message&amp;quot; type=&amp;quot;text&amp;quot;&amp;gt;v-model 实际上是 v-on:input 与 v-bind:value 的语法糖，它的实现原理大致如下：</description>
+    </item>
+    
+    <item>
+      <title>Vue 计算属性和监听器</title>
+      <link>https://uphgs.com/posts/vue/computed-and-watch/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/computed-and-watch/</guid>
+      <description>计算属性（computed） 基础用法 computed: {fullName() {return this.firstName + &#39; &#39; + this.lastName}}添加 getter &amp;amp; setter computed: {fullName: {// getterget() {return this.</description>
+    </item>
+    
+    <item>
+      <title>使用 Vue CLI 创建项目</title>
+      <link>https://uphgs.com/posts/vue/use-vue-cli/</link>
+      <pubDate>Wed, 25 Nov 2020 22:07:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/use-vue-cli/</guid>
+      <description>创建脚手架 安装 Vue CLI
+yarn global add @vue/cli-service-global# or npm install -g @vue/cli-service-global创建一个项目</description>
+    </item>
+    
+    <item>
+      <title>Vue Prop 自定义属性</title>
+      <link>https://uphgs.com/posts/vue/prop/</link>
+      <pubDate>Tue, 24 Nov 2020 17:35:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/prop/</guid>
+      <description>官方文档：https://cn.vuejs.org/v2/guide/components-props.html
+Prop 的大小写 语法示例
+Vue.component(&#39;blog-post&#39;, {// 下面的 postTitle 在JS中是驼峰式命名法props: [&#39;postTitle&#39;],template: &#39;&amp;lt;h3&amp;gt;{{ postTitle }}&amp;lt;/h3&amp;gt;&#39;})但由于 HTML 中的属性对大小写不敏感，所以在模板中要按照以下方式书写</description>
+    </item>
+    
+    <item>
+      <title>Vue 简介 &amp; 构造选项</title>
+      <link>https://uphgs.com/posts/vue/options/</link>
+      <pubDate>Tue, 24 Nov 2020 17:35:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/options/</guid>
+      <description>Vue 作者 尤雨溪，英文名 Evan You 。 本科就读于美国科尔盖特大学，艺术与艺术史专业。 帕森设计学院艺术硕士。 毕业后在 Google Creative Lab 担任 UI 相关工作。 后来转为全职 JavaScript 开发工程师。 现为独立开发者，靠每个月几十万以上的 捐款生活，还有 其他赞助。 Linkedin 主页、GitHub 主页、个人域名。 Vue 完整版与运行时（runtime）版本的区别 完整版 Vue 自带一个 compiler 函数，可以将类似 &amp;lt;div&amp;gt;{{n}}&amp;lt;/div&amp;gt; 的代码转换为类似 h(&#39;div&#39;, this.</description>
+    </item>
+    
+    <item>
+      <title>使用递归组件</title>
+      <link>https://uphgs.com/posts/vue/tree-component/</link>
+      <pubDate>Fri, 16 Oct 2020 10:37:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/tree-component/</guid>
+      <description>::: tip 注意
+由于需要调用自身，所以必须含有 name 这个属性，因为没有 name 这个属性会造成控件自身不能调用自身。且调用自身组件最好绑定一个 key 值，方便 Vue 重新渲染。
+:::
+假设有如下数据结构的data.js
+export default [{title: &amp;quot;标题 1&amp;quot;,content: &amp;quot;内容 1&amp;quot;,child: [{title: &amp;quot;标题 1-1&amp;quot;,content: &amp;quot;内容 1-1&amp;quot;,child: [{title: &amp;quot;标题 1-1-1&amp;quot;,content: &amp;quot;内容 1-1-1&amp;quot;}]}]},{title: &amp;quot;标题 2&amp;quot;,content: &amp;quot;内容 2&amp;quot;,}]那么组件（tree.</description>
+    </item>
+    
+    <item>
+      <title>CSS 引入字体</title>
+      <link>https://uphgs.com/posts/css/add-font-family/</link>
+      <pubDate>Sun, 20 Sep 2020 20:01:35 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/add-font-family/</guid>
+      <description>首先需要字体文件，类似如下类型
+HankRnd-Black.otfHankRnd-Black.ttf然后需要一个工具生成本地字体文件，这里我使用 https://www.fontsquirrel.com/
+打开后点击 Generator，按照如下步骤操作
+会得到一个压缩包，复制其中如下后缀的文件
+hankrnd-webfont.woffhankrnd-webfont.woff2创建一个 font-family.css 文件，添加以下内容
+@font-face {font-family: &#39;hankrndregular&#39;;src: url(&#39;hankrnd-webfont.</description>
+    </item>
+    
+    <item>
+      <title>函数</title>
+      <link>https://uphgs.com/posts/javascript/function/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/function/</guid>
+      <description>函数是什么 JavaScript 中只有函数和方法
+闭包 闭包的特点
+能让一个函数维持一个变量 但并不能维持这个变量的值 尤其是变量的值会变化时 例1
+let x = &#39;x&#39;let a = &#39;1&#39;function f1(x) {return x + a}a = &#39;3&#39;{let a = &#39;2&#39;f1(&#39;x&#39;) // &#39;x3&#39;}a = &#39;4&#39;例2</description>
+    </item>
+    
+    <item>
+      <title>构造函数</title>
+      <link>https://uphgs.com/posts/javascript/constructor/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/constructor/</guid>
+      <description>构造函数（类） 创建一个简单的构造函数
+function Fn(name) {this.name = name}Fn.prototype.run = function() {console.log(this.name + &#39;在跑&#39;)}let obj = new Fn(&#39;小张&#39;)new 做了什么 当 let obj = new Fn(&#39;小张&#39;) 执行时，做了以下事情</description>
+    </item>
+    
+    <item>
+      <title>DOM API</title>
+      <link>https://uphgs.com/posts/javascript/dom/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom/</guid>
+      <description>获取 DOM 元素 window.id名 // 通过id获取（无法获取与关键字冲突的id）document.getElementById(&#39;id名&#39;) // 通过id获取document.getElementsByTagName(&#39;div&#39;) // 通过标签获取（伪数组）document.getElementsByClassName(&#39;part&#39;) // 通过class名获取（伪数组）document.</description>
+    </item>
+    
+    <item>
+      <title>DOM 操作跨线程</title>
+      <link>https://uphgs.com/posts/javascript/dom-operate-across-threads/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom-operate-across-threads/</guid>
+      <description>概述 JavaScript 引擎是无法直接操作页面的，只能通过 JavaScript 调用 DOM API，当浏览器发现 JavaScript 调用了像 document.body.appendChild(div) 这样的 DOM API ，就会通知渲染引擎，新增一个与 JavaScript 中 div 属性一模一样的 div。这就叫做跨线程通信。</description>
+    </item>
+    
+    <item>
+      <title>文件操作命令</title>
+      <link>https://uphgs.com/posts/envconfig/mobile-file/</link>
+      <pubDate>Tue, 01 Sep 2020 16:50:39 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/mobile-file/</guid>
+      <description>拷贝文件 拷贝 markdown 目录下的所有文件到 a 文件夹下
+cp -avx markdown/* a/拷贝 markdown 目录下的所有文件到 a b 文件夹下</description>
+    </item>
+    
+    <item>
+      <title>使用 VuePress 搭建文档</title>
+      <link>https://uphgs.com/posts/vue/vuepress-started/</link>
+      <pubDate>Tue, 01 Sep 2020 16:37:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/vuepress-started/</guid>
+      <description>新建一个项目 创建并进入一个新目录
+mkdir vuepress-starter &amp;amp;&amp;amp; cd vuepress-starter使用你喜欢的包管理器进行初始化
+yarn init # npm init将 VuePress 安装为本地依赖（不推荐全局安装 VuePress）</description>
+    </item>
+    
+    <item>
+      <title>BFC 是什么</title>
+      <link>https://uphgs.com/posts/css/what-is-bfc/</link>
+      <pubDate>Wed, 01 Jul 2020 16:36:50 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/what-is-bfc/</guid>
+      <description>BFC 的定义 BFC是没有一个明确的定义的，它是通过特定的属性所反映的一种状态。
+CSS 规范的定义 浮动，绝对定位的元素，非block的block容器(如：inline-block, table-cells和table-captions)，overflow不为 visible 的块会为它们的内容建立一个新的块级格式化上下文(BFC)
+MDN 的定义 通俗点讲，就是当元素具有以下特点之一，就称该元素BFC了
+根元素(&amp;lt;html&amp;gt;) 浮动元素（元素的 float 不是 none） 绝对定位元素（元素的 position 为 absolute 或 fixed） 行内块元素（元素的 display 为 inline-block） 表格单元格（元素的 display为 table-cell，HTML表格单元格默认为该值） 表格标题（元素的 display 为 table-caption，HTML表格标题默认为该值） 匿名表格单元格元素（元素的 display为 table、table-row、 table-row-group、table-header-group、table-footer-group（分别是HTML table、row、tbody、thead、tfoot的默认属性）或 inline-table） overflow 值不为 visible 的块元素 display 值为 flow-root 的元素 contain 值为 layout、content或 paint 的元素 弹性元素（display为 flex 或 inline-flex元素的直接子元素） 网格元素（display为 grid 或 inline-grid 元素的直接子元素） 多列容器（元素的 column-count 或 column-width 不为 auto，包括 column-count 为 1） column-span 为 all 的元素始终会创建一个新的BFC，即使该元素没有包裹在一个多列容器中（标准变更，Chrome bug）。 BFC 是什么 BFC可以清除浮动，使父元素可以包裹浮动的子元素 代码</description>
+    </item>
+    
+    <item>
+      <title>jQuery 中的链式操作</title>
+      <link>https://uphgs.com/posts/javascript/jquery-chain-operation/</link>
+      <pubDate>Tue, 16 Jun 2020 12:56:26 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/jquery-chain-operation/</guid>
+      <description>通过实现几个 jQuery 中的常用方法来理解 jQuery 链式操作的原理。
+实现 jQuery 的 addClass 功能 假设给以下 div 添加 class
+&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;封装一个获取元素列表的 jQuery 函数 window.</description>
+    </item>
+    
+    <item>
+      <title>跨域 &amp; CORS &amp; JSONP</title>
+      <link>https://uphgs.com/posts/javascript/cross-domain/</link>
+      <pubDate>Wed, 10 Jun 2020 09:28:17 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/cross-domain/</guid>
+      <description>关键词 同源策略
+浏览器故意设计的一个功能限制
+CORS
+突破浏览器限制的一个方法
+JSONP
+IE时代妥协的产物
+同源策略 什么是源 使用 window.origin 或 location.origin 可以得到当前页面的源
+源 = 协议 + 域名 + 端口号</description>
+    </item>
+    
+    <item>
+      <title>AJAX</title>
+      <link>https://uphgs.com/posts/javascript/ajax-use/</link>
+      <pubDate>Tue, 09 Jun 2020 15:44:57 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/ajax-use/</guid>
+      <description>什么是 AJAX 全称：Async JavaScript And XML（异步的 JavaScript 和 XML）。 功能：用 JavaScript 发请求和收响应。 概念：AJAX 是浏览器的功能，浏览器可以发请求收响应，浏览器在 window 上加了一个 XMLHttpRequest 函数，用这个函数可以构造一个对象，用于发送请求接收响应。 一个完整的 AJAX 请求 buttons.</description>
+    </item>
+    
+    <item>
+      <title>七种方式实现垂直居中</title>
+      <link>https://uphgs.com/posts/css/center-vertically/</link>
+      <pubDate>Fri, 29 May 2020 15:09:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/center-vertically/</guid>
+      <description>1. table 自带属性 &amp;lt;table class=&amp;quot;parent&amp;quot;&amp;gt;&amp;lt;tr&amp;gt;&amp;lt;td class=&amp;quot;child&amp;quot;&amp;gt;你知道就算大雨让这座城市颠倒，我会给你怀抱。&amp;lt;/td&amp;gt;&amp;lt;/tr&amp;gt;&amp;lt;/table&amp;gt;.parent {border: 2px solid #999999;height: 500px;}.</description>
+    </item>
+    
+    <item>
+      <title>Promise 对象 &amp; async 函数</title>
+      <link>https://uphgs.com/posts/promise-and-async/</link>
+      <pubDate>Wed, 27 May 2020 19:30:16 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/promise-and-async/</guid>
+      <description>Promise &amp;amp; setTimeout 的执行顺序 经典的面试题
+setTimeout(() =&amp;gt; console.log(1))const fn = () =&amp;gt; new Promise(resolve =&amp;gt; {resolve()console.</description>
+    </item>
+    
+    <item>
+      <title>ES6 模块化</title>
+      <link>https://uphgs.com/posts/javascript/module/</link>
+      <pubDate>Mon, 25 May 2020 14:46:09 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/module/</guid>
+      <description>基本示例 a.js 文件默认导出一个对象
+let object = {a: 1, b: 2, c: 3}export default objectb.</description>
+    </item>
+    
+    <item>
+      <title>Hugo 搭建个人博客</title>
+      <link>https://uphgs.com/posts/envconfig/hugo-created-blog/</link>
+      <pubDate>Sat, 23 May 2020 17:15:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hugo-created-blog/</guid>
+      <description>此教程只适用于在 Windows10 环境下搭建。其他系统在官网自行查询教程即可。
+安装 去Github下载：https://github.com/gohugoio/hugo/releases
+通常选择 hugo_X.XX.X_Windows-64bit.zip 或者 hugo_extended_X.XX.X_Windows-64bit.zip（拓展版）即可，部分博客可能需要安装拓展版。
+下载后最好解压到一个无空格无中文的目录。
+解压后在我的电脑中配置环境，分别按照以下步骤点击：
+右键此电脑 &amp;gt; 属性 &amp;gt; 高级系统设置 &amp;gt; 环境变量 &amp;gt; 选择「系统变量」下的 Path 编辑，在 Path 中添加 hugo 的安装路径。</description>
+    </item>
+    
+    <item>
+      <title>浏览器模型</title>
+      <link>https://uphgs.com/posts/javascript/browser-storage/</link>
+      <pubDate>Fri, 22 May 2020 19:43:52 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/browser-storage/</guid>
+      <description>window.JSON ::: tip 注意
+由于 JSON 只支持对象、数组、数值、字符串、布尔值和 null ，所以 window.JSON 只适用于。如果强行转换其他类型，如：日期、正则、函数、循环、引用类型的对象，或者带有 undefined 的对象，则会抛出一个错误。
+:::
+JSON.parse 作用：</description>
+    </item>
+    
+    <item>
+      <title>CSS 常用属性</title>
+      <link>https://uphgs.com/posts/css/note/</link>
+      <pubDate>Wed, 20 May 2020 16:06:52 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/note/</guid>
+      <description>记录一下我使用过的一些 CSS 样式
+CSS3 盒模型 通常情况可以全局使用
+*, *::before, *::after {box-sizing: border-box;}去除默认样式 a 链接默认下划线 &amp;amp; 字体颜色继承 a {color: inherit; /* 颜色继承父元素 */text-decoration: none; /* 去掉下划线 */}表单/按钮 focus 默认状态 button {outline: none;}textarea 大小不可拖动 textarea {overflow: hidden;resize: none; /* 设置大小不可拖动 */}图片文字中线对齐 img {vertical-align: middle;}滤镜灰色图片 img {cursor: pointer;filter: contrast(0%);transition: filter 0.</description>
+    </item>
+    
+    <item>
+      <title>动态 REM</title>
+      <link>https://uphgs.com/posts/css/dynamic-rem/</link>
+      <pubDate>Wed, 20 May 2020 16:06:52 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/dynamic-rem/</guid>
+      <description>rem 是什么 rem 就是页面根元素（html元素）的 font-size 大小
+html {font-size: 100px;}div {width: 1rem; /* 此处 1rem = 100px */}动态 rem 我们可以通过在页面中加载一段简单的 JS 来实现 rem 根据屏幕宽度动态改变</description>
+    </item>
+    
+    <item>
+      <title>Symbol &amp; 迭代器 &amp; 生成器</title>
+      <link>https://uphgs.com/posts/javascript/symbol-iterate-generate/</link>
+      <pubDate>Tue, 19 May 2020 08:51:15 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/symbol-iterate-generate/</guid>
+      <description>大纲 之前的 7 种数据类型
+string number boolean undefined null object symbol最新的 ECMAScript 标准（ES10）添加了：BigInt
+三种 for</description>
+    </item>
+    
+    <item>
+      <title>Hexo 生成永久链接</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-generate/</link>
+      <pubDate>Tue, 12 May 2020 19:52:09 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-generate/</guid>
+      <description>Hexo默认会使用当前文件名生成链接，默认没有随机码生成的方式，使用以下插件，就可以实现。
+GitHub链接：https://github.com/rozbo/hexo-abbrlink
+也可以按照 GitHub 的文档步骤安装，毕竟官方更新会更及时
+安装 安装命令
+npm install hexo-abbrlink --save使用 配置博客根目录的 config.yml 文件</description>
+    </item>
+    
+    <item>
+      <title>字面量增强</title>
+      <link>https://uphgs.com/posts/javascript/literal/</link>
+      <pubDate>Tue, 12 May 2020 12:12:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/literal/</guid>
+      <description>字面量的含义 它写出来就代表它所展示的意思，例如：1, 2, 3, true, false, {}，很直观的量。
+相反的，像构造函数，或者复杂的对象，就不是字面量。
+新版进制区分 如之前的写法
+二进制
+1010101;// 85八进制</description>
+    </item>
+    
+    <item>
+      <title>搜索引擎常用技巧</title>
+      <link>https://uphgs.com/posts/envconfig/search-skill/</link>
+      <pubDate>Mon, 27 Apr 2020 22:31:32 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/search-skill/</guid>
+      <description>在某个网站内搜索关键词 在知乎中搜索 360 安全，可以在搜索栏 (或地址栏) 输入：
+site:zhihu.com 360 安全筛选无用的关键词 搜索 知乎 时不想看到 &amp;ldquo;发现&amp;rdquo; 关键词，可以在知乎后空格再加一个 -发现，搜索框输入如下 (注意A后面的空格不能省略)：</description>
+    </item>
+    
+    <item>
+      <title>HTTP</title>
+      <link>https://uphgs.com/posts/the-internet/</link>
+      <pubDate>Wed, 15 Apr 2020 07:11:52 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/the-internet/</guid>
+      <description>WWW 的发明 1990年 万维网（World Wide Web）出生的年份。这一年 Tim Berners-Lee 发明了用网址就能访问网页的办法，他发明了第一个网页、第一个浏览器和第一个服务器。
+Tim Berners-Lee（下文中称为李爵士）在 1989 年至 1992 年间，发明了 WWW（World Wide Web），一种适用于全世界的网络。主要包含三个概念</description>
+    </item>
+    
+    <item>
+      <title>Reflect</title>
+      <link>https://uphgs.com/posts/javascript/reflect/</link>
+      <pubDate>Tue, 31 Mar 2020 21:14:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/reflect/</guid>
+      <description>概述 Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个。
+将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。
+修改某些Object方法的返回结果，让其变得更合理。比如，Object.defineProperty(obj, name, desc)在无法定义属性时，会抛出一个错误，而Reflect.defineProperty(obj, name, desc)则会返回false。
+Reflect Reflect.get() Reflect.get 方法可以获取对象的属性</description>
+    </item>
+    
+    <item>
+      <title>参数处理 &amp; 解构赋值</title>
+      <link>https://uphgs.com/posts/javascript/deconstruction/</link>
+      <pubDate>Sun, 01 Dec 2019 18:32:01 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/deconstruction/</guid>
+      <description>函数剩余参数 使用 arguments 获取
+function sum(message){var result = 0for(var i = 1; i &amp;lt; arguments.</description>
+    </item>
+    
+    <item>
+      <title>命令行快捷键</title>
+      <link>https://uphgs.com/posts/envconfig/cli-hot-key/</link>
+      <pubDate>Tue, 10 Sep 2019 21:31:23 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cli-hot-key/</guid>
+      <description>常用 Ctrl L：清屏 Ctrl M：等效于回车 Ctrl C：中断正在当前正在执行的程序 历史命令 Ctrl P：上一条命令，可以一直按表示一直往前翻 Ctrl N：下一条命令 Ctrl R：再按历史命令中出现过的字符串：按字符串寻找历史命令（重度推荐） 命令行编辑 Tab：自动补齐（重度推荐） Ctrl A：移动光标到命令行首 Ctrl E：移动光标到命令行尾 Ctrl B：光标后退 Ctrl F：光标前进 Alt F：光标前进一个单词 Alt B：光标后退一格单词 Ctrl ]：从当前光标往后搜索字符串，用于快速移动到该字符串 Ctrl Alt ]：从当前光标往前搜索字符串，用于快速移动到该字符串 Ctrl H：删除光标的前一个字符 Ctrl D：删除当前光标所在字符 Ctrl K：删除光标之后所有字符 Ctrl U：清空当前键入的命令 Ctrl W：删除光标前的单词(Word, 不包含空格的字符串) Ctrl \：删除光标前的所有空白字符 Ctrl Y：粘贴 Ctrl W 或 Ctrl K 删除的内容 Alt .</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - 命令行插件</title>
+      <link>https://uphgs.com/posts/envconfig/cli-plugin/</link>
+      <pubDate>Tue, 10 Sep 2019 21:31:23 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cli-plugin/</guid>
+      <description>本教程只在 Windows 生效
+z 命令 z 命令是一个快捷跳转目录的命令，可以记录你每次经常进入的目录，只要输入该目录文件名即可跳转。
+首先打开 z 命令 GitHub 仓库：https://github.com/rupa/z 找一个安全的目录（此处推荐在用户目录下新建一个 GitHub 目录） cd ~/GitHub在该目录下克隆 z 命令的仓库 git clone git@github.</description>
+    </item>
+    
+    <item>
+      <title>CSS 不正交</title>
+      <link>https://uphgs.com/posts/css/css-not-orthogonal/</link>
+      <pubDate>Sun, 01 Sep 2019 09:06:34 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/css-not-orthogonal/</guid>
+      <description>margin 属性合并 兄弟元素之间 在默认情况下两个 div 之间的 margin 属性会重合，例如：
+CSS
+main {border: 1px solid blue;}div {border: 1px solid red;height: 100px;margin: 10px;}HTML</description>
+    </item>
+    
+    <item>
+      <title>Hexo 搭建博客教程</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-build-blog/</link>
+      <pubDate>Wed, 28 Aug 2019 19:15:48 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-build-blog/</guid>
+      <description>需要会使用命令行工具，并且有GitHub账号。 这篇文章的主要目的是记录自己搭建博客时踩的坑，所以可能没那么全面 部分内容来自： Hexo官方文档
+在 Github 新建一个仓库 名称格式：
+username.github.io注：username 必须是你的 GitHub 用户名
+在新仓库中点击 Settings 下拉，在 GitHub Pages 中点击 Choose a theme ，随便选择一个主题应用</description>
+    </item>
+    
+    <item>
+      <title>Windows 常用工具</title>
+      <link>https://uphgs.com/posts/envconfig/tool-recommend/</link>
+      <pubDate>Wed, 14 Aug 2019 14:13:54 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/tool-recommend/</guid>
+      <description>一些常用的小工具
+Windows Terminal Windows Terminal 是微软推出的一款命令行工具，对 Window 系统的兼容性很好。
+常用快捷键 左右分屏：alt+shift++ 上下分屏：alt+shift+- 调整当前活动窗口大小：alt+shift+方向键 添加 Git Bash 找到你的 Git Bash 目录，比如我的目录：C:\Software\xxx\vendor\git-for-windows</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - Cmder 配置</title>
+      <link>https://uphgs.com/posts/envconfig/cmder-install/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cmder-install/</guid>
+      <description>尽量使用完整版 Cmder，这样配置起来更方便。
+注意 如果安装了浏览器FQ插件（如 Proxy SwitchyOmega）尽量使用FQ下载。 如果安装电脑中前已经有 Git Bash 直接下载安装简化版即可，此教程不包括简化版安装教程。 下载 官网链接：https://cmder.net/ 下载后尽量解压到一个非中文无空格路径下的目录 选择完整版下载 配置 首先解压文件 (最好放在一个没有空格的目录)，解压后打开</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - Git 配置</title>
+      <link>https://uphgs.com/posts/envconfig/git-config/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/git-config/</guid>
+      <description>配置 Git 在 Git Bash 命令行运行这五句话
+git config --global user.name xxxxxx # 把 xxxxxx 替换成你的英文名字随便什么都行git config --global user.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://uphgs.com/posts/project/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://uphgs.com/posts/vue/use-vuepress-theme-plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/use-vuepress-theme-plugin/</guid>
+      <description>使用 VuePress(2.x) 添加主题插件 自定义文件路由 在插件 API 中添加 extendsPageOptions 函数，可以自定义每个 .md 文件的路由地址 。
+为 _posts 目录下的页面设置永久链接 Pattern 示例</description>
+    </item>
+    
+    <item>
+      <title>CSS 字体</title>
+      <link>https://uphgs.com/posts/css/css-font/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/css/css-font/</guid>
+      <description>text-shadow 1. 实现字体阴影 h2 {color: #000;text-shadow: 5px 5px 0 #ffc947;}示例
+2. 实现漫画风格的字体描边 h2 {color: #fff;text-shadow:-.</description>
+    </item>
+    
+    <item>
+      <title>Git 命令入门</title>
+      <link>https://uphgs.com/posts/envconfig/git-getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/git-getting-started/</guid>
+      <description>提交代码 # 提交至暂存区$ git add .# 提交暂存区到仓库区$ git commit -m [提交说明] # 提交时显示所有差异信息 (diff)$ git commit -v# 取回远程仓库的变化，并与本地分支合并$ git pull [远程主机名] [远程分支名]:[本地分支名]# 上传本地分支到指定远程分支$ git push [远程主机名] [本地分支名]:[远程分支名]commit 拓展 # 撤销上一次的 commitgit reset --soft HEAD^# 使用一次新的 commit，替代上一次提交# 如果代码没有任何新变化，则用来改写上一次commit的提交信息$ git commit --amend -m [message]# 重做上一次 commit，并包括指定文件的新变化$ git commit --amend [file1] [file2] .</description>
+    </item>
+    
+    <item>
+      <title>Lisp 入门</title>
+      <link>https://uphgs.com/posts/envconfig/lisp-getting-started/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/lisp-getting-started/</guid>
+      <description>运行 Scheme Scheme 是 Lisp 的方言版本。
+下载 Racket 来运行 Scheme。 下载后打开 DrRacket 选择 Language &amp;gt; 选择 Choose Language 选择 Beginning Student（初学者模式），点击 OK。 DrRacket 的使用 DrRacket 的上半部分负责命名，下半部分负责运算。上半部分修改后需要重新 run 才会生效。</description>
+    </item>
+    
+    <item>
+      <title>MVC 模式</title>
+      <link>https://uphgs.com/posts/javascript/mvc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/mvc/</guid>
+      <description>MVC 模式（Model–view–controller）是软件工程中的一种软件架构模式，把软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）
+模型（Model） 用于封装与应用程序的业务逻辑相关的数据以及对数据的处理方法。 视图（View）能够实现数据有目的的显示。 控制器（Controller）起到不同层面间的组织作用，用于控制应用程序的流程。它处理事件并作出响应。“事件” 包括用户的行为和数据 Model 上的改变。 使用 jQuery 实现一个简单的 MVC 的案例
+https://github.com/uphg/mvc-example </description>
+    </item>
+    
+    <item>
+      <title>VSCode 配置</title>
+      <link>https://uphgs.com/posts/envconfig/vscode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/vscode/</guid>
+      <description>配置 Git Bash 在新版 VSCode 中关联 Git Bash，需要配置两个属性
+Ctrl + Shift + P 搜索 setting，选择 打开设置（json），添加如下配置：</description>
+    </item>
+    
+    <item>
+      <title>Vue 常用插件</title>
+      <link>https://uphgs.com/posts/vue/plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/plugin/</guid>
+      <description>Element UI 使用 el-scrollbar &amp;lt;el-scrollbar wrap-class=&amp;quot;scrollbar-wrapper&amp;quot;&amp;gt;&amp;lt;/el-scrollbar&amp;gt;.el-scrollbar {height: 100%;}/* 由于 横向滚动条的 bug 可以设置此样式消除 */.</description>
+    </item>
+    
+    <item>
+      <title>Vue 造轮子 - 测试用例</title>
+      <link>https://uphgs.com/posts/vue/test-grammar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/test-grammar/</guid>
+      <description>大部分语法来自 Jest
+其中 Wrapper 是一个包括了一个挂载组件或 vnode，以及测试该组件或 vnode 的方法。
+基本示例 判断一个 Button 组件是否存在
+// 期待 Button 组件存在describe(&#39;Button&#39;, () =&amp;gt; {it(&#39;create&#39;, () =&amp;gt; {const wrapper = mount(Button)expect(wrapper.</description>
+    </item>
+    
+    <item>
+      <title>Vue 造轮子 - 添加单元测试</title>
+      <link>https://uphgs.com/posts/vue/test/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/test/</guid>
+      <description>给 Vue3 项目添加单元测试
+Jest 单元测试 本次使用 Vue 官方测试库 Vue Test Utils 首先安装测试相关的依赖
+yarn add jest@26.6.3 @types/jest ts-jest@26.</description>
+    </item>
+    
+    <item>
+      <title>WebStorm 配置</title>
+      <link>https://uphgs.com/posts/envconfig/webstorm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/webstorm/</guid>
+      <description>设置自动格式化代码快捷键 按两下 shift 在弹出框中搜索：Reformat 其中第一项 Reformat Code 就是你自动格式化代码的快捷键 配置 JS 代码自动加分号 打开 Setting &amp;gt; Editor &amp;gt; Code Style &amp;gt; JavaScript &amp;gt; Puntuation 选择 semicolon to terminate statements 后的 always 选项 自动引入与自动添加变量 搜索 Show Context Actions，查看你的快捷键</description>
+    </item>
+    
+    <item>
+      <title>命令行翻译工具</title>
+      <link>https://uphgs.com/posts/node/nodejs-fanyi/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/nodejs-fanyi/</guid>
+      <description>项目地址：https://github.com/uphg/node-fanyi-demo
+Node.js 发送请求 向百度发送一个 GET 请求，官方文档
+import * as https from &amp;quot;https&amp;quot;;const options = {hostname: &#39;www.</description>
+    </item>
+    
+    <item>
+      <title>如何自学</title>
+      <link>https://uphgs.com/posts/javascript/self-study-skills/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/self-study-skills/</guid>
+      <description>源码阅读 推荐库
+Underscore.js 常用函数库（函数式编程）。 Lodash.js 处理数组、数字、对象、字符串方法库。 Backbone.js MVC 框架，通常与 Underscore.js 结合使用。 Handlebars.js 模板语言。 Webpack.js 包管理工具，包含常用的设计模式。 Preact.</description>
+    </item>
+    
+    <item>
+      <title>文件模块</title>
+      <link>https://uphgs.com/posts/node/nodejs-fs-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/nodejs-fs-file/</guid>
+      <description>commander.js Node.js 命令行操作符库，用于执行各种拓展操作符。官网地址
+安装
+yarn add commander#or npm install commander使用
+const program = require(&#39;commander&#39;)program.</description>
+    </item>
+    
+    <item>
+      <title>静态服务器</title>
+      <link>https://uphgs.com/posts/node/static-server/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/static-server/</guid>
+      <description>安装 ts-node-dev 支持 TypeScript 的 Node 静态服务器
+yarn global add ts-node-dev创建一个 http 服务器 监听本地端口</description>
+    </item>
+    
+  </channel>
+</rss>

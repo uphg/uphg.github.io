@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RegExp on 石塔白又大</title>
+    <link>https://uphgs.com/tags/regexp/</link>
+    <description>Recent content in RegExp on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Wed, 29 Dec 2021 22:49:58 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/regexp/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>正则速查表</title>
+      <link>https://uphgs.com/posts/regexp-memo/</link>
+      <pubDate>Wed, 29 Dec 2021 22:49:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/regexp-memo/</guid>
+      <description>loadsh 中的正则 n进制字符串 // 不规范的16进制字符串值const reIsBadHex = /^[-+]0x[0-9a-f]+$/i// 二进制字符串const reIsBinary = /^0b[01]+$/i// 八进制字符串值const reIsOctal = /^0o[0-7]+$/i数字 // 无符号的整数值 const reIsUint = /^(?</description>
+    </item>
+    
+  </channel>
+</rss>

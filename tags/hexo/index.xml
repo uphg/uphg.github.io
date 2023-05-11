@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hexo on 石塔白又大</title>
+    <link>https://uphgs.com/tags/hexo/</link>
+    <description>Recent content in Hexo on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Tue, 22 Dec 2020 13:15:21 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hexo 主题推荐</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-theme/</link>
+      <pubDate>Tue, 22 Dec 2020 13:15:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-theme/</guid>
+      <description>主题均来自Hexo官网
+Oranges GitHub：https://github.com/zchengsite/hexo-theme-oranges 网站示例：https://hexo.theme.oranges.zcheng.site/ Inside GitHub：https://github.com/ikeq/hexo-theme-inside 网站示例：https://blog.oniuo.com/ Lx GitHub：https://github.com/blleng/hexo-theme-lx 网站示例：https://lx.js.org/ Fluid GitHub：https://github.com/fluid-dev/hexo-theme-fluid 网站示例：https://hexo.fluid-dev.com/ Aomori GitHub：https://github.com/lh1me/hexo-theme-aomori 网站示例：https://linhong.</description>
+    </item>
+    
+    <item>
+      <title>Hexo 生成永久链接</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-generate/</link>
+      <pubDate>Tue, 12 May 2020 19:52:09 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-generate/</guid>
+      <description>Hexo默认会使用当前文件名生成链接，默认没有随机码生成的方式，使用以下插件，就可以实现。
+GitHub链接：https://github.com/rozbo/hexo-abbrlink
+也可以按照 GitHub 的文档步骤安装，毕竟官方更新会更及时
+安装 安装命令
+npm install hexo-abbrlink --save使用 配置博客根目录的 config.yml 文件</description>
+    </item>
+    
+    <item>
+      <title>Hexo 搭建博客教程</title>
+      <link>https://uphgs.com/posts/envconfig/hexo-build-blog/</link>
+      <pubDate>Wed, 28 Aug 2019 19:15:48 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/hexo-build-blog/</guid>
+      <description>需要会使用命令行工具，并且有GitHub账号。 这篇文章的主要目的是记录自己搭建博客时踩的坑，所以可能没那么全面 部分内容来自： Hexo官方文档
+在 Github 新建一个仓库 名称格式：
+username.github.io注：username 必须是你的 GitHub 用户名
+在新仓库中点击 Settings 下拉，在 GitHub Pages 中点击 Choose a theme ，随便选择一个主题应用</description>
+    </item>
+    
+  </channel>
+</rss>

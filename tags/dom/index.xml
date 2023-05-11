@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DOM on 石塔白又大</title>
+    <link>https://uphgs.com/tags/dom/</link>
+    <description>Recent content in DOM on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Mon, 14 Sep 2020 23:07:31 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/dom/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DOM API</title>
+      <link>https://uphgs.com/posts/javascript/dom/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom/</guid>
+      <description>获取 DOM 元素 window.id名 // 通过id获取（无法获取与关键字冲突的id）document.getElementById(&#39;id名&#39;) // 通过id获取document.getElementsByTagName(&#39;div&#39;) // 通过标签获取（伪数组）document.getElementsByClassName(&#39;part&#39;) // 通过class名获取（伪数组）document.</description>
+    </item>
+    
+    <item>
+      <title>DOM 操作跨线程</title>
+      <link>https://uphgs.com/posts/javascript/dom-operate-across-threads/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom-operate-across-threads/</guid>
+      <description>概述 JavaScript 引擎是无法直接操作页面的，只能通过 JavaScript 调用 DOM API，当浏览器发现 JavaScript 调用了像 document.body.appendChild(div) 这样的 DOM API ，就会通知渲染引擎，新增一个与 JavaScript 中 div 属性一模一样的 div。这就叫做跨线程通信。</description>
+    </item>
+    
+  </channel>
+</rss>

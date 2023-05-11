@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.js on 石塔白又大</title>
+    <link>https://uphgs.com/tags/node.js/</link>
+    <description>Recent content in Node.js on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Mon, 13 Jun 2022 17:56:09 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Webpack 核心原理</title>
+      <link>https://uphgs.com/posts/node/webpack-core-principle/</link>
+      <pubDate>Mon, 13 Jun 2022 17:56:09 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-core-principle/</guid>
+      <description>代码地址：webpack-core-principle-demo
+打包 英文 bundle bundle 是打包，bundler 就叫打包器 现有代码 index.js
+import a from &#39;./a.js&#39;import b from &#39;.</description>
+    </item>
+    
+    <item>
+      <title>babel、AST、依赖</title>
+      <link>https://uphgs.com/posts/node/webpack-babel-ast-and-rely/</link>
+      <pubDate>Sun, 12 Jun 2022 21:48:00 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/webpack-babel-ast-and-rely/</guid>
+      <description>代码地址：github.com/uphg/webpack-babel-compile-demo
+babel 的原理 parse: 把代码 code1 变成 AST traverse: 遍历 AST 进行修改 generate: 把 AST 变成代码 code2 运行流程</description>
+    </item>
+    
+    <item>
+      <title>数据库设计与搭建</title>
+      <link>https://uphgs.com/posts/node/database-design-and-build/</link>
+      <pubDate>Mon, 02 May 2022 13:51:26 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/database-design-and-build/</guid>
+      <description>增删改查的难点 开发效率
+很多人做了五年的 CRUD，开发效率却始终没有变 如何做到快速开发？ 代码质量
+为何互联网公司的代码大部分都是屎山，难以维护 2000 年左右就兴起的单元测试技术，为何还不会用 宣称敏捷开发，是否懂得敏捷开发包含单元测试 前后端联调
+为何后端给出的接口前端总是无法流畅使用，需要联调 前后端代码交给两个人做，增加的沟通成本是否值得 伸缩性
+数据量变大之后，应用是否还能正常运行 业务量增加之后，机器性能是否还扛得住 高并发 C10k problem</description>
+    </item>
+    
+    <item>
+      <title>TypeORM 数据库实践</title>
+      <link>https://uphgs.com/posts/node/typeorm-database-practice/</link>
+      <pubDate>Sat, 30 Apr 2022 22:37:48 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/typeorm-database-practice/</guid>
+      <description>代码地址：github.com/uphg/nextjs-blog-demo
+运行 Type ORM 首先在项目根目录创建 post-data 并把它添加到 .gitignore
+然后运行
+docker run -v &amp;quot;$PWD/blog-data&amp;quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.</description>
+    </item>
+    
+    <item>
+      <title>Cypress 自动化测试</title>
+      <link>https://uphgs.com/posts/cypress-test/</link>
+      <pubDate>Mon, 21 Mar 2022 20:33:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/cypress-test/</guid>
+      <description>自动化测试的好处 用代码来模拟键盘、鼠标操作，方便多个页面，多次重复测试。
+为什么以前自动化测试不流行 以前浏览器对自动化的支持不友好，如 IE 自动化测试框架 API 不友好，有很大的学习成本，如 selenium 为什么现在可以做自动化测试 支持 Headless（无界面）的浏览器变多，方便测试 一些自动化测试框架的 API（Cypress）非常友好 Cypress 自带丰富的测试样例 Cypress 简介 版本 v1.</description>
+    </item>
+    
+    <item>
+      <title>package.json 配置项</title>
+      <link>https://uphgs.com/posts/node/package-config/</link>
+      <pubDate>Sat, 04 Dec 2021 22:11:20 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/package-config/</guid>
+      <description>配置示例 ::: details 基础配置示例
+{&amp;quot;name&amp;quot;: &amp;quot;vue&amp;quot;,&amp;quot;version&amp;quot;: &amp;quot;3.2.23&amp;quot;,&amp;quot;description&amp;quot;: &amp;quot;The progressive...&amp;quot;,&amp;quot;main&amp;quot;: &amp;quot;index.js&amp;quot;,&amp;quot;module&amp;quot;: &amp;quot;dist/vue.</description>
+    </item>
+    
+    <item>
+      <title>Node.js 环境搭建</title>
+      <link>https://uphgs.com/posts/node/node-env-setup/</link>
+      <pubDate>Sat, 04 Dec 2021 21:56:55 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/node-env-setup/</guid>
+      <description>安装 Node.js 进入官网，下载稳定版安装，安装过程中如果有需要勾选的选项，尽量选择勾选。
+安装 Node.js 后重启命令行（不要打开 Node.js），Node.js 默认自带了 npm、npx 工具，如下
+node --versionnpm --versionnpx --versionnpm CLI Node 包管理工具</description>
+    </item>
+    
+    <item>
+      <title>Express 核心</title>
+      <link>https://uphgs.com/posts/node/express-core/</link>
+      <pubDate>Thu, 02 Dec 2021 21:39:43 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/express-core/</guid>
+      <description>Express 历史：2010 年 6 月，TJ 开始编写 Express，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。
+Express 中间件模型
+创建一个 Express 项目 mkdir express-democd express-demoyarn init -yyarn install express创建 app.</description>
+    </item>
+    
+    <item>
+      <title>Stream 入门</title>
+      <link>https://uphgs.com/posts/node/stream-getting-started/</link>
+      <pubDate>Sun, 14 Nov 2021 12:49:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/stream-getting-started/</guid>
+      <description>本文案例使用 Node.js 应用 Stream
+本文案例代码：https://github.com/uphg/stream-demo
+概念图 stream 是水流，默认没有水 stream.write 可以让水流中有水（数据） 每次写入的小数据叫做 chunk（块） 产生数据的一段叫做 source（源头） 得到数据的一段叫做 sink（水池） 基本用法 使用 Stream 写入内容</description>
+    </item>
+    
+    <item>
+      <title>Node.js 技术架构</title>
+      <link>https://uphgs.com/posts/node/nodejs-technical-architecture/</link>
+      <pubDate>Sat, 17 Jul 2021 16:46:12 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/nodejs-technical-architecture/</guid>
+      <description>API 文档 官方地址：中文文档/英文文档 devdocs.io 搜索功能便捷，支持夜间模式，并且可以离线观看 Node.js 是什么 是一个平台
+让多种技术组合起来 让 JavaScript 也能调用系统接口、开发后端应用 Node.js 用到了哪些技术
+V8引擎 libuv C/C++ 实现的 c-ares、http-parser、OpenSSL、zlib 等库 Node.</description>
+    </item>
+    
+  </channel>
+</rss>

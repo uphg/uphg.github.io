@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 类（TS）</title>
+<meta name="description" content="Class 的基础语法 创建一个最基本的空类
+class Point {}声明两个公共可写的属性
+class Point {x: number;y: number;}const pt = new Point();pt.">
+<link rel="canonical" href="https://uphgs.com/posts/typescript/ts-class/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Class 类（TS）</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-08-21 08:04:10 &#43;0800 CST" title="2021-08-21 08:04:10 &#43;0800 CST">
+    2021-08-21
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="class-的基础语法">Class 的基础语法</h2>
+<p>创建一个最基本的空类</p>
+<pre><code class="language-typescript">class Point {}
+</code></pre>
+<p>声明两个公共可写的属性</p>
+<pre><code class="language-typescript">class Point {
+  x: number;
+  y: number;
+}
+ 
+const pt = new Point();
+pt.x = 0;
+pt.y = 0;
+</code></pre>
+<p>字段也可以有初始化值，这些值将在类实例化时自动运行</p>
+<pre><code class="language-typescript">class Point {
+  x = 0;
+  y = 0;
+}
+
+const pt = new Point();
+// Prints 0, 0
+console.log(`${pt.x}, ${pt.y}`);
+</code></pre>
+<p>配置 <code>strictPropertyInitialization</code> 控制是否需要在构造函数中初始化类字段。</p>
+<pre><code class="language-typescript">// 坏的写法
+class BadGreeter {
+  // 报错：属性&quot;name&quot;没有初始化器，也没有在构造函数中明确分配。
+  name: string;
+}
+
+// 好的写法
+class GoodGreeter {
+  name: string;
+ 
+  constructor() {
+    this.name = &quot;hello&quot;;
+  }
+}
+</code></pre>
+<p>如果需要以构造函数外的方式明确字段，可以使用确定赋值断言运算符 <code>!</code></p>
+<pre><code class="language-typescript">class OKGreeter {
+  // 这样就可以使该值未初始化，但没有错误
+  name!: string;
+}
+</code></pre>
+<p>字段可以使用 <code>readonly</code> 修饰符作为前缀，这样防止对构造函数之外的字段进行赋值。</p>
+<pre><code class="language-typescript">class Greeter {
+  readonly name: string = &quot;world&quot;;
+ 
+  constructor(otherName?: string) {
+    if (otherName !== undefined) {
+      this.name = otherName;
+    }
+  }
+ 
+  err() {
+    this.name = &quot;not ok&quot;;
+    // 无法给“name”分配值，因为它是只读属性。
+  }
+}
+const g = new Greeter();
+g.name = &quot;also not ok&quot;;
+// 无法给“name”分配值，因为它是只读属性。
+</code></pre>
+<h2 id="constructors">Constructors</h2>
+<p>类构造函数与函数非常相似。可以添加带有类型注释、默认值和重载的参数：</p>
+<pre><code class="language-typescript">class Point {
+  x: number;
+  y: number;
+ 
+  // 具有默认值的普通参数
+  constructor(x = 0, y = 0) {
+    this.x = x;
+    this.y = y;
+  }
+}
+</code></pre>
+<pre><code class="language-typescript">class Point {
+  // 重载
+  constructor(x: number, y: string);
+  constructor(s: string);
+  constructor(xs: any, y?: any) {
+    // ...
+  }
+}
+</code></pre>
+<h2 id="类的继承">类的继承</h2>
+<p>在 TypeScript 中，如果继承的类在调用 <code>this</code> 前没有写 <code>super()</code>，会报错提示</p>
+<pre><code class="language-typescript">class Base {
+  k = 4;
+}
+ 
+class Derived extends Base {
+  constructor() {
+    // 在 ES5 中打印错误值； 在 ES6 中抛出异常
+    console.log(this.k); // 错误：在派生类的构造函数中访问&quot;this&quot;之前必须调用&quot;super&quot;。
+    super();
+  }
+}
+</code></pre>
+<h2 id="getters--setters">Getters / Setters</h2>
+<p>类也可以使用访问器</p>
+<pre><code class="language-typescript">class C {
+  _length = 0;
+  get length() {
+    return this._length;
+  }
+  set length(value) {
+    this._length = value;
+  }
+}
+</code></pre>
+<p>TypeScript 对访问器有一些特殊的推理规则：</p>
+<ul>
+<li>如果<code>get</code>存在但不存在<code>set</code>，则该属性自动<code>readonly</code></li>
+<li>如果没有指定 setter 参数的类型，则根据 getter 的返回类型推断</li>
+<li>Getter 和 setter 必须具有相同的<a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#member-visibility">成员可见性</a></li>
+</ul>
+<pre><code class="language-typescript">class Thing {
+  _size = 0;
+ 
+  get size(): number {
+    return this._size;
+  }
+ 
+  set size(value: string | number | boolean) {
+    let num = Number(value);
+ 
+    // 排除 NaN, Infinity 等
+    if (!Number.isFinite(num)) {
+      this._size = 0;
+      return;
+    }
+ 
+    this._size = num;
+  }
+}
+</code></pre>
+<h2 id="索引签名">索引签名</h2>
+<p>类可以声明索引签名，这个与 <code>interface</code> 的索引签名很像</p>
+<pre><code class="language-typescript">class StringArray {
+  [s: number]: string | boolean;
+}
+
+const a: StringArray = ['hi', true, 'hello']
+</code></pre>
+<blockquote>
+<p>因为索引签名类型还需要捕获方法的类型，所以有用地使用这些类型并不容易。通常最好将索引数据存储在另一个地方而不是类实例本身。</p>
+</blockquote>
+<h2 id="类的继承-1">类的继承</h2>
+<h3 id="类实现接口">类实现接口</h3>
+<p>实现（implements）是面向对象中的一个重要概念。一般来说，一个类只能继承自另一个类，但是有时候不同类之间可以有一些共同特性，这时就可以把特性提取成接口（interfaces），用 <code>implements</code> 关键字来实现。这个特性大大提高了面向对象的灵活性。</p>
+<p>举例来说，电视有播放音频功能的功能，可以给电视添加一个播放音频的方法。这时如果另一个类，手机，也有播放音频功能，就可以吧播放音频的功能提取出来作为接口，让电视和手机都去实现它。</p>
+<pre><code class="language-typescript">interface PlayAudio {
+  ablePlayAudio(audio: string): void;
+}
+
+class Phone implements PlayAudio {
+  ablePlayAudio(data: string) {
+    console.log('手机播放：' + data)
+  }
+}
+
+class Teevee implements PlayAudio {
+  ablePlayAudio(data: string) {
+    console.log('TV 播放：' + data)
+  }
+}
+</code></pre>
+<p>需要注意，<code>implements</code> 不会改变 class 内的任何东西，只是对它的实现方式做约定</p>
+<pre><code class="language-typescript">interface A {
+  x: number;
+  y?: number;
+}
+class B implements A {
+  x = 0;
+  z = 2;
+}
+const c = new B();
+console.log(c) // { &quot;x&quot;: 0, &quot;z&quot;: 2 }
+</code></pre>
+<h3 id="extends-继承">extends 继承</h3>
+<p>在 TypeScript 中，想要在 <code>extends</code> 后覆盖父类的属性或方法，需要与父类的属性或方法类型兼容，如下</p>
+<p>错误写法</p>
+<pre><code class="language-typescript">class Base {
+  greet() {
+    console.log(&quot;Hello, world!&quot;);
+  }
+}
+ 
+class Derived extends Base {
+  greet(name: string) {
+    if (name !== undefined) {
+      console.log(`Hello, ${name.toUpperCase()}`);
+    }
+  }
+}
+</code></pre>
+<p>正确写法</p>
+<pre><code class="language-typescript">class Base {
+  greet() {
+    console.log(&quot;Hello, world!&quot;);
+  }
+}
+ 
+class Derived extends Base {
+  greet(name?: string) {
+    if (name !== undefined) {
+      console.log(`Hello, ${name.toUpperCase()}`);
+    }
+  }
+}
+</code></pre>
+<h2 id="属性可见性">属性可见性</h2>
+<h3 id="public"><code>public</code></h3>
+<p>类成员的默认可见性是 <code>public</code>。一个 <code>public</code> 成员可以在任何地方进行访问（俗称公共属性，可以在创建后的对象中调用）</p>
+<pre><code class="language-typescript">class Greeter {
+  public greet() {
+    console.log(&quot;hi!&quot;);
+  }
+}
+const g = new Greeter();
+g.greet();
+</code></pre>
+<h3 id="protected"><code>protected</code></h3>
+<p>受保护的属性，只能在当前 <code>class</code> 和继承它的 <code>class</code> 中使用</p>
+<pre><code class="language-typescript">class Greeter {
+  public greet() {
+    console.log(&quot;Hello, &quot; + this.getName());
+  }
+  protected getName() {
+    return &quot;hi&quot;;
+  }
+}
+ 
+class SpecialGreeter extends Greeter {
+  public howdy() {
+    console.log(&quot;Howdy, &quot; + this.getName());
+  }
+}
+const g = new SpecialGreeter();
+g.greet();
+g.getName(); // 报错，不能访问&quot;protected&quot;的属性
+</code></pre>
+<p>但是子类还可以通过重新初始化属性使 <code>protected</code> 后的属性重新变的外部可访问</p>
+<pre><code class="language-typescript">class Base {
+  protected m = 10;
+}
+class Derived extends Base {
+  // 没有任何修饰，即默认为&quot;public&quot;修饰符
+  m = 15;
+}
+const d = new Derived();
+console.log(d.m); // 15
+</code></pre>
+<p>跨层次访问 <code>protected</code>，假如要在继承的类的函数参数中访问父类的 <code>protected</code> 属性，需要通过当前类访问，不能直接通过父类访问</p>
+<pre><code class="language-typescript">class Base {
+  protected x: number = 1;
+}
+class Derived1 extends Base {
+  protected x: number = 5;
+}
+class Derived2 extends Base {
+  f1(other: Derived2) {
+    other.x = 10;
+  }
+  f2(other: Base) {
+    other.x = 10;
+  }
+}
+</code></pre>
+<h3 id="private"><code>private</code></h3>
+<p>私有属性，与 <code>protected</code> 很像，但不允许从子类访问成员</p>
+<pre><code class="language-typescript">class Base {
+  private x = 0;
+}
+const b = new Base();
+// 错误：属性“x”是私有的，只能在类“bass”中访问。
+console.log(b.x);
+
+class Derived extends Base {
+  showX() {
+    // 错误：属性“x”是私有的，只能在类“bass”中访问。
+    console.log(this.x);
+  }
+}
+</code></pre>
+<p>因为 <code>private</code> 成员对子类不可见，所以子类不能增加其可见性：</p>
+<pre><code class="language-typescript">class Base {
+  private x = 0;
+}
+class Derived extends Base {
+  // 错误：子类错误的拓展了&quot;x&quot;，属性“x”在类型“Base”中私有
+  x = 1;
+}
+</code></pre>
+<p>TypeScript 允许在同一个类的方法的参数中访问 <code>private</code></p>
+<pre><code class="language-typescript">class A {
+  private x = 10;
+ 
+  public sameAs(other: A) {
+    // 不会报错
+    return other.x === this.x;
+  }
+}
+</code></pre>
+<p>虽然 TypeScript 中的 <code>protected</code> 和 <code>private</code> 限制了 class 成员的类型，但是由于 JavaScript 的运行时特性，你依然可以通过 <code>in</code> 或 <code>.</code> 访问该属性，即使会报错，依然能运行。</p>
+<pre><code class="language-typescript">class MySafe {
+  protected x = 1;
+  private y = 2;
+}
+
+const s = new MySafe();
+console.log(s.x); // 1
+console.log(s.y); // 2
+console.log(s[&quot;x&quot;]); // 1
+</code></pre>
+<p><code>private</code> 还允许在类型检查期间使用括号表示法进行访问，并且不报错</p>
+<pre><code class="language-typescript">class MySafe {
+  private p = 3;
+}
+
+const s = new MySafe();
+console.log(s.p) // 报错：运行结果 3
+console.log(s[&quot;p&quot;]); // 不报错：运行结果 3
+</code></pre>
+<p>与 TypeScripts 的 <code>private</code> 不同 JavaScript 的私有字段（<code>#</code>）在编译后仍保持私有，并且不提供访问方式，如括号表示法访问，使它们成为<strong>硬私有</strong>。</p>
+<pre><code class="language-typescript">class Dog {
+  #barkAmount = 0;
+  personality = &quot;happy&quot;;
+
+  constructor() {}
+}
+
+const a = new Dog()
+console.log(a) // { personality: &quot;happy&quot;, #barkAmount: 0 }
+</code></pre>
+<h2 id="静态成员">静态成员</h2>
+<p>类可能有 <code>static</code> 静态成员。这些成员与类的特定实例无关，不能通过实例化后的对象访问，但它们可以通过类构造函数对象本身访问</p>
+<pre><code class="language-typescript">class MyClass {
+  static x = 0;
+  static printX() {
+    console.log(MyClass.x);
+  }
+}
+console.log(MyClass.x);
+MyClass.printX();
+</code></pre>
+<p>静态成员也可以使用相同的 <code>public</code>，<code>protected</code> 和 <code>private</code> 可见性修饰符：</p>
+<pre><code class="language-typescript">class MyClass {
+  private static x = 0;
+}
+// 错误：属性“x”是私有的，只能在“MyClass”类中访问。
+console.log(MyClass.x);
+</code></pre>
+<p>静态成员也可以继承</p>
+<pre><code class="language-typescript">class Base {
+  static getGreeting() {
+    return &quot;Hello world&quot;;
+  }
+}
+class Derived extends Base {
+  myGreeting = Derived.getGreeting();
+}
+</code></pre>
+<h3 id="特殊静态名称">特殊静态名称</h3>
+<p>由于有些默认的静态属性在 Function 上已经存在，所以没办法在 class 中重新声明来覆盖，如 <code>name</code>，<code>length</code> 和 <code>call</code></p>
+<pre><code class="language-typescript">class S {
+  // 错误：静态属性“名称”与构造函数“S”的内置属性“Function.name”冲突。
+  static name = &quot;S!&quot;;
+}
+</code></pre>
+<h3 id="静态成员中的类型参数">静态成员中的类型参数</h3>
+<p><code>static</code> 泛型类的成员永远不能引用类的类型参数。简单来说就是以下写法在 TypeScript 中不合法</p>
+<pre><code class="language-typescript">class Box&lt;Type&gt; {
+  // 错误：静态成员不能引用类类型参数
+  static defaultValue: Type;
+}
+</code></pre>
+<blockquote>
+<p>此处详情参考<a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#type-parameters-in-static-members">静态成员中的类型参数</a></p>
+</blockquote>
+<h2 id="class-类型声明">Class 类型声明</h2>
+<p>类，很像接口，可以是通用的。当使用 实例化泛型类时 <code>new</code>，其类型参数的推断方式与函数调用中的方式相同：</p>
+<pre><code class="language-typescript">class Box&lt;Type&gt; {
+  contents: Type;
+  constructor(value: Type) {
+    this.contents = value;
+  }
+}
+// const b: Box&lt;string&gt;
+const b = new Box(&quot;hello!&quot;);
+</code></pre>
+<h2 id="class-中的-this">Class 中的 this</h2>
+<p>JavaScript 的处理 <code>this</code> 确实不寻常，通常 <code>this</code> 只会跟运行时的上下文有关</p>
+<pre><code class="language-typescript">class MyClass {
+  name = &quot;MyClass&quot;;
+  getName() {
+    return this.name;
+  }
+}
+const c = new MyClass();
+const obj = {
+  name: &quot;obj&quot;,
+  getName: c.getName,
+};
+
+// 打印 &quot;obj&quot;
+console.log(obj.getName());
+</code></pre>
+<p>为了防止这种情况，可以使用箭头函数</p>
+<pre><code class="language-typescript">class MyClass {
+  name = &quot;MyClass&quot;;
+  getName = () =&gt; {
+    return this.name;
+  }
+}
+const c = new MyClass();
+const obj = {
+  name: &quot;obj&quot;,
+  getName: c.getName,
+};
+ 
+// 打印 &quot;MyClass&quot;
+console.log(obj.getName());
+</code></pre>
+<p>还可以在函数声明时强制定义 <code>this</code> 的类型，TypeScript 会根据上下文检查你设置的 <code>this</code> 类型</p>
+<pre><code class="language-typescript">class MyClass {
+  name = &quot;MyClass&quot;;
+  getName(this: MyClass) {
+    return this.name;
+  }
+}
+const c = new MyClass();
+// OK
+c.getName();
+ 
+const g = c.getName;
+// 错误：“void”类型的“this”不能分配给“MyClass”类型的“this”。
+console.log(g());
+</code></pre>
+<h3 id="this-参数">this 参数</h3>
+<p>在 TypeScript 中强制定义函数的 <code>this</code> 参数，在编译后的 JavaScript 文件中会擦除</p>
+<pre><code class="language-typescript">class SomeType {
+  a = 1;
+  b = 2;
+}
+// 设置带有 SomeType 类型的 this
+function fn(this: SomeType, x: number) {
+  /* ... */
+}
+</code></pre>
+<pre><code class="language-javascript">// 编译后的 JavaScript
+function fn(x) {
+  /* ... */
+}
+</code></pre>
+<h2 id="this-的类型">this 的类型</h2>
+<p>TypeScript 中的 <code>this</code> 类型判断也是动态的，以以下类为例</p>
+<pre><code class="language-typescript">class Box {
+  contents: string = &quot;&quot;;
+  // TypeScript 推断该方法的类型定义：Box.setValue(value: string): this
+  setValue(value: string) {
+    this.contents = value;
+    return this;
+  }
+}
+
+const a = new Box()
+console.log(a) // { &quot;contents&quot;: &quot;&quot; }
+a.setValue('hi')
+console.log(a) // { &quot;contents&quot;: &quot;hi&quot; }
+</code></pre>
+<p>然后再创建一个子类</p>
+<pre><code class="language-typescript">class ClearableBox extends Box {
+  clear() {
+    this.contents = &quot;&quot;;
+  }
+}
+ 
+const a = new ClearableBox();
+const b = a.setValue(&quot;hello&quot;); // const b: ClearableBox
+console.log(b) // { &quot;contents&quot;: &quot;hello&quot; }
+a.clear()
+console.log(b) // { &quot;contents&quot;: &quot;&quot; }
+</code></pre>
+<p><code>this</code> 也可以当作参数的类型注释使用</p>
+<pre><code class="language-typescript">class Box {
+  content: string = &quot;&quot;;
+  sameAs(other: this) {
+    return other.content === this.content;
+  }
+}
+</code></pre>
+<p>假如有一个类继承了上面的类，那它就必须传入继承后的类</p>
+<pre><code class="language-typescript">class Box {
+  content: string = &quot;&quot;;
+  sameAs(other: this) {
+    return other.content === this.content;
+  }
+}
+ 
+class DerivedBox extends Box {
+  otherContent: string = &quot;?&quot;;
+}
+ 
+const base = new Box();
+const derived = new DerivedBox();
+// 报错：“Box”类型的参数不能分配给“DerivedBox”类型的参数
+derived.sameAs(base);
+</code></pre>
+<h3 id="基于-this-的类型守卫">基于 this 的类型守卫</h3>
+<p>在函数的返回值类型定义中使用 <code>this is Type</code> 语法，可以缩小在特定条件下 <code>this</code> 的类型范围</p>
+<pre><code class="language-typescript">class FileSystemObject {
+  isFile(): this is FileRep {
+    return this instanceof FileRep;
+  }
+  isDirectory(): this is Directory {
+    return this instanceof Directory;
+  }
+  isNetworked(): this is Networked &amp; this {
+    return this.networked;
+  }
+  constructor(public path: string, private networked: boolean) {}
+}
+ 
+class FileRep extends FileSystemObject {
+  constructor(path: string, public content: string) {
+    super(path, false);
+  }
+}
+ 
+class Directory extends FileSystemObject {
+  children: FileSystemObject[];
+}
+ 
+interface Networked {
+  host: string;
+}
+ 
+const fso: FileSystemObject = new FileRep(&quot;foo/bar.txt&quot;, &quot;foo&quot;);
+ 
+if (fso.isFile()) {
+  // const fso: FileRep
+  fso.content;
+} else if (fso.isDirectory()) {
+  // const fso: Directory
+  fso.children;
+} else if (fso.isNetworked()) {
+  // const fso: Networked &amp; FileSystemObject
+  fso.host;
+}
+</code></pre>
+<p>基于 <code>this</code> 的类型保护的一个常见用例是允许对特定字段进行延迟验证。例如，<code>undefined</code> 当 <code>hasValue</code> 验证为 <code>true</code> 时，这种情况会从保存在 box 内的值中删除一个：</p>
+<p>也可以用来指定属性在特殊情况下的类型范围</p>
+<pre><code class="language-typescript">class Box&lt;T&gt; {
+  value?: T;
+ 
+  hasValue(): this is { value: T } {
+    return this.value !== undefined;
+  }
+}
+ 
+const box = new Box();
+// (property) Box&lt;unknown&gt;.value?: unknown
+box.value = &quot;Gameboy&quot;;
+box.value;
+ 
+if (box.hasValue()) {
+  // (property) value: unknown
+  box.value;
+}
+</code></pre>
+<p>上面的代码表示，如果 <code>hasValue</code> 为 <code>true</code>，那么 value 的类型就是必选值</p>
+<h2 id="参数属性">参数属性</h2>
+<p>TypeScript 提供了一种便捷的写法，可以在 constructor 函数创建时快捷传参并挂载到 <code>this</code>，通过添加前缀还能指定参数类型，如<code>public</code>，<code>private</code>，<code>protected</code>，<code>readonly</code></p>
+<pre><code class="language-typescript">class Params {
+  constructor(
+    public readonly x: number,
+    protected y: number,
+    private z: number
+  ) {
+    // No body necessary
+  }
+}
+const a = new Params(1, 2, 3);
+console.log(a.x);
+</code></pre>
+<p>上面的代码相当于在 JavaScript 中运行如下代码</p>
+<pre><code class="language-javascript">&quot;use strict&quot;;
+class Params {
+  constructor(x, y, z) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+const a = new Params(1, 2, 3);
+console.log(a.x);
+</code></pre>
+<h2 id="类表达式">类表达式</h2>
+<p>TypeScript 中也支持类表达式声明</p>
+<pre><code class="language-typescript">const someClass = class&lt;Type&gt; {
+  content: Type;
+  constructor(value: Type) {
+    this.content = value;
+  }
+};
+ 
+const m = new someClass(&quot;Hello, world&quot;);
+</code></pre>
+<h2 id="抽象类abstract">抽象类（<code>abstract</code>）</h2>
+<p>一个类只要有一个属性/方法带有 <code>abstract</code> 那么这个类就必须带有 <code>abstract</code>，也就是抽象类。抽象类只能作为其他类的继承出现，无法自己作为构造对象，并且抽象类的方法具体实现，需要由它的子类来完成。</p>
+<pre><code class="language-typescript">abstract class Base {
+  abstract getName(): string;
+ 
+  printName() {
+    console.log(&quot;Hello, &quot; + this.getName());
+  }
+}
+// 错误：无法创建抽象类的实例。
+const b = new Base();
+</code></pre>
+<p>使用继承类实现上面的抽象类</p>
+<pre><code class="language-typescript">class Derived extends Base {
+  getName() {
+    return &quot;world&quot;;
+  }
+}
+ 
+const d = new Derived();
+d.printName(); // &quot;Hello, world&quot; 
+</code></pre>
+<p>如果继承的类没有去实现抽象类的方法/属性，会提示报错</p>
+<pre><code class="language-typescript">class Derived extends Base {
+  // 错误：非抽象类“Derived”未实现从类“Base”继承的抽象成员“getName”
+}
+</code></pre>
+<p>抽象类也可以继承抽象类</p>
+<pre><code class="language-typescript">abstract class B {
+  abstract markNoice(): void
+}
+
+abstract class Animal extends B {
+  
+}
+
+class Human extends Animal {
+  markNoice() {
+    console.log('呐呐呐')
+  }
+}
+
+const jack = new Human()
+console.log(jack.markNoice()) // &quot;呐呐呐&quot;
+</code></pre>
+<h2 id="类之间的关系">类之间的关系</h2>
+<p>在大多数情况下，TypeScript 中的类在结构上进行比较，与其他类型相同。</p>
+<p>例如，这两个类可以相互代替，因为它们是相同的：</p>
+<pre><code class="language-typescript">class Point1 {
+  x = 0;
+  y = 0;
+}
+ 
+class Point2 {
+  x = 0;
+  y = 0;
+}
+ 
+// OK
+const p: Point1 = new Point2();
+</code></pre>
+<p>同样，即使没有显式继承，类之间的子类型关系也存在：</p>
+<pre><code class="language-typescript">class Person {
+  name: string;
+  age: number;
+}
+ 
+class Employee {
+  name: string;
+  age: number;
+  salary: number;
+}
+ 
+// OK
+const p: Person = new Employee();
+</code></pre>
+<p>这听起来很简单，但有些情况似乎比其他情况更奇怪。</p>
+<p>空类没有成员。在结构类型系统中，没有成员的类型通常是其他任何类型的超类型。所以如果你写一个空类（永远不要这么做！），任何东西都可以用来代替它：</p>
+<pre><code class="language-typescript">class Empty {}
+ 
+function fn(x: Empty) {
+  // can't do anything with 'x', so I won't
+}
+ 
+// All OK!
+fn(window);
+fn({});
+fn(fn);
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/typescript/" alt="TypeScript" >
+                        TypeScript
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VueComponent on 石塔白又大</title>
+    <link>https://uphgs.com/tags/vuecomponent/</link>
+    <description>Recent content in VueComponent on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 16 Oct 2020 10:37:01 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/vuecomponent/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用递归组件</title>
+      <link>https://uphgs.com/posts/vue/tree-component/</link>
+      <pubDate>Fri, 16 Oct 2020 10:37:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/tree-component/</guid>
+      <description>::: tip 注意
+由于需要调用自身，所以必须含有 name 这个属性，因为没有 name 这个属性会造成控件自身不能调用自身。且调用自身组件最好绑定一个 key 值，方便 Vue 重新渲染。
+:::
+假设有如下数据结构的data.js
+export default [{title: &amp;quot;标题 1&amp;quot;,content: &amp;quot;内容 1&amp;quot;,child: [{title: &amp;quot;标题 1-1&amp;quot;,content: &amp;quot;内容 1-1&amp;quot;,child: [{title: &amp;quot;标题 1-1-1&amp;quot;,content: &amp;quot;内容 1-1-1&amp;quot;}]}]},{title: &amp;quot;标题 2&amp;quot;,content: &amp;quot;内容 2&amp;quot;,}]那么组件（tree.</description>
+    </item>
+    
+  </channel>
+</rss>

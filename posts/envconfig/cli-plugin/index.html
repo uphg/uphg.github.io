@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环境搭建 - 命令行插件</title>
+<meta name="description" content="本教程只在 Windows 生效
+z 命令 z 命令是一个快捷跳转目录的命令，可以记录你每次经常进入的目录，只要输入该目录文件名即可跳转。
+首先打开 z 命令 GitHub 仓库：https://github.com/rupa/z 找一个安全的目录（此处推荐在用户目录下新建一个 GitHub 目录） cd ~/GitHub在该目录下克隆 z 命令的仓库 git clone git@github.">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/cli-plugin/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">环境搭建 - 命令行插件</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2019-09-10 21:31:23 &#43;0000 UTC" title="2019-09-10 21:31:23 &#43;0000 UTC">
+    2019-09-10
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>本教程只在 Windows 生效</p>
+<h2 id="z-命令"><code>z</code> 命令</h2>
+<p>z 命令是一个快捷跳转目录的命令，可以记录你每次经常进入的目录，只要输入该目录文件名即可跳转。</p>
+<p><img src="/images/bash-z.png" alt="cli-plugin"></p>
+<ol>
+<li>首先打开 <code>z</code> 命令 GitHub 仓库：<a href="https://github.com/rupa/z">https://github.com/rupa/z</a></li>
+<li>找一个安全的目录（此处推荐在用户目录下新建一个 GitHub 目录）</li>
+</ol>
+<pre><code class="language-sh">cd ~/GitHub
+</code></pre>
+<ol start="3">
+<li>在该目录下克隆 z 命令的仓库</li>
+</ol>
+<pre><code class="language-sh">git clone git@github.com:rupa/z.git
+</code></pre>
+<ol start="4">
+<li>进入你克隆的仓库，复制该仓库的地址</li>
+</ol>
+<pre><code class="language-sh">cd z
+pwd # /c/Users/xxx/z
+</code></pre>
+<ol start="5">
+<li>使用编辑器打开用户目录下的 <code>.bashrc</code> 文件（没有就创建一个）</li>
+</ol>
+<pre><code class="language-sh">start ~/.bashrc
+</code></pre>
+<ol start="6">
+<li>在 .bashrc 中添加以下内容</li>
+</ol>
+<pre><code class="language-sh">. ~/GitHub/z/z.sh 
+# or /c/Users/xxx/GitHub/z/z.sh
+
+alias j='z'
+</code></pre>
+<ol start="7">
+<li>运行 <code>source ~/.bashrc</code> 使命令生效</li>
+</ol>
+<h2 id="tree-命令">tree 命令</h2>
+<ol>
+<li>打开官网：<a href="http://gnuwin32.sourceforge.net/packages/tree.htm">http://gnuwin32.sourceforge.net/packages/tree.htm</a></li>
+<li>选择 Complete package, except sources 那一行下载完整包，如图：</li>
+</ol>
+<p><img src="/images/bash-tree.png" alt="cil-used"></p>
+<ol start="3">
+<li>安装成功后在用户目录下的 <code>.bashrc</code> 输入</li>
+</ol>
+<pre><code class="language-text">export PATH=&quot;$PATH:/C/Software/GnuWin32/bin&quot;
+</code></pre>
+<blockquote>
+<p>其中 $PATH: 后的路径为 tree 安装路径下的 bin 路径（注意路径中的 <code>\</code> 要修改为 <code>/</code> 格式）</p>
+</blockquote>
+<ol start="4">
+<li><code>. ~/.bashrc</code> 一下，再运行 <code>which tree</code> 如果出现了安装路径就说明成功了。</li>
+<li>使用 <code>tree .</code> 即可查看当前目录下文件。</li>
+</ol>
+<h2 id="翻译插件">翻译插件</h2>
+<p>安装</p>
+<pre><code class="language-sh">yarn global add fanyi
+# or
+npm install -g fanyi
+</code></pre>
+<p>使用</p>
+<pre><code class="language-sh">fy hi
+</code></pre>
+<h2 id="配置-git-命令">配置 git 命令</h2>
+<h3 id="git-log">git log</h3>
+<p>配置一个更直观的 git log 命令，在 <code>~/.bashrc</code> 文件中添加如下内容（用户目录下的 <code>.bashrc</code>）</p>
+<pre><code class="language-sh">alias glog=&quot;git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset' --abbrev-commit -- | less&quot;
+</code></pre>
+<p>添加后执行 <code>. ~/.bashrc</code>，然后就可以使用 glog 命令查看当前 git 仓库的历史的提交了</p>
+<p>其他命令缩写：</p>
+<pre><code class="language-text">alias gst=&quot;git status -sb&quot;
+alias ga=&quot;git add&quot;
+alias gc=&quot;git commit -v&quot;
+alias gcc=&quot;git commit . -m update&quot;
+alias gp=&quot;git push&quot;
+alias gl=&quot;git pull&quot;
+</code></pre>
+<h2 id="安装-ubuntu">安装 Ubuntu</h2>
+<p>在 Win10 的 Microsoft Store 搜索 Ubuntu 安装即可</p>
+<p>在 Ubuntu 中 Windows 目录都在 /mnt/ 下，如 c 盘为 <code>/mnt/c/</code></p>
+<h4 id="快捷打开目录">快捷打开目录</h4>
+<pre><code class="language-sh">ln -s /mnt/c/xxx/GitHub/
+</code></pre>
+<p>设置后直接使用 cd GitHub 即可打开该目录</p>
+<h4 id="打开文件管理器">打开文件管理器</h4>
+<p>默认模式下，打开当前目录要运行以下命令</p>
+<pre><code class="language-sh">explorer.exe .
+</code></pre>
+<p>你可以将 <code>explorer.exe</code> 设置为 <code>start</code>，步骤如下：</p>
+<blockquote>
+<ol>
+<li>执行 <code>vi ~/.bashrc</code> 用 vim 打开配置文件。</li>
+<li>按 <code>i</code> 然后在最下方插入 <code>alias start=&quot;explorer.exe&quot;</code>。</li>
+<li>然后运行 <code>:wq</code> 保存。</li>
+<li>就可以使用 <code>start .</code> 打开目录了。</li>
+</ol>
+</blockquote>
+<h4 id="开启-root-模式">开启 root 模式</h4>
+<p>使用 <code>sudo passwd root</code> 设置 root 的密码 (默认情况下密码在命令行不会显示)</p>
+<p>设置后输入 <code>su root</code> 输入密码进入</p>
+<h4 id="在-cmder-中添加-ubuntu">在 Cmder 中添加 Ubuntu</h4>
+<p>首先打开设置，在启动中设置以下选项</p>
+<p><img src="/images/ubuntu_01.png" alt="cil-used"></p>
+<p>然后就可以在 Cmder 中新建 Ubuntu 窗口了</p>
+<p>也可以把 Ubuntu 设置为默认启动，如下</p>
+<p><img src="/images/ubuntu_02.png" alt="cil-used"></p>
+<h2 id="常用命令">常用命令</h2>
+<h4 id="读取配置">读取配置</h4>
+<pre><code class="language-sh">source ~/.bashrc
+# 缩写
+. ~/.bashrc
+</code></pre>
+<h4 id="打开指定文件">打开指定文件</h4>
+<pre><code class="language-sh">start demo.sh
+</code></pre>
+<h4 id="配置快捷命令">配置快捷命令</h4>
+<p>将 <code>z</code> 命令赋给 j（类似变量）以后就可以使用 j 代替 <code>z</code> 命令，如下：</p>
+<pre><code class="language-sh">alias j='z'
+</code></pre>
+<h2 id="常用快捷键">常用快捷键</h2>
+<h4 id="搜索历史">搜索历史</h4>
+<p>首先按一下 <code>Ctrl</code> + <code>R</code> 然后输入命令 的一部分</p>
+<p>然后会显示历史命令，然后按住 <code>Ctrl</code> 再按 <code>R</code> 切换历史命令，直到切换到自己想要的，按方向键左右键即可退出</p>
+<p>如果是需要的命令 按方向键左右即可在当前行显示该命令</p>
+<p>如果不想搜索 使用 <code>Ctrl</code> + <code>Go</code> 退出搜索</p>
+<h4 id="删除当前行">删除当前行</h4>
+<p>按下 <code>ctrl</code> + <code>a</code> 到达命令首字母，然后再按下 <code>ctrl</code> + <code>k</code> 删除本行命令</p>
+<h4 id="其他快捷键">其他快捷键</h4>
+<ul>
+<li>光标移至行首 <code>Ctrl + A</code></li>
+<li>光标移至行尾 <code>Ctrl + E</code></li>
+<li>光标退后 <code>Ctrl + B</code></li>
+<li>光标前进 <code>Ctrl + F</code></li>
+<li>删一个单词 <code>Ctrl + W</code></li>
+<li>中断命令 <code>Ctrl + Cancel</code></li>
+<li>使用上一条命令的最后一个参数 <code>Alt + .</code></li>
+</ul>
+<p><strong>更多快捷键</strong></p>
+<p>谷歌搜索 <code>bash 快捷键</code>，推荐网址：<a href="https://linuxtoy.org/archives/bash-shortcuts.html">https://linuxtoy.org/archives/bash-shortcuts.html</a></p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" alt="命令行" >
+                        命令行
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

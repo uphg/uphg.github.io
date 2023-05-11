@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>package.json on 石塔白又大</title>
+    <link>https://uphgs.com/tags/package.json/</link>
+    <description>Recent content in package.json on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 04 Dec 2021 22:11:20 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/package.json/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>package.json 配置项</title>
+      <link>https://uphgs.com/posts/node/package-config/</link>
+      <pubDate>Sat, 04 Dec 2021 22:11:20 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/package-config/</guid>
+      <description>配置示例 ::: details 基础配置示例
+{&amp;quot;name&amp;quot;: &amp;quot;vue&amp;quot;,&amp;quot;version&amp;quot;: &amp;quot;3.2.23&amp;quot;,&amp;quot;description&amp;quot;: &amp;quot;The progressive...&amp;quot;,&amp;quot;main&amp;quot;: &amp;quot;index.js&amp;quot;,&amp;quot;module&amp;quot;: &amp;quot;dist/vue.</description>
+    </item>
+    
+  </channel>
+</rss>

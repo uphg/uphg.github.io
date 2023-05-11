@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jQuery on 石塔白又大</title>
+    <link>https://uphgs.com/tags/jquery/</link>
+    <description>Recent content in jQuery on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Tue, 16 Jun 2020 12:56:26 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/jquery/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jQuery 中的链式操作</title>
+      <link>https://uphgs.com/posts/javascript/jquery-chain-operation/</link>
+      <pubDate>Tue, 16 Jun 2020 12:56:26 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/jquery-chain-operation/</guid>
+      <description>通过实现几个 jQuery 中的常用方法来理解 jQuery 链式操作的原理。
+实现 jQuery 的 addClass 功能 假设给以下 div 添加 class
+&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;&amp;lt;div class=&amp;quot;test&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;封装一个获取元素列表的 jQuery 函数 window.</description>
+    </item>
+    
+  </channel>
+</rss>

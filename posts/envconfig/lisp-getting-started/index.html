@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisp 入门</title>
+<meta name="description" content="运行 Scheme Scheme 是 Lisp 的方言版本。
+下载 Racket 来运行 Scheme。 下载后打开 DrRacket 选择 Language &gt; 选择 Choose Language 选择 Beginning Student（初学者模式），点击 OK。 DrRacket 的使用 DrRacket 的上半部分负责命名，下半部分负责运算。上半部分修改后需要重新 run 才会生效。">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/lisp-getting-started/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Lisp 入门</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="0001-01-01 00:00:00 &#43;0000 UTC" title="0001-01-01 00:00:00 &#43;0000 UTC">
+    0001-01-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="运行-scheme">运行 Scheme</h2>
+<p>Scheme 是 Lisp 的方言版本。</p>
+<ol>
+<li>下载 <a href="https://download.racket-lang.org/">Racket</a> 来运行 Scheme。</li>
+<li>下载后打开 DrRacket 选择 Language &gt; 选择 Choose Language</li>
+</ol>
+<!-- raw HTML omitted -->
+<p><img src="/images/lisp-01.png" alt="lisp"></p>
+<!-- raw HTML omitted -->
+<ol start="3">
+<li>选择 Beginning Student（初学者模式），点击 OK。</li>
+</ol>
+<!-- raw HTML omitted -->
+<p><img src="/images/lisp-02.png" alt="lisp"></p>
+<!-- raw HTML omitted -->
+<h2 id="drracket-的使用">DrRacket 的使用</h2>
+<p>DrRacket 的上半部分负责命名，下半部分负责运算。上半部分修改后需要重新 run 才会生效。</p>
+<!-- raw HTML omitted -->
+<p><img src="/images/lisp-03.png" alt="lisp"></p>
+<!-- raw HTML omitted -->
+<h2 id="lisp-的基本语法">Lisp 的基本语法</h2>
+<p>注释写法</p>
+<pre><code class="language-lisp">(+ 1 1); 1+1 分号后就是注释
+</code></pre>
+<p>简单的四则运算</p>
+<pre><code class="language-lisp">(+ 1 2); 1+2
+(- 3 2); 3-2
+(* 4 5); 4*5
+(/ 6 2); 6/2
+</code></pre>
+<p>四则运算升级</p>
+<pre><code class="language-lisp">(+ 1 2 3); 1+2+3
+(- 3 2 1); 3-2-1
+(* 4 5 6); 4*5*6
+(/ 6 2 3); 6/2/3
+</code></pre>
+<p>小数</p>
+<pre><code class="language-lisp">(+ 1.5 2); 3.5
+.1       ; 0.1
+</code></pre>
+<p>更复杂的运算</p>
+<pre><code class="language-lisp">(+ (* 3 ( + (* 2 4) (+ 3 5) ) ) (+ (- 10 6) 7) )
+</code></pre>
+<p>如果觉得看起来乱，可以将上面的语法用树形结构书写</p>
+<pre><code class="language-lisp">(+ 
+  (* 3
+    ( +
+      (* 2 4) (+ 3 5)
+    )
+  )
+  (+ (- 10 6) 7)
+)
+</code></pre>
+<p>命名（很像变量）声明一个数字</p>
+<pre><code class="language-lisp">(define x 10)
+(* x 2); 20
+</code></pre>
+<p>复合过程（很像函数）求两个数的平方</p>
+<pre><code class="language-lisp">(define (square n) (* n n) )
+(square 10); 100
+</code></pre>
+<p>还可以结合上面的例子实现求一个数的平方和</p>
+<pre><code class="language-lisp">(define (sum-of-square x y) (+ (square x) (square y)))
+(sum-of-square 3 4); 25
+</code></pre>
+<p>代入法</p>
+<pre><code class="language-lisp">(define (f a) (sum-of-square (+ a 1) (* a 2)))
+(f 5); 136
+</code></pre>
+<p>上面的代入法求值有两种计算过程</p>
+<ol>
+<li>应用序（参数先求值，再代入过程）</li>
+<li>正常序（参数不求值，全部代入，最后求值）</li>
+</ol>
+<h2 id="条件判断">条件判断</h2>
+<p>在 Lisp 中，条件判断可以这么写，假如我们要求一个数的绝对值：</p>
+<pre><code class="language-lisp">(define x (- 6))
+(cond ((&gt; x 0) x)
+      ((= x 0) 0)
+      ((&lt; x 0) (- x)) )
+; 结果: 6
+</code></pre>
+<p>可以将它封装起来</p>
+<pre><code class="language-lisp">(define (my-abs n)
+  (cond
+    ((&gt; n 0) n)
+    ((= n 0) 0)
+    ((&lt; n 0) (- n)) ) )
+; 这样就可以执行
+(my-abs (- 6)) ; 6
+</code></pre>
+<p>还可以使用 if 来实现</p>
+<pre><code class="language-lisp">(define (my-abs n)
+  (if (&gt; n 0) n (- n)))
+</code></pre>
+<p>它的意思是，如果 n &gt; 0 就返回 n，否则就返回 <code>-n</code></p>
+<h2 id="或且非">或且非</h2>
+<p>在 Lisp 中：or 为或，and 为且，not 为非。</p>
+<p>使用 or 判断一个数为 2 或 5，是就返回 1，否则就返回 0 。</p>
+<pre><code class="language-lisp">(define (assign-or n)
+  (if
+    (or (= n 2) (= n 5)) 1 0))
+; 测试
+(assign-or 3); 0
+(assign-or 2); 1
+</code></pre>
+<p>使用 and 判断一个数是否在 1-9 之间，是就返回 1 ，否就返回 0 。</p>
+<pre><code class="language-lisp">(define (small-number n) 
+  (if
+    (and (&gt;= n 1) (&lt;= n 9)) 1 0))
+; 测试
+(small-number 0); 0
+(small-number 2); 1
+(small-number 9); 1
+</code></pre>
+<p>使用 not 判断一个数是否为大于 0 的数，是就返回 1，否则就返回 0 。</p>
+<pre><code class="language-lisp">(define (assign-not n)
+  (if
+    (not (&lt;= n 0)) 1 0))
+; 测试
+(assign-not 1); 1
+(assign-not 0.1); 1
+(assign-not 0); 0
+</code></pre>
+<p>求一个数的平方根</p>
+<p>使用 JavaScript 实现</p>
+<pre><code class="language-js">function root(n) {
+  return 盲猜(1, n)
+}
+
+function 盲猜(x, n) {
+  if(Math.abs(x*x - n) &lt; 0.001){
+    return x
+  }
+  const y = n/x
+  return 盲猜((x+y)/2, n)
+}
+
+root(2) // 1.4142156862745097
+</code></pre>
+<pre><code class="language-lisp">(define (root n)
+  (guess 1 n))
+(define (guess x n)
+  (if
+    (&lt;
+      (abs
+        (- (* x x) n) ) 0.001 )
+    x
+    (guess
+      (/
+        (+
+          (/ n x) x ) 2 ) n ) ) )
+; 测试
+(root 2); 1.4142156862745098039
+</code></pre>
+<h2 id="词法作用域">词法作用域</h2>
+<p>在 Lisp 中 如果define 中定义了 define 并且引用最外层 define 的值，就叫词法作用域（在本文的 DrRacket 中不支持）。</p>
+<pre><code class="language-lisp">(define (lexical n)
+  (define (childer x) (x * n))
+)
+</code></pre>
+<h2 id="线性递归线性迭代">线性递归&amp;线性迭代</h2>
+<h3 id="以线性递归的方式实现阶乘">以线性递归的方式实现阶乘</h3>
+<p>使用 JavaScript</p>
+<pre><code class="language-js">function f(n) {
+  if (n === 1) { return 1 }
+  return n * f(n - 1)
+}
+f(5) // 120
+</code></pre>
+<p>使用 Lisp</p>
+<pre><code class="language-lisp">(define (f n)
+  (if
+    (= n 1) 1
+    (* n (f (- n 1)))
+   ))
+; 测试
+(f 5); 120
+</code></pre>
+<p>Lisp 的线性递归示意图</p>
+<p><img src="/images/linear-recursion.png" alt="lisp"></p>
+<h3 id="以线性迭代的方式实现阶乘">以线性迭代的方式实现阶乘</h3>
+<p>使用 JavaScript</p>
+<pre><code class="language-js">function f(n) {
+  return 迭代(1, 1, n)
+}
+function 迭代(i, result, n) {
+  if (i &gt; n) { return result }
+  return 迭代(i + 1, i * result, n)
+}
+f(6) // 720
+</code></pre>
+<p>使用 Lisp</p>
+<pre><code class="language-lisp">(define (f n) (iterator 1 1 n))
+(define (iterator i result n)
+  (if 
+    (&gt; i n)
+    result
+    (iterator (+ i 1) (* i result) n)
+  )
+)
+; 测试
+(f 5); 120
+</code></pre>
+<h3 id="注意">注意</h3>
+<p>线性递归和线性迭代都是「递归」</p>
+<ul>
+<li>线性递归和线性迭代强调的是「计算过程」</li>
+<li>「递归」表示函数调用自己这种「形式」</li>
+</ul>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

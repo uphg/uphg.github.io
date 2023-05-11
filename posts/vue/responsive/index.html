@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vue 数据响应式原理（2.x）</title>
+<meta name="description" content="在理解 Vue 数据响应式之前，首先要理解一些 ES6 之后的新语法，如 getter、setter、Object.defineProperty()。
+getter 可以给对象的属性设置获取时的值，通过函数 return 的方式返回。
+let object = {姓: &#39;张&#39;,名: &#39;三&#39;,get 姓名() {return this.">
+<link rel="canonical" href="https://uphgs.com/posts/vue/responsive/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Vue 数据响应式原理（2.x）</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2020-11-28 14:05:00 &#43;0800 CST" title="2020-11-28 14:05:00 &#43;0800 CST">
+    2020-11-28
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>在理解 Vue 数据响应式之前，首先要理解一些 ES6 之后的新语法，如 <code>getter</code>、<code>setter</code>、<code>Object.defineProperty()</code>。</p>
+<h2 id="getter">getter</h2>
+<p>可以给对象的属性设置获取时的值，通过函数 return 的方式返回。</p>
+<pre><code class="language-js">let object = {
+  姓: '张',
+  名: '三',
+  get 姓名() {
+    return this.姓 + this.名
+  }
+}
+console.log(object.姓名) // 张三
+</code></pre>
+<h2 id="setter">setter</h2>
+<p>可以给对象的属性设置一个修改该属性时所做的操作，依然是一个函数，函数的第一个参数就是修改时赋给该属性的新值。</p>
+<pre><code class="language-js">let object = {
+  姓: '张',
+  名: '三',
+  set 姓名(value) {
+    this.姓 = value[0]
+    this.名 = value.substring(1)
+  }
+}
+object.姓名 = '李四'
+console.log(object.姓) // 李
+console.log(object.名) // 四
+</code></pre>
+<h2 id="getter--setter">getter + setter</h2>
+<p>通常情况下，我们习惯将两个属性结合起来使用，如下：</p>
+<pre><code class="language-js">let object = {
+  姓: '张',
+  名: '三',
+  get 姓名() {
+    return this.姓 + this.名
+  },
+  set 姓名(value) {
+    this.姓 = value[0]
+    this.名 = value.substring(1)
+  }
+}
+object.姓名 = '王五'
+console.log(object.姓名)
+</code></pre>
+<h2 id="objectdefineproperty"><code>Object.defineProperty()</code></h2>
+<p>有时候在声明对象后，又想给对象添加一个带有 getter 和 setter 的值。这时候就需要使用 <code>Object.defineProperty()</code></p>
+<p>它接受三个参数，第一个是要添加的对象，第二个是要添加的对象的属性，第三个是由 getter 和 setter 两个属性组成的对象（注：此处的 getter 和 setter 后不需要再加属性名），示例：</p>
+<pre><code class="language-js">let object = { name: '张三' }
+let _email = '123@xx.com'
+Object.defineProperty(object, 'email', {
+  get() {
+    return _email
+  },
+  set(value) {
+    _email = value
+  }
+})
+console.log(object.email) // 123@xx.com
+object.email = '5885653362@qq.com'
+console.log(object.email) // 5885653362@qq.com
+</code></pre>
+<p>上面的代码还有一个缺陷，就是每次都要再次声明一个变量 <code>_email</code> 来存储真实 <code>email</code> 的值，我们可以通过以下的代理函数来解决这个问题。</p>
+<h2 id="objectdefineproperty-实现代理"><code>Object.defineProperty</code> 实现代理</h2>
+<p><strong>假如要实现一个限制输入的数字不能小于 0 的需求</strong></p>
+<p>我们可以封装如下函数</p>
+<pre><code class="language-js">let data = proxy({ data: {n: 0}}) // 生成一个匿名对象，外部无法访问
+// 将 data 解构赋值，传入函数
+function proxy({data}) {
+  const object = {}
+  // 使用 defineProperty 代理 data 中的每一个属性
+  // 此处应该是循环遍历对象的每一个属性，为了简化代码暂时省略。
+  Object.defineProperty(object, 'n', {
+    get() {
+      return data.n
+    },
+    set(value) {
+      if(value &lt; 0) return
+      data.n = value
+    }
+  })
+  return object
+}
+
+// 此时设置 data 的值
+data.n = -1
+console.log(data.n) // 修改失败，返回 0
+data.n = 1
+console.log(data.n) // 修改成功，返回 1
+</code></pre>
+<p>但是如果传入一个命名对象，那么还是可以修改 <code>data</code> 的属性为 <code>-1</code>，如下</p>
+<pre><code class="language-js">let myData = {n: 0}
+let data = proxy({ data: myData })
+
+console.log(data.n) // 0
+myData.n = -1
+console.log(data.n) // -1
+</code></pre>
+<p>这时候就要实现一个即使传入命名对象，也可以限制该对象的属性。只要在原有的代码上添加对原对象也使用 <code>Object.defineProperty</code> 代理，该代理会直接覆盖对象的默认属性的 getter 和 setter</p>
+<pre><code class="language-js{5-15}">let myData = {n: 0}
+let data = proxy({ data: myData })
+
+function proxy({data}) {
+  let value = data.n
+  delete data.n // 此行可以删掉，因为通过 defineProperty 设置属性时会覆盖存在的值
+  Object.defineProperty(data, 'n', {
+    get() {
+      return value
+    },
+    set(newValue) {
+      if (newValue &lt; 0) return
+      value = newValue
+    }
+  })
+
+  const object = {}
+  Object.defineProperty(object, 'n', {
+    get() {
+      return data.n
+    },
+    set(value) {
+      if (value &lt; 0) return // 此行可以删掉，因为上面已经做了一次判断进行限制
+      data.n = value
+    }
+  })
+
+  return object
+}
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>Vue 数据响应式实现的原理，基本上就是 通过 <code>Object.defineProperty</code> 的 <code>getter</code> 和 <code>setter</code> 劫持数据。并拷贝一个数据实现的。</p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/vue/" alt="Vue" >
+                        Vue
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

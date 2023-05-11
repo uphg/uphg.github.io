@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>博客系统搭建</title>
+<meta name="description" content="使用 Next.js &#43; TypeORM 搭建博客系统
+创建三个表 博客系统应该最少包含三个表 User、Post、Comment 分别表示用户、博客、评论
+User 表
+@Entity(&#39;users&#39;)export class User {@PrimaryGeneratedColumn(&#39;increment&#39;)id: string;@Column(&#39;varchar&#39;)username: string;@Column(&#39;varchar&#39;)passwordDigest: string;@CreateDateColumn()createdAt: Date;@UpdateDateColumn()updatedAt: Date;}Post 表">
+<link rel="canonical" href="https://uphgs.com/posts/node/blog-system-building/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">博客系统搭建</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-05-08 19:35:07 &#43;0800 CST" title="2022-05-08 19:35:07 &#43;0800 CST">
+    2022-05-08
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>使用 Next.js + TypeORM 搭建博客系统</p>
+<h2 id="创建三个表">创建三个表</h2>
+<p>博客系统应该最少包含三个表 User、Post、Comment 分别表示用户、博客、评论</p>
+<p>User 表</p>
+<pre><code class="language-ts">@Entity('users')
+export class User {
+  @PrimaryGeneratedColumn('increment')
+    id: string;
+  @Column('varchar')
+    username: string;
+  @Column('varchar')
+    passwordDigest: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+}
+</code></pre>
+<p>Post 表</p>
+<pre><code class="language-ts">@Entity('posts')
+export class Post {
+  @PrimaryGeneratedColumn('increment')
+    id: string;
+  @Column('varchar')
+    title: string;
+  @Column('text')
+    content: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+}
+</code></pre>
+<p>Comment 表</p>
+<pre><code class="language-ts">@Entity('comments')
+export class Comment {
+  @PrimaryGeneratedColumn('increment')
+    id: number;
+  @Column('text')
+    content: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+}
+</code></pre>
+<h2 id="创建数据库关联">创建数据库关联</h2>
+<p>三个表之间的关联关系</p>
+<pre><code>users
+a user has many post
+a user has many comments
+
+posts
+a post belongs to a user
+a post has many comments
+
+comments
+a comment belongs to a user
+a comment belongs to a post
+</code></pre>
+<p>对应</p>
+<pre><code>用户
+一个用户有很多文章
+一个用户有很多评论
+
+文章
+一篇文章属于一个用户
+一篇文章有很多评论
+
+评论
+一个评论属于一个用户
+一个评论属于一篇文章
+</code></pre>
+<p><strong>添加它们的关联</strong></p>
+<p>User</p>
+<pre><code class="language-ts">@Entity('users')
+export class User {
+  @PrimaryGeneratedColumn('increment')
+    id: string;
+  @Column('varchar')
+    username: string;
+  @Column('varchar')
+    passwordDigest: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+  @OneToMany('Post', 'author')
+    posts: Post[];
+  @OneToMany('Comment', 'user')
+    comments: Comment[];
+}
+</code></pre>
+<p>Post</p>
+<pre><code class="language-ts">@Entity('posts')
+export class Post {
+  @PrimaryGeneratedColumn('increment')
+    id: string;
+  @Column('varchar')
+    title: string;
+  @Column('text')
+    content: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+  @ManyToOne('User', 'posts')
+    author: User;
+  @OneToMany('Comment', 'post')
+    comments: Comment[];
+}
+</code></pre>
+<p>Comments</p>
+<pre><code class="language-ts">@Entity('comments')
+export class Comment {
+  @PrimaryGeneratedColumn('increment')
+    id: number;
+  @Column('text')
+    content: string;
+  @CreateDateColumn()
+    createdAt: Date;
+  @UpdateDateColumn()
+    updatedAt: Date;
+  @ManyToOne('User', 'comments')
+    user: User;
+  @ManyToOne('Post', 'comments')
+    post: Post;
+}
+</code></pre>
+<h2 id="获取博客列表">获取博客列表</h2>
+<p>通过 TypeORM 连接数据库，获取博客列表数据</p>
+<p>封装 getDataSource，方便在 Next.js 中连接数据库</p>
+<pre><code class="language-ts">import { AppDataSource } from &quot;src/data-source&quot;
+
+export const getDataSource = async () =&gt; {
+  if (AppDataSource.isInitialized) {
+    return AppDataSource
+  } else {
+    return AppDataSource.initialize()
+  }
+}
+</code></pre>
+<p>获取分页的博客列表</p>
+<pre><code class="language-ts">const myDataSource = await getDataSource()
+const [posts, count] = await myDataSource.manager.findAndCount(Post, {
+  skip: (page - 1) * perPage,
+  take: perPage
+})
+</code></pre>
+<h2 id="创建博客">创建博客</h2>
+<p><strong>处理未登录</strong></p>
+<ol>
+<li>后端发现未登录返回 401</li>
+<li>前端发现 401 提示用户未登录，跳转登录页，并在登录页的 url 上 添加 returnTo 参数，方便登陆后退回当前页面</li>
+<li>前端登录成功后，再次返回 returnTo 所指的页面</li>
+</ol>
+<p><strong>复用 React 组件页面</strong></p>
+<p>假如有一个 about.jsx 组件文件</p>
+<pre><code class="language-js">function About() {
+  return &lt;div&gt;About&lt;/div&gt;
+}
+
+export default About
+</code></pre>
+<p>index.jsx 想要复用该组件，可直接引用该组件并导出</p>
+<pre><code class="language-js">import About from './about.jsx'
+export default About
+</code></pre>
+<h2 id="分页怎么做">分页怎么做</h2>
+<ol>
+<li>获取查询参数 page = n</li>
+<li>计算 skip: (N - 1) * perPage 和 take: perPage</li>
+<li>把数据、count、perPage、page 传给页面</li>
+<li>前端显示数据、count、page</li>
+</ol>
+<p>perPage：每页多少个
+skip：跳过的数量
+take：获取多少个</p>
+<h2 id="docker-化">docker 化</h2>
+<p>参考 Node.js <a href="https://nodejs.org/zh-cn/docs/guides/nodejs-docker-webapp/">官方文档</a></p>
+<p>创建 Dockerfile <code>touch Dockerfile</code> 添加以下内容</p>
+<pre><code class="language-sh">FROM node:12
+
+# Create app directory
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+COPY yarn*.lock ./
+
+RUN yarn install
+
+# Bundle app source
+COPY . .
+
+EXPOSE 3000
+
+CMD [ &quot;yarn&quot;, &quot;start&quot; ]
+</code></pre>
+<p>添加排除配置 <code>.dockerignore</code> 防止复制镜像时复制无用文件</p>
+<pre><code class="language-sh">node_modules
+*.log
+</code></pre>
+<p>创建一个网络，参考<a href="https://docs.docker.com/engine/reference/commandline/network/">官方文档</a></p>
+<pre><code class="language-sh">docker network create network1
+</code></pre>
+<p>运行数据库容器时指定该网络，并将数据库命名为 psql1</p>
+<pre><code class="language-sh">docker run --net=network1 --name=psql1 -v &quot;/$PWD/blog-data&quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+</code></pre>
+<p>打包当前 Next.js 项目</p>
+<pre><code class="language-sh">yarn build
+</code></pre>
+<p>进入根目录，构建你的镜像</p>
+<pre><code class="language-sh">docker build . -t jack/node-web-app
+</code></pre>
+<p>运行镜像</p>
+<pre><code class="language-sh">docker run --name=node1 --network=network1 -p 3000:3000 -dit jack/node-web-app
+</code></pre>
+<p>查看当前镜像运行状态</p>
+<pre><code class="language-sh">docker logs node1
+</code></pre>
+<p>修改 TypeORM 的 host 配置</p>
+<pre><code class="language-ts">export const AppDataSourceOptions: DataSourceOptions = {
+  host: &quot;psql1&quot;,
+  port: 5432,
+  ...
+}
+
+export const AppDataSource = new DataSource(AppDataSourceOptions)
+</code></pre>
+<h2 id="将项目上传到阿里云">将项目上传到阿里云</h2>
+<p>购买一个阿里云服务器 ECS，购买后复制该服务器的公网IP，打开 bash 命令，添加以下内容</p>
+<pre><code class="language-sh">ssh root@&lt;IP&gt;
+</code></pre>
+<p>运行后会提示你输入密码，密码就是阿里云服务器 root 账户的密码</p>
+<h3 id="使用-ssh-登录机器">使用 ssh 登录机器</h3>
+<p>运行快捷命令复制你的 ssh 公钥到服务器</p>
+<pre><code class="language-sh"># 运行以下命令，将当前机器 ssh copy 至
+ssh-copy-id root@&lt;IP&gt;
+</code></pre>
+<p>如果失败，按照如下方式可以手动复制</p>
+<p>首先使用命令登录远程服务器</p>
+<pre><code class="language-sh"># 复制当前主机公钥
+cat ~/.ssh/id_rsa.pub
+
+# 登录远程服务器
+ssh root@&lt;IP&gt;
+
+# 进入远程服务器的 ssh 配置
+cd ~/.ssh
+
+# 编辑 authorized_keys，将当前主机的公钥复制至该文件即可
+vi authorized_keys
+</code></pre>
+<h2 id="添加-hosts-配置">添加 hosts 配置</h2>
+<p>打开目录 <code>c/Windows/System32/drivers/etc</code></p>
+<p>添加示例：<code>116.62.24.71 dev1</code></p>
+<p>添加后就可以使用 <code>ssh root@dev1</code> 方式登录远程服务器</p>
+<h2 id="在服务器上创建用户">在服务器上创建用户</h2>
+<p>默认使用 root 用户操作权限过大，所以我们需要单独创建一个用户用于操作 blog</p>
+<p>在远程服务器运行</p>
+<pre><code class="language-sh"># 创建 blog 用户
+adduser blog
+
+# 切换至 blog 用户
+su - blog
+
+# 修改 blog 用户密码
+passwd blog
+
+# 添加 ssh 公钥
+cd ~
+mkdir .ssh
+cd .ssh
+touch authorized_keys
+vi authorized_keys
+# 粘贴自己的 ssh 公钥
+</code></pre>
+<h2 id="用-root-安装-docker">用 root 安装 docker</h2>
+<p>参考<a href="https://docs.docker.com/engine/install/ubuntu/">官方文档</a>，在 服务器的 root 用户下安装 ubuntu 版本的 docker</p>
+<p>注意在运行 apt-get instal 时按照以下命令指定版本安装</p>
+<pre><code class="language-sh">apt-get install docker-ce=5:19.03.12~3-0~ubuntu-bionic docker-ce-cli=5:19.03.12~3-0~ubuntu-bionic containerd.io=1.2.13-2 docker-compose-plugin=2.5.0~ubuntu-bionic
+</code></pre>
+<h2 id="将-blog-用户加到-docker-分组">将 blog 用户加到 docker 分组</h2>
+<pre><code class="language-sh"># 进入 blog 用户
+su - blog
+
+# 查看是否存在 docker
+which docker
+
+# linux list all groups
+cat /etc/group
+
+# Ctrl + D
+logout
+
+# linux add user to group
+usermod -a -G docker blog
+
+# 再次进入 blog
+su - blog
+
+# 运行 docker
+docker run hello-world
+</code></pre>
+<h2 id="使用-git-clone-下载代码">使用 git clone 下载代码</h2>
+<p>给 blog 用户生成 ssh key</p>
+<pre><code class="language-sh">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;
+</code></pre>
+<p>在你的 GitHub 账户添加该 ssh key</p>
+<h2 id="运行-blog-中的-项目">运行 blog 中的 项目</h2>
+<p>参考 Node.js <a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions">官方文档</a>在 Ubuntu 中安装 Node.js，在运行安装命令后，它会提示你是否需要安装 yarn，内容如下</p>
+<pre><code class="language-sh">## Run `sudo apt-get install -y nodejs` to install Node.js 14.x and npm
+## You may also need development tools to build native addons:
+     sudo apt-get install gcc g++ make
+## To install the Yarn package manager, run:
+     curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg &gt;/dev/null
+     echo &quot;deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main&quot; | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update &amp;&amp; sudo apt-get install yarn
+</code></pre>
+<p>按照它的提示内容安装 yarn</p>
+<p>在 blog 用户根目录下创建 blog-data 目录，表示当前数据库目录</p>
+<pre><code class="language-sh"># 查看相关命令运行历史
+history | grep 'docker run'
+
+# 在当前服务器创建数据库
+docker run --net=network1 --name=psql1 -v /home/blog/blog-data/:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.2
+</code></pre>
+<h2 id="配置环境变量">配置环境变量</h2>
+<pre><code class="language-sh"># 查看当前环境变量
+env
+
+# 指定当前 NODE_ENV 环境变量
+export NODE_ENV=production
+
+# 输入当前命令按 Tab
+vi ~/.bash
+
+# 编辑 .bashrc，在第一行添加 export NODE_ENV=production
+vi ~/.bashrc
+
+# 查看是否存在 NODE_ENV
+echo $NODE_ENV
+</code></pre>
+<p>安装后按照 README 文档步骤运行数据库和当前 Next.js 项目</p>
+<h2 id="添加阿里云安全策略">添加阿里云安全策略</h2>
+<p>打开 云服务器 ECS 控制台，选择当前实例的 操作 -&gt; 更多 -&gt; 网络和安全组 -&gt; 安全组配置，进入后选择 配置规则 -&gt; 手动添加</p>
+<p>添加时选择 协议类型：自定义TCP（默认），端口范围：3000。</p>
+<h2 id="自动化部署">自动化部署</h2>
+<p>开启服务器</p>
+<p>移动服务器中的当前项目至 app 目录</p>
+<pre><code class="language-bash">mv -f nextjs-blog-demo/* ./
+mv -f nextjs-blog-demo/.* ./
+</code></pre>
+<p>在 package.json 中添加 babel 打包命令</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;concurrently \&quot;next dev\&quot; \&quot;yarn compile:watch\&quot;&quot;,
+    &quot;compile:watch&quot;: &quot;babel -w ./src --out-dir dist --extensions .ts,.tsx&quot;,
+    &quot;compile&quot;: &quot;babel ./src --out-dir dist --extensions .ts,.tsx&quot;,
+    ...
+  },
+  ...
+}
+</code></pre>
+<p>创建自动化部署命令</p>
+<pre><code class="language-bash">echo 'start';
+docker start psql1 &amp;&amp; # 启动服务器
+cd /home/blog/app/ &amp;&amp;
+git pull origin main &amp;&amp;
+yarn install --production=false &amp;&amp;
+yarn build &amp;&amp;
+yarn compile &amp;&amp;
+yarn m:run &amp;&amp;
+docker build -t jack/node-web-app . &amp;&amp;
+docker kill app &amp;&amp;
+docker rm app &amp;&amp;
+docker run --name=app --net=host -p 3000:3000 -dit jack/node-web-app &amp;&amp;
+echo 'OK!'
+</code></pre>
+<h2 id="报错">报错</h2>
+<p>解决 <code>CannotExecuteNotConnectedError: Cannot execute operation on &quot;default&quot; connection because connection is not yet established.</code> 报错：</p>
+<p>检查当前使用数据库是否创建，未创建去创建一个</p>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

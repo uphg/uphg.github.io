@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>域名申请教程</title>
+<meta name="description" content="服务商配置 在 www.namesilo.com 上注册一个账号（注册信息需为英文） 选择一个域名，并使用支付宝购买。 配置 DNS 关联 github 的 ip 地址（A），并关联 www 子域（CNAME） 选择 Manage My Domains （管理我的域名）可配置域名相关设置">
+<link rel="canonical" href="https://uphgs.com/posts/domain-name-application/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">域名申请教程</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-11-12 11:01:57 &#43;0800 CST" title="2021-11-12 11:01:57 &#43;0800 CST">
+    2021-11-12
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="服务商配置">服务商配置</h2>
+<ol>
+<li>在 <a href="https://www.namesilo.com/">www.namesilo.com</a> 上注册一个账号（注册信息需为英文）</li>
+<li>选择一个域名，并使用支付宝购买。</li>
+<li>配置 DNS 关联 github 的 ip 地址（<code>A</code>），并关联 www 子域（<code>CNAME</code>）</li>
+</ol>
+<blockquote>
+<p>选择 Manage My Domains （管理我的域名）可配置域名相关设置</p>
+</blockquote>
+<p>DNS 配置示例</p>
+<table>
+<thead>
+<tr>
+<th>HOSTNAME</th>
+<th>TYPE</th>
+<th>ADDRESS / VALUE</th>
+<th>DISTANCE/PRIO</th>
+<th>TTL</th>
+<th>SERVICE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>A</td>
+<td>123.189.108.123</td>
+<td>NA</td>
+<td>8808*****</td>
+<td>3rd-party</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>123.189.109.123</td>
+<td>NA</td>
+<td>8808*****</td>
+<td>3rd-party</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>123.189.110.123</td>
+<td>NA</td>
+<td>8808*****</td>
+<td>3rd-party</td>
+</tr>
+<tr>
+<td></td>
+<td>A</td>
+<td>123.189.111.123</td>
+<td>NA</td>
+<td>8808*****</td>
+<td>3rd-party</td>
+</tr>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>example.github.io</td>
+<td>NA</td>
+<td>8808*****</td>
+<td>3rd-party</td>
+</tr>
+</tbody>
+</table>
+<h2 id="github-配置">GitHub 配置</h2>
+<ol>
+<li>在 GitHub 中新建一个 <code>你的用户名.github.io</code> 仓库</li>
+<li>选择 Settings -&gt; Pages ，在 Custom domain 选项中配置你的自定义域名（例：<code>example.com</code>）</li>
+<li>配置自定义域名 ip，参考：<a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site">管理 GitHub Pages 站点的自定义域</a></li>
+</ol>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

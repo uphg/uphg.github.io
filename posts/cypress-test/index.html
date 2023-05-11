@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cypress 自动化测试</title>
+<meta name="description" content="自动化测试的好处 用代码来模拟键盘、鼠标操作，方便多个页面，多次重复测试。
+为什么以前自动化测试不流行 以前浏览器对自动化的支持不友好，如 IE 自动化测试框架 API 不友好，有很大的学习成本，如 selenium 为什么现在可以做自动化测试 支持 Headless（无界面）的浏览器变多，方便测试 一些自动化测试框架的 API（Cypress）非常友好 Cypress 自带丰富的测试样例 Cypress 简介 版本 v1.">
+<link rel="canonical" href="https://uphgs.com/posts/cypress-test/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Cypress 自动化测试</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2022-03-21 20:33:07 &#43;0800 CST" title="2022-03-21 20:33:07 &#43;0800 CST">
+    2022-03-21
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="自动化测试的好处">自动化测试的好处</h2>
+<p>用代码来模拟键盘、鼠标操作，方便多个页面，多次重复测试。</p>
+<h2 id="为什么以前自动化测试不流行">为什么以前自动化测试不流行</h2>
+<ul>
+<li>以前浏览器对自动化的支持不友好，如 IE</li>
+<li>自动化测试框架 API 不友好，有很大的学习成本，如 selenium</li>
+</ul>
+<h2 id="为什么现在可以做自动化测试">为什么现在可以做自动化测试</h2>
+<ul>
+<li>支持 Headless（无界面）的浏览器变多，方便测试</li>
+<li>一些自动化测试框架的 API（Cypress）非常友好</li>
+<li>Cypress 自带丰富的测试样例</li>
+</ul>
+<h2 id="cypress-简介">Cypress 简介</h2>
+<h3 id="版本">版本</h3>
+<ul>
+<li>v1.0.0 - 2017 年 10 月，基于 Electron（Chromium + Node.js），多平台支持，但不支持 IE</li>
+<li>v2.0.0 - 2018 年 2 月，升级至 Chromium 59</li>
+<li>v3.0.0 - 2018 年 5 月，支持 Node 任务，可以用来连接数据库、读文件等</li>
+<li>v4.0.0 - 2020 年 2 月，支持 Firefox 和基于 Chromium 的 Edge 浏览器</li>
+</ul>
+<h3 id="cypress-优点">Cypress 优点</h3>
+<ul>
+<li>界面美观友好</li>
+<li>支持模拟手机</li>
+<li>每一步操作截图</li>
+<li>全程录屏</li>
+<li>支持 debug，随时暂停</li>
+<li>自动等待 UI 更新，减少异步代码（减少 await 写法）</li>
+</ul>
+<h2 id="安装">安装</h2>
+<p><strong>用命令行安装</strong></p>
+<pre><code class="language-sh">yarn add -D cypress
+# or npm i -D cypress
+</code></pre>
+<p>如果未翻墙，需要将 <code>*.cypress.io</code> 添加到代理规则列表</p>
+<p><strong>用本地压缩包 + 命令行安装</strong></p>
+<p>如果没办法翻墙，可以先<a href="https://docs.cypress.io/guides/getting-started/installing-cypress#Direct-download">下载 cypress.zip</a> 压缩包，然后在安装命令前添加 <code>CYPRESS_INSTALL_BINARY=/绝对路径/cypress.zip</code>，示例</p>
+<pre><code class="language-sh">CYPRESS_INSTALL_BINARY=/d/Jack/Downloads/cypress.zip npm install -D cypress
+</code></pre>
+<h2 id="运行-cypress">运行 Cypress</h2>
+<p><strong>启动</strong></p>
+<ul>
+<li>用 VSCode 或者命令行打开安装 cypress 的目录</li>
+<li>输入 <code>./node_modules/.bin/cypress open</code></li>
+<li>然后你就会看到 Cypress 的界面</li>
+<li>可能会提示你是否要安装示例文件</li>
+<li>同时 Cypress 会创建 cypress.json 文件</li>
+</ul>
+<p><strong>启动单个测试用例</strong></p>
+<pre><code class="language-sh">./node_modules/.bin/cypress run --spec cypress/integration/1-getting-started/todo.spec.js
+
+# 使用 --headed 参数查看测试用例运行过程
+</code></pre>
+<p><strong>不运行 examples 目录</strong></p>
+<p>在 cypress.json 里面添加如下配置</p>
+<pre><code class="language-json">{
+  &quot;ignoreTestFiles&quot;: [
+    &quot;*.hot-update.js&quot;, &quot;**/examples/*.*&quot;
+  ]
+}
+</code></pre>
+<p>创建一个测试 demo</p>
+<pre><code class="language-js">describe('百度', () =&gt; {
+  it('可以搜索 MDN', () =&gt; {
+    cy.visit('https://www.baidu.com/')
+    cy.get('input#kw').type('MDN') // 搜索框输入MDN
+    cy.get('input#su').click() // 点击百度一下
+    cy.contains('MDN').should('exist')
+    cy.contains('developer.mozilla.org').should('exist')
+  })
+})
+</code></pre>
+<p>运行 <code>./node_modules/.bin/cypress run</code></p>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/cypress/" alt="Cypress" >
+                        Cypress
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

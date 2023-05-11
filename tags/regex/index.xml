@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>regex on 石塔白又大</title>
+    <link>https://uphgs.com/tags/regex/</link>
+    <description>Recent content in regex on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 12 Feb 2021 18:15:22 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/regex/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>正则表达式入门</title>
+      <link>https://uphgs.com/posts/envconfig/regexp-started/</link>
+      <pubDate>Fri, 12 Feb 2021 18:15:22 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/regexp-started/</guid>
+      <description>相关链接 内容参考：正则表达式30分钟入门教程 正则验证：在线正则验证器(JavaScript) 入门 \b 是正则表达式规定的一个特殊代码（元字符），代表着单词的开头或结尾，也就是单词的分界处。
+如果需要更精确的说法，\b 匹配这样的位置：它的前一个字符和后一个字符不全是（一个是,一个不是或不存在）\w。
+假如要精确地查找 hi 这个单词，如下
+假如要找 hi 后面不远处跟着的一个 Lucy 的内容，如下</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React Redux</title>
+<meta name="description" content="GitHub 案例链接 使用 Vanilla JS &#43; Redux 实现简单加减 使用 React &#43; Redux 实现加减 使用 React-Redux 实现加减 Vanilla JS Vanilla JS 是一个快速，轻量级，跨平台的框架，用于构建功能强大的 JavaScript 应用程序。">
+<link rel="canonical" href="https://uphgs.com/posts/react/redux/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">React Redux</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-01-28 11:20:01 &#43;0800 CST" title="2021-01-28 11:20:01 &#43;0800 CST">
+    2021-01-28
+</time>
+      
+        —
+        
+            <a class="hover:text-gray-500" href="/categories/%E5%89%8D%E7%AB%AF/" alt="前端" >
+                前端
+                </a>
+        
+
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="github-案例链接">GitHub 案例链接</h2>
+<ul>
+<li><a href="https://github.com/uphg/react-component-demo/blob/master/src/index-redux.html">使用 Vanilla JS + Redux 实现简单加减</a></li>
+<li><a href="https://github.com/uphg/react-redux-demo/blob/1465d7e7dfbc006b6fcdbe121a0813f23ff27bcc/src/index.js">使用 React + Redux 实现加减</a></li>
+<li><a href="https://github.com/uphg/react-redux-demo/blob/master/src/index.js">使用 React-Redux 实现加减</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="vanilla-jshttpvanilla-jscom"><a href="http://vanilla-js.com/">Vanilla JS</a></h2>
+<p>Vanilla JS 是一个快速，轻量级，跨平台的框架，用于构建功能强大的 JavaScript 应用程序。</p>
+<p>谁在使用 Vanilla JS：</p>
+<p>Facebook	Google	YouTube	Yahoo	Wikipedia	Windows Live	Twitter	Amazon	LinkedIn	MSN
+eBay	Microsoft	Tumblr	Apple	Pinterest	PayPal	Reddit	Netflix	Stack Overflow&hellip;</p>
+<blockquote>
+<!-- raw HTML omitted -->
+</blockquote>
+<h2 id="redux-api">Redux API</h2>
+<h3 id="reducer-函数">reducer 函数</h3>
+<p>用于处理所有事件</p>
+<pre><code class="language-js">function reducer(state = 0, action) {
+  switch (action.type) {
+    case '点击添加':
+      return state + action.payload
+    case '点击减少':
+      return state - action.payload
+    default:
+      return state
+  }
+}
+</code></pre>
+<h3 id="store">store</h3>
+<p>存储数据的状态</p>
+<pre><code class="language-js">const store = Redux.createStore(reducer)
+</code></pre>
+<h3 id="storesubscriberender">store.subscribe(render)</h3>
+<p>监听数据，每次数据发生变化时执行</p>
+<pre><code class="language-js">store.subscribe(render)
+</code></pre>
+<h3 id="storedispatchactive--type-payload-">store.dispatch(active: { type, payload })</h3>
+<p>添加事件，通知 reducer 执行该事件</p>
+<pre><code class="language-js">store.dispatch({ type: '点击添加', payload: 1 })
+</code></pre>
+<h2 id="使用-redux">使用 Redux</h2>
+<p>安装</p>
+<pre><code class="language-sh">yarn add redux
+</code></pre>
+<p>在项目中引入</p>
+<pre><code class="language-js">import { createStore } from 'redux'
+
+const stateChange = (state = 0, action) =&gt; {
+  if (action.type === 'add') {
+    return state + action.payload
+  } else {
+    return state
+  }
+}
+
+const store = createStore(stateChange)
+
+// 常用API
+store.subscribe()    // 数据变化时执行，接受一个函数体
+store.getState()     // 获取 store 最新的状态
+store.dispatch()     // 添加事件，接收参数：action: { type: 'add', payload: 1 }
+</code></pre>
+<h2 id="使用-react-redux">使用 React-Redux</h2>
+<p>官方文档：<a href="https://react-redux.js.org/">https://react-redux.js.org/</a></p>
+<p>解释 connect 函数</p>
+<pre><code class="language-js">function connect(a) {
+  return function fn(b) {
+    console.log(a + b)
+  }
+}
+connect(1)(2)
+</code></pre>
+<h3 id="在项目中添加-react-redux">在项目中添加 React-Redux</h3>
+<p>React-Redux 相比 Redux 新增了一些 React 相关的组件及 API，是专为 React 开发的 Redux</p>
+<p>安装</p>
+<pre><code class="language-sh">yarn add react-redux
+#or npm install react-redux
+</code></pre>
+<p>index.js 引入 React-Redux</p>
+<pre><code class="language-jsx">import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
+const stateChange = (state = { number: 0 }, action) =&gt; {
+  if (action.type === 'add') {
+    return { number: state.number + action.payload }
+  } else if( action.type === 'back') {
+    return { number: state.number - action.payload }
+  } else {
+    return state
+  }
+}
+
+const store = createStore(stateChange)
+
+ReactDOM.render(
+  &lt;Provider store={store}&gt;
+    &lt;React.StrictMode&gt;
+      &lt;App /&gt;
+    &lt;/React.StrictMode&gt;
+  &lt;/Provider&gt;,
+  document.getElementById('root')
+)
+</code></pre>
+<p>中间组件 App.js</p>
+<pre><code class="language-jsx">import Box from './Box.js'
+import { Component } from 'react'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;div className=&quot;App&quot;&gt;
+        &lt;Box /&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+export default App
+</code></pre>
+<p>Box.js 组件</p>
+<pre><code class="language-jsx">import { Component } from 'react';
+import { connect } from 'react-redux'
+
+class Box extends Component {
+  render() {
+    return (
+      &lt;div className=&quot;Box&quot;&gt;
+        &lt;p className=&quot;message&quot;&gt;
+          {this.props.message}
+        &lt;/p&gt;
+        &lt;div&gt;
+          &lt;button
+            className=&quot;margin-right-10&quot;
+            onClick={() =&gt; { this.props.add() }}
+          &gt;点击加一&lt;/button&gt;
+          &lt;button
+            onClick={() =&gt; { this.props.back() }}
+          &gt;点击减一&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    )
+  }
+}
+
+// mapStateToProps 获取需要的 store 映射到当前组件的 this.props中
+function mapStateToProps(state) {
+  return {
+    message: state.number
+  }
+}
+
+// mapDispatchToProps 传入多个 dispatch。
+function mapDispatchToProps(dispatch) {
+  return {
+    add: () =&gt; dispatch({ type: 'add', payload: 1 }),
+    back: () =&gt; dispatch({ type: 'back', payload: 1 })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Box);
+</code></pre>
+<p>mapDispatchToProps 的其他写法</p>
+<pre><code class="language-js">const mapDispatchToProps = {
+  add: () =&gt; {
+    return { type: 'add', payload: 1 }
+  },
+  back: () =&gt; {
+    return { type: 'back', payload: 1 }
+  }
+}
+</code></pre>
+<blockquote>
+<p><code>connect()()</code> 的作用：封装 React 组件，添加传入的 store</p>
+</blockquote>
+<blockquote>
+<p>代码地址：<a href="https://github.com/uphg/react-redux-demo">https://github.com/uphg/react-redux-demo</a></p>
+</blockquote>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/react/" alt="React" >
+                        React
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

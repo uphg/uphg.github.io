@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>JavaScript on 石塔白又大</title>
+    <link>https://uphgs.com/tags/javascript/</link>
+    <description>Recent content in JavaScript on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Fri, 04 Feb 2022 13:30:03 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>继承与组合</title>
+      <link>https://uphgs.com/posts/extends-and-composition/</link>
+      <pubDate>Fri, 04 Feb 2022 13:30:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/extends-and-composition/</guid>
+      <description>类的使用 用原生 JavaScript 声明一个类
+class Person {name;age;sayHi() {} // 共有函数playing = function () {} // 自有函数constructor(name, age) {this.</description>
+    </item>
+    
+    <item>
+      <title>Event Loop</title>
+      <link>https://uphgs.com/posts/event-loop/</link>
+      <pubDate>Thu, 03 Feb 2022 19:48:27 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/event-loop/</guid>
+      <description>当 JavaScript 执行一个异步任务的时候（如：AJAX），JavaScript 什么都不会做，它只会通知 C++（单线程），C++ 通过轮询来查看延时任务什么时候完成，完成了再通知 JavaScript 继续执行该任务。EventLoop 就是 C++ 如何通过轮询执行 JavaScript 异步任务（也可以说 C++ 轮询执行 JavaScript 异步任务的规则）</description>
+    </item>
+    
+    <item>
+      <title>事件委托</title>
+      <link>https://uphgs.com/posts/javascript/event-deleg/</link>
+      <pubDate>Sat, 29 Jan 2022 21:29:28 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/event-deleg/</guid>
+      <description>事件捕获/冒泡，示例项目：https://github.com/uphg/dom-event-demo
+事件冒泡 微软公司提出使用事件冒泡来处理事件流，事件冒泡表示事件会从最内层元素开始触发，一直向外传播，具体顺序为：div -&amp;gt; body -&amp;gt; html -&amp;gt; document
+事件捕获 网景公司提出另一种名为事件捕获的概念，与事件冒泡相反，事件会从最外层开始触发，直到最内侧的元素，顺序为：document -&amp;gt; html -&amp;gt; body -&amp;gt; div</description>
+    </item>
+    
+    <item>
+      <title>搭建 JavaScript 库</title>
+      <link>https://uphgs.com/posts/javascript/build-js-library/</link>
+      <pubDate>Thu, 20 Jan 2022 13:52:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/build-js-library/</guid>
+      <description>记录搭建一个 JavaScript 库的过程
+示例项目：github.com/uphg/vanilla-ts-lib-starter
+使用 Vite 搭建脚手架 运行 create 命令快速创建
+pnpm create vite my-vanilla-app# 或指定模板pnpm create vite my-vanilla-app --template vanilla-ts添加 library（库）配置</description>
+    </item>
+    
+    <item>
+      <title>Funt - 函数封装</title>
+      <link>https://uphgs.com/posts/wheel/funt-function/</link>
+      <pubDate>Wed, 05 Jan 2022 10:09:07 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-function/</guid>
+      <description>函数防抖 首先用 setTimeout 实现一个最简单的防抖函数
+function debounce(func, wait) {let timerIdreturn function (...args) {if (timerId) clearTimeout(timerId)timerId = setTimeout(() =&amp;gt; {func.</description>
+    </item>
+    
+    <item>
+      <title>Funt - 类型转换</title>
+      <link>https://uphgs.com/posts/wheel/funt-typecast/</link>
+      <pubDate>Thu, 30 Dec 2021 19:31:03 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-typecast/</guid>
+      <description>过滤负值
+Math.max(-123, 0)</description>
+    </item>
+    
+    <item>
+      <title>正则速查表</title>
+      <link>https://uphgs.com/posts/regexp-memo/</link>
+      <pubDate>Wed, 29 Dec 2021 22:49:58 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/regexp-memo/</guid>
+      <description>loadsh 中的正则 n进制字符串 // 不规范的16进制字符串值const reIsBadHex = /^[-+]0x[0-9a-f]+$/i// 二进制字符串const reIsBinary = /^0b[01]+$/i// 八进制字符串值const reIsOctal = /^0o[0-7]+$/i数字 // 无符号的整数值 const reIsUint = /^(?</description>
+    </item>
+    
+    <item>
+      <title>Funt - 类型</title>
+      <link>https://uphgs.com/posts/wheel/funt-parsing/</link>
+      <pubDate>Tue, 28 Dec 2021 20:55:39 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/wheel/funt-parsing/</guid>
+      <description>string &amp;amp; boolean &amp;amp; number &amp;amp; symbol &amp;amp; bigInt 基本都使用 typeof value === &#39;type&#39; 的方式判断，只有布尔使用严格相等的 true 或 false，以 isString 为例：</description>
+    </item>
+    
+    <item>
+      <title>内存管理</title>
+      <link>https://uphgs.com/posts/memory-management/</link>
+      <pubDate>Wed, 08 Dec 2021 16:27:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/memory-management/</guid>
+      <description>本文转自内存管理 - JavaScript | MDN
+简介 像C语言这样的底层语言一般都有底层的内存管理接口，比如 malloc()和free()。相反，JavaScript 是在创建变量（对象，字符串等）时自动进行了分配内存，并且在不使用它们时“自动”释放。 释放的过程称为垃圾回收。这个“自动”是混乱的根源，并让 JavaScript（和其他高级语言）开发者错误的感觉他们可以不关心内存管理。
+内存生命周期 不管什么程序语言，内存生命周期基本是一致的：
+分配你所需要的内存 使用分配到的内存（读、写） 不需要时将其释放\归还 所有语言第二部分都是明确的。第一和第三部分在底层语言中是明确的，但在像JavaScript这些高级语言中，大部分都是隐含的。</description>
+    </item>
+    
+    <item>
+      <title>对象</title>
+      <link>https://uphgs.com/posts/javascript/object/</link>
+      <pubDate>Sun, 01 Aug 2021 09:45:13 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/object/</guid>
+      <description>Object.create() Object.create() 方法创建一个新对象，可以传入一个对象作为创建对象的原型。
+// 创建带有对象原型链的空对象const obj1 = Object.create(Object.prototype)const obj2 = new Object()const obj3 = {}// 创建一个没有任何原型链的对象（纯对象）const obj4 = Object.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript 数据类型</title>
+      <link>https://uphgs.com/posts/javascript/type-of-data/</link>
+      <pubDate>Sat, 31 Jul 2021 22:14:02 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/type-of-data/</guid>
+      <description>数据类型概述 最新的 ECMAScript 标准定义了 8 种数据类型：
+Boolean Number String BigInt Symbol null undefined Object 任何 constructed 对象实例的特殊非数据结构类型，也用做数据结构：new Object，new Array，new Map，new Set，new WeakMap，new WeakSet，new Date，和几乎所有通过 new keyword 创建的东西，都属于 Object 类型（复杂类型）。</description>
+    </item>
+    
+    <item>
+      <title>JS 的缺陷</title>
+      <link>https://uphgs.com/posts/javascript/js-garbage/</link>
+      <pubDate>Sun, 03 Jan 2021 13:12:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/js-garbage/</guid>
+      <description>JS 的BUG 字符串相加运算方式歧义，将 + &amp;quot;a&amp;quot; 转为 NaN &amp;quot;b&amp;quot; + &amp;quot;a&amp;quot; + + &amp;quot;a&amp;quot; + &amp;quot;a&amp;quot;答案：&amp;quot;baNaNa&amp;quot;</description>
+    </item>
+    
+    <item>
+      <title>使用递归组件</title>
+      <link>https://uphgs.com/posts/vue/tree-component/</link>
+      <pubDate>Fri, 16 Oct 2020 10:37:01 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/tree-component/</guid>
+      <description>::: tip 注意
+由于需要调用自身，所以必须含有 name 这个属性，因为没有 name 这个属性会造成控件自身不能调用自身。且调用自身组件最好绑定一个 key 值，方便 Vue 重新渲染。
+:::
+假设有如下数据结构的data.js
+export default [{title: &amp;quot;标题 1&amp;quot;,content: &amp;quot;内容 1&amp;quot;,child: [{title: &amp;quot;标题 1-1&amp;quot;,content: &amp;quot;内容 1-1&amp;quot;,child: [{title: &amp;quot;标题 1-1-1&amp;quot;,content: &amp;quot;内容 1-1-1&amp;quot;}]}]},{title: &amp;quot;标题 2&amp;quot;,content: &amp;quot;内容 2&amp;quot;,}]那么组件（tree.</description>
+    </item>
+    
+    <item>
+      <title>函数</title>
+      <link>https://uphgs.com/posts/javascript/function/</link>
+      <pubDate>Thu, 17 Sep 2020 20:58:21 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/function/</guid>
+      <description>函数是什么 JavaScript 中只有函数和方法
+闭包 闭包的特点
+能让一个函数维持一个变量 但并不能维持这个变量的值 尤其是变量的值会变化时 例1
+let x = &#39;x&#39;let a = &#39;1&#39;function f1(x) {return x + a}a = &#39;3&#39;{let a = &#39;2&#39;f1(&#39;x&#39;) // &#39;x3&#39;}a = &#39;4&#39;例2</description>
+    </item>
+    
+    <item>
+      <title>DOM API</title>
+      <link>https://uphgs.com/posts/javascript/dom/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom/</guid>
+      <description>获取 DOM 元素 window.id名 // 通过id获取（无法获取与关键字冲突的id）document.getElementById(&#39;id名&#39;) // 通过id获取document.getElementsByTagName(&#39;div&#39;) // 通过标签获取（伪数组）document.getElementsByClassName(&#39;part&#39;) // 通过class名获取（伪数组）document.</description>
+    </item>
+    
+    <item>
+      <title>DOM 操作跨线程</title>
+      <link>https://uphgs.com/posts/javascript/dom-operate-across-threads/</link>
+      <pubDate>Mon, 14 Sep 2020 23:07:31 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/dom-operate-across-threads/</guid>
+      <description>概述 JavaScript 引擎是无法直接操作页面的，只能通过 JavaScript 调用 DOM API，当浏览器发现 JavaScript 调用了像 document.body.appendChild(div) 这样的 DOM API ，就会通知渲染引擎，新增一个与 JavaScript 中 div 属性一模一样的 div。这就叫做跨线程通信。</description>
+    </item>
+    
+    <item>
+      <title>AJAX</title>
+      <link>https://uphgs.com/posts/javascript/ajax-use/</link>
+      <pubDate>Tue, 09 Jun 2020 15:44:57 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/ajax-use/</guid>
+      <description>什么是 AJAX 全称：Async JavaScript And XML（异步的 JavaScript 和 XML）。 功能：用 JavaScript 发请求和收响应。 概念：AJAX 是浏览器的功能，浏览器可以发请求收响应，浏览器在 window 上加了一个 XMLHttpRequest 函数，用这个函数可以构造一个对象，用于发送请求接收响应。 一个完整的 AJAX 请求 buttons.</description>
+    </item>
+    
+    <item>
+      <title>Promise 对象 &amp; async 函数</title>
+      <link>https://uphgs.com/posts/promise-and-async/</link>
+      <pubDate>Wed, 27 May 2020 19:30:16 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/promise-and-async/</guid>
+      <description>Promise &amp;amp; setTimeout 的执行顺序 经典的面试题
+setTimeout(() =&amp;gt; console.log(1))const fn = () =&amp;gt; new Promise(resolve =&amp;gt; {resolve()console.</description>
+    </item>
+    
+    <item>
+      <title>ES6 模块化</title>
+      <link>https://uphgs.com/posts/javascript/module/</link>
+      <pubDate>Mon, 25 May 2020 14:46:09 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/module/</guid>
+      <description>基本示例 a.js 文件默认导出一个对象
+let object = {a: 1, b: 2, c: 3}export default objectb.</description>
+    </item>
+    
+    <item>
+      <title>Symbol &amp; 迭代器 &amp; 生成器</title>
+      <link>https://uphgs.com/posts/javascript/symbol-iterate-generate/</link>
+      <pubDate>Tue, 19 May 2020 08:51:15 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/symbol-iterate-generate/</guid>
+      <description>大纲 之前的 7 种数据类型
+string number boolean undefined null object symbol最新的 ECMAScript 标准（ES10）添加了：BigInt
+三种 for</description>
+    </item>
+    
+    <item>
+      <title>Reflect</title>
+      <link>https://uphgs.com/posts/javascript/reflect/</link>
+      <pubDate>Tue, 31 Mar 2020 21:14:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/reflect/</guid>
+      <description>概述 Reflect对象与Proxy对象一样，也是 ES6 为了操作对象而提供的新 API。Reflect对象的设计目的有这样几个。
+将Object对象的一些明显属于语言内部的方法（比如Object.defineProperty），放到Reflect对象上。现阶段，某些方法同时在Object和Reflect对象上部署，未来的新方法将只部署在Reflect对象上。也就是说，从Reflect对象上可以拿到语言内部的方法。
+修改某些Object方法的返回结果，让其变得更合理。比如，Object.defineProperty(obj, name, desc)在无法定义属性时，会抛出一个错误，而Reflect.defineProperty(obj, name, desc)则会返回false。
+Reflect Reflect.get() Reflect.get 方法可以获取对象的属性</description>
+    </item>
+    
+    <item>
+      <title>参数处理 &amp; 解构赋值</title>
+      <link>https://uphgs.com/posts/javascript/deconstruction/</link>
+      <pubDate>Sun, 01 Dec 2019 18:32:01 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/javascript/deconstruction/</guid>
+      <description>函数剩余参数 使用 arguments 获取
+function sum(message){var result = 0for(var i = 1; i &amp;lt; arguments.</description>
+    </item>
+    
+    <item>
+      <title>Vue 常用插件</title>
+      <link>https://uphgs.com/posts/vue/plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/vue/plugin/</guid>
+      <description>Element UI 使用 el-scrollbar &amp;lt;el-scrollbar wrap-class=&amp;quot;scrollbar-wrapper&amp;quot;&amp;gt;&amp;lt;/el-scrollbar&amp;gt;.el-scrollbar {height: 100%;}/* 由于 横向滚动条的 bug 可以设置此样式消除 */.</description>
+    </item>
+    
+  </channel>
+</rss>

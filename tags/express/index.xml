@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Express on 石塔白又大</title>
+    <link>https://uphgs.com/tags/express/</link>
+    <description>Recent content in Express on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Thu, 02 Dec 2021 21:39:43 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/express/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Express 核心</title>
+      <link>https://uphgs.com/posts/node/express-core/</link>
+      <pubDate>Thu, 02 Dec 2021 21:39:43 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/express-core/</guid>
+      <description>Express 历史：2010 年 6 月，TJ 开始编写 Express，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。
+Express 中间件模型
+创建一个 Express 项目 mkdir express-democd express-demoyarn init -yyarn install express创建 app.</description>
+    </item>
+    
+  </channel>
+</rss>

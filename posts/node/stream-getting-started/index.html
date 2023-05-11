@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stream 入门</title>
+<meta name="description" content="本文案例使用 Node.js 应用 Stream
+本文案例代码：https://github.com/uphg/stream-demo
+概念图 stream 是水流，默认没有水 stream.write 可以让水流中有水（数据） 每次写入的小数据叫做 chunk（块） 产生数据的一段叫做 source（源头） 得到数据的一段叫做 sink（水池） 基本用法 使用 Stream 写入内容">
+<link rel="canonical" href="https://uphgs.com/posts/node/stream-getting-started/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Stream 入门</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-11-14 12:49:31 &#43;0800 CST" title="2021-11-14 12:49:31 &#43;0800 CST">
+    2021-11-14
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <p>本文案例使用 Node.js 应用 Stream</p>
+<p>本文案例代码：<a href="https://github.com/uphg/stream-demo">https://github.com/uphg/stream-demo</a></p>
+<h2 id="概念图">概念图</h2>
+<p><img src="/images/stream-demo.png" alt="Stream 流示例"></p>
+<ul>
+<li>stream 是水流，默认没有水</li>
+<li>stream.write 可以让水流中有水（数据）</li>
+<li>每次写入的小数据叫做 chunk（块）</li>
+<li>产生数据的一段叫做 source（源头）</li>
+<li>得到数据的一段叫做 sink（水池）</li>
+</ul>
+<h2 id="基本用法">基本用法</h2>
+<p><strong>使用 Stream 写入内容</strong></p>
+<pre><code class="language-js">const fs = require('fs')
+const stream = fs.createWriteStream('./big_file.txt') // 创建一个 Stream
+
+for (let i = 0; i &lt; 1000000; i++) {
+  stream.write(`这是第 ${i} 行内容，我们需要很多很多内容，要不停地写文件噢噢噢噢噢噢回车\n`)
+}
+
+stream.end() // 关掉 Stream
+console.log('done')
+</code></pre>
+<blockquote>
+<p>上面代码的运行方式：打开一个流，多次添加内容，关闭流（每次添加都是在上一次的流中追加）</p>
+</blockquote>
+<p><strong>使用 Node.js 服务器访问该文件</strong></p>
+<pre><code class="language-js">const fs = require('fs')
+const http = require('http')
+const server = http.createServer()
+
+server.on('request', (request, response) =&gt; {
+  fs.readFile('./big_file.txt', (error, data) =&gt; {
+    if (error) throw error
+    response.end(data)
+    console.log('done')
+  })
+})
+
+server.listen(8888)
+</code></pre>
+<p>运行 <code>curl http://localhost:8888/</code> 访问该端口，然后打开任务管理器，会发现 Node.js 占用了 110MB 左右的内存，直到文件访问完成后才会结束占用。</p>
+<p><strong>使用 Stream 改写上面的例子</strong></p>
+<p>用 Stream 读取该文件</p>
+<pre><code class="language-js">const http = require('http')
+const fs = require('fs')
+const server = http.createServer()
+
+server.on('request', (request, response) =&gt; {
+  const stream = fs.createReadStream('./big_file.txt')
+  stream.pipe(response)
+})
+
+server.listen(8888)
+</code></pre>
+<p>再次运行 <code>curl http://localhost:8888/</code> 访问该端口，这时查看 Node.js 内存占用，基本在 30MB 左右。这就是使用 Stream（流）的效果。</p>
+<h2 id="管道">管道</h2>
+<p><code>stream.pipe(response)</code> 表示 将 stream 读到的文件通过管道连接到 response 响应体中。</p>
+<p><img src="/images/stream-pipe-demo.png" alt="pipe 管道示例图"></p>
+<ul>
+<li>两个流可以用一个管道相连</li>
+<li>stream1 的末尾连上 stream2 的开头</li>
+<li>只要 stream1 有数据，就会流到 stream2</li>
+</ul>
+<p>代码</p>
+<pre><code class="language-js">stream1.pipe(stream2)
+
+// 链式操作
+a.pipe(b).pipe(c)
+</code></pre>
+<p><strong>管道可以通过事件监听实现</strong>，我们可以使用事件监听实现 pipe API</p>
+<pre><code class="language-js">// data 事件，传输一段 chunk 时触发，一有数据就塞给 stream2
+stream1.on('data', (chunk) =&gt; {
+  stream2.write(chunk)
+})
+
+// end 事件，表示数据传输结束，停掉 stream2
+stream1.on('end', () =&gt; {
+  stream2.end()
+})
+</code></pre>
+<h2 id="stream-对象的原型链">Stream 对象的原型链</h2>
+<p>创建一个</p>
+<pre><code class="language-js">const fs = require('fs')
+const stream = require('stream')
+const events = require('events')
+const s = fs.createReadStream('big_file.txt')
+</code></pre>
+<p>运行以下命令在浏览器调试窗口中查看 log</p>
+<pre><code class="language-sh">node --inspect-brk demo.js
+</code></pre>
+<p><strong><code>s = fs.createReadStream(path)</code>（读取文件）的原型链</strong></p>
+<ol>
+<li>自身属性（由 <code>fs.ReadStream</code> 构造）</li>
+<li>第一层原型：<code>Readable.prototype</code></li>
+<li>第二层原型：<code>Stream.prototype</code></li>
+<li>第三层原型：<code>EventEmitter.prototype</code></li>
+<li>第四层原型：<code>Object.prototype</code></li>
+</ol>
+<blockquote>
+<p>上面的原型链表示 Stream 对象都继承了 EventEmitter 也就是事件发布订阅</p>
+</blockquote>
+<h2 id="readable-stream">Readable Stream</h2>
+<ul>
+<li>事件
+<ul>
+<li><strong>data</strong></li>
+<li><strong>end</strong></li>
+<li>error</li>
+<li>close</li>
+<li>readable</li>
+</ul>
+</li>
+<li>方法
+<ul>
+<li>pipe() unpipe()</li>
+<li>wrap()</li>
+<li>destroy()</li>
+<li>read()</li>
+<li>unshift()</li>
+<li>resume() pause()</li>
+<li>isPaused()</li>
+<li>setEncoding()</li>
+</ul>
+</li>
+</ul>
+<h3 id="静止态-paused-和流动态-flowing">静止态 paused 和流动态 flowing</h3>
+<ul>
+<li>默认处于 paused 态</li>
+<li>添加 data 事件监听，它就变为 flowing 态</li>
+<li>删除 data 事件监听，它就变为 paused 态</li>
+<li>使用 <code>pause()</code> 可以将它变为 paused 态</li>
+<li>使用 <code>resume()</code> 可以将它变为 flowing 态</li>
+</ul>
+<p>状态示例</p>
+<pre><code class="language-js">const http = require('http')
+const fs = require('fs')
+const server = http.createServer()
+server.on('request', (request, response) =&gt; {
+  const stream =
+    fs.createReadStream('./big_file.txt') // --&gt; 默认 paused
+
+  stream.pipe(response) // --&gt; 变为 flowing
+  stream.pause()        // --&gt; 变为 paused
+  setTimeout(() =&gt; {
+    stream.resume()     // --&gt; 变为 flowing
+  }, 3000)
+
+})
+</code></pre>
+<h2 id="writable-stream">Writable Stream</h2>
+<ul>
+<li>事件
+<ul>
+<li><strong>drain</strong></li>
+<li><strong>finish</strong></li>
+<li>error</li>
+<li>close</li>
+<li>pipe</li>
+<li>unpipe</li>
+</ul>
+</li>
+<li>方法
+<ul>
+<li>write()</li>
+<li>destroy()</li>
+<li>end()</li>
+<li>cork() uncork()</li>
+<li>setDefaultEncoding()</li>
+</ul>
+</li>
+</ul>
+<h3 id="drain-事件流干耗尽">drain 事件（流干、耗尽）</h3>
+<ul>
+<li>该事件表示可以继续 write（写）内容了</li>
+<li>我们调用 <code>stream.write(chunk)</code> 的时候，可能会得到 <code>false</code> 状态</li>
+<li><code>false</code> 的意思的你写的太快了，数据积压了（堵塞了）。</li>
+<li>这时候我们就不能再 write 了，需要监听 drain</li>
+<li>等到 drain 事件触发了，我们才能继续 write</li>
+</ul>
+<p><a href="https://nodejs.org/api/stream.html#stream_event_drain">数据积压示例代码</a></p>
+<pre><code class="language-js">function writeOneMillionTimes(writer, data, encoding, callback) {
+  let i = 1000000;
+  write();
+  function write() {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        // Last time!
+        writer.write(data, encoding, callback);
+      } else {
+        // See if we should continue, or wait.
+        // Don't pass the callback, because we're not done yet.
+        ok = writer.write(data, encoding);
+        if (ok === false) {
+          console.log('堵塞了，不能再写了')
+        }
+      }
+    } while (i &gt; 0 &amp;&amp; ok);
+    if (i &gt; 0) {
+      // Had to stop early!
+      // Write some more once it drains.
+      writer.once('drain', () =&gt; {
+        console.log('水流干了')
+        write()
+      });
+    }
+  }
+}
+
+const writer = fs.createWriteStream('./big_file.txt')
+writeOneMillionTimes(writer, 'Hello World!')
+</code></pre>
+<p>运行上面的代码后，会发现打出了很多次 &lsquo;堵塞了，不能再写了&rsquo;、&lsquo;水流干了&rsquo; 的 log，这表明我们文件写入的太快了，在不超过 1 毫秒内就想把 1000000 次的 &lsquo;Hello Wrold!&rsquo; 写入，所以导致了很多次数据积压，只能监听 drain 事件来执行继续写入。</p>
+<h3 id="finish-事件">finish 事件</h3>
+<p>在调用 <code>stream.end()</code> 之后，而且缓冲区数据都已经传给底层系统之后，触发 finish 事件。</p>
+<h2 id="创建-writable-stream">创建 Writable Stream</h2>
+<p>创建一个可写流</p>
+<pre><code class="language-js">const { Writable } = require('stream')
+
+const outStream = new Writable({
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString())
+    callback()
+  }
+})
+
+process.stdin.pipe(outStream)
+// 上面相当于运行以下代码
+// process.stdin.on('data', (chunk) =&gt; {
+//   outStream.write(chunk)
+// })
+</code></pre>
+<h2 id="创建-readable-stream">创建 Readable Stream</h2>
+<p>创建一个可读流</p>
+<pre><code class="language-js">const { Readable } = require('stream')
+
+const inStream = new Readable({
+  read(size) {
+    const char = String.fromCharCode(this.currentCharCode++)
+    this.push(char)
+    console.log(`推了 ${char}`)
+    if (this.currentCharCode &gt; 90) { // Z 的字符编码为 90
+      this.push(null); // 数据推完了
+    }
+  }
+})
+
+inStream.currentCharCode = 65
+inStream.pipe(process.stdout) // 每次读数据都输出
+// 这次数据是按需供给的，对方调用 read 我们才会给一次数据
+</code></pre>
+<h2 id="创建-duplex-stream">创建 Duplex Stream</h2>
+<p>创建一个可读可写流</p>
+<pre><code class="language-js">const { Duplex } = require('stream')
+
+const inoutStream = new Duplex({
+  write(chunk, encoding, callback) {
+    console.log(chunk.toString())
+    callback()
+  },
+  read(size) {
+    const char = String.fromCharCode(this.currentCharCode++)
+    this.push(char)
+    if (this.currentCharCode &gt; 90) { // Z 的字符编码为 90
+      this.push(null); // 数据推完了
+    }
+  }
+})
+
+inoutStream.currentCharCode = 65
+process.stdin.pipe(inoutStream).pipe(process.stdout)
+</code></pre>
+<h2 id="创建-transform-stream">创建 Transform Stream</h2>
+<p>创建一个转换流，可以将小写字母转为大写字母输出</p>
+<pre><code class="language-js">const { Transform } = require('stream')
+
+const upperCaseTr = new Transform({
+  transform(chunk, encoding, callback) {
+    this.push(chunk.toString().toUpperCase())
+    callback()
+  }
+})
+
+// 将输入使用 upperCaseTr 转换为大写，并且输出
+process.stdin.pipe(upperCaseTr).pipe(process.stdout)
+</code></pre>
+<h2 id="内置的-transform-stream">内置的 Transform Stream</h2>
+<p>使用 gzip 压缩文件</p>
+<pre><code class="language-js">// 根据输入文件路径 使用 gzip 压缩指定文件
+const fs = require('fs')
+const zlib = require('zlib')
+const filePath = process.argv[2]
+
+fs.createReadStream(filePath)
+  .pipe(zlib.createGzip())
+  .pipe(fs.createWriteStream(filePath + '.gz'))
+</code></pre>
+<p>使用 crypto 模块加密 gzip 文件</p>
+<pre><code class="language-js">// 使用 crypto 模块加密 gzip 文件
+const fs = require('fs')
+const zlib = require('zlib')
+const filePath = process.argv[2]
+const crypto = require('crypto')
+const { Transform } = require('stream')
+const { Buffer } = require('buffer')
+
+const PASSWORD = 'ExchangePasswordPasswordExchange'
+const iv = Buffer.from(crypto.randomBytes(8))
+ivString = iv.toString('hex')
+
+// 每次 chunk 打出一个 .
+const reportProgress = new Transform({
+  transform(chunk, encoding, callback) {
+    process.stdout.write('.')
+    callback(null, chunk)
+  }
+})
+
+fs.createReadStream(filePath)
+  .pipe(crypto.createCipheriv('aes-256-cbc', PASSWORD, ivString)) // 一定要先加密，再 gzip 压缩
+  .pipe(zlib.createGzip())
+  .pipe(reportProgress)
+  .pipe(fs.createWriteStream(filePath + '.gz'))
+  .on('finish', () =&gt; console.log('\nDone'))
+</code></pre>
+<h2 id="数据流中的积压问题httpsnodejsorgzh-cndocsguidesbackpressuring-in-streams"><a href="https://nodejs.org/zh-cn/docs/guides/backpressuring-in-streams/">数据流中的积压问题</a></h2>
+<ul>
+<li>处理数据流的时候经常会遇到数据过多产生阻塞</li>
+<li>比如有时 <code>Readable</code> 传输给 <code>Writable</code> 的速度远大于它接受和处理的速度</li>
+<li>发生这种情况时，传输过快的数据会积压起来，直到整个流程全部处理完毕</li>
+<li><code>highWaterMark</code> 就是高水位线，表明了流的缓冲的容量</li>
+<li>一旦内部的可读缓冲的总大小达到 <code>highWaterMark</code> 指定的阈值时，流会暂时停止读取数据，直到当前缓冲的数据被消费。</li>
+</ul>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/stream/" alt="Stream" >
+                        Stream
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Express 核心</title>
+<meta name="description" content="Express 历史：2010 年 6 月，TJ 开始编写 Express，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。
+Express 中间件模型
+创建一个 Express 项目 mkdir express-democd express-demoyarn init -yyarn install express创建 app.">
+<link rel="canonical" href="https://uphgs.com/posts/node/express-core/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">Express 核心</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2021-12-02 21:39:43 &#43;0800 CST" title="2021-12-02 21:39:43 &#43;0800 CST">
+    2021-12-02
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="express">Express</h2>
+<p>历史：2010 年 6 月，TJ 开始编写 Express，2014 年发展到 v0.12，基本成熟，移交 StrongLoop。</p>
+<p>Express 中间件模型</p>
+<p><img src="/images/express-middleware.jpg" alt="Express 中间件模型"></p>
+<h2 id="创建一个-express-项目">创建一个 Express 项目</h2>
+<pre><code class="language-sh">mkdir express-demo
+cd express-demo
+yarn init -y
+yarn install express
+</code></pre>
+<p>创建 app.js 文件</p>
+<pre><code class="language-js">// app.js
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) =&gt; {
+  res.send('Hello World!')
+})
+
+app.listen(port, () =&gt; {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+</code></pre>
+<p>运行 app.js</p>
+<pre><code class="language-sh">node app.js
+</code></pre>
+<p>安装类型文件</p>
+<pre><code class="language-sh">yarn add -D @types/express
+</code></pre>
+<p>将 app.js 改为 app.ts</p>
+<pre><code class="language-ts">// app.ts
+import express from 'express'
+
+const app = express()
+const port = 4000
+
+app.get('/', (request, response) =&gt; {
+  response.send('你好！')
+})
+
+app.get('/demo', (request, response) =&gt; {
+  response.send('你好，Demo!')
+})
+
+app.listen(port, () =&gt; {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+</code></pre>
+<h2 id="使用-express-generator">使用 express-generator</h2>
+<p><strong>安装</strong></p>
+<pre><code class="language-sh">yarn global add express-generator
+</code></pre>
+<p><strong>使用</strong></p>
+<pre><code class="language-sh">express -h # 查看帮助
+express --view=ejs . # 使用 ejs 模板在当前目录创建，运行后会覆盖之前的 package.json
+</code></pre>
+<p><strong>运行</strong></p>
+<pre><code class="language-sh"># 重新初始化
+yarn install
+
+# 运行
+yarn start
+</code></pre>
+<p>重新安装 类型声明文件</p>
+<pre><code class="language-sh">yarn add -D @types/express @types/node
+</code></pre>
+<h2 id="让-express-支持-typescript">让 express 支持 TypeScript</h2>
+<p>安装 TypeScript 运行依赖</p>
+<pre><code class="language-sh">yarn add -D typescript ts-node-dev
+</code></pre>
+<p>修改 package.json 中的脚本</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;ts-node-dev ./bin/www&quot;
+  },
+}
+</code></pre>
+<h2 id="使用-appuse">使用 <code>app.use()</code></h2>
+<p>使用 <code>app.use()</code> 发送数据</p>
+<pre><code class="language-js">app.use((request, response, next) =&gt; {
+  response.send('hi')
+  next()
+})
+
+app.use((request, response, next) =&gt; {
+  response.send('hi')
+  next()
+})
+
+// 结束
+app.use((request, response, next) =&gt; {
+  response.end('hi')
+})
+</code></pre>
+<p>每次使用完 use 都要调用 next，才能进入下一个 use。</p>
+<p>send 表示一次性发送所有数据，我们还可以使用 write，表示使用流发送，每次都可以发送一点点</p>
+<pre><code class="language-js">app.use((request, response, next) =&gt; {
+  response.write('hi1')
+  next()
+})
+
+app.use((request, response, next) =&gt; {
+  response.write('hi2')
+  next()
+})
+
+// 结束
+app.use((request, response, next) =&gt; {
+  response.end('hi')
+})
+</code></pre>
+<h2 id="中间件">中间件</h2>
+<p><code>app.use()</code> 就是中间件的实现</p>
+<p>实现一个 logger 中间件，每次运行都打印当前环境监听的地址</p>
+<pre><code class="language-js">const logger = (perfix) =&gt; (request, response, next) =&gt; {
+  console.log(`${perfix}: ${request.url}`)
+  next()
+}
+
+// 使用
+app.use(logger('dev'))
+</code></pre>
+<p>使用 app.use 实现路由</p>
+<pre><code class="language-js">app.use((request, response, next) =&gt; {
+  if (request.path === '/xxx' &amp;&amp; request.method === 'get') {
+    response.write('home')
+  }
+  next()
+})
+
+// 更便捷的写法（这些都是 API 的语法糖）
+app.use('/xxx', fn)
+app.get('/xxx', fn)
+app.post('/xxx', fn)
+app.route('/xxx').all(fn).get(fn2).post(fn3)
+</code></pre>
+<h2 id="错误处理">错误处理</h2>
+<p>一个简单的错误处理</p>
+<pre><code class="language-js">const errorState = true
+
+app.use((request, response, next) =&gt; {
+  console.log(1)
+  next()
+})
+
+app.use((request, response, next) =&gt; {
+  console.log(2)
+  if (errorState) {
+    next('未登录')
+  } else {
+    next()
+  }
+})
+
+app.use((request, response, next) =&gt; {
+  console.log(3)
+  next()
+})
+
+app.use((error, request, response, next) =&gt; {
+  if (response.headersSent) {
+    console.log(response.headersSent)
+    return next(error)
+  }
+  response.status(500)
+  response.send(error)
+})
+</code></pre>
+<p>可以调用多个错误处理，它们会像中间件一样连续调用</p>
+<pre><code class="language-js">const errorState = true
+
+app.use((request, response, next) =&gt; {
+  console.log(1)
+  next()
+})
+
+app.use((request, response, next) =&gt; {
+  console.log(2)
+  if (errorState) {
+    next('未登录')
+  } else {
+    next()
+  }
+})
+
+app.use((request, response, next) =&gt; {
+  console.log(3)
+  next()
+})
+
+app.use((error, request, response, next) =&gt; {
+  console.log(error)
+  next(error)
+})
+
+let count = 0
+app.use((error, request, response, next) =&gt; {
+  count+=1
+  console.log(`目前有 ${count} 个错误`)
+  next(error)
+})
+</code></pre>
+<h2 id="express-常用-api">express 常用 API</h2>
+<ul>
+<li><code>express.json()</code> *</li>
+<li><code>express.raw()</code></li>
+<li><code>express.Router()</code> *</li>
+<li><code>express.static()</code> *</li>
+<li><code>express.text()</code></li>
+<li><code>express.urlencoded()</code></li>
+</ul>
+<h3 id="expressjson"><code>express.json()</code></h3>
+<p>用于接口请求的参数，假如使用 postman 发送一个 body 为 <code>{ &quot;name&quot;: &quot;Jack&quot;, &quot;age&quot;: 18 }</code> 的 JSON 数据</p>
+<pre><code class="language-js">// 监听 data 事件获取
+app.use((request, response, next) =&gt; {
+  console.log('request.body')
+  console.log(request.body)
+  // undefined
+  request.on('data', (chunk) =&gt; {
+    console.log(chunk.toString())
+    // { name: 'Jack', age: 18 }
+  })
+})
+
+// 使用 express.json() API 获取
+app.use(express.json())
+
+app.use((request, response, next) =&gt; {
+  console.log('request.body')
+  console.log(request.body)
+  // { name: 'Jack', age: 18 }
+  next()
+})
+</code></pre>
+<h3 id="expressstatic"><code>express.static()</code></h3>
+<p>访问指定目录的静态文件，例如添加 public 目录下的文件为可访问的</p>
+<pre><code class="language-js">app.use(express.static('public'))
+</code></pre>
+<p>现在，可以访问位于 public 目录中的文件：</p>
+<pre><code class="language-sh"># 访问 ./public/images/demo.jpg
+http://localhost:3000/images/demo.jpg
+
+# 访问 ./public/css/style.css
+http://localhost:3000/css/style.css
+</code></pre>
+<h3 id="expressurlencoded"><code>express.urlencoded()</code></h3>
+<p>处理参数类型为 <code>x-www-form-urlencoded</code> 的请求</p>
+<h2 id="appxxx">app.xxx</h2>
+<p>重点 API</p>
+<ul>
+<li><code>app.set('views' | 'view engine', xxx)</code></li>
+<li><code>app.get('env')</code></li>
+<li><code>app.get('/xxx', fn)</code></li>
+<li><code>app.post、app.put、app.delete...</code></li>
+<li><code>app.render()</code></li>
+<li><code>app.use()</code></li>
+</ul>
+<h3 id="appset"><code>app.set()</code></h3>
+<p>基本用法</p>
+<pre><code class="language-js">app.set('foo', true)
+app.get('foo') // true
+</code></pre>
+<p>app.set 还内置了几个值，具体参考：https://expressjs.com/zh-cn/api.html#app.set</p>
+<p><strong>开启大小写敏感（注意 app.set 要写在所有 app.use 的最上面）</strong></p>
+<pre><code class="language-js">app.set('case sensitive routing', true)
+
+app.get('/style.css', (request, response, next) =&gt; {
+  response.send('style.css')
+})
+
+app.get('/STYLE.css', (request, response, next) =&gt; {
+  response.send('STYLE.css')
+})
+
+// 访问 http://localhost:3001/style.css，返回：style.css
+// 访问 http://localhost:3001/STYLE.css，返回：STYLE.css
+</code></pre>
+<p><strong>配置渲染视图所在目录（默认为当前根目录下的 views 文件夹）</strong></p>
+<pre><code class="language-js">app.set('views', 'jack')
+// 配置渲染模板，需要安装对应模板插件，如 npm i pug
+app.set('view engine', 'pug')
+
+app.get('/test', (request, response, next) =&gt; {
+  response.render('test', { pageTitle: 'hello' })
+})
+</code></pre>
+<p>创建 <code>jack/test.pug</code> 文件</p>
+<pre><code class="language-pug">doctype html
+html(lang=&quot;zh-CN&quot;)
+  head
+    title= pageTitle
+    script(type='text/javascript').
+      if (foo) bar(1 + 5);
+  body
+    h1 Pug - node template engine
+</code></pre>
+<p>访问 <code>http://localhost:3001/test</code>，返回如下内容</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+	&lt;title&gt;hello&lt;/title&gt;
+	&lt;script type=&quot;text/javascript&quot;&gt;
+		if (foo) bar(1 + 5);
+	&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;h1&gt;Pug - node template engine&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>app.get / app.post / app.put / app.delete / app.patch</strong></p>
+<pre><code class="language-js">app.get('/test', (request, response, next) =&gt; {
+  response.send('get test')
+})
+
+// 使用 app.use 实现
+app.use((request, response, next) =&gt; {
+  if (request.method === 'GET' &amp;&amp; request.path === '/test') {
+    response.send('get test')
+  }
+})
+</code></pre>
+<p><strong>app.locals</strong></p>
+<p>用于存储公共数据，例如页面 title（可以 <code>request.app.locals</code> 方式使用）</p>
+<pre><code class="language-js">app.locals.title = '我的个人博客'
+
+app.get('/test', (request, response, next) =&gt; {
+  response.render('test', { pageTitle: request.app.locals.title })
+})
+</code></pre>
+<h2 id="requestxxx">request.xxx</h2>
+<p>请求相关 API</p>
+<h3 id="requestparams">request.params</h3>
+<p>假如你的路由中包含 <code>/user/:id</code> 则 name 属性可用作 <code>request.params.id</code>，如下</p>
+<pre><code class="language-js">app.get('/users/:id', (request, response, next) =&gt; {
+  console.log('request.params')
+  console.log(request.params)
+  response.send('hi')
+  next()
+})
+
+// get 请求 `http://localhost:3000/users/1?name=jack`
+// 得到 { id: '1' } 
+</code></pre>
+<h3 id="requestquery">request.query</h3>
+<p>获取路由中查询字符串的参数，自动封装为一个对象</p>
+<pre><code class="language-js">app.get('/users/:id', (request, response, next) =&gt; {
+  console.log('# request.query')
+  console.log(request.query)
+  response.send('hi')
+  next()
+})
+
+// get 请求 `http://localhost:3000/users/1?name=jack&amp;age=19`
+// 得到 { name: 'jack', age: '19' }
+</code></pre>
+<h3 id="requestxhr">request.xhr</h3>
+<p>用于区分 XML Http Request 请求与普通请求</p>
+<h3 id="requestrange">request.range()</h3>
+<p>用于分片下载，详情查看 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Range_requests">MDN HTTP请求范围</a></p>
+<p>以 <a href="https://www.neatdownloadmanager.com/index.php/en/">Neat</a> 下载 <a href="https://cmder.net/">Cmder</a> 为例</p>
+<h2 id="responsexxx">response.xxx</h2>
+<p>响应相关 API</p>
+<h3 id="responseget">response.get()</h3>
+<p>返回指定响应头的值</p>
+<pre><code class="language-js">res.get('Content-Type')
+// =&gt; &quot;text/plain&quot;
+</code></pre>
+<h3 id="responseset">response.set()</h3>
+<p>用于设置响应头</p>
+<pre><code class="language-js">response.set('X-Jack', 'yes')
+</code></pre>
+<h3 id="responsestatus">response.status()</h3>
+<p>用于设置 HTTP 响应码</p>
+<pre><code class="language-js">res.status(403).end()
+res.status(404).sendFile('/absolute/path/to/404.png')
+</code></pre>
+<h3 id="responseappend">response.append()</h3>
+<p>追加一个响应头</p>
+<pre><code class="language-js">response.set('X-Jack', 'yes2')
+</code></pre>
+<h3 id="resformatobject">res.format(object)</h3>
+<p>设置支持的类型，如 <code>Accept: text/plain</code>、<code>Accept: text/html</code></p>
+<h3 id="reslocation">res.location()</h3>
+<p>设置 响应头的 location</p>
+<h3 id="ressend">res.send()</h3>
+<p>发送一个消息体，注意不能与 <code>res.write()</code> 一起使用</p>
+<h3 id="resrender">res.render()</h3>
+<p>渲染一个模板</p>
+<h3 id="resheaderssent">res.headersSent</h3>
+<p>检测之前的中间件是否调用过 <code>res.send()</code> API</p>
+<h2 id="router">router</h2>
+<p>router 相当于一个小型的 app，但它只有路由的功能</p>
+<p>创建 users 路径下的路由</p>
+<pre><code class="language-js">// app.js
+const users = require('./routes/user')
+
+app.use('/users', users)
+
+// routes/users.js
+const express = require('express')
+const router = express.Router()
+
+router.get('/', (req, res, next) =&gt; {
+  res.send('/users')
+})
+router.get('/:id', (req, res, next) =&gt; {
+  res.send('/users/:id')
+})
+router.get('/:id/edit', (req, res, next) =&gt; {
+  res.send('/users/:id/edit')
+})
+
+module.exports = router
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/node.js/" alt="Node.js" >
+                        Node.js
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/express/" alt="Express" >
+                        Express
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

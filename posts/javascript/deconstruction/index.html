@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参数处理 &amp; 解构赋值</title>
+<meta name="description" content="函数剩余参数 使用 arguments 获取
+function sum(message){var result = 0for(var i = 1; i &lt; arguments.">
+<link rel="canonical" href="https://uphgs.com/posts/javascript/deconstruction/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">参数处理 &amp; 解构赋值</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2019-12-01 18:32:01 &#43;0000 UTC" title="2019-12-01 18:32:01 &#43;0000 UTC">
+    2019-12-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="函数剩余参数">函数剩余参数</h2>
+<p>使用 <code>arguments</code> 获取</p>
+<pre><code class="language-js">function sum(message){
+  var result = 0
+  for(var i = 1; i &lt; arguments.length; i++){
+    result += arguments[i]
+  }
+  return message + result
+}
+sum('结果是：', 1, 2, 3, 4) // 输出：&quot;结果是：10&quot;
+</code></pre>
+<p>ES6 <code>...</code> 写法</p>
+<pre><code class="language-js">function sum(message, ...numbers){
+  let result = 0
+  for(let i=0; i&lt;numbers.length; i++){
+    result += numbers[i]
+  }
+  return message + result
+}
+sum('结果是：', 1, 2, 3, 4) // 输出：&quot;结果是：10&quot;
+</code></pre>
+<p>上面的代码还可以使用 <code>.reduce()</code> 来简化循环的步骤。</p>
+<pre><code class="language-js">function sum(message, ...numbers){
+  let result = numbers.reduce((p, v)=&gt;p+v, 0)
+  return message + result
+}
+sum('结果是：', 1, 2, 3, 4) // 输出：&quot;结果是：10&quot;
+</code></pre>
+<p><code>...</code> 也支持数组及及对象的合并，如下：</p>
+<pre><code class="language-js">let array1 = [1, 2, 3, 4, 5, 6]
+let array2 = [0, ...array1, 7]
+</code></pre>
+<p>而在 ES5 之前，要完成上面的操作需要更复杂的方式</p>
+<pre><code class="language-js">let array1 = [1, 2, 3, 4, 5, 6]
+let array2 = [0].concat(array1).concat([7])
+</code></pre>
+<h2 id="数组解构赋值">数组解构赋值</h2>
+<p>ES6 新增了通过数组来赋值转换的功能</p>
+<pre><code class="language-js">let a = 1
+let b = 2
+;[a, b] = [b, a] // 此处要加分号，否则这行代码会向上变为一行
+console.log('a: ' + a '，b: ' + b) // a: 2，b: 1
+</code></pre>
+<p>还可以结合 <code>...</code> 来批量赋值</p>
+<pre><code class="language-js">let [a, b, ...rest] = [10, 20, 30, 40, 50]
+console.log(rest) // [30, 40, 50]
+</code></pre>
+<blockquote>
+<p>此处不能在 <code>...rest</code> 后再追加变量，剩余参数只能放在最后，否则会出现语法歧义。</p>
+</blockquote>
+<p>还可以使用函数返回一个对象</p>
+<pre><code class="language-js">function fn() {
+  return [1, 2]
+}
+let [a, b] = fn()
+</code></pre>
+<p>在赋值时还支持设置默认值</p>
+<pre><code class="language-js">let [a = 5, b = 7] = [1]
+console.log(a, b) // 1 7
+</code></pre>
+<h2 id="对象解构赋值">对象解构赋值</h2>
+<p>在 ES5 之前，对象批量赋值只能通过以下方式</p>
+<pre><code class="language-js">let sun = {name: 'isSun', age: 18, gender: 'Male'}
+let name = sun.name
+let age = sun.age
+let gender = sun.gender
+</code></pre>
+<p>而 ES6 的新语法添加了通过对象来批量赋值</p>
+<pre><code class="language-js">let sun = {name: 'isSun', age: 18, gender: 'Male'}
+let {name, age, gender} = sun
+</code></pre>
+<p>赋值时还可通过修改对象的属性名来修改变量名</p>
+<pre><code class="language-js">let sun = {
+  name: 'Jack', age: 18, gender: 'Male'
+}
+let {name: serial} = sun
+console.log(serial) // 输出：Jack
+</code></pre>
+<p>该方法还支持嵌套，如修改子对象的属性名</p>
+<pre><code class="language-js">let sun = {
+  name: 'Jack',
+  age: 18,
+  gender: 'Male',
+  child: {
+    name: 'Tom', age: 6, gender: 'Male'
+  }
+}
+let {child: {name: serial}} = sun
+console.log(serial) // 输出：Tom
+</code></pre>
+<p>并且子对象赋值时也可添加默认参数（如果子对象没有该属性，则使用默认参数），同时子对象的属性也可以使用批量声明。</p>
+<pre><code class="language-js">let sun = {
+  name: 'Jack',
+  age: 18,
+  gender: 'Male',
+  child: {
+    name: 'Jerry', age: 6, gender: 'Male'
+  }
+}
+let { child: { name: serial='Tom', age, gender } } = sun
+console.log(serial) // 输出：Jerry
+console.log(age, gender) // 输出：6 &quot;Male&quot;
+</code></pre>
+<p>也可以根据同名 key 解构赋值</p>
+<pre><code class="language-javascript">({ a, b } = { a: &quot;baz&quot;, b: 101 });
+</code></pre>
+<blockquote>
+<p>注意，此处需要用括号将它括起来，因为 Javascript 通常会将以 <code>{</code> 起始的语句解析为一个块。</p>
+</blockquote>
+<h2 id="设置函数默认值">设置函数默认值</h2>
+<h3 id="基本写法">基本写法</h3>
+<p>之前的写法</p>
+<pre><code class="language-js">function sum(a, b){
+  a = a || 0
+  b = b || 0
+  return a + b
+}
+</code></pre>
+<p>ES6 语法</p>
+<pre><code class="language-js">function sum(a = 0, b = 0){
+  return a + b
+}
+</code></pre>
+<h3 id="设置对象的默认值">设置对象的默认值</h3>
+<p>在 ES5 之前，设置默认值要经过一系列的判断</p>
+<pre><code class="language-js">function fn(options) {
+  options = options === undefined ? {} : options;
+  var size = options.size === undefined ? 'big' : options.size;
+  var cords = options.cords === undefined ? { x: 0, y: 0 } : options.cords;
+  var radius = options.radius === undefined ? 25 : options.radius;
+  console.log(size, cords, radius);
+  // now finally do some chart drawing
+}
+
+fn({
+  cords: { x: 18, y: 30 },
+  radius: 30
+});
+</code></pre>
+<p>ES6 新语法将上面的写法简化为对象形式</p>
+<pre><code class="language-js">function fn({size = 'big', cords = { x: 0, y: 0 }, radius = 25} = {}) {
+  console.log(size, cords, radius);
+}
+fn({
+  cords: { x: 18, y: 30 },
+  radius: 30
+});
+</code></pre>
+<p>如果觉得复杂，还可以这么写</p>
+<pre><code class="language-js">function fn(options = {}) {
+  let {size = 'big', cords = { x: 0, y: 0 }, radius = 25} = options
+  console.log(size, cords, radius);
+}
+
+fn({
+  cords: { x: 18, y: 30 },
+  radius: 30
+});
+</code></pre>
+<blockquote>
+<p>参考自 MDN 文档：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC">函数参数默认值</a></p>
+</blockquote>
+<h2 id="对象浅拷贝">对象浅拷贝</h2>
+<p>浅拷贝通常指的是只会拷贝对象的第一层属性。使用 ES6 的两种语法都可以实现简单的浅拷贝</p>
+<pre><code class="language-js">let objA = {
+  name: {
+    x: 'a'
+  }
+}
+
+let objB = Object.assign({}, objA)
+console.log(objB) // {name: {x: &quot;b&quot;}}
+
+let objC = {...objA}
+console.log(objC) // {name: {x: &quot;b&quot;}}
+</code></pre>
+<p>上面两种语法还可以用来合并对象</p>
+<pre><code class="language-js">let objA = {
+  p1: 1,
+  p2: 2
+}
+let objB = {
+  p1: 1250,
+  p3: 3
+}
+
+let objC = Object.assign({}, objA, objB)
+console.log(objC) // 输出：{p1: 1250, p2: 2, p3: 3}
+
+let objD = {...objA, ...objB}
+console.log(objD) // 输出：{p1: 1250, p2: 2, p3: 3}
+</code></pre>
+<h2 id="对象属性加强">对象属性加强</h2>
+<p>ES6 将变量赋值给对象的属性的语法简化了</p>
+<pre><code class="language-js">let x = 1
+let y = 2
+let obj = {x, y} // 等同于 let obj = {x: x, y: y}
+console.log(obj) // {x: 1, y: 2}
+</code></pre>
+<p>并且支持对象的 key 在赋值时传入变量（ES5之前只能通过 <code>object[xxx]</code> 的方式传入变量）</p>
+<pre><code class="language-js">let key = 'x'
+let value = 'y'
+let object = {
+  [key]: value
+}
+console.log(object) // {x: &quot;y&quot;}
+</code></pre>
+<p>中括号 (<code>[]</code>) 里还可以做简单的运算</p>
+<pre><code class="language-js">let key = 'x'
+let value = 'y'
+let obj = {
+  [key + key]: value
+}
+
+console.log(obj) // {xx: &quot;y&quot;}
+</code></pre>
+
+  </section>
+  <footer>
+    
+        <div class="pb-14 inline-flex gap-2 text-gray-600 text-sm font-medium">
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/javascript/" alt="JavaScript" >
+                        JavaScript
+                    </a>
+            
+                    <a class="bg-gray-100 py-2 px-3 rounded-lg" href="/tags/es6/" alt="ES6" >
+                        ES6
+                    </a>
+            
+        </div>
+
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

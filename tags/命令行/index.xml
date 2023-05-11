@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>命令行 on 石塔白又大</title>
+    <link>https://uphgs.com/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</link>
+    <description>Recent content in 命令行 on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Tue, 10 Sep 2019 21:31:23 +0000</lastBuildDate><atom:link href="https://uphgs.com/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>命令行快捷键</title>
+      <link>https://uphgs.com/posts/envconfig/cli-hot-key/</link>
+      <pubDate>Tue, 10 Sep 2019 21:31:23 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cli-hot-key/</guid>
+      <description>常用 Ctrl L：清屏 Ctrl M：等效于回车 Ctrl C：中断正在当前正在执行的程序 历史命令 Ctrl P：上一条命令，可以一直按表示一直往前翻 Ctrl N：下一条命令 Ctrl R：再按历史命令中出现过的字符串：按字符串寻找历史命令（重度推荐） 命令行编辑 Tab：自动补齐（重度推荐） Ctrl A：移动光标到命令行首 Ctrl E：移动光标到命令行尾 Ctrl B：光标后退 Ctrl F：光标前进 Alt F：光标前进一个单词 Alt B：光标后退一格单词 Ctrl ]：从当前光标往后搜索字符串，用于快速移动到该字符串 Ctrl Alt ]：从当前光标往前搜索字符串，用于快速移动到该字符串 Ctrl H：删除光标的前一个字符 Ctrl D：删除当前光标所在字符 Ctrl K：删除光标之后所有字符 Ctrl U：清空当前键入的命令 Ctrl W：删除光标前的单词(Word, 不包含空格的字符串) Ctrl \：删除光标前的所有空白字符 Ctrl Y：粘贴 Ctrl W 或 Ctrl K 删除的内容 Alt .</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - 命令行插件</title>
+      <link>https://uphgs.com/posts/envconfig/cli-plugin/</link>
+      <pubDate>Tue, 10 Sep 2019 21:31:23 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cli-plugin/</guid>
+      <description>本教程只在 Windows 生效
+z 命令 z 命令是一个快捷跳转目录的命令，可以记录你每次经常进入的目录，只要输入该目录文件名即可跳转。
+首先打开 z 命令 GitHub 仓库：https://github.com/rupa/z 找一个安全的目录（此处推荐在用户目录下新建一个 GitHub 目录） cd ~/GitHub在该目录下克隆 z 命令的仓库 git clone git@github.</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - Cmder 配置</title>
+      <link>https://uphgs.com/posts/envconfig/cmder-install/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/cmder-install/</guid>
+      <description>尽量使用完整版 Cmder，这样配置起来更方便。
+注意 如果安装了浏览器FQ插件（如 Proxy SwitchyOmega）尽量使用FQ下载。 如果安装电脑中前已经有 Git Bash 直接下载安装简化版即可，此教程不包括简化版安装教程。 下载 官网链接：https://cmder.net/ 下载后尽量解压到一个非中文无空格路径下的目录 选择完整版下载 配置 首先解压文件 (最好放在一个没有空格的目录)，解压后打开</description>
+    </item>
+    
+    <item>
+      <title>环境搭建 - Git 配置</title>
+      <link>https://uphgs.com/posts/envconfig/git-config/</link>
+      <pubDate>Thu, 08 Aug 2019 22:31:32 +0000</pubDate>
+      
+      <guid>https://uphgs.com/posts/envconfig/git-config/</guid>
+      <description>配置 Git 在 Git Bash 命令行运行这五句话
+git config --global user.name xxxxxx # 把 xxxxxx 替换成你的英文名字随便什么都行git config --global user.</description>
+    </item>
+    
+  </channel>
+</rss>

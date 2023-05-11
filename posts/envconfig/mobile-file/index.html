@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+    <head><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文件操作命令</title>
+<meta name="description" content="拷贝文件 拷贝 markdown 目录下的所有文件到 a 文件夹下
+cp -avx markdown/* a/拷贝 markdown 目录下的所有文件到 a b 文件夹下">
+<link rel="canonical" href="https://uphgs.com/posts/envconfig/mobile-file/">
+<link rel="robots" href="/robots.txt" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://uphgs.com/css/main.min.c75af085ddc7ddfb50fdeb82f690c3f09961d9dd6186d3c6d139efe9a36ca3b0.css" integrity="sha256-x1rwhd3H3ftQ/euC9pDD8Jlh2d1hhtPG0Tnv6aNso7A=">
+</head>
+    <body class="max-w-screen-md px-10 mx-auto"><header class="flex flex-col sm:flex-row items-center gap-5 sm:gap-10 pt-16 py-12">
+    
+
+<figure class="flex-none w-20 h-20 rounded-full overflow-hidden" ><a href="https://uphgs.com/"><img srcset="/logo/avatar-2_huf8f1767a3a9cb1bc27342abdd0b303cf_3322_80x80_fill_q90_box_smart1.jpg 80w" src="/logo/avatar-2.jpg" width="180" height="180" alt="石塔白又大"></a></figure>
+
+    <div class="flex flex-col gap-5">
+    <a href="https://uphgs.com/">
+    
+    <h3 class="text-center sm:text-left text-4xl font-bold text-gray-800 ">石塔白又大</h3>
+    
+</a>
+    <nav>
+    <ul class="flex flex-wrap justify-center uppercase text-xs font-semibold gap-7 text-gray-500 ">
+        
+        
+        <li class="hover:text-gray-500"><a href="/">Home</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/posts">Posts</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/categories">Categories</a></li>
+        
+        <li class="hover:text-gray-500"><a href="/tags">Tags</a></li>
+        
+    </ul>
+</nav>
+    </div>
+</header><div id="content">
+<article class="article flex flex-col">
+  <header class="flex flex-col gap-2">
+    <h2 class="text-4xl leading-snug font-bold text-gray-900">文件操作命令</h2>
+
+    <div class="text-sm font-semibold text-gray-500 flex gap-3">
+      
+<time datetime="2020-09-01 16:50:39 &#43;0800 CST" title="2020-09-01 16:50:39 &#43;0800 CST">
+    2020-09-01
+</time>
+      
+    </div>
+  </header>
+  <section class="content text-gray-800 flex flex-col">
+    <h2 id="拷贝文件">拷贝文件</h2>
+<p>拷贝 <code>markdown</code> 目录下的所有文件到 <code>a</code> 文件夹下</p>
+<pre><code class="language-sh">cp -avx markdown/* a/
+</code></pre>
+<p>拷贝 markdown 目录下的所有文件到 <code>a</code> <code>b</code> 文件夹下</p>
+<pre><code class="language-sh">echo a/ b/ | xargs -n 1 cp -r markdown/*
+
+echo a/ b/ | xargs -n 1 cp -avx markdown/*
+</code></pre>
+<h2 id="重命名">重命名</h2>
+<p>将文件 A 重命名为文件 B</p>
+<pre><code class="language-sh">mv A B
+</code></pre>
+<h2 id="压缩文件">压缩文件</h2>
+<p>将<code>/home/demo/</code> 这个目录下所有文件和文件夹打包为当前目录下的 <code>demo.zip</code></p>
+<pre><code class="language-sh">zip –q –r demo.zip /home/demo
+</code></pre>
+<p>上面的命令操作是将绝对地址的文件及文件夹进行压缩.以下给出压缩相对路径目录</p>
+<p>比如目前在home这个目录下,执行以下操作可以达到以上同样的效果.</p>
+<pre><code class="language-sh">zip –q –r demo.zip demo
+</code></pre>
+<p>比如现在我的 demo 目录下,我操作的zip压缩命令是</p>
+<pre><code class="language-sh">zip –q –r demo.zip *
+</code></pre>
+<p>更多</p>
+<pre><code class="language-sh">rz             # 上传压缩包
+unzip [文件名]  # 解压压缩包
+</code></pre>
+<p><strong><code>zip</code> 命令参数列表（linux）</strong></p>
+<ul>
+<li><code>-a</code> 将文件转成ASCII模式</li>
+<li><code>-F</code> 尝试修复损坏的压缩文件</li>
+<li><code>-h</code> 显示帮助界面</li>
+<li><code>-m</code> 将文件压缩之后，删除源文件</li>
+<li><code>-n</code> 特定字符串 不压缩具有特定字尾字符串的文件</li>
+<li><code>-o</code> 将压缩文件内的所有文件的最新变动时间设为压缩时候的时间</li>
+<li><code>-q</code> 安静模式，在压缩的时候不显示指令的执行过程</li>
+<li><code>-r</code> 将指定的目录下的所有子目录以及文件一起处理</li>
+<li><code>-S</code> 包含系统文件和隐含文件（S是大写）</li>
+<li><code>-t</code> 日期 把压缩文件的最后修改日期设为指定的日期，日期格式为mmddyyyy</li>
+</ul>
+<p><strong><code>unzip</code> 语法</strong></p>
+<pre><code class="language-sh">unzip [-cflptuvz][-agCjLMnoqsVX][-P &lt;密码&gt;][.zip文件][文件][-d &lt;目 录&gt;][-x &lt;文件&gt;] 或 unzip [-Z]
+</code></pre>
+<p><strong><code>unzip</code> 命令参数列表（linux）</strong></p>
+<ul>
+<li><code>-c</code> 将解压缩的结果显示到屏幕上，并对字符做适当的转换。</li>
+<li><code>-f</code> 更新现有的文件。</li>
+<li><code>-l</code> 显示压缩文件内所包含的文件。</li>
+<li><code>-p</code> 与<code>-c</code>参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换。</li>
+<li><code>-t</code> 检查压缩文件是否正确。</li>
+<li><code>-u</code> 与<code>-f</code>参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中。</li>
+<li><code>-v</code> 执行是时显示详细的信息。</li>
+<li><code>-z</code> 仅显示压缩文件的备注文字。</li>
+<li><code>-a</code> 对文本文件进行必要的字符转换。</li>
+<li><code>-b</code> 不要对文本文件进行字符转换。</li>
+<li><code>-C</code> 压缩文件中的文件名称区分大小写。</li>
+<li><code>-j</code> 不处理压缩文件中原有的目录路径。</li>
+<li><code>-L</code> 将压缩文件中的全部文件名改为小写。</li>
+<li><code>-M</code> 将输出结果送到more程序处理。</li>
+<li><code>-n</code> 解压缩时不要覆盖原有的文件。</li>
+<li><code>-o</code> 不必先询问用户，unzip执行后覆盖原有文件。</li>
+<li><code>-P &lt;密码&gt;</code> 使用zip的密码选项。</li>
+<li><code>-q</code> 执行时不显示任何信息。</li>
+<li><code>-s</code> 将文件名中的空白字符转换为底线字符。</li>
+<li><code>-V</code> 保留VMS的文件版本信息。</li>
+<li><code>-X</code> 解压缩时同时回存文件原来的UID/GID。</li>
+<li><code>[.zip文件]</code> 指定.zip压缩文件。</li>
+<li><code>[文件]</code> 指定要处理.zip压缩文件中的哪些文件。</li>
+<li><code>-d &lt;目录&gt;</code> 指定文件解压缩后所要存储的目录。</li>
+<li><code>-x &lt;文件&gt;</code> 指定不要处理.zip压缩文件中的哪些文件。</li>
+<li><code>-Z unzip</code> -Z 等于执行 zipinfo 指令</li>
+</ul>
+
+  </section>
+  <footer>
+    
+  </footer>
+</article>
+
+        </div><footer class="pt-5 pb-10 grid gap-3 sm:grid-cols-2">
+    <div class="text-xs font-semibold text-gray-500 order-2 sm:order-1 ">
+    © 2023 — <a class="hover:text-gray-500" href="https://uphgs.com/">石塔白又大</a> <span class=" font-normal ">with</span> <a class="hover:text-gray-500" href="https://github.com/nixentric/Lowkey-Hugo-Theme" target="_blank" rel="noopener noreferrer">Lowkey</a>
+</div>
+    <div class="text-xs font-semibold text-gray-500 order-1 sm:order-2">
+    <ul class="flex sm:justify-end gap-5">
+    <li><a class="hover:text-gray-500" href="https://github.com/uphg" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+</div>
+</footer></body>
+</html>

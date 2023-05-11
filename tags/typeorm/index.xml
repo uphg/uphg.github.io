@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeORM on 石塔白又大</title>
+    <link>https://uphgs.com/tags/typeorm/</link>
+    <description>Recent content in TypeORM on 石塔白又大</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>{year}</copyright>
+    <lastBuildDate>Sat, 30 Apr 2022 22:37:48 +0800</lastBuildDate><atom:link href="https://uphgs.com/tags/typeorm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TypeORM 数据库实践</title>
+      <link>https://uphgs.com/posts/node/typeorm-database-practice/</link>
+      <pubDate>Sat, 30 Apr 2022 22:37:48 +0800</pubDate>
+      
+      <guid>https://uphgs.com/posts/node/typeorm-database-practice/</guid>
+      <description>代码地址：github.com/uphg/nextjs-blog-demo
+运行 Type ORM 首先在项目根目录创建 post-data 并把它添加到 .gitignore
+然后运行
+docker run -v &amp;quot;$PWD/blog-data&amp;quot;:/var/lib/postgresql/data -p 5432:5432 -e POSTGRES_USER=blog -e POSTGRES_HOST_AUTH_METHOD=trust -d postgres:12.</description>
+    </item>
+    
+  </channel>
+</rss>
