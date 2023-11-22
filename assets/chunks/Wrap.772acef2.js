@@ -1,0 +1,1 @@
+import{_ as s,o as c,c as t,k as _,r as a}from"./framework.42e95ed4.js";const o={},r={class:"wrap"},n={class:"wrap-container"};function d(e,p){return c(),t("div",r,[_("div",n,[a(e.$slots,"default",{},void 0,!0)])])}const l=s(o,[["render",d],["__scopeId","data-v-1c52737b"]]);export{l as W};
